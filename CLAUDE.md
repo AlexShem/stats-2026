@@ -146,17 +146,27 @@ Solutions are labelled by origin and the distinction matters:
 - **Решение книжное** — printed in the book, transcribed as-is. Do not rewrite it
   into a slicker form; it is the reference for what students may have seen.
 - **Решение наше** — the book leaves the problem for self-study, so the solution
-  was written here and checked numerically. These answers are **not yet verified
-  against «Ответы», p. 373**, which Alex has not transcribed.
+  was written here.
+
+**A book answer is not evidence on its own.** The book is assumed to contain
+typos, so every answer — the book's included — gets recomputed independently
+before it is trusted. That verdict lives in each problem's **Статус** field:
+✅ сверено (book answer on p. 373, matched our computation), ✅ проверено (no
+p. 373 entry, our recomputation confirmed the printed derivation),
+⚠️ расхождение, or ❔ не проверено. Never use an answer marked ❔, and never
+raise a status without actually running the check. `problems/README.md` lists
+what each check consisted of.
 
 Seminar `.qmd` files do **not** include these files — they restate the problems
 they use. The duplication is deliberate: a seminar may trim or reorder a
 statement, while the bank keeps the book's original.
 
 Adding a paragraph Alex has pasted: create the file, keep the book's numbering
-and `{#gNN}` anchors, verify every self-written answer with a scratch Python
-calculation before committing, and update the table in `problems/README.md` and
-the mapping table in `gmurman-contents.md`.
+and `{#gNN}` anchors, recompute every answer with a scratch Python calculation
+and record the verdict in **Статус** before committing, then update the table in
+`problems/README.md` and the mapping table in `gmurman-contents.md`.
+`problems/gmurman/answers-p373.md` already holds the answers for problems 90–109
+(§§ 3–4), so those need no new request.
 
 ## `lectures/`
 
