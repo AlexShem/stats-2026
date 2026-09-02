@@ -29,3 +29,6 @@ __pycache__/
 *.swp
 
 **/*.quarto_ipynb
+
+# Gmurman book
+gmurman.pdf

@@ -17,6 +17,32 @@ identifiers, file names, and directory slugs stay in Latin script. Comments in
 Schedule: 16 seminars, Thursdays, 2026-09-03 through 2026-12-17. The dates are
 generated, not hand-maintained — see `src/mephi_stats/schedule.py`.
 
+## `gmurman.pdf` — NEVER open this file
+
+`gmurman.pdf` in the repo root is Гмурман, "Руководство к решению задач по теории
+вероятностей и математической статистике" (Высшая школа, 1979), the book seminar
+problems are drawn from.
+
+**Do not read it, ever — with any tool.** Not `Read`, not `pdftotext`, not page
+extraction, not a subagent. It is a 16 MB scan: the pages are images with no text
+layer, so every attempt returns nothing usable and burns a large amount of
+context. It is gitignored and stays local.
+
+The machine-readable substitute is **`gmurman-contents.md`** — the full table of
+contents with page numbers, plus a seminar-to-paragraph mapping table. Use it to
+work out *which pages to ask for*.
+
+**When a seminar needs problems from the book, stop and ask Alex.** Name the
+chapter, paragraph and page range from `gmurman-contents.md`, and ask him to open
+the PDF there and paste the statements (and the answers from «Ответы», p. 373).
+Never invent a problem and attribute it to Гмурман, and never guess a problem
+number. Problems Alex pastes are transcribed verbatim, keeping the book's
+numbering; problems written from scratch are marked as such — see the source
+convention below.
+
+Keep the mapping table at the bottom of `gmurman-contents.md` up to date as
+seminars are planned.
+
 ## The one architectural idea: one source, two audiences
 
 Each seminar is a single file `seminars/NN-slug/seminar-NN.qmd` that renders two
@@ -87,6 +113,12 @@ survives greyscale printing, which matters because handouts get printed.
 seed with `rng = np.random.default_rng(2026)` and never call the global
 `np.random` functions. Where a simulation checks an analytic answer, print both
 side by side so a drifting result is visible.
+
+**Problem provenance.** Every task carries its source in the heading, so it is
+always clear what may be re-derived and what was transcribed:
+`## Задача 3 (Гмурман, гл. 2 § 1, № 24)` for a book problem,
+`## Задача 3` alone for one written for this course. Never attach a Гмурман
+number to a problem Alex did not paste from the book.
 
 **Cell labels.** Follow Quarto cross-reference prefixes (`fig-`, `tbl-`,
 `sec-`); a plot cell without a `fig-` label and `fig-cap` will not be
