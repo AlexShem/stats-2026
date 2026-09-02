@@ -1,0 +1,39 @@
+# Профиль подготовки к семинару.
+# Рендер:  quarto render <file>.qmd --profile prep --to html
+#
+# Показывает блоки .solution и .teacher-note, обёрнутые в
+# ::: {.content-visible when-profile="prep"}, а также исходный код ячеек.
+# Формат задаётся явно через --to, потому что pdf из _quarto.yml не отключается.
+
+execute:
+  echo: true
+
+format:
+  html:
+    theme: [cosmo, prep.scss]
+    toc: true
+    toc-depth: 3
+    toc-title: "Содержание"
+    number-sections: true
+    code-fold: true
+    code-summary: "Показать код"
+    code-tools: true
+    fig-width: 7
+    fig-height: 4.5
+    # Математические макросы для MathJax — зеркало include-in-header из _quarto.yml.
+    # Добавляя макрос, правьте оба файла.
+    include-in-header:
+      text: |
+        <script>
+        window.MathJax = {
+          tex: {
+            macros: {
+              E: "\\mathsf{E}",
+              Var: "\\mathsf{D}",
+              Prob: "\\mathsf{P}",
+              Cov: "\\mathrm{cov}",
+              indep: "\\perp\\!\\!\\!\\perp"
+            }
+          }
+        };
+        </script>

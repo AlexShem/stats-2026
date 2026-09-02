@@ -1,0 +1,56 @@
+---
+title: "Семинар NN. Тема"
+subtitle: "Теория вероятностей и математическая статистика · НИЯУ МИФИ"
+date: 2026-01-01
+---
+
+```{python}
+#| label: setup
+#| include: false
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy import stats
+
+from mephi_stats import setup_matplotlib
+
+setup_matplotlib()
+rng = np.random.default_rng(2026)
+```
+
+::: {.content-visible when-profile="prep"}
+::: {.teacher-note}
+**План на 90 минут.** Разминка 10 мин → задачи 1–2 у доски 30 мин →
+задача 3 в парах 20 мин → разбор 20 мин → итоги 10 мин.
+
+**Что чаще всего идёт не так.** …
+:::
+:::
+
+## Краткая сводка
+
+Определения и формулы, нужные для задач ниже.
+
+## Задача 1. {#sec-task-1}
+
+Условие задачи.
+
+::: {.content-visible when-profile="prep"}
+::: {.solution}
+Разбор решения. Выкладки, ответ.
+:::
+:::
+
+## Задача 2. {#sec-task-2}
+
+Условие задачи.
+
+::: {.content-visible when-profile="prep"}
+::: {.solution}
+Разбор решения.
+:::
+:::
+
+## Задачи для самостоятельной работы
+
+1. …
+2. …

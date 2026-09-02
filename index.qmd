@@ -1,0 +1,49 @@
+---
+title: "Семинары по теории вероятностей и математической статистике"
+subtitle: "НИЯУ МИФИ · осенний семестр 2026"
+format:
+  html:
+    toc: false
+    theme: cosmo
+jupyter: python3
+---
+
+Занятия проходят по четвергам с 3 сентября по 17 декабря 2026 года — всего
+16 семинаров. Лекции читает лектор курса; этот репозиторий содержит материалы
+к семинарским занятиям.
+
+```{python}
+#| label: tbl-schedule
+#| echo: false
+from pathlib import Path
+
+import pandas as pd
+from IPython.display import Markdown
+
+from mephi_stats.schedule import SEMINAR_DATES, format_ru
+
+# Тема берётся из заголовка seminar-NN.qmd, если файл уже создан.
+def topic(number: int) -> str:
+    hits = sorted(Path("seminars").glob(f"{number:02d}-*/seminar-{number:02d}.qmd"))
+    if not hits:
+        return "—"
+    for line in hits[0].read_text(encoding="utf-8").splitlines()[:10]:
+        if line.startswith("title:"):
+            return line.split(":", 1)[1].strip().strip('"').split(". ", 1)[-1]
+    return "—"
+
+rows = [
+    {"№": i, "Дата": format_ru(d), "Тема": topic(i)}
+    for i, d in enumerate(SEMINAR_DATES, start=1)
+]
+Markdown(pd.DataFrame(rows).to_markdown(index=False))
+```
+
+: Расписание семинаров {#tbl-schedule-cap}
+
+## Как устроен репозиторий
+
+Материалы каждого семинара лежат в `seminars/NN-slug/seminar-NN.qmd` и
+собираются в двух видах: раздаточный PDF с условиями задач для студентов и
+HTML-конспект с решениями и заметками для подготовки. Подробности —
+в `README.md`.

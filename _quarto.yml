@@ -1,0 +1,49 @@
+project:
+  title: "Теория вероятностей и математическая статистика"
+  output-dir: _output
+  render:
+    - "*.qmd"
+    - "seminars/**/*.qmd"
+    - "!_templates/"
+    - "!README.md"
+
+# Раздаточный материал для студентов: PDF, только условия задач.
+# Профиль `prep` (см. _quarto-prep.yml) даёт HTML с решениями для подготовки.
+
+lang: ru
+date-format: "D MMMM YYYY"
+
+execute:
+  freeze: auto
+  echo: false
+  warning: false
+
+format:
+  pdf:
+    documentclass: scrartcl
+    papersize: a4
+    geometry:
+      - top=20mm
+      - bottom=20mm
+      - left=20mm
+      - right=20mm
+    fontsize: 11pt
+    linestretch: 1.15
+    mainfont: "Liberation Serif"
+    sansfont: "Liberation Sans"
+    monofont: "DejaVu Sans Mono"
+    colorlinks: true
+    number-sections: true
+    toc: false
+    fig-pos: "H"
+    include-in-header:
+      text: |
+        \usepackage{amsmath,amssymb,mathtools}
+        \usepackage{float}
+        \newcommand{\E}{\mathsf{E}}
+        \newcommand{\Var}{\mathsf{D}}
+        \newcommand{\Prob}{\mathsf{P}}
+        \newcommand{\Cov}{\mathrm{cov}}
+        \newcommand{\indep}{\perp\!\!\!\perp}
+
+bibliography: references.bib

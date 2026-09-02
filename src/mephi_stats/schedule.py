@@ -1,0 +1,42 @@
+"""Расписание семинаров: осенний семестр 2026, четверги."""
+
+from __future__ import annotations
+
+import datetime as dt
+
+FIRST_SEMINAR = dt.date(2026, 9, 3)
+LAST_POSSIBLE = dt.date(2026, 12, 21)
+
+#: Даты всех 16 семинаров семестра, по порядку.
+SEMINAR_DATES: list[dt.date] = [
+    FIRST_SEMINAR + dt.timedelta(weeks=i)
+    for i in range((LAST_POSSIBLE - FIRST_SEMINAR).days // 7 + 1)
+]
+
+
+def seminar_date(number: int) -> dt.date:
+    """Дата семинара по его номеру (нумерация с 1)."""
+    if not 1 <= number <= len(SEMINAR_DATES):
+        raise ValueError(
+            f"Номер семинара должен быть от 1 до {len(SEMINAR_DATES)}, получено {number}"
+        )
+    return SEMINAR_DATES[number - 1]
+
+
+def format_ru(date: dt.date) -> str:
+    """Дата по-русски: '3 сентября 2026'."""
+    months = [
+        "января",
+        "февраля",
+        "марта",
+        "апреля",
+        "мая",
+        "июня",
+        "июля",
+        "августа",
+        "сентября",
+        "октября",
+        "ноября",
+        "декабря",
+    ]
+    return f"{date.day} {months[date.month - 1]} {date.year}"

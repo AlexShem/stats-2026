@@ -1,0 +1,31 @@
+# Quarto
+/_output/
+/.quarto/
+*_files/
+*_cache/
+/.jupyter_cache/
+/_freeze/
+*.rmarkdown
+
+# LaTeX intermediates
+*.aux
+*.log
+*.out
+*.toc
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+.ipynb_checkpoints/
+.pytest_cache/
+.ruff_cache/
+
+# OS / editors
+.DS_Store
+*.swp
+
+**/*.quarto_ipynb
