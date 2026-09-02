@@ -28,11 +28,18 @@ extraction, not a subagent. It is a 16 MB scan: the pages are images with no tex
 layer, so every attempt returns nothing usable and burns a large amount of
 context. It is gitignored and stays local.
 
-The machine-readable substitute is **`gmurman-contents.md`** — the full table of
-contents with page numbers, plus a seminar-to-paragraph mapping table. Use it to
-work out *which pages to ask for*.
+Two machine-readable substitutes exist, and both should be checked before asking
+Alex for anything:
 
-**When a seminar needs problems from the book, stop and ask Alex.** Name the
+- **`gmurman-contents.md`** — the full table of contents with page numbers, plus
+  a seminar-to-paragraph mapping table. Use it to work out *which pages to ask
+  for*.
+- **`problems/`** — the problem bank: pages Alex has already transcribed, with
+  statements, solutions and answers in plain Markdown. If a problem is in there,
+  it is already available; do not ask for it again. See `problems/README.md`.
+
+**When a seminar needs problems the bank does not yet cover, stop and ask Alex.**
+Name the
 chapter, paragraph and page range from `gmurman-contents.md`, and ask him to open
 the PDF there and paste the statements (and the answers from «Ответы», p. 373).
 Never invent a problem and attribute it to Гмурман, and never guess a problem
@@ -127,6 +134,29 @@ referenceable from the text.
 **`freeze: auto`** is on. Cell output is cached in `_freeze/` and reused until
 the `.qmd` changes; if a figure looks stale after editing only Python in
 `src/mephi_stats/`, run `make clean` or touch the `.qmd`.
+
+## `problems/`
+
+The transcribed problem bank — `problems/gmurman/ch<NN>-<S>.md`, one file per
+book paragraph, currently гл. 2 §§ 1–2 (problems 46–88). Each entry has the
+statement verbatim, a type/difficulty line, a solution, and the answer.
+
+Solutions are labelled by origin and the distinction matters:
+
+- **Решение книжное** — printed in the book, transcribed as-is. Do not rewrite it
+  into a slicker form; it is the reference for what students may have seen.
+- **Решение наше** — the book leaves the problem for self-study, so the solution
+  was written here and checked numerically. These answers are **not yet verified
+  against «Ответы», p. 373**, which Alex has not transcribed.
+
+Seminar `.qmd` files do **not** include these files — they restate the problems
+they use. The duplication is deliberate: a seminar may trim or reorder a
+statement, while the bank keeps the book's original.
+
+Adding a paragraph Alex has pasted: create the file, keep the book's numbering
+and `{#gNN}` anchors, verify every self-written answer with a scratch Python
+calculation before committing, and update the table in `problems/README.md` and
+the mapping table in `gmurman-contents.md`.
 
 ## `lectures/`
 
