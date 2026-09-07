@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from collections.abc import Sequence
+
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 
@@ -40,6 +42,45 @@ def setup_matplotlib(scale: float = 1.0) -> None:
             "figure.constrained_layout.use": True,
         }
     )
+
+
+def distribution_polygon(
+    ax: plt.Axes,
+    values: Sequence[float],
+    probs: Sequence[float],
+    *,
+    label: str | None = None,
+    color: str | None = None,
+    annotate: bool = True,
+    stems: bool = True,
+) -> None:
+    """Многоугольник распределения: точки ``(x_i, p_i)``, соединённые отрезками.
+
+    Стандартный чертёж для дискретной случайной величины по Гмурману
+    (гл. 4 § 1): вертикальные «ножки» к оси абсцисс плюс ломаная по вершинам.
+
+    ``annotate`` подписывает вершины значениями вероятностей — при наложении
+    нескольких распределений на одни оси подписи лучше выключить.
+    """
+    color = color or mpl.rcParams["axes.prop_cycle"].by_key()["color"][0]
+    if stems:
+        ax.vlines(values, 0, probs, color=color, ls=":", lw=1.1, alpha=0.7)
+    ax.plot(values, probs, "-o", color=color, ms=6, lw=1.7, label=label)
+    if annotate:
+        span = max(probs) if max(probs) else 1.0
+        for x, p in zip(values, probs, strict=True):
+            ax.annotate(
+                f"{p:.4g}".replace(".", ","),
+                xy=(x, p),
+                xytext=(0, 7),
+                textcoords="offset points",
+                ha="center",
+                fontsize=9,
+                color=color,
+            )
+        ax.set_ylim(0, span * 1.25)
+    ax.set_xticks(list(values))
+    ax.set_ylabel("$p_i$")
 
 
 def annotate_prob(ax: plt.Axes, text: str, xy: tuple[float, float]) -> None:

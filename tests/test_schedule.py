@@ -4,15 +4,23 @@ import pytest
 
 from mephi_stats.schedule import SEMINAR_DATES, format_ru, seminar_date
 
+TUESDAY = 1
 
-def test_semester_has_sixteen_thursdays():
+
+def test_semester_has_sixteen_tuesdays():
     assert len(SEMINAR_DATES) == 16
-    assert all(d.weekday() == 3 for d in SEMINAR_DATES)
+    assert all(d.weekday() == TUESDAY for d in SEMINAR_DATES)
 
 
 def test_semester_boundaries():
-    assert SEMINAR_DATES[0] == dt.date(2026, 9, 3)
-    assert SEMINAR_DATES[-1] == dt.date(2026, 12, 17)
+    assert SEMINAR_DATES[0] == dt.date(2026, 9, 1)
+    assert SEMINAR_DATES[-1] == dt.date(2026, 12, 15)
+
+
+def test_seminar_02_falls_on_8_september():
+    # Дата на раздатке семинара 02; проверяем явно, потому что нумерация
+    # сдвинута относительно фактического четверга первой недели.
+    assert seminar_date(2) == dt.date(2026, 9, 8)
 
 
 def test_seminar_date_is_one_indexed():
@@ -24,4 +32,4 @@ def test_seminar_date_is_one_indexed():
 
 
 def test_format_ru():
-    assert format_ru(dt.date(2026, 9, 3)) == "3 сентября 2026"
+    assert format_ru(dt.date(2026, 9, 8)) == "8 сентября 2026"
