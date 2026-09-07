@@ -1,17 +1,18 @@
-"""Расписание семинаров: осенний семестр 2026, четверги."""
+"""Расписание семинаров: осенний семестр 2026, вторники."""
 
 from __future__ import annotations
 
 import datetime as dt
 
-FIRST_SEMINAR = dt.date(2026, 9, 3)
-LAST_POSSIBLE = dt.date(2026, 12, 21)
+#: Первый вторник семестра. Семинар 01 фактически прошёл в четверг 3 сентября
+#: (разовый перенос в первую неделю), дальше занятия идут строго по вторникам.
+FIRST_SEMINAR = dt.date(2026, 9, 1)
 
-#: Даты всех 16 семинаров семестра, по порядку.
-SEMINAR_DATES: list[dt.date] = [
-    FIRST_SEMINAR + dt.timedelta(weeks=i)
-    for i in range((LAST_POSSIBLE - FIRST_SEMINAR).days // 7 + 1)
-]
+#: Число семинаров в семестре.
+SEMINAR_COUNT = 16
+
+#: Даты всех семинаров семестра, по порядку.
+SEMINAR_DATES: list[dt.date] = [FIRST_SEMINAR + dt.timedelta(weeks=i) for i in range(SEMINAR_COUNT)]
 
 
 def seminar_date(number: int) -> dt.date:
@@ -24,7 +25,7 @@ def seminar_date(number: int) -> dt.date:
 
 
 def format_ru(date: dt.date) -> str:
-    """Дата по-русски: '3 сентября 2026'."""
+    """Дата по-русски: '8 сентября 2026'."""
     months = [
         "января",
         "февраля",
