@@ -32,3 +32,6 @@ __pycache__/
 
 # Gmurman book
 gmurman.pdf
+
+# Docs with lecture notes
+docs/*
