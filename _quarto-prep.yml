@@ -28,9 +28,9 @@ format:
         window.MathJax = {
           tex: {
             macros: {
-              E: "\\mathsf{E}",
-              Var: "\\mathsf{D}",
-              Prob: "\\mathsf{P}",
+              E: "\\mathbb{E}",
+              Var: "\\mathbb{D}",
+              Prob: "\\mathbb{P}",
               Cov: "\\mathrm{cov}",
               indep: "\\perp\\!\\!\\!\\perp"
             }
