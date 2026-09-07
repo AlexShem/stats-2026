@@ -18,6 +18,12 @@ format:
     code-fold: true
     code-summary: "Показать код"
     code-tools: true
+    # Ширину контента задаём через сетку Quarto, а не через `body { max-width }`
+    # в prep.scss — иначе сжимается вся раскладка и прижимается к левому краю.
+    grid:
+      body-width: 960px
+      sidebar-width: 270px
+      margin-width: 270px
     fig-width: 7
     fig-height: 4.5
     # Математические макросы для MathJax — зеркало include-in-header из _quarto.yml.
