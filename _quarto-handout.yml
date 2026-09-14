@@ -1,0 +1,47 @@
+# Профиль раздатки: PDF с условиями задач, по одному файлу на семинар.
+# Рендер:  quarto render <file>.qmd --profile handout --to pdf
+#
+# Профиль заменяет тип проекта `book` на `default`, чтобы каждая глава
+# собиралась в отдельный PDF, а не в общую книгу. Блоки
+# ::: {.content-hidden when-profile="handout"} (решения, ответы) скрываются.
+# Формат задаётся явно через --to, потому что html из _quarto.yml не отключается.
+
+project:
+  type: default
+  output-dir: _output/handouts
+  render:
+    - "seminars/**/*.qmd"
+
+execute:
+  echo: false
+
+# В главах книги блоки — ##, задачи — ###; в раздатке поднимаем на уровень.
+shift-heading-level-by: -1
+
+format:
+  pdf:
+    documentclass: scrartcl
+    papersize: a4
+    geometry:
+      - top=20mm
+      - bottom=20mm
+      - left=20mm
+      - right=20mm
+    fontsize: 11pt
+    linestretch: 1.15
+    mainfont: "Liberation Serif"
+    sansfont: "Liberation Sans"
+    monofont: "DejaVu Sans Mono"
+    colorlinks: true
+    number-sections: false
+    toc: false
+    fig-pos: "H"
+    include-in-header:
+      text: |
+        \usepackage{amsmath,amssymb,mathtools}
+        \usepackage{float}
+        \newcommand{\E}{\mathbb{E}}
+        \newcommand{\Var}{\mathrm{D}}
+        \newcommand{\Prob}{\mathbb{P}}
+        \newcommand{\Cov}{\mathrm{cov}}
+        \newcommand{\indep}{\perp\!\!\!\perp}

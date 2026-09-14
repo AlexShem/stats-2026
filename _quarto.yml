@@ -1,49 +1,65 @@
 project:
-  title: "Теория вероятностей и математическая статистика"
-  output-dir: _output
+  type: book
+  output-dir: _output/book
   render:
-    - "*.qmd"
+    - index.qmd
     - "seminars/**/*.qmd"
-    - "!_templates/"
-    - "!README.md"
 
-# Раздаточный материал для студентов: PDF, только условия задач.
-# Профиль `prep` (см. _quarto-prep.yml) даёт HTML с решениями для подготовки.
+# Книга для студентов (HTML): теория, задачи, решения и примеры на Python.
+# Профиль `handout` (см. _quarto-handout.yml) даёт PDF-раздатку с одними
+# условиями задач — всё, что обёрнуто в
+# ::: {.content-hidden when-profile="handout"}, в раздатку не попадает.
+
+book:
+  title: "Теория вероятностей и математическая статистика"
+  subtitle: "Семинары · НИЯУ МИФИ · осенний семестр 2026"
+  author: "А. Шемендюк"
+  language: ru
+  chapters:
+    - index.qmd
+    - seminars/01-addition-multiplication/seminar-01.qmd
+    - seminars/02-discrete-random-variables/seminar-02.qmd
 
 lang: ru
 date-format: "D MMMM YYYY"
 
 execute:
   freeze: auto
-  echo: false
+  echo: true
   warning: false
 
 format:
-  pdf:
-    documentclass: scrartcl
-    papersize: a4
-    geometry:
-      - top=20mm
-      - bottom=20mm
-      - left=20mm
-      - right=20mm
-    fontsize: 11pt
-    linestretch: 1.15
-    mainfont: "Liberation Serif"
-    sansfont: "Liberation Sans"
-    monofont: "DejaVu Sans Mono"
-    colorlinks: true
+  html:
+    theme: [cosmo, book.scss]
+    toc: true
+    toc-depth: 3
+    toc-title: "Содержание"
     number-sections: true
-    toc: false
-    fig-pos: "H"
+    number-depth: 3
+    code-fold: false
+    code-tools: false
+    grid:
+      body-width: 960px
+      sidebar-width: 270px
+      margin-width: 270px
+    fig-width: 7
+    fig-height: 4.5
+    # Математические макросы для MathJax — зеркало include-in-header
+    # из _quarto-handout.yml. Добавляя макрос, правьте оба файла.
     include-in-header:
       text: |
-        \usepackage{amsmath,amssymb,mathtools}
-        \usepackage{float}
-        \newcommand{\E}{\mathbb{E}}
-        \newcommand{\Var}{\mathrm{D}}
-        \newcommand{\Prob}{\mathbb{P}}
-        \newcommand{\Cov}{\mathrm{cov}}
-        \newcommand{\indep}{\perp\!\!\!\perp}
+        <script>
+        window.MathJax = {
+          tex: {
+            macros: {
+              E: "\\mathbb{E}",
+              Var: "\\mathbb{D}",
+              Prob: "\\mathbb{P}",
+              Cov: "\\mathrm{cov}",
+              indep: "\\perp\\!\\!\\!\\perp"
+            }
+          }
+        };
+        </script>
 
 bibliography: references.bib
