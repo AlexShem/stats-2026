@@ -1,0 +1,1683 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru" xml:lang="ru"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="А. Шемендюк">
+
+<title>1&nbsp; Семинар 1. Теоремы сложения и умножения вероятностей – Теория вероятностей и математическая статистика</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../seminars/02-discrete-random-variables/seminar-02.html" rel="next">
+<link href="../../index.html" rel="prev">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-1aa567b42d78015c3b7cfc07166ec9b5.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Поиск не дал результатов",
+    "search-matching-documents-text": "Результаты поиска",
+    "search-copy-link-title": "Скопировать ссылку",
+    "search-hide-matches-text": "Скрыть дополнительные результаты",
+    "search-more-match-text": "дополнительный результат в этом документе",
+    "search-more-matches-text": "дополнительных результата(-ов) в этом документе",
+    "search-clear-button-title": "Очистить",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Отменить",
+    "search-submit-button-title": "Найти",
+    "search-label": "Поиск"
+  }
+}</script>
+<script>
+window.MathJax = {
+  tex: {
+    macros: {
+      E: "\\mathbb{E}",
+      Var: "\\mathrm{D}",
+      Prob: "\\mathbb{P}",
+      Cov: "\\mathrm{cov}",
+      indep: "\\perp\\!\\!\\!\\perp"
+    }
+  }
+};
+</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Переключить боковую панель навигации" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../seminars/01-addition-multiplication/seminar-01.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Семинар 1. Теоремы сложения и умножения вероятностей</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Переключить боковую панель навигации" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Поиск" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../../">Теория вероятностей и математическая статистика</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Поиск"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">О книге</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../seminars/01-addition-multiplication/seminar-01.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Семинар 1. Теоремы сложения и умножения вероятностей</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../seminars/02-discrete-random-variables/seminar-02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Семинар 2. Дискретные случайные величины: биномиальный закон и закон Пуассона</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../seminars/03-continuous-random-variables/seminar-03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Семинар 3. Непрерывные случайные величины</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Содержание</h2>
+   
+  <ul>
+  <li><a href="#sec-s01-code" id="toc-sec-s01-code" class="nav-link active" data-scroll-target="#sec-s01-code"><span class="header-section-number">1.1</span> Код для этой главы</a></li>
+  <li><a href="#краткая-сводка" id="toc-краткая-сводка" class="nav-link" data-scroll-target="#краткая-сводка"><span class="header-section-number">1.2</span> Краткая сводка</a></li>
+  <li><a href="#блок-a.-разминка" id="toc-блок-a.-разминка" class="nav-link" data-scroll-target="#блок-a.-разминка"><span class="header-section-number">1.3</span> Блок A. Разминка</a>
+  <ul class="collapse">
+  <li><a href="#sec-s01-t1" id="toc-sec-s01-t1" class="nav-link" data-scroll-target="#sec-s01-t1"><span class="header-section-number">1.3.1</span> Задача 1 (Гмурман, гл. 2 § 1, № 47)</a></li>
+  <li><a href="#sec-s01-t2" id="toc-sec-s01-t2" class="nav-link" data-scroll-target="#sec-s01-t2"><span class="header-section-number">1.3.2</span> Задача 2 (Гмурман, гл. 2 § 1, № 51)</a></li>
+  <li><a href="#sec-s01-t3" id="toc-sec-s01-t3" class="nav-link" data-scroll-target="#sec-s01-t3"><span class="header-section-number">1.3.3</span> Задача 3 (Гмурман, гл. 2 § 1, № 68)</a></li>
+  <li><a href="#sec-s01-t4" id="toc-sec-s01-t4" class="nav-link" data-scroll-target="#sec-s01-t4"><span class="header-section-number">1.3.4</span> Задача 4 (Гмурман, гл. 2 § 2, № 82)</a></li>
+  </ul></li>
+  <li><a href="#блок-b.-основной" id="toc-блок-b.-основной" class="nav-link" data-scroll-target="#блок-b.-основной"><span class="header-section-number">1.4</span> Блок B. Основной</a>
+  <ul class="collapse">
+  <li><a href="#sec-s01-t5" id="toc-sec-s01-t5" class="nav-link" data-scroll-target="#sec-s01-t5"><span class="header-section-number">1.4.1</span> Задача 5 (Гмурман, гл. 2 § 1, № 57)</a></li>
+  <li><a href="#sec-s01-t6" id="toc-sec-s01-t6" class="nav-link" data-scroll-target="#sec-s01-t6"><span class="header-section-number">1.4.2</span> Задача 6 (Гмурман, гл. 2 § 1, № 59)</a></li>
+  <li><a href="#sec-s01-t7" id="toc-sec-s01-t7" class="nav-link" data-scroll-target="#sec-s01-t7"><span class="header-section-number">1.4.3</span> Задача 7 (Гмурман, гл. 2 § 1, № 60)</a></li>
+  <li><a href="#sec-s01-t8" id="toc-sec-s01-t8" class="nav-link" data-scroll-target="#sec-s01-t8"><span class="header-section-number">1.4.4</span> Задача 8 (Гмурман, гл. 2 § 2, № 86)</a></li>
+  </ul></li>
+  <li><a href="#блок-c.-повышенная-сложность" id="toc-блок-c.-повышенная-сложность" class="nav-link" data-scroll-target="#блок-c.-повышенная-сложность"><span class="header-section-number">1.5</span> Блок C. Повышенная сложность</a>
+  <ul class="collapse">
+  <li><a href="#sec-s01-t9" id="toc-sec-s01-t9" class="nav-link" data-scroll-target="#sec-s01-t9"><span class="header-section-number">1.5.1</span> Задача 9 (Гмурман, гл. 2 § 1, № 62)</a></li>
+  <li><a href="#sec-s01-t10" id="toc-sec-s01-t10" class="nav-link" data-scroll-target="#sec-s01-t10"><span class="header-section-number">1.5.2</span> Задача 10 (Гмурман, гл. 2 § 1, № 75)</a></li>
+  <li><a href="#sec-s01-t11" id="toc-sec-s01-t11" class="nav-link" data-scroll-target="#sec-s01-t11"><span class="header-section-number">1.5.3</span> Задача 11 (Гмурман, гл. 2 § 1, № 76)</a></li>
+  <li><a href="#sec-s01-t12" id="toc-sec-s01-t12" class="nav-link" data-scroll-target="#sec-s01-t12"><span class="header-section-number">1.5.4</span> Задача 12 (Гмурман, гл. 2 § 1, № 79*)</a></li>
+  </ul></li>
+  <li><a href="#задачи-для-самостоятельной-работы" id="toc-задачи-для-самостоятельной-работы" class="nav-link" data-scroll-target="#задачи-для-самостоятельной-работы"><span class="header-section-number">1.6</span> Задачи для самостоятельной работы</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Семинар 1. Теоремы сложения и умножения вероятностей</span></h1>
+<p class="subtitle lead">Теория вероятностей и математическая статистика · НИЯУ МИФИ</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Автор</div>
+    <div class="quarto-title-meta-contents">
+             <p>А. Шемендюк </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Дата публикации</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">8 сентября 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="sec-s01-code" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="sec-s01-code"><span class="header-section-number">1.1</span> Код для этой главы</h2>
+<p>Все импорты и функции, которые используются в примерах главы, собраны в одной ячейке. Выполните её первой — остальные ячейки опираются на неё.</p>
+<div id="s01-setup" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sympy <span class="im">as</span> sp</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> fractions <span class="im">import</span> Fraction <span class="im">as</span> F</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> itertools <span class="im">import</span> permutations, product</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> math <span class="im">import</span> comb, log</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Оформление графиков: шрифт с кириллицей и палитра, различимая при печати</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>PALETTE <span class="op">=</span> [<span class="st">"#0b5394"</span>, <span class="st">"#b45309"</span>, <span class="st">"#2e7d32"</span>, <span class="st">"#7b1fa2"</span>, <span class="st">"#c62828"</span>, <span class="st">"#00838f"</span>]</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>plt.rcParams.update({</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"font.family"</span>: <span class="st">"sans-serif"</span>,</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"font.sans-serif"</span>: [<span class="st">"DejaVu Sans"</span>, <span class="st">"Liberation Sans"</span>, <span class="st">"Noto Sans"</span>, <span class="st">"sans-serif"</span>],</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"axes.unicode_minus"</span>: <span class="va">False</span>,</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">"axes.prop_cycle"</span>: plt.cycler(color<span class="op">=</span>PALETTE),</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">"axes.spines.top"</span>: <span class="va">False</span>,</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    <span class="st">"axes.spines.right"</span>: <span class="va">False</span>,</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    <span class="st">"axes.grid"</span>: <span class="va">True</span>,</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    <span class="st">"grid.alpha"</span>: <span class="fl">0.3</span>,</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    <span class="st">"figure.dpi"</span>: <span class="dv">110</span>,</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>    <span class="st">"figure.constrained_layout.use"</span>: <span class="va">True</span>,</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Генератор случайных чисел с фиксированным зерном: результаты воспроизводимы</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>rng <span class="op">=</span> np.random.default_rng(<span class="dv">2026</span>)</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Углы вершин правильного треугольника, вписанного в единичный круг</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>TRIANGLE_ANGLES <span class="op">=</span> np.array([np.pi <span class="op">/</span> <span class="dv">2</span>, np.pi <span class="op">/</span> <span class="dv">2</span> <span class="op">+</span> <span class="dv">2</span> <span class="op">*</span> np.pi <span class="op">/</span> <span class="dv">3</span>, np.pi <span class="op">/</span> <span class="dv">2</span> <span class="op">+</span> <span class="dv">4</span> <span class="op">*</span> np.pi <span class="op">/</span> <span class="dv">3</span>])</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> exactly_k(ps, k):</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Вероятность того, что наступит ровно k из независимых событий с вероятностями ps.</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="co">    Перебираются все наборы «наступило / не наступило» длины len(ps).</span></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>    total <span class="op">=</span> <span class="fl">0.0</span></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> mask <span class="kw">in</span> product([<span class="dv">0</span>, <span class="dv">1</span>], repeat<span class="op">=</span><span class="bu">len</span>(ps)):</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">sum</span>(mask) <span class="op">==</span> k:</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>            pr <span class="op">=</span> <span class="fl">1.0</span></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> p, m <span class="kw">in</span> <span class="bu">zip</span>(ps, mask):</span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>                pr <span class="op">*=</span> p <span class="cf">if</span> m <span class="cf">else</span> <span class="dv">1</span> <span class="op">-</span> p</span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>            total <span class="op">+=</span> pr</span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> total</span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> region(x, y):</span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Номер области единичного круга, в которую попала точка (x, y).</span></span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a><span class="co">    0 — вписанный треугольник, 1, 2, 3 — сегменты за его сторонами.</span></span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>    vx, vy <span class="op">=</span> np.cos(TRIANGLE_ANGLES), np.sin(TRIANGLE_ANGLES)</span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>    inside <span class="op">=</span> np.ones(<span class="bu">len</span>(x), dtype<span class="op">=</span><span class="bu">bool</span>)</span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>    seg <span class="op">=</span> np.zeros(<span class="bu">len</span>(x), dtype<span class="op">=</span><span class="bu">int</span>)</span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">3</span>):</span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>        j <span class="op">=</span> (i <span class="op">+</span> <span class="dv">1</span>) <span class="op">%</span> <span class="dv">3</span></span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>        <span class="co"># знак векторного произведения: точка справа от ребра i→j лежит вне треугольника</span></span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>        cross <span class="op">=</span> (vx[j] <span class="op">-</span> vx[i]) <span class="op">*</span> (y <span class="op">-</span> vy[i]) <span class="op">-</span> (vy[j] <span class="op">-</span> vy[i]) <span class="op">*</span> (x <span class="op">-</span> vx[i])</span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>        outside_edge <span class="op">=</span> cross <span class="op">&lt;</span> <span class="dv">0</span></span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>        inside <span class="op">&amp;=</span> <span class="op">~</span>outside_edge</span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>        seg[outside_edge] <span class="op">=</span> i <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.where(inside, <span class="dv">0</span>, seg)</span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> prob_both(outcomes, weights, i, j):</span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""P(события i и j наступили оба) в модели с конечным числом исходов.</span></span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a><span class="co">    outcomes — массив из 0 и 1 (строка — исход, столбец — событие),</span></span>
+<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a><span class="co">    weights — вероятности исходов.</span></span>
+<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a>    both <span class="op">=</span> (outcomes[:, i] <span class="op">==</span> <span class="dv">1</span>) <span class="op">&amp;</span> (outcomes[:, j] <span class="op">==</span> <span class="dv">1</span>)</span>
+<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">float</span>(weights[both].<span class="bu">sum</span>())</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="краткая-сводка" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="краткая-сводка"><span class="header-section-number">1.2</span> Краткая сводка</h2>
+<p><strong>Операции над событиями.</strong> Сумма <span class="math inline">\(A + B\)</span> (или <span class="math inline">\(A \cup B\)</span>) — наступило хотя бы одно из событий; произведение <span class="math inline">\(AB\)</span> (или <span class="math inline">\(A \cap B\)</span>) — наступили оба; <span class="math inline">\(\bar{A}\)</span> — противоположное событие, <span class="math inline">\(\Prob(\bar A) = 1 - \Prob(A)\)</span>.</p>
+<p><strong>Теорема сложения.</strong> Для несовместных <span class="math inline">\(A\)</span> и <span class="math inline">\(B\)</span> <span class="math display">\[
+\Prob(A + B) = \Prob(A) + \Prob(B).
+\]</span> В общем случае <span id="eq-s01-addition"><span class="math display">\[
+\Prob(A + B) = \Prob(A) + \Prob(B) - \Prob(AB),
+\tag{1.1}\]</span></span> а для трёх совместных событий <span id="eq-s01-addition3"><span class="math display">\[
+\Prob(A + B + C) = \Prob(A) + \Prob(B) + \Prob(C)
+- \Prob(AB) - \Prob(AC) - \Prob(BC) + \Prob(ABC).
+\tag{1.2}\]</span></span></p>
+<p><strong>Условная вероятность.</strong> При <span class="math inline">\(\Prob(A) &gt; 0\)</span> <span class="math display">\[
+\Prob(B \mid A) = \frac{\Prob(AB)}{\Prob(A)}
+\]</span> (в учебнике Гмурмана она обозначается <span class="math inline">\(P_A(B)\)</span>).</p>
+<p><strong>Теорема умножения.</strong> <span id="eq-s01-multiplication"><span class="math display">\[
+\Prob(AB) = \Prob(A)\,\Prob(B \mid A) = \Prob(B)\,\Prob(A \mid B),
+\tag{1.3}\]</span></span> и в общем виде — цепное правило <span class="math display">\[
+\Prob(A_1 A_2 \cdots A_n)
+  = \Prob(A_1)\,\Prob(A_2 \mid A_1)\,\Prob(A_3 \mid A_1 A_2)\cdots
+    \Prob(A_n \mid A_1 \cdots A_{n-1}).
+\]</span></p>
+<p><strong>Независимость.</strong> События <span class="math inline">\(A\)</span> и <span class="math inline">\(B\)</span> независимы, если <span class="math inline">\(\Prob(AB) =
+\Prob(A)\Prob(B)\)</span>; тогда <span class="math inline">\(\Prob(B \mid A) = \Prob(B)\)</span>. События <span class="math inline">\(A_1, \dots, A_n\)</span> независимы <strong>в совокупности</strong>, если равенство <span class="math inline">\(\Prob(A_{i_1} \cdots A_{i_k}) = \Prob(A_{i_1}) \cdots \Prob(A_{i_k})\)</span> выполняется для любого набора индексов. Попарной независимости для этого недостаточно — см. задачу 12.</p>
+<p><strong>Хотя бы одно событие.</strong> Если <span class="math inline">\(A_1, \dots, A_n\)</span> независимы в совокупности и <span class="math inline">\(q_i = \Prob(\bar A_i)\)</span>, то <span id="eq-s01-at-least-one"><span class="math display">\[
+\Prob(\text{хотя бы одно из } A_i) = 1 - q_1 q_2 \cdots q_n.
+\tag{1.4}\]</span></span> В частности, при одинаковых <span class="math inline">\(\Prob(A_i) = p\)</span> имеем <span class="math inline">\(\Prob(A) = 1 - q^n\)</span>.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Уведомление
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Несовместность и независимость — разные вещи. Если <span class="math inline">\(\Prob(A) &gt; 0\)</span>, <span class="math inline">\(\Prob(B) &gt; 0\)</span> и события несовместны, то они обязательно <strong>зависимы</strong>: <span class="math inline">\(\Prob(AB) = 0 \ne \Prob(A)\Prob(B)\)</span> — наступление <span class="math inline">\(A\)</span> полностью исключает <span class="math inline">\(B\)</span>.</p>
+</div>
+</div>
+</section>
+<section id="блок-a.-разминка" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="блок-a.-разминка"><span class="header-section-number">1.3</span> Блок A. Разминка</h2>
+<section id="sec-s01-t1" class="level3" data-number="1.3.1">
+<h3 data-number="1.3.1" class="anchored" data-anchor-id="sec-s01-t1"><span class="header-section-number">1.3.1</span> Задача 1 (Гмурман, гл. 2 § 1, № 47)</h3>
+<p>В ящике 10 деталей, из которых четыре окрашены. Сборщик наудачу взял три детали. Найти вероятность того, что хотя бы одна из взятых деталей окрашена.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Решение">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Совет</span>Решение
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Прямой путь — сложить вероятности «ровно одна», «ровно две», «ровно три» — работает, но длинен. Проще перейти к противоположному событию <span class="math inline">\(\bar A\)</span>: ни одна из трёх деталей не окрашена, то есть все три взяты из шести неокрашенных: <span class="math display">\[
+\Prob(\bar A) = \frac{C_6^3}{C_{10}^3} = \frac{20}{120} = \frac16,
+\qquad
+\Prob(A) = 1 - \frac16 = \frac56 \approx 0{,}833.
+\]</span></p>
+<p><strong>Приём:</strong> вероятность события «хотя бы один» почти всегда удобнее считать через противоположное событие «ни одного».</p>
+<p>Проверка: считаем обоими способами в точных дробях.</p>
+<div id="s01-t1-check" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>p_direct <span class="op">=</span> <span class="bu">sum</span>(F(comb(<span class="dv">4</span>, k) <span class="op">*</span> comb(<span class="dv">6</span>, <span class="dv">3</span> <span class="op">-</span> k), comb(<span class="dv">10</span>, <span class="dv">3</span>)) <span class="cf">for</span> k <span class="kw">in</span> (<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>))</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>p_compl <span class="op">=</span> <span class="dv">1</span> <span class="op">-</span> F(comb(<span class="dv">6</span>, <span class="dv">3</span>), comb(<span class="dv">10</span>, <span class="dv">3</span>))</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"напрямую: </span><span class="sc">{</span>p_direct<span class="sc">}</span><span class="ss">   через дополнение: </span><span class="sc">{</span>p_compl<span class="sc">}</span><span class="ss">   совпало: </span><span class="sc">{</span>p_direct <span class="op">==</span> p_compl<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>напрямую: 5/6   через дополнение: 5/6   совпало: True</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning callout-titled" title="Типичная ошибка">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Предупреждение</span>Типичная ошибка
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Путать «хотя бы одна» и «ровно одна». Вероятность «ровно одна окрашена» равна <span class="math inline">\(C_4^1 C_6^2 / C_{10}^3 = 1/2\)</span> — это только одно из трёх слагаемых.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="sec-s01-t2" class="level3" data-number="1.3.2">
+<h3 data-number="1.3.2" class="anchored" data-anchor-id="sec-s01-t2"><span class="header-section-number">1.3.2</span> Задача 2 (Гмурман, гл. 2 § 1, № 51)</h3>
+<p>Два стрелка стреляют по мишени. Вероятность попадания в мишень при одном выстреле для первого стрелка равна <span class="math inline">\(0{,}7\)</span>, а для второго — <span class="math inline">\(0{,}8\)</span>. Найти вероятность того, что при одном залпе в мишень попадает только один из стрелков.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Решение">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Совет</span>Решение
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Событие «попал только один» распадается на два несовместных: <span class="math inline">\(A_1\bar A_2\)</span> (попал первый, промахнулся второй) и <span class="math inline">\(\bar A_1 A_2\)</span>. Стрелки независимы, поэтому <span class="math display">\[
+\Prob = p_1 q_2 + q_1 p_2 = 0{,}7 \cdot 0{,}2 + 0{,}3 \cdot 0{,}8
+      = 0{,}14 + 0{,}24 = 0{,}38.
+\]</span></p>
+<p><strong>Структура формулы:</strong> снаружи — <strong>сложение</strong> (слагаемые несовместны), внутри каждого слагаемого — <strong>умножение</strong> (стрелки независимы). Формула <span class="math inline">\(p_1 q_2 + q_1 p_2\)</span> годится для любой пары независимых событий.</p>
+<p>Проверка: формула и симуляция миллиона залпов.</p>
+<div id="s01-t2-check" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>p1, p2 <span class="op">=</span> <span class="fl">0.7</span>, <span class="fl">0.8</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>formula <span class="op">=</span> p1 <span class="op">*</span> (<span class="dv">1</span> <span class="op">-</span> p2) <span class="op">+</span> (<span class="dv">1</span> <span class="op">-</span> p1) <span class="op">*</span> p2</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">1_000_000</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>hits <span class="op">=</span> rng.random((n, <span class="dv">2</span>)) <span class="op">&lt;</span> np.array([p1, p2])</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>sim <span class="op">=</span> (hits.<span class="bu">sum</span>(axis<span class="op">=</span><span class="dv">1</span>) <span class="op">==</span> <span class="dv">1</span>).mean()</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"формула: </span><span class="sc">{</span>formula<span class="sc">:.4f}</span><span class="ss">   симуляция (</span><span class="sc">{</span>n<span class="sc">:,}</span><span class="ss"> залпов): </span><span class="sc">{</span>sim<span class="sc">:.4f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>формула: 0.3800   симуляция (1,000,000 залпов): 0.3797</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="sec-s01-t3" class="level3" data-number="1.3.3">
+<h3 data-number="1.3.3" class="anchored" data-anchor-id="sec-s01-t3"><span class="header-section-number">1.3.3</span> Задача 3 (Гмурман, гл. 2 § 1, № 68)</h3>
+<p>В урне имеется пять шаров с номерами от 1 до 5. Наудачу по одному извлекают три шара без возвращения. Найти вероятности следующих событий: а) последовательно появятся шары с номерами 1, 4, 5; б) извлечённые шары будут иметь номера 1, 4, 5 независимо от того, в какой последовательности они появились.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Решение">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Совет</span>Решение
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>а) Цепное правило <a href="#eq-s01-multiplication" class="quarto-xref">Уравнение&nbsp;<span>1.3</span></a>: вероятность вытащить первым шар № 1 равна <span class="math inline">\(1/5\)</span>; при условии, что он вытащен, вероятность вытащить вторым № 4 равна <span class="math inline">\(1/4\)</span>; далее <span class="math inline">\(1/3\)</span>: <span class="math display">\[
+\Prob = \frac15 \cdot \frac14 \cdot \frac13 = \frac{1}{60}.
+\]</span></p>
+<p>б) Тот же набор годится в любом из <span class="math inline">\(3! = 6\)</span> порядков, и все они несовместны: <span class="math display">\[
+\Prob = 6 \cdot \frac{1}{60} = \frac{1}{10}.
+\]</span> Тот же ответ сразу через сочетания: <span class="math inline">\(1 / C_5^3 = 1/10\)</span>.</p>
+<p>Разница между пунктами — ровно разница между <strong>размещениями</strong> и <strong>сочетаниями</strong>: «порядок важен» против «порядок не важен». Ответы отличаются в <span class="math inline">\(3!\)</span> раз.</p>
+<p>Проверка: полный перебор всех упорядоченных троек.</p>
+<div id="s01-t3-check" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>omega <span class="op">=</span> <span class="bu">list</span>(permutations(<span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">6</span>), <span class="dv">3</span>))          <span class="co"># все упорядоченные тройки</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> <span class="bu">sum</span>(o <span class="op">==</span> (<span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">5</span>) <span class="cf">for</span> o <span class="kw">in</span> omega)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> <span class="bu">sum</span>(<span class="bu">set</span>(o) <span class="op">==</span> {<span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">5</span>} <span class="cf">for</span> o <span class="kw">in</span> omega)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"|Ω| = </span><span class="sc">{</span><span class="bu">len</span>(omega)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"а) </span><span class="sc">{</span>F(a, <span class="bu">len</span>(omega))<span class="sc">}</span><span class="ss">   б) </span><span class="sc">{</span>F(b, <span class="bu">len</span>(omega))<span class="sc">}</span><span class="ss">   б)/а) = </span><span class="sc">{</span>b <span class="op">//</span> a<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>|Ω| = 60
+а) 1/60   б) 1/10   б)/а) = 6</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="sec-s01-t4" class="level3" data-number="1.3.4">
+<h3 data-number="1.3.4" class="anchored" data-anchor-id="sec-s01-t4"><span class="header-section-number">1.3.4</span> Задача 4 (Гмурман, гл. 2 § 2, № 82)</h3>
+<p>Для разрушения моста достаточно попадания одной авиационной бомбы. Найти вероятность того, что мост будет разрушен, если на него сбросить четыре бомбы, вероятности попадания которых соответственно равны: <span class="math inline">\(0{,}3\)</span>; <span class="math inline">\(0{,}4\)</span>; <span class="math inline">\(0{,}6\)</span>; <span class="math inline">\(0{,}7\)</span>.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Решение">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Совет</span>Решение
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>«Достаточно одного попадания» — это «хотя бы одно», а вероятности разные, так что нужна общая формула <a href="#eq-s01-at-least-one" class="quarto-xref">Уравнение&nbsp;<span>1.4</span></a>: <span class="math display">\[
+\Prob(A) = 1 - q_1 q_2 q_3 q_4
+= 1 - 0{,}7 \cdot 0{,}6 \cdot 0{,}4 \cdot 0{,}3
+= 1 - 0{,}0504 = 0{,}9496.
+\]</span></p>
+<p>В книге ответ округлён до <span class="math inline">\(0{,}95\)</span>.</p>
+<p>Прямое суммирование по числу попаданий потребовало бы 15 слагаемых. Код считает оба варианта — результат один и тот же.</p>
+<div id="s01-t4-check" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>ps <span class="op">=</span> [<span class="fl">0.3</span>, <span class="fl">0.4</span>, <span class="fl">0.6</span>, <span class="fl">0.7</span>]</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>formula <span class="op">=</span> <span class="dv">1</span> <span class="op">-</span> np.prod([<span class="dv">1</span> <span class="op">-</span> p <span class="cf">for</span> p <span class="kw">in</span> ps])</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>direct <span class="op">=</span> <span class="bu">sum</span>(exactly_k(ps, k) <span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">5</span>))   <span class="co"># ровно 1 + ... + ровно 4</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"через дополнение: </span><span class="sc">{</span>formula<span class="sc">:.4f}</span><span class="ss">   прямым суммированием: </span><span class="sc">{</span>direct<span class="sc">:.4f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>через дополнение: 0.9496   прямым суммированием: 0.9496</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="блок-b.-основной" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="блок-b.-основной"><span class="header-section-number">1.4</span> Блок B. Основной</h2>
+<section id="sec-s01-t5" class="level3" data-number="1.4.1">
+<h3 data-number="1.4.1" class="anchored" data-anchor-id="sec-s01-t5"><span class="header-section-number">1.4.1</span> Задача 5 (Гмурман, гл. 2 § 1, № 57)</h3>
+<p>Вероятности того, что нужная сборщику деталь находится в первом, втором, третьем, четвёртом ящике, соответственно равны <span class="math inline">\(0{,}6\)</span>; <span class="math inline">\(0{,}7\)</span>; <span class="math inline">\(0{,}8\)</span>; <span class="math inline">\(0{,}9\)</span>. Найти вероятности того, что деталь содержится: а) не более чем в трёх ящиках; б) не менее чем в двух ящиках.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Решение">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Совет</span>Решение
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Сумма данных вероятностей равна <span class="math inline">\(3\)</span>, так что это <strong>не</strong> распределение по ящикам и <strong>не</strong> полная группа. Речь о четырёх независимых событиях <span class="math inline">\(A_i\)</span> = «деталь есть в <span class="math inline">\(i\)</span>-м ящике»; деталей может быть несколько.</p>
+<p>а) «Не более чем в трёх» — дополнение к «во всех четырёх сразу»: <span class="math display">\[
+\Prob = 1 - p_1 p_2 p_3 p_4
+      = 1 - 0{,}6 \cdot 0{,}7 \cdot 0{,}8 \cdot 0{,}9
+      = 1 - 0{,}3024 = 0{,}6976.
+\]</span></p>
+<p>б) «Не менее чем в двух» — дополнение к объединению «ни в одном» и «ровно в одном»: <span class="math display">\[
+\Prob(0) = q_1 q_2 q_3 q_4 = 0{,}4 \cdot 0{,}3 \cdot 0{,}2 \cdot 0{,}1 = 0{,}0024,
+\]</span> <span class="math display">\[
+\Prob(1) = 0{,}6 \cdot 0{,}3 \cdot 0{,}2 \cdot 0{,}1
+         + 0{,}4 \cdot 0{,}7 \cdot 0{,}2 \cdot 0{,}1
+         + 0{,}4 \cdot 0{,}3 \cdot 0{,}8 \cdot 0{,}1
+         + 0{,}4 \cdot 0{,}3 \cdot 0{,}2 \cdot 0{,}9 = 0{,}0404,
+\]</span> <span class="math display">\[
+\Prob = 1 - 0{,}0024 - 0{,}0404 = 0{,}9572.
+\]</span></p>
+<p>Проверка: полное распределение числа ящиков с деталью.</p>
+<div id="s01-t5-check" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>ps <span class="op">=</span> [<span class="fl">0.6</span>, <span class="fl">0.7</span>, <span class="fl">0.8</span>, <span class="fl">0.9</span>]</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>dist <span class="op">=</span> [exactly_k(ps, k) <span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">5</span>)]</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"P(ровно k):"</span>, <span class="st">" "</span>.join(<span class="ss">f"</span><span class="sc">{</span>k<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>v<span class="sc">:.4f}</span><span class="ss">"</span> <span class="cf">for</span> k, v <span class="kw">in</span> <span class="bu">enumerate</span>(dist)))</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"сумма = </span><span class="sc">{</span><span class="bu">sum</span>(dist)<span class="sc">:.10f}</span><span class="ss">"</span>)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"а) не более трёх: </span><span class="sc">{</span><span class="dv">1</span> <span class="op">-</span> dist[<span class="dv">4</span>]<span class="sc">:.4f}</span><span class="ss">"</span>)</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"б) не менее двух: </span><span class="sc">{</span><span class="bu">sum</span>(dist[<span class="dv">2</span>:])<span class="sc">:.4f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>P(ровно k): 0: 0.0024 1: 0.0404 2: 0.2144 3: 0.4404 4: 0.3024
+сумма = 1.0000000000
+а) не более трёх: 0.6976
+б) не менее двух: 0.9572</code></pre>
+</div>
+</div>
+<p>Оба ответа — это распределение с отрезанными хвостами (<a href="#fig-s01-t5" class="quarto-xref">Рисунок&nbsp;<span>1.1</span></a>).</p>
+<div id="cell-fig-s01-t5" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="fl">3.8</span>))</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>colors <span class="op">=</span> [<span class="st">"#c62828"</span>, <span class="st">"#c62828"</span>, <span class="st">"#0b5394"</span>, <span class="st">"#0b5394"</span>, <span class="st">"#b45309"</span>]</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>ax.bar(<span class="bu">range</span>(<span class="dv">5</span>), dist, color<span class="op">=</span>colors, width<span class="op">=</span><span class="fl">0.62</span>)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> k, v <span class="kw">in</span> <span class="bu">enumerate</span>(dist):</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    ax.text(k, v <span class="op">+</span> <span class="fl">0.012</span>, <span class="ss">f"</span><span class="sc">{</span>v<span class="sc">:.4f}</span><span class="ss">"</span>, ha<span class="op">=</span><span class="st">"center"</span>, fontsize<span class="op">=</span><span class="dv">10</span>)</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">"Число ящиков с деталью, $k$"</span>)</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"$</span><span class="ch">\\</span><span class="st">mathsf</span><span class="sc">{P}</span><span class="st">$(ровно $k$)"</span>)</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>ax.set_xticks(<span class="bu">range</span>(<span class="dv">5</span>))</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>ax.set_ylim(<span class="dv">0</span>, <span class="bu">max</span>(dist) <span class="op">*</span> <span class="fl">1.22</span>)</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>ax.legend(</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>    handles<span class="op">=</span>[</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>        plt.Rectangle((<span class="dv">0</span>, <span class="dv">0</span>), <span class="dv">1</span>, <span class="dv">1</span>, color<span class="op">=</span><span class="st">"#c62828"</span>),</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>        plt.Rectangle((<span class="dv">0</span>, <span class="dv">0</span>), <span class="dv">1</span>, <span class="dv">1</span>, color<span class="op">=</span><span class="st">"#0b5394"</span>),</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>        plt.Rectangle((<span class="dv">0</span>, <span class="dv">0</span>), <span class="dv">1</span>, <span class="dv">1</span>, color<span class="op">=</span><span class="st">"#b45309"</span>),</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>    ],</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>    labels<span class="op">=</span>[<span class="st">"исключается в б)"</span>, <span class="st">"входит в оба ответа"</span>, <span class="st">"исключается в а)"</span>],</span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>    fontsize<span class="op">=</span><span class="dv">9</span>, loc<span class="op">=</span><span class="st">"upper left"</span>,</span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div id="fig-s01-t5" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-s01-t5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="seminar-01_files/figure-html/fig-s01-t5-output-1.png" width="782" height="430" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-s01-t5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;1.1: Распределение числа ящиков, содержащих деталь. В пункте а) исключается столбец «во всех четырёх», в пункте б) — «ни в одном» и «ровно в одном».
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning callout-titled" title="Типичная ошибка">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Предупреждение</span>Типичная ошибка
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Считать четыре числа распределением и делить их на сумму <span class="math inline">\(3\)</span>. Независимые события и полная группа несовместных событий — разные конструкции: у первых сумма вероятностей может быть любой, у второй она равна <span class="math inline">\(1\)</span>.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="sec-s01-t6" class="level3" data-number="1.4.2">
+<h3 data-number="1.4.2" class="anchored" data-anchor-id="sec-s01-t6"><span class="header-section-number">1.4.2</span> Задача 6 (Гмурман, гл. 2 § 1, № 59)</h3>
+<p>Брошены три игральные кости. Найти вероятности следующих событий: а) на двух выпавших гранях появится одно очко, а на третьей грани — другое число очков; б) на двух выпавших гранях появится одинаковое число очков, а на третьей грани — другое число очков; в) на всех выпавших гранях появится разное число очков.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Решение">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Совет</span>Решение
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Все <span class="math inline">\(6^3 = 216\)</span> <strong>упорядоченных</strong> исходов равновозможны.</p>
+<p>а) Выбираем, какие две кости дали единицу: <span class="math inline">\(C_3^2 = 3\)</span> способа; третья принимает любое из 5 оставшихся значений: <span class="math display">\[
+\Prob = \frac{3 \cdot 5}{216} = \frac{15}{216} = \frac{5}{72} \approx 0{,}069.
+\]</span></p>
+<p>б) То же, но повторяющееся значение — любое из шести: <span class="math display">\[
+\Prob = \frac{6 \cdot 3 \cdot 5}{216} = \frac{90}{216} = \frac{5}{12}
+\approx 0{,}417.
+\]</span></p>
+<p>в) Все три различны: <span class="math inline">\(6 \cdot 5 \cdot 4 = 120\)</span> исходов, <span class="math display">\[
+\Prob = \frac{120}{216} = \frac59 \approx 0{,}556.
+\]</span></p>
+<p><strong>Проверка полной группой.</strong> События «все три одинаковы», «ровно две одинаковы», «все разные» несовместны и исчерпывают все исходы: <span class="math display">\[
+\frac{6}{216} + \frac{90}{216} + \frac{120}{216} = 1.
+\]</span></p>
+<p>Проверка: полный перебор 216 исходов.</p>
+<div id="s01-t6-check" class="cell" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>omega <span class="op">=</span> <span class="bu">list</span>(product(<span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">7</span>), repeat<span class="op">=</span><span class="dv">3</span>))</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="bu">len</span>(omega)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> <span class="bu">sum</span>(<span class="bu">sorted</span>(o).count(<span class="dv">1</span>) <span class="op">==</span> <span class="dv">2</span> <span class="kw">and</span> <span class="bu">len</span>(<span class="bu">set</span>(o)) <span class="op">==</span> <span class="dv">2</span> <span class="cf">for</span> o <span class="kw">in</span> omega)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> <span class="bu">sum</span>(<span class="bu">len</span>(<span class="bu">set</span>(o)) <span class="op">==</span> <span class="dv">2</span> <span class="cf">for</span> o <span class="kw">in</span> omega)</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> <span class="bu">sum</span>(<span class="bu">len</span>(<span class="bu">set</span>(o)) <span class="op">==</span> <span class="dv">3</span> <span class="cf">for</span> o <span class="kw">in</span> omega)</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>same <span class="op">=</span> <span class="bu">sum</span>(<span class="bu">len</span>(<span class="bu">set</span>(o)) <span class="op">==</span> <span class="dv">1</span> <span class="cf">for</span> o <span class="kw">in</span> omega)</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"а) </span><span class="sc">{</span>F(a, n)<span class="sc">}</span><span class="ss">   б) </span><span class="sc">{</span>F(b, n)<span class="sc">}</span><span class="ss">   в) </span><span class="sc">{</span>F(c, n)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"полная группа: </span><span class="sc">{</span>F(same, n)<span class="sc">}</span><span class="ss"> + </span><span class="sc">{</span>F(b, n)<span class="sc">}</span><span class="ss"> + </span><span class="sc">{</span>F(c, n)<span class="sc">}</span><span class="ss"> = </span><span class="sc">{</span>F(same <span class="op">+</span> b <span class="op">+</span> c, n)<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>а) 5/72   б) 5/12   в) 5/9
+полная группа: 1/36 + 5/12 + 5/9 = 1</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning callout-titled" title="Типичная ошибка">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Предупреждение</span>Типичная ошибка
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>В пункте б) теряют множитель <span class="math inline">\(6\)</span> — выбор того значения, которое повторяется. Проверка полной группой ловит такую ошибку сразу: сумма перестаёт быть равной <span class="math inline">\(1\)</span>.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="sec-s01-t7" class="level3" data-number="1.4.3">
+<h3 data-number="1.4.3" class="anchored" data-anchor-id="sec-s01-t7"><span class="header-section-number">1.4.3</span> Задача 7 (Гмурман, гл. 2 § 1, № 60)</h3>
+<p>Сколько надо бросить игральных костей, чтобы с вероятностью, меньшей <span class="math inline">\(0{,}3\)</span>, можно было ожидать, что ни на одной из выпавших граней не появится шесть очков?</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Решение">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Совет</span>Решение
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-13" class="callout-13-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><em>Решение Гмурмана (с. 22).</em> Пусть <span class="math inline">\(A\)</span> — ни на одной грани нет шестёрки, <span class="math inline">\(A_i\)</span> — на <span class="math inline">\(i\)</span>-й кости нет шестёрки. Тогда <span class="math inline">\(A = A_1 A_2 \cdots A_n\)</span>, <span class="math inline">\(\Prob(A_i) = 5/6\)</span>, события независимы в совокупности, поэтому <span class="math display">\[
+\Prob(A) = \left(\frac56\right)^n.
+\]</span> По условию <span class="math inline">\((5/6)^n &lt; 0{,}3\)</span>, откуда <span class="math inline">\(n \log(5/6) &lt; \log 0{,}3\)</span>. Так как <span class="math inline">\(\log(5/6) &lt; 0\)</span>, при делении знак неравенства меняется: <span class="math display">\[
+n &gt; \frac{\log 0{,}3}{\log(5/6)} \approx 6{,}6,
+\qquad n \geqslant 7.
+\]</span></p>
+<p>Проверка: граница из логарифмов и прямой подбор <span class="math inline">\(n\)</span>.</p>
+<div id="s01-t7-check" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>threshold <span class="op">=</span> <span class="fl">0.3</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>n_exact <span class="op">=</span> log(threshold) <span class="op">/</span> log(<span class="dv">5</span> <span class="op">/</span> <span class="dv">6</span>)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>n_min <span class="op">=</span> <span class="bu">min</span>(k <span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">100</span>) <span class="cf">if</span> (<span class="dv">5</span> <span class="op">/</span> <span class="dv">6</span>) <span class="op">**</span> k <span class="op">&lt;</span> threshold)</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"граница: n &gt; </span><span class="sc">{</span>n_exact<span class="sc">:.4f}</span><span class="ss">  →  n_min = </span><span class="sc">{</span>n_min<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"проверка: (5/6)^6 = </span><span class="sc">{</span>(<span class="dv">5</span><span class="op">/</span><span class="dv">6</span>)<span class="op">**</span><span class="dv">6</span><span class="sc">:.4f}</span><span class="ss"> ≥ 0.3,  (5/6)^7 = </span><span class="sc">{</span>(<span class="dv">5</span><span class="op">/</span><span class="dv">6</span>)<span class="op">**</span><span class="dv">7</span><span class="sc">:.4f}</span><span class="ss"> &lt; 0.3"</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>граница: n &gt; 6.6036  →  n_min = 7
+проверка: (5/6)^6 = 0.3349 ≥ 0.3,  (5/6)^7 = 0.2791 &lt; 0.3</code></pre>
+</div>
+</div>
+<div id="cell-fig-s01-t7" class="cell" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>n_grid <span class="op">=</span> np.arange(<span class="dv">1</span>, <span class="dv">21</span>)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>p_grid <span class="op">=</span> (<span class="dv">5</span> <span class="op">/</span> <span class="dv">6</span>) <span class="op">**</span> n_grid</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">4</span>))</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>ax.plot(n_grid, p_grid, marker<span class="op">=</span><span class="st">"o"</span>, ms<span class="op">=</span><span class="dv">4</span>, lw<span class="op">=</span><span class="fl">1.8</span>)</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>ax.axhline(threshold, color<span class="op">=</span><span class="st">"gray"</span>, ls<span class="op">=</span><span class="st">"--"</span>, lw<span class="op">=</span><span class="fl">1.2</span>)</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>ax.axvline(n_min, color<span class="op">=</span><span class="st">"#b45309"</span>, ls<span class="op">=</span><span class="st">":"</span>, lw<span class="op">=</span><span class="fl">1.6</span>)</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>ax.text(n_min <span class="op">+</span> <span class="fl">0.3</span>, <span class="fl">0.62</span>, <span class="ss">f"$n = </span><span class="sc">{</span>n_min<span class="sc">}</span><span class="ss">$"</span>, color<span class="op">=</span><span class="st">"#b45309"</span>)</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>ax.text(<span class="fl">16.5</span>, threshold <span class="op">+</span> <span class="fl">0.02</span>, <span class="st">"0,3"</span>, color<span class="op">=</span><span class="st">"gray"</span>)</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">"Число костей, $n$"</span>)</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"$</span><span class="ch">\\</span><span class="st">mathsf</span><span class="sc">{P}</span><span class="st">$(ни одной шестёрки) $= (5/6)^n$"</span>)</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>ax.set_xticks(<span class="bu">range</span>(<span class="dv">0</span>, <span class="dv">21</span>, <span class="dv">2</span>))</span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>ax.set_ylim(<span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div id="fig-s01-t7" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-s01-t7-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="seminar-01_files/figure-html/fig-s01-t7-output-1.png" width="782" height="452" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-s01-t7-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;1.2: Вероятность не получить ни одной шестёрки на <span class="math inline">\(n\)</span> костях. Порог <span class="math inline">\(0{,}3\)</span> впервые пробивается при <span class="math inline">\(n = 7\)</span>.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning callout-titled" title="Типичная ошибка">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Предупреждение</span>Типичная ошибка
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Забыть сменить знак неравенства при делении на <span class="math inline">\(\log(5/6) &lt; 0\)</span>. Тогда получается бессмысленный ответ <span class="math inline">\(n \leqslant 6\)</span>.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Для самопроверки (Гмурман, № 61)">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Уведомление</span>Для самопроверки (Гмурман, № 61)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Вероятность попадания в мишень стрелком при одном выстреле равна <span class="math inline">\(0{,}8\)</span>. Сколько выстрелов должен произвести стрелок, чтобы с вероятностью, меньшей <span class="math inline">\(0{,}4\)</span>, можно было ожидать, что не будет ни одного промаха? Ответ: <span class="math inline">\(n \geqslant 5\)</span>.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="sec-s01-t8" class="level3" data-number="1.4.4">
+<h3 data-number="1.4.4" class="anchored" data-anchor-id="sec-s01-t8"><span class="header-section-number">1.4.4</span> Задача 8 (Гмурман, гл. 2 § 2, № 86)</h3>
+<p>Вероятность хотя бы одного попадания стрелком в мишень при трёх выстрелах равна <span class="math inline">\(0{,}875\)</span>. Найти вероятность попадания при одном выстреле.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Решение">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Совет</span>Решение
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-15" class="callout-15-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><em>Решение Гмурмана (с. 30).</em> Это обратная задача к формуле <a href="#eq-s01-at-least-one" class="quarto-xref">Уравнение&nbsp;<span>1.4</span></a>. Пусть <span class="math inline">\(q\)</span> — вероятность промаха при одном выстреле; выстрелы независимы, вероятности одинаковы, поэтому <span class="math display">\[
+\Prob(A) = 1 - q^3 = 0{,}875
+\;\Longrightarrow\;
+q^3 = 0{,}125
+\;\Longrightarrow\;
+q = \sqrt[3]{0{,}125} = 0{,}5,
+\]</span> и искомая вероятность <span class="math inline">\(p = 1 - q = 0{,}5\)</span>.</p>
+<p>Проверка: вычисляем <span class="math inline">\(p\)</span> и подставляем обратно.</p>
+<div id="s01-t8-check" class="cell" data-execution_count="11">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>q <span class="op">=</span> (<span class="dv">1</span> <span class="op">-</span> <span class="fl">0.875</span>) <span class="op">**</span> (<span class="dv">1</span> <span class="op">/</span> <span class="dv">3</span>)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> <span class="dv">1</span> <span class="op">-</span> q</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"q = </span><span class="sc">{</span>q<span class="sc">:.4f}</span><span class="ss">   p = </span><span class="sc">{</span>p<span class="sc">:.4f}</span><span class="ss">   обратная подстановка: 1 - q^3 = </span><span class="sc">{</span><span class="dv">1</span> <span class="op">-</span> q<span class="op">**</span><span class="dv">3</span><span class="sc">:.4f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>q = 0.5000   p = 0.5000   обратная подстановка: 1 - q^3 = 0.8750</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Для самопроверки (Гмурман, № 87)">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Уведомление</span>Для самопроверки (Гмурман, № 87)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Вероятность хотя бы одного попадания в цель при четырёх выстрелах равна <span class="math inline">\(0{,}9984\)</span>. Найти вероятность попадания в цель при одном выстреле. Ответ: <span class="math inline">\(0{,}8\)</span>.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="блок-c.-повышенная-сложность" class="level2" data-number="1.5">
+<h2 data-number="1.5" class="anchored" data-anchor-id="блок-c.-повышенная-сложность"><span class="header-section-number">1.5</span> Блок C. Повышенная сложность</h2>
+<section id="sec-s01-t9" class="level3" data-number="1.5.1">
+<h3 data-number="1.5.1" class="anchored" data-anchor-id="sec-s01-t9"><span class="header-section-number">1.5.1</span> Задача 9 (Гмурман, гл. 2 § 1, № 62)</h3>
+<p>В круг радиуса <span class="math inline">\(R\)</span> вписан правильный треугольник. Внутрь круга наудачу брошены четыре точки. Найти вероятности следующих событий: а) все четыре точки попадут внутрь треугольника; б) одна точка попадёт внутрь треугольника и по одной точке попадёт на каждый «малый» сегмент. Предполагается, что вероятность попадания точки в фигуру пропорциональна площади фигуры и не зависит от её расположения.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Решение">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-17-contents" aria-controls="callout-17" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Совет</span>Решение
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-17" class="callout-17-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Задача соединяет геометрическую вероятность (для одной точки) с теоремой умножения (для четырёх независимых точек).</p>
+<p><strong>Одна точка.</strong> Сторона вписанного правильного треугольника равна <span class="math inline">\(R\sqrt3\)</span>, его площадь <span class="math inline">\(S_\triangle = \tfrac{3\sqrt3}{4}R^2\)</span>, площадь круга <span class="math inline">\(\pi R^2\)</span>: <span class="math display">\[
+p = \frac{S_\triangle}{S_\circ} = \frac{3\sqrt3}{4\pi} \approx 0{,}4135.
+\]</span> Три «малых» сегмента одинаковы и делят между собой остаток круга: <span class="math display">\[
+s = \frac{1 - p}{3} = \frac{4\pi - 3\sqrt3}{12\pi} \approx 0{,}1955.
+\]</span></p>
+<p>а) Точки бросаются независимо, поэтому вероятности перемножаются: <span class="math display">\[
+\Prob = p^4 = \left(\frac{3\sqrt3}{4\pi}\right)^{4} \approx 0{,}0292.
+\]</span></p>
+<p>б) Четыре точки различимы, и их надо разложить по четырём областям (треугольник и три сегмента) по одной в каждую — это <span class="math inline">\(4! = 24\)</span> способа, каждый вероятности <span class="math inline">\(p\,s^3\)</span>: <span class="math display">\[
+\Prob = 4!\,p\,s^3
+= 4! \cdot \frac{3\sqrt3}{4\pi}
+   \left(\frac{4\pi - 3\sqrt3}{12\pi}\right)^{3} \approx 0{,}0742.
+\]</span></p>
+<p>Проверка: символьный расчёт в sympy.</p>
+<div id="s01-t9-check" class="cell" data-execution_count="12">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>p_sym <span class="op">=</span> <span class="dv">3</span> <span class="op">*</span> sp.sqrt(<span class="dv">3</span>) <span class="op">/</span> (<span class="dv">4</span> <span class="op">*</span> sp.pi)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>s_sym <span class="op">=</span> (<span class="dv">1</span> <span class="op">-</span> p_sym) <span class="op">/</span> <span class="dv">3</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>s_book <span class="op">=</span> (<span class="dv">4</span> <span class="op">*</span> sp.pi <span class="op">-</span> <span class="dv">3</span> <span class="op">*</span> sp.sqrt(<span class="dv">3</span>)) <span class="op">/</span> (<span class="dv">12</span> <span class="op">*</span> sp.pi)</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"наша форма сегмента совпадает с книжной:"</span>, sp.simplify(s_sym <span class="op">-</span> s_book) <span class="op">==</span> <span class="dv">0</span>)</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"p = </span><span class="sc">{</span><span class="bu">float</span>(p_sym)<span class="sc">:.5f}</span><span class="ss">   s = </span><span class="sc">{</span><span class="bu">float</span>(s_sym)<span class="sc">:.5f}</span><span class="ss">   p + 3s = </span><span class="sc">{</span><span class="bu">float</span>(p_sym <span class="op">+</span> <span class="dv">3</span><span class="op">*</span>s_sym)<span class="sc">:.5f}</span><span class="ss">"</span>)</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"а) </span><span class="sc">{</span><span class="bu">float</span>(p_sym<span class="op">**</span><span class="dv">4</span>)<span class="sc">:.5f}</span><span class="ss">"</span>)</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"б) </span><span class="sc">{</span><span class="bu">float</span>(<span class="dv">24</span> <span class="op">*</span> p_sym <span class="op">*</span> s_sym<span class="op">**</span><span class="dv">3</span>)<span class="sc">:.5f}</span><span class="ss">   без 4!: </span><span class="sc">{</span><span class="bu">float</span>(p_sym <span class="op">*</span> s_sym<span class="op">**</span><span class="dv">3</span>)<span class="sc">:.5f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>наша форма сегмента совпадает с книжной: True
+p = 0.41350   s = 0.19550   p + 3s = 1.00000
+а) 0.02923
+б) 0.07415   без 4!: 0.00309</code></pre>
+</div>
+</div>
+<p>Проверка симуляцией: бросаем точки равномерно в круг и определяем функцией <code>region</code>, в какую из четырёх областей попала каждая.</p>
+<div id="s01-t9-sim" class="cell" data-execution_count="13">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>m <span class="op">=</span> <span class="dv">500_000</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="co"># равномерно в единичном круге: радиус как корень из равномерной величины</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>r <span class="op">=</span> np.sqrt(rng.random((m, <span class="dv">4</span>)))</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>th <span class="op">=</span> rng.uniform(<span class="dv">0</span>, <span class="dv">2</span> <span class="op">*</span> np.pi, (m, <span class="dv">4</span>))</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>reg <span class="op">=</span> region((r <span class="op">*</span> np.cos(th)).ravel(), (r <span class="op">*</span> np.sin(th)).ravel()).reshape(m, <span class="dv">4</span>)</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>sim_a <span class="op">=</span> (reg <span class="op">==</span> <span class="dv">0</span>).<span class="bu">all</span>(axis<span class="op">=</span><span class="dv">1</span>).mean()</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>sim_b <span class="op">=</span> (np.sort(reg, axis<span class="op">=</span><span class="dv">1</span>) <span class="op">==</span> np.array([<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>])).<span class="bu">all</span>(axis<span class="op">=</span><span class="dv">1</span>).mean()</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"а) симуляция </span><span class="sc">{</span>sim_a<span class="sc">:.5f}</span><span class="ss">  против </span><span class="sc">{</span><span class="bu">float</span>(p_sym<span class="op">**</span><span class="dv">4</span>)<span class="sc">:.5f}</span><span class="ss">"</span>)</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"б) симуляция </span><span class="sc">{</span>sim_b<span class="sc">:.5f}</span><span class="ss">  против </span><span class="sc">{</span><span class="bu">float</span>(<span class="dv">24</span> <span class="op">*</span> p_sym <span class="op">*</span> s_sym<span class="op">**</span><span class="dv">3</span>)<span class="sc">:.5f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>а) симуляция 0.02944  против 0.02923
+б) симуляция 0.07420  против 0.07415</code></pre>
+</div>
+</div>
+<div id="cell-fig-s01-t9" class="cell" data-execution_count="14">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>vx, vy <span class="op">=</span> np.cos(TRIANGLE_ANGLES), np.sin(TRIANGLE_ANGLES)</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="fl">5.2</span>, <span class="fl">5.2</span>))</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">2</span> <span class="op">*</span> np.pi, <span class="dv">400</span>)</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>ax.fill(np.cos(t), np.sin(t), color<span class="op">=</span><span class="st">"#b45309"</span>, alpha<span class="op">=</span><span class="fl">0.22</span>)</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>ax.plot(np.cos(t), np.sin(t), color<span class="op">=</span><span class="st">"#b45309"</span>, lw<span class="op">=</span><span class="fl">1.6</span>)</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>ax.fill(vx, vy, color<span class="op">=</span><span class="st">"#0b5394"</span>, alpha<span class="op">=</span><span class="fl">0.30</span>)</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>ax.plot(np.append(vx, vx[<span class="dv">0</span>]), np.append(vy, vy[<span class="dv">0</span>]), color<span class="op">=</span><span class="st">"#0b5394"</span>, lw<span class="op">=</span><span class="fl">1.8</span>)</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>ax.text(<span class="dv">0</span>, <span class="op">-</span><span class="fl">0.13</span>, <span class="ss">f"$p = </span><span class="sc">{</span><span class="bu">float</span>(p_sym)<span class="sc">:.3f}</span><span class="ss">$"</span>, ha<span class="op">=</span><span class="st">"center"</span>, color<span class="op">=</span><span class="st">"#0b5394"</span>, fontsize<span class="op">=</span><span class="dv">13</span>)</span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">3</span>):</span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>    mid <span class="op">=</span> (TRIANGLE_ANGLES[i] <span class="op">+</span> TRIANGLE_ANGLES[(i <span class="op">+</span> <span class="dv">1</span>) <span class="op">%</span> <span class="dv">3</span>]) <span class="op">/</span> <span class="dv">2</span></span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>    mid <span class="op">=</span> mid <span class="cf">if</span> i <span class="op">&lt;</span> <span class="dv">2</span> <span class="cf">else</span> mid <span class="op">+</span> np.pi</span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>    ax.text(<span class="fl">0.78</span> <span class="op">*</span> np.cos(mid), <span class="fl">0.78</span> <span class="op">*</span> np.sin(mid), <span class="ss">f"</span><span class="sc">{</span><span class="bu">float</span>(s_sym)<span class="sc">:.3f}</span><span class="ss">"</span>,</span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>            ha<span class="op">=</span><span class="st">"center"</span>, va<span class="op">=</span><span class="st">"center"</span>, color<span class="op">=</span><span class="st">"#b45309"</span>, fontsize<span class="op">=</span><span class="dv">11</span>)</span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a>ax.set_aspect(<span class="st">"equal"</span>)</span>
+<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a>ax.axis(<span class="st">"off"</span>)</span>
+<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a>ax.set_xlim(<span class="op">-</span><span class="fl">1.12</span>, <span class="fl">1.12</span>)</span>
+<span id="cb24-20"><a href="#cb24-20" aria-hidden="true" tabindex="-1"></a>ax.set_ylim(<span class="op">-</span><span class="fl">1.12</span>, <span class="fl">1.12</span>)</span>
+<span id="cb24-21"><a href="#cb24-21" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div id="fig-s01-t9" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-s01-t9-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="seminar-01_files/figure-html/fig-s01-t9-output-1.png" width="584" height="584" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-s01-t9-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;1.3: Правильный треугольник, вписанный в круг: он занимает долю <span class="math inline">\(3\sqrt3/(4\pi) \approx 0{,}414\)</span> площади, каждый из трёх сегментов — примерно <span class="math inline">\(0{,}196\)</span>.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning callout-titled" title="Типичная ошибка">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Предупреждение</span>Типичная ошибка
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Потерять множитель <span class="math inline">\(4!\)</span> в пункте б). Без него получается <span class="math inline">\(0{,}0031\)</span> — ответ в 24 раза меньше верного. Множитель нужен, потому что точки различимы: важно, какая именно точка попала в треугольник, а какая — в каждый сегмент.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="sec-s01-t10" class="level3" data-number="1.5.2">
+<h3 data-number="1.5.2" class="anchored" data-anchor-id="sec-s01-t10"><span class="header-section-number">1.5.2</span> Задача 10 (Гмурман, гл. 2 § 1, № 75)</h3>
+<p>Наступление события <span class="math inline">\(AB\)</span> необходимо влечёт наступление события <span class="math inline">\(C\)</span>. Доказать, что <span class="math display">\[
+\Prob(A) + \Prob(B) - \Prob(C) \leqslant 1.
+\]</span></p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Решение">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-18-contents" aria-controls="callout-18" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Совет</span>Решение
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-18" class="callout-18-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><em>Решение Гмурмана (с. 25).</em> Если <span class="math inline">\(AB\)</span> влечёт <span class="math inline">\(C\)</span>, то <span class="math inline">\(C\)</span> содержит <span class="math inline">\(AB\)</span>, и поэтому <span class="math display">\[
+\Prob(C) \geqslant \Prob(AB). \tag{$*$}
+\]</span> Разложим <span class="math inline">\(A\)</span> и <span class="math inline">\(B\)</span> на несовместные части: <span class="math display">\[
+\Prob(A) = \Prob(AB) + \Prob(A\bar B), \qquad
+\Prob(B) = \Prob(AB) + \Prob(\bar A B).
+\]</span> Три события <span class="math inline">\(AB\)</span>, <span class="math inline">\(A\bar B\)</span>, <span class="math inline">\(\bar A B\)</span> несовместны, а вместе с <span class="math inline">\(\bar A \bar B\)</span> образуют полную группу: <span class="math display">\[
+\Prob(AB) + \Prob(A\bar B) + \Prob(\bar A B) = 1 - \Prob(\bar A \bar B).
+\]</span> Подставляя и пользуясь <span class="math inline">\((*)\)</span>: <span class="math display">\[
+\Prob(A) + \Prob(B) - \Prob(C)
+\leqslant \Prob(AB) + \Prob(A\bar B) + \Prob(AB) + \Prob(\bar A B) - \Prob(AB)
+\]</span> <span class="math display">\[
+= \Prob(AB) + \Prob(A\bar B) + \Prob(\bar A B)
+= 1 - \Prob(\bar A \bar B) \leqslant 1. \qquad \blacksquare
+\]</span></p>
+<p><strong>Частный случай.</strong> При <span class="math inline">\(C = AB\)</span> получается <span class="math display">\[
+\Prob(A) + \Prob(B) - \Prob(AB) \leqslant 1,
+\]</span> то есть просто <span class="math inline">\(\Prob(A + B) \leqslant 1\)</span> по <a href="#eq-s01-addition" class="quarto-xref">Уравнение&nbsp;<span>1.1</span></a>. Это неравенство используется в задаче 11.</p>
+<p><strong>Ключевой приём</strong> — разложение <span class="math inline">\(A = AB + A\bar B\)</span> на несовместные части.</p>
+<p>Численная проверка: берём 300 000 случайных распределений на четырёх атомах <span class="math inline">\((AB,\, A\bar B,\, \bar A B,\, \bar A \bar B)\)</span> и проверяем неравенство в худшем случае <span class="math inline">\(C = AB\)</span> (при большем <span class="math inline">\(C\)</span> левая часть только уменьшится).</p>
+<div id="s01-t10-check" class="cell" data-execution_count="15">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>w <span class="op">=</span> rng.dirichlet(np.ones(<span class="dv">4</span>), size<span class="op">=</span><span class="dv">300_000</span>)     <span class="co"># P(AB), P(AB̄), P(ĀB), P(ĀB̄)</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>P_AB, P_Ab, P_aB, P_ab <span class="op">=</span> w.T</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>PA, PB <span class="op">=</span> P_AB <span class="op">+</span> P_Ab, P_AB <span class="op">+</span> P_aB</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>lhs <span class="op">=</span> PA <span class="op">+</span> PB <span class="op">-</span> P_AB                             <span class="co"># худший случай C = AB</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"максимум левой части: </span><span class="sc">{</span>lhs<span class="sc">.</span><span class="bu">max</span>()<span class="sc">:.6f}</span><span class="ss">   нарушений: </span><span class="sc">{</span>(lhs <span class="op">&gt;</span> <span class="dv">1</span> <span class="op">+</span> <span class="fl">1e-12</span>)<span class="sc">.</span><span class="bu">sum</span>()<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"совпадает с 1 - P(ĀB̄): </span><span class="sc">{</span>np<span class="sc">.</span>allclose(lhs, <span class="dv">1</span> <span class="op">-</span> P_ab)<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>максимум левой части: 1.000000   нарушений: 0
+совпадает с 1 - P(ĀB̄): True</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="sec-s01-t11" class="level3" data-number="1.5.3">
+<h3 data-number="1.5.3" class="anchored" data-anchor-id="sec-s01-t11"><span class="header-section-number">1.5.3</span> Задача 11 (Гмурман, гл. 2 § 1, № 76)</h3>
+<p>Доказать, что <span class="math display">\[
+\Prob(B \mid A) \geqslant 1 - \frac{\Prob(\bar B)}{\Prob(A)}.
+\]</span> Предполагается, что <span class="math inline">\(\Prob(A) &gt; 0\)</span>.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Решение">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-19-contents" aria-controls="callout-19" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Совет</span>Решение
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-19" class="callout-19-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><em>Решение Гмурмана (с. 26).</em> Воспользуемся неравенством из задачи 10: <span class="math inline">\(\Prob(A) + \Prob(B) - \Prob(AB) \leqslant 1\)</span>. Подставим в него <span class="math inline">\(\Prob(AB) = \Prob(A)\Prob(B \mid A)\)</span> и <span class="math inline">\(\Prob(B) = 1 - \Prob(\bar B)\)</span>: <span class="math display">\[
+\Prob(A) + 1 - \Prob(\bar B) - \Prob(A)\,\Prob(B \mid A) \leqslant 1,
+\]</span> откуда <span class="math display">\[
+\Prob(A)\,\Prob(B \mid A) \geqslant \Prob(A) - \Prob(\bar B).
+\]</span> Разделив на <span class="math inline">\(\Prob(A) &gt; 0\)</span>: <span class="math display">\[
+\Prob(B \mid A) \geqslant 1 - \frac{\Prob(\bar B)}{\Prob(A)}. \qquad \blacksquare
+\]</span></p>
+<p><strong>Смысл.</strong> Если <span class="math inline">\(B\)</span> почти достоверно (<span class="math inline">\(\Prob(\bar B)\)</span> мало), то <span class="math inline">\(B\)</span> остаётся почти достоверным и при условии любого не слишком редкого <span class="math inline">\(A\)</span>. Оценка содержательна лишь при <span class="math inline">\(\Prob(\bar B) &lt; \Prob(A)\)</span>; иначе правая часть отрицательна и неравенство выполняется автоматически. Равенство достигается, когда <span class="math inline">\(\Prob(\bar A \bar B) = 0\)</span>, то есть событие <span class="math inline">\(A + B\)</span> достоверно.</p>
+<p>Численная проверка на тех же случайных распределениях, что в задаче 10.</p>
+<div id="s01-t11-check" class="cell" data-execution_count="16">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>lhs <span class="op">=</span> P_AB <span class="op">/</span> PA                                  <span class="co"># P(B | A), переменные из задачи 10</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>rhs <span class="op">=</span> <span class="dv">1</span> <span class="op">-</span> (<span class="dv">1</span> <span class="op">-</span> PB) <span class="op">/</span> PA</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>gap <span class="op">=</span> lhs <span class="op">-</span> rhs</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"минимальный запас lhs - rhs: </span><span class="sc">{</span>gap<span class="sc">.</span><span class="bu">min</span>()<span class="sc">:.3e}</span><span class="ss">   нарушений: </span><span class="sc">{</span>(gap <span class="op">&lt;</span> <span class="op">-</span><span class="fl">1e-12</span>)<span class="sc">.</span><span class="bu">sum</span>()<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"случаев, где оценка содержательна (rhs &gt; 0): </span><span class="sc">{</span>(rhs <span class="op">&gt;</span> <span class="dv">0</span>)<span class="sc">.</span>mean()<span class="sc">:.1%}</span><span class="ss">"</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>минимальный запас lhs - rhs: 1.686e-07   нарушений: 0
+случаев, где оценка содержательна (rhs &gt; 0): 50.0%</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="sec-s01-t12" class="level3" data-number="1.5.4">
+<h3 data-number="1.5.4" class="anchored" data-anchor-id="sec-s01-t12"><span class="header-section-number">1.5.4</span> Задача 12 (Гмурман, гл. 2 § 1, № 79*)</h3>
+<p>Даны три попарно независимых события <span class="math inline">\(A\)</span>, <span class="math inline">\(B\)</span>, <span class="math inline">\(C\)</span>, которые, однако, все три вместе произойти не могут. Предполагая, что все они имеют одну и ту же вероятность <span class="math inline">\(p\)</span>, найти наибольшее возможное значение <span class="math inline">\(p\)</span>.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Решение">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-21-contents" aria-controls="callout-21" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Совет</span>Решение
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-21" class="callout-21-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>По условию <span class="math display">\[
+\Prob(A) = \Prob(B) = \Prob(C) = p, \qquad
+\Prob(AB) = \Prob(AC) = \Prob(BC) = p^2, \qquad
+\Prob(ABC) = 0.
+\]</span> Здесь <span class="math inline">\(\Prob(ABC) = 0 \ne p^3\)</span>: события попарно независимы, но <strong>не независимы в совокупности</strong>.</p>
+<p><strong>Короткий путь.</strong> Разложим <span class="math inline">\(A\bar B\)</span> на несовместные части: <span class="math inline">\(A\bar B = A\bar B C + A\bar B\bar C\)</span>, откуда <span class="math display">\[
+\Prob(A\bar B\bar C) = \Prob(A\bar B) - \Prob(A\bar B C).
+\]</span> Здесь <span class="math inline">\(\Prob(A\bar B) = p - p^2\)</span> (попарная независимость <span class="math inline">\(A\)</span> и <span class="math inline">\(B\)</span>), а <span class="math inline">\(\Prob(A\bar BC) = \Prob(AC) - \Prob(ABC) = p^2 - 0 = p^2\)</span>. Значит, <span class="math display">\[
+\Prob(A\bar B\bar C) = p - p^2 - p^2 = p - 2p^2 = p(1 - 2p).
+\]</span> Вероятность неотрицательна, поэтому <span class="math inline">\(p(1 - 2p) \geqslant 0\)</span>, то есть <span class="math display">\[
+\boxed{p \leqslant \tfrac12.}
+\]</span> Значение достижимо: при <span class="math inline">\(p = 1/2\)</span> получаем <span class="math inline">\(\Prob(A\bar B\bar C) = 0\)</span>, и непротиворечивая модель существует (см. ниже).</p>
+<p><strong>Полный набор атомов</strong> (разбор Гмурмана, с. 27–28). Все восемь вероятностей выражаются через <span class="math inline">\(p\)</span>:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Атом</th>
+<th style="text-align: left;">Вероятность</th>
+<th style="text-align: right;">При <span class="math inline">\(p = 1/2\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(ABC\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(0\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(0\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(AB\bar C\)</span>, <span class="math inline">\(A\bar BC\)</span>, <span class="math inline">\(\bar ABC\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(p^2\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(1/4\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(A\bar B\bar C\)</span>, <span class="math inline">\(\bar AB\bar C\)</span>, <span class="math inline">\(\bar A\bar BC\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(p - 2p^2\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(0\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(\bar A\bar B\bar C\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(3p^2 - 3p + 1\)</span></td>
+<td style="text-align: right;"><span class="math inline">\(1/4\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>Требование неотрицательности всех восьми даёт систему неравенств; самое жёсткое из них — <span class="math inline">\(p - 2p^2 \geqslant 0\)</span>.</p>
+<p>Проверка: сумма атомов и область неотрицательности в sympy.</p>
+<div id="s01-t12-check" class="cell" data-execution_count="17">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>p_s <span class="op">=</span> sp.symbols(<span class="st">"p"</span>, nonnegative<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>atoms <span class="op">=</span> {</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"ABC"</span>: sp.Integer(<span class="dv">0</span>),</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"AB̄C̄ (и симметричные)"</span>: p_s <span class="op">-</span> <span class="dv">2</span> <span class="op">*</span> p_s<span class="op">**</span><span class="dv">2</span>,</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"ABC̄ (и симметричные)"</span>: p_s<span class="op">**</span><span class="dv">2</span>,</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"ĀB̄C̄"</span>: <span class="dv">3</span> <span class="op">*</span> p_s<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> <span class="dv">3</span> <span class="op">*</span> p_s <span class="op">+</span> <span class="dv">1</span>,</span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>total <span class="op">=</span> (atoms[<span class="st">"ABC"</span>] <span class="op">+</span> <span class="dv">3</span> <span class="op">*</span> atoms[<span class="st">"ABC̄ (и симметричные)"</span>]</span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>         <span class="op">+</span> <span class="dv">3</span> <span class="op">*</span> atoms[<span class="st">"AB̄C̄ (и симметричные)"</span>] <span class="op">+</span> atoms[<span class="st">"ĀB̄C̄"</span>])</span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"сумма восьми атомов:"</span>, sp.simplify(total))</span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> name, expr <span class="kw">in</span> atoms.items():</span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"  </span><span class="sc">{</span>name<span class="sc">:26s}</span><span class="ss"> </span><span class="sc">{</span>expr<span class="sc">}</span><span class="ss">   ≥0 при </span><span class="sc">{</span>sp<span class="sc">.</span>solve([sp.Ge(expr, <span class="dv">0</span>), sp.Le(p_s, <span class="dv">1</span>)], p_s)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">максимум p:"</span>, sp.Rational(<span class="dv">1</span>, <span class="dv">2</span>))</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>сумма восьми атомов: 1
+  ABC                        0   ≥0 при p &lt;= 1
+  AB̄C̄ (и симметричные)     -2*p**2 + p   ≥0 при p &lt;= 1/2
+  ABC̄ (и симметричные)      p**2   ≥0 при p &lt;= 1
+  ĀB̄C̄                      3*p**2 - 3*p + 1   ≥0 при p &lt;= 1
+
+максимум p: 1/2</code></pre>
+</div>
+</div>
+<p>Модель при <span class="math inline">\(p = 1/2\)</span>: четыре равновероятных исхода, три из них дают ровно по два события из трёх, четвёртый — ни одного.</p>
+<div id="s01-t12-model" class="cell" data-execution_count="18">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># исходы (A, B, C): три пары и «ничего», каждый с вероятностью 1/4</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>M <span class="op">=</span> np.array([(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>), (<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>), (<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>), (<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>)])</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>w4 <span class="op">=</span> np.full(<span class="dv">4</span>, <span class="fl">0.25</span>)</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>PA_, PB_, PC_ <span class="op">=</span> (M <span class="op">*</span> w4[:, <span class="va">None</span>]).<span class="bu">sum</span>(axis<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>pairs <span class="op">=</span> [(<span class="dv">0</span>, <span class="dv">1</span>), (<span class="dv">0</span>, <span class="dv">2</span>), (<span class="dv">1</span>, <span class="dv">2</span>)]</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>triple <span class="op">=</span> <span class="bu">float</span>(w4[(M <span class="op">==</span> <span class="dv">1</span>).<span class="bu">all</span>(axis<span class="op">=</span><span class="dv">1</span>)].<span class="bu">sum</span>())</span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"P(A), P(B), P(C) = </span><span class="sc">{</span>PA_<span class="sc">}</span><span class="ss">, </span><span class="sc">{</span>PB_<span class="sc">}</span><span class="ss">, </span><span class="sc">{</span>PC_<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"P(AB), P(AC), P(BC) ="</span>, [prob_both(M, w4, i, j) <span class="cf">for</span> i, j <span class="kw">in</span> pairs], <span class="st">"  p² ="</span>, <span class="fl">0.5</span><span class="op">**</span><span class="dv">2</span>)</span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"попарная независимость:"</span>, <span class="bu">all</span>(<span class="bu">abs</span>(prob_both(M, w4, i, j) <span class="op">-</span> <span class="fl">0.25</span>) <span class="op">&lt;</span> <span class="fl">1e-12</span> <span class="cf">for</span> i, j <span class="kw">in</span> pairs))</span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"P(ABC) = </span><span class="sc">{</span>triple<span class="sc">}</span><span class="ss">, но p³ = </span><span class="sc">{</span><span class="fl">0.5</span><span class="op">**</span><span class="dv">3</span><span class="sc">}</span><span class="ss">  →  в совокупности НЕ независимы"</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>P(A), P(B), P(C) = 0.5, 0.5, 0.5
+P(AB), P(AC), P(BC) = [0.25, 0.25, 0.25]   p² = 0.25
+попарная независимость: True
+P(ABC) = 0.0, но p³ = 0.125  →  в совокупности НЕ независимы</code></pre>
+</div>
+</div>
+<div id="cell-fig-s01-t12" class="cell" data-execution_count="19">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>grid <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">400</span>)</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>curves <span class="op">=</span> {</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"$</span><span class="ch">\\</span><span class="st">mathsf</span><span class="sc">{P}</span><span class="st">(AB</span><span class="ch">\\</span><span class="st">bar C) = p^2$"</span>: grid<span class="op">**</span><span class="dv">2</span>,</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"$</span><span class="ch">\\</span><span class="st">mathsf</span><span class="sc">{P}</span><span class="st">(A</span><span class="ch">\\</span><span class="st">bar B</span><span class="ch">\\</span><span class="st">bar C) = p - 2p^2$"</span>: grid <span class="op">-</span> <span class="dv">2</span> <span class="op">*</span> grid<span class="op">**</span><span class="dv">2</span>,</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"$</span><span class="ch">\\</span><span class="st">mathsf</span><span class="sc">{P}</span><span class="st">(</span><span class="ch">\\</span><span class="st">bar A</span><span class="ch">\\</span><span class="st">bar B</span><span class="ch">\\</span><span class="st">bar C) = 3p^2 - 3p + 1$"</span>: <span class="dv">3</span> <span class="op">*</span> grid<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> <span class="dv">3</span> <span class="op">*</span> grid <span class="op">+</span> <span class="dv">1</span>,</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="fl">4.2</span>))</span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (label, y), st <span class="kw">in</span> <span class="bu">zip</span>(curves.items(), [<span class="st">"-"</span>, <span class="st">"-"</span>, <span class="st">"--"</span>]):</span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a>    ax.plot(grid, y, st, lw<span class="op">=</span><span class="dv">2</span>, label<span class="op">=</span>label)</span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>ax.axhline(<span class="dv">0</span>, color<span class="op">=</span><span class="st">"black"</span>, lw<span class="op">=</span><span class="fl">0.9</span>)</span>
+<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a>ax.axvspan(<span class="dv">0</span>, <span class="fl">0.5</span>, color<span class="op">=</span><span class="st">"#2e7d32"</span>, alpha<span class="op">=</span><span class="fl">0.10</span>)</span>
+<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a>ax.axvline(<span class="fl">0.5</span>, color<span class="op">=</span><span class="st">"#c62828"</span>, ls<span class="op">=</span><span class="st">":"</span>, lw<span class="op">=</span><span class="fl">1.8</span>)</span>
+<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a>ax.text(<span class="fl">0.25</span>, <span class="fl">0.86</span>, <span class="st">"допустимо"</span>, ha<span class="op">=</span><span class="st">"center"</span>, color<span class="op">=</span><span class="st">"#2e7d32"</span>, fontsize<span class="op">=</span><span class="dv">12</span>)</span>
+<span id="cb33-15"><a href="#cb33-15" aria-hidden="true" tabindex="-1"></a>ax.text(<span class="fl">0.52</span>, <span class="fl">0.86</span>, <span class="st">"$p = 1/2$"</span>, color<span class="op">=</span><span class="st">"#c62828"</span>, fontsize<span class="op">=</span><span class="dv">12</span>)</span>
+<span id="cb33-16"><a href="#cb33-16" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">"$p$"</span>)</span>
+<span id="cb33-17"><a href="#cb33-17" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"Вероятность атома"</span>)</span>
+<span id="cb33-18"><a href="#cb33-18" aria-hidden="true" tabindex="-1"></a>ax.set_xlim(<span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb33-19"><a href="#cb33-19" aria-hidden="true" tabindex="-1"></a>ax.set_ylim(<span class="op">-</span><span class="fl">0.3</span>, <span class="fl">1.02</span>)</span>
+<span id="cb33-20"><a href="#cb33-20" aria-hidden="true" tabindex="-1"></a>ax.legend(fontsize<span class="op">=</span><span class="dv">9</span>, loc<span class="op">=</span><span class="st">"lower left"</span>)</span>
+<span id="cb33-21"><a href="#cb33-21" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div id="fig-s01-t12" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-s01-t12-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="seminar-01_files/figure-html/fig-s01-t12-output-1.png" width="782" height="474" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-s01-t12-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;1.4: Вероятности атомов как функции <span class="math inline">\(p\)</span>. Ограничение даёт <span class="math inline">\(\mathsf{P}(A\bar B\bar C) = p - 2p^2\)</span>: она обращается в нуль при <span class="math inline">\(p = 1/2\)</span> и дальше стала бы отрицательной.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning callout-titled" title="Типичная ошибка">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Предупреждение</span>Типичная ошибка
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Считать, что из попарной независимости следует <span class="math inline">\(\Prob(ABC) = \Prob(A)\Prob(B)\Prob(C) = p^3\)</span>. Тогда из <span class="math inline">\(\Prob(ABC) = 0\)</span> вышло бы <span class="math inline">\(p = 0\)</span>. Попарная независимость <strong>не</strong> даёт независимости в совокупности — именно это и показывает задача.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="задачи-для-самостоятельной-работы" class="level2" data-number="1.6">
+<h2 data-number="1.6" class="anchored" data-anchor-id="задачи-для-самостоятельной-работы"><span class="header-section-number">1.6</span> Задачи для самостоятельной работы</h2>
+<ol type="1">
+<li><strong>(Гмурман, № 70.)</strong> В мешочке 10 одинаковых кубиков с номерами от 1 до 10. Наудачу извлекают по одному три кубика. Найти вероятность того, что последовательно появятся кубики с номерами 1, 2, 3, если кубики извлекаются: а) без возвращения; б) с возвращением. Сравните ответы и объясните, какой из них больше и почему.</li>
+<li><strong>(Гмурман, № 63.)</strong> Отрезок разделён на три равные части. На него наудачу брошены три точки. Найти вероятность того, что на каждую из трёх частей попадёт по одной точке.</li>
+<li><strong>(Гмурман, № 77.)</strong> Наступление события <span class="math inline">\(ABC\)</span> необходимо влечёт наступление события <span class="math inline">\(D\)</span>. Доказать, что <span class="math inline">\(\Prob(A) + \Prob(B) + \Prob(C) - \Prob(D) \leqslant 2\)</span>.</li>
+<li><strong>(Гмурман, № 88.)</strong> Вероятность ошибки при одном измерении равна <span class="math inline">\(p\)</span>. Найти наименьшее число измерений, при котором с вероятностью, большей <span class="math inline">\(\alpha\)</span>, хотя бы один результат окажется неверным.</li>
+</ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Ответы">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-22-contents" aria-controls="callout-22" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Совет</span>Ответы
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-22" class="callout-22-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>а) <span class="math inline">\(1/720\)</span>; б) <span class="math inline">\(0{,}001\)</span>. Без возвращения вероятность <strong>больше</strong>: повторы исключены, и исходов меньше.</li>
+<li><span class="math inline">\(3!\,(1/3)^3 = 2/9\)</span>.</li>
+<li>Доказательство по схеме задачи 10, но с восемью атомами для трёх событий.</li>
+<li><span class="math inline">\(n_{\min} = \lfloor \ln(1-\alpha)/\ln(1-p) \rfloor + 1\)</span>. Проверка: при <span class="math inline">\(\alpha = 0{,}7\)</span>, <span class="math inline">\(p = 1/6\)</span> получается <span class="math inline">\(n = 7\)</span> — ответ задачи 7.</li>
+</ol>
+</div>
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Скопировано");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Скопировано");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../../index.html" class="pagination-link" aria-label="О книге">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">О книге</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../../seminars/02-discrete-random-variables/seminar-02.html" class="pagination-link" aria-label="Семинар 2. Дискретные случайные величины: биномиальный закон и закон Пуассона">
+        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Семинар 2. Дискретные случайные величины: биномиальный закон и закон Пуассона</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
