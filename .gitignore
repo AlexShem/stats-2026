@@ -30,8 +30,13 @@ __pycache__/
 
 **/*.quarto_ipynb
 
-# Gmurman book
+# Gmurman book и всё, что из него выписано: авторские права, только локально
 gmurman.pdf
+gmurman-contents.md
+problems/
+
+# Конспекты лектора: чужие материалы, только локально
+lectures/
 
 # Docs with lecture notes
 docs/*

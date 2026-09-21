@@ -21,6 +21,14 @@ started a week after the calendar start of the semester, so seminar 3 falls on
 `src/mephi_stats/schedule.py`; the chapters' own `date:` fields must agree with
 what it produces.
 
+## Local-only files (gitignored)
+
+`gmurman.pdf`, `gmurman-contents.md`, `problems/` and `lectures/` are **not in
+git** (copyright / the lecturer's material) and were purged from the history
+before the repo was published. They exist only on Alex's machine. On a fresh
+clone they are absent: do not treat that as a bug and do not recreate them —
+ask Alex. Never `git add -f` them.
+
 ## `gmurman.pdf` — NEVER open this file
 
 `gmurman.pdf` in the repo root is Гмурман, "Руководство к решению задач по теории
