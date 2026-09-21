@@ -1,8 +1,3 @@
 # Общие настройки для всех семинаров.
 author: "А. Шемендюк"
 jupyter: python3
-
-format:
-  pdf:
-    toc: false
-    number-sections: false

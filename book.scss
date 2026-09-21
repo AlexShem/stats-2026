@@ -1,0 +1,12 @@
+/*-- scss:defaults --*/
+$font-size-root: 17px;
+$body-color: #1f2328;
+$link-color: #0b5394;
+$code-block-bg: #f6f8fa;
+
+/*-- scss:rules --*/
+
+/* Условие задачи отделено от блока решения небольшим отступом */
+.callout.callout-style-default {
+  margin-top: 0.8rem;
+}

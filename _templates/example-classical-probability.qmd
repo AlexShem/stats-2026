@@ -1,34 +1,40 @@
 ---
-title: "Семинар 1. Классическая вероятность и комбинаторика"
+title: "Пример главы. Классическая вероятность и комбинаторика"
 subtitle: "Теория вероятностей и математическая статистика · НИЯУ МИФИ"
 date: 2026-09-03
 ---
 
+::: {.content-hidden when-profile="handout"}
+## Код для этой главы {#sec-sNN-code}
+
+Все импорты и функции, которые используются в примерах главы, собраны
+в одной ячейке. Выполните её первой — остальные ячейки опираются на неё.
+
 ```{python}
-#| label: setup
-#| include: false
+#| label: sNN-setup
 import numpy as np
 import matplotlib.pyplot as plt
-from scipy import stats
+from itertools import product
 from math import comb
 
-from mephi_stats import setup_matplotlib
+# Оформление графиков: шрифт с кириллицей и палитра, различимая при печати
+PALETTE = ["#0b5394", "#b45309", "#2e7d32", "#7b1fa2", "#c62828", "#00838f"]
+plt.rcParams.update({
+    "font.family": "sans-serif",
+    "font.sans-serif": ["DejaVu Sans", "Liberation Sans", "Noto Sans", "sans-serif"],
+    "axes.unicode_minus": False,
+    "axes.prop_cycle": plt.cycler(color=PALETTE),
+    "axes.spines.top": False,
+    "axes.spines.right": False,
+    "axes.grid": True,
+    "grid.alpha": 0.3,
+    "figure.dpi": 110,
+    "figure.constrained_layout.use": True,
+})
 
-setup_matplotlib()
+# Генератор случайных чисел с фиксированным зерном: результаты воспроизводимы
 rng = np.random.default_rng(2026)
 ```
-
-::: {.content-visible when-profile="prep"}
-::: {.teacher-note}
-**План на 90 минут.** Разминка (равновозможные исходы) 10 мин → задача 1 у доски
-15 мин → задача 2 в парах 20 мин → задача 3 (парадокс дней рождения) 25 мин с
-демонстрацией симуляции → задачи 4–5 бегло 15 мин → итоги 5 мин.
-
-**Что чаще всего идёт не так.** Студенты берут «число исходов» без проверки
-равновозможности; путают размещения и сочетания; в задаче о днях рождения
-считают вероятность «совпадения с моим днём рождения» вместо «хоть какого-то
-совпадения».
-:::
 :::
 
 ## Краткая сводка
@@ -46,9 +52,11 @@ $$
 | без повторений | $A_n^k = \dfrac{n!}{(n-k)!}$ | $C_n^k = \dbinom{n}{k}$ |
 | с повторениями | $n^k$ | $\dbinom{n+k-1}{k}$ |
 
-: Число способов выбрать $k$ элементов из $n$ {#tbl-counting}
+: Число способов выбрать $k$ элементов из $n$ {#tbl-sNN-counting}
 
-## Задача 1. Две кости {#sec-task-1}
+## Задачи
+
+### Задача 1. Две кости {#sec-sNN-t1}
 
 Бросают две симметричные игральные кости. Найдите вероятность того, что
 
@@ -56,10 +64,10 @@ $$
 б) сумма очков не меньше 10;
 в) выпало хотя бы одно нечётное число.
 
-::: {.content-visible when-profile="prep"}
-::: {.solution}
+::: {.content-hidden when-profile="handout"}
+::: {.callout-tip collapse="true" title="Решение"}
 Берём $\Omega = \{(i, j) : 1 \le i, j \le 6\}$, $|\Omega| = 36$; исходы
-равновозможны именно для *упорядоченных* пар — это ключевой момент.
+равновозможны именно **упорядоченные** пары.
 
 а) Сумма 8: $(2,6), (3,5), (4,4), (5,3), (6,2)$ — 5 исходов, $\Prob = 5/36$.
 
@@ -72,9 +80,7 @@ $$
 Проверка перебором:
 
 ```{python}
-#| label: tbl-dice-check
-from itertools import product
-
+#| label: sNN-t1-check
 omega = list(product(range(1, 7), repeat=2))
 print("а)", sum(i + j == 8 for i, j in omega), "/", len(omega))
 print("б)", sum(i + j >= 10 for i, j in omega), "/", len(omega))
@@ -83,14 +89,14 @@ print("в)", sum(i % 2 or j % 2 for i, j in omega), "/", len(omega))
 :::
 :::
 
-## Задача 2. Партия деталей {#sec-task-2}
+### Задача 2. Партия деталей {#sec-sNN-t2}
 
 В партии из 20 деталей 5 бракованных. Наудачу без возвращения берут 4 детали.
 Найдите вероятность того, что среди них ровно одна бракованная, и вероятность
 того, что бракованных нет вовсе.
 
-::: {.content-visible when-profile="prep"}
-::: {.solution}
+::: {.content-hidden when-profile="handout"}
+::: {.callout-tip collapse="true" title="Решение"}
 Порядок не важен, поэтому $|\Omega| = \binom{20}{4}$.
 
 $$
@@ -100,33 +106,32 @@ $$
 $$
 
 ```{python}
-#| label: hyper
+#| label: sNN-t2-check
 p1 = comb(5, 1) * comb(15, 3) / comb(20, 4)
 p0 = comb(15, 4) / comb(20, 4)
 print(f"ровно одна: {p1:.4f}    ни одной: {p0:.4f}")
 ```
 
-Это гипергеометрическое распределение — стоит проговорить название,
-оно вернётся при обсуждении выборок без возвращения.
+Это гипергеометрическое распределение: выбор без возвращения.
 :::
 :::
 
-## Задача 3. Парадокс дней рождения {#sec-task-3}
+### Задача 3. Парадокс дней рождения {#sec-sNN-t3}
 
 В группе $n$ студентов. Считая, что дни рождения независимы и равномерно
 распределены по 365 дням, найдите вероятность того, что хотя бы у двоих
 день рождения совпадает. При каком наименьшем $n$ эта вероятность превышает
 $1/2$?
 
-::: {.content-visible when-profile="prep"}
-::: {.solution}
+::: {.content-hidden when-profile="handout"}
+::: {.callout-tip collapse="true" title="Решение"}
 Через дополнение — все дни рождения различны:
 $$
 \Prob(\text{совпадение}) = 1 - \frac{365 \cdot 364 \cdots (365 - n + 1)}{365^n}.
 $$
 
 ```{python}
-#| label: fig-birthday
+#| label: fig-sNN-t3
 #| fig-cap: "Вероятность хотя бы одного совпадения дней рождения в группе из $n$ человек."
 n = np.arange(1, 81)
 log_no_match = np.cumsum(np.log(1 - np.arange(n.max()) / 365))
@@ -148,26 +153,28 @@ plt.show()
 Ответ: $n = `{python} n_half`$. Контрольная проверка симуляцией:
 
 ```{python}
-#| label: birthday-sim
+#| label: sNN-t3-sim
 draws = rng.integers(0, 365, size=(200_000, n_half))
 draws.sort(axis=1)
 share = np.mean((np.diff(draws, axis=1) == 0).any(axis=1))
 print(f"симуляция: {share:.4f}   формула: {p[n_half - 1]:.4f}")
 ```
 
-Стоит подчеркнуть источник интуитивной ошибки: сравниваются все
-$\binom{n}{2}$ пар, а не $n$ человек с одним фиксированным днём.
+::: {.callout-warning title="Типичная ошибка"}
+Считать вероятность совпадения с **одним фиксированным** днём рождения.
+Сравниваются все $\binom{n}{2}$ пар студентов, а их гораздо больше, чем $n$.
+:::
 :::
 :::
 
-## Задача 4. Геометрическая вероятность {#sec-task-4}
+### Задача 4. Геометрическая вероятность {#sec-sNN-t4}
 
 Два человека договорились встретиться между 12:00 и 13:00; каждый приходит в
 случайный момент, независимо и равномерно, и ждёт 15 минут. Какова вероятность
 встречи?
 
-::: {.content-visible when-profile="prep"}
-::: {.solution}
+::: {.content-hidden when-profile="handout"}
+::: {.callout-tip collapse="true" title="Решение"}
 $\Omega = [0,60]^2$, событие $|x - y| \le 15$. Площадь дополнения — два
 треугольника с катетом 45:
 $$
@@ -176,7 +183,7 @@ $$
 $$
 
 ```{python}
-#| label: fig-meeting
+#| label: fig-sNN-t4
 #| fig-cap: "Область встречи $|x - y| \\le 15$ в квадрате $[0,60]^2$."
 fig, ax = plt.subplots(figsize=(4.6, 4.6))
 xs = np.array([0, 60])
