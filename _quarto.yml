@@ -15,6 +15,9 @@ book:
   subtitle: "Семинары · НИЯУ МИФИ · осенний семестр 2026"
   author: "А. Шемендюк"
   language: ru
+  site-url: https://alexshem.github.io/stats-2026/
+  repo-url: https://github.com/AlexShem/stats-2026/
+  repo-actions: [issue]
   chapters:
     - index.qmd
     - seminars/01-addition-multiplication/seminar-01.qmd

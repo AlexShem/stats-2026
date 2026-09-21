@@ -114,6 +114,7 @@ make preview                                  # book with live reload
 make handout N=01                             # one student PDF
 make handouts                                 # all student PDFs
 make all                                      # book + all handouts
+make publish                                  # make all + push the site to GitHub Pages (gh-pages)
 make new N=03 SLUG=random-variables           # scaffold from _templates/seminar.qmd
 make test                                     # pytest (incl. chapter rules)
 make lint                                     # ruff check + format --check

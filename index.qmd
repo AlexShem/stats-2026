@@ -9,7 +9,8 @@
 Каждому семинару соответствует **глава книги** и **раздатка**:
 
 - **Раздатка** — PDF с условиями задач, её выдают на занятии. В ней краткая
-  сводка теории, задачи и домашнее задание, но нет решений.
+  сводка теории, задачи и домашнее задание, но нет решений. Ссылки на PDF
+  собраны в таблице расписания ниже.
 - **Глава книги** — те же задачи с полными решениями. Решение каждой задачи
   спрятано в свёрнутом блоке «Решение»: сначала попробуйте решить сами, потом
   откройте и сверьтесь.
@@ -61,20 +62,35 @@ from IPython.display import Markdown
 from mephi_stats.schedule import SEMINAR_DATES, format_ru
 
 
-# Тема берётся из заголовка seminar-NN.qmd, если глава уже написана.
-def topic(number: int) -> str:
+# Глава и тема берутся из seminar-NN.qmd, если глава уже написана.
+def chapter(number: int) -> Path | None:
+    """Путь к файлу главы семинара или None, если её ещё нет."""
     hits = sorted(Path("seminars").glob(f"{number:02d}-*/seminar-{number:02d}.qmd"))
-    if not hits:
-        return "—"
-    for line in hits[0].read_text(encoding="utf-8").splitlines()[:10]:
+    return hits[0] if hits else None
+
+
+def topic(path: Path) -> str:
+    """Тема семинара из заголовка главы, без слов «Семинар N.»."""
+    for line in path.read_text(encoding="utf-8").splitlines()[:10]:
         if line.startswith("title:"):
             return line.split(":", 1)[1].strip().strip('"').split(". ", 1)[-1]
     return "—"
 
 
-rows = [
-    {"№": i, "Дата": format_ru(d), "Тема": topic(i)}
-    for i, d in enumerate(SEMINAR_DATES, start=1)
-]
+def row(number: int, date) -> dict:
+    """Строка таблицы: тема со ссылкой на главу и ссылка на PDF-раздатку."""
+    path = chapter(number)
+    if path is None:
+        return {"№": number, "Дата": format_ru(date), "Тема": "—", "Раздатка": ""}
+    pdf = f"handouts/{path.parent}/{path.stem}.pdf"
+    return {
+        "№": number,
+        "Дата": format_ru(date),
+        "Тема": f"[{topic(path)}]({path.as_posix()})",
+        "Раздатка": f"[PDF]({pdf})",
+    }
+
+
+rows = [row(i, d) for i, d in enumerate(SEMINAR_DATES, start=1)]
 Markdown(pd.DataFrame(rows).to_markdown(index=False))
 ```

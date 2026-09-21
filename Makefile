@@ -3,7 +3,7 @@
 VENV := uv run
 SEM  := $(wildcard seminars/$(N)-*/seminar-$(N).qmd)
 
-.PHONY: help book preview handout handouts all clean lint test new
+.PHONY: help book preview handout handouts all publish clean lint test new
 
 help:  ## показать список целей
 	@grep -E '^[a-z-]+:.*##' $(MAKEFILE_LIST) | sed 's/:.*##/\t/' | expand -t 12
@@ -22,6 +22,11 @@ handouts:  ## PDF-раздатки всех семинаров: _output/handouts
 	$(VENV) quarto render --profile handout --to pdf
 
 all: book handouts  ## книга и все раздатки
+
+publish: all  ## собрать всё и выложить на GitHub Pages (ветка gh-pages)
+	rm -rf _output/book/handouts
+	cp -r _output/handouts _output/book/handouts
+	$(VENV) quarto publish gh-pages --no-render --no-prompt
 
 new:  ## новый семинар из шаблона: make new N=03 SLUG=random-variables
 	@test -n "$(N)" && test -n "$(SLUG)" || { echo "Нужны N и SLUG"; exit 1; }
