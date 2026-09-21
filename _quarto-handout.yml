@@ -18,6 +18,10 @@ execute:
 # В главах книги блоки — ##, задачи — ###; в раздатке поднимаем на уровень.
 shift-heading-level-by: -1
 
+# Иконки callout'ов в PDF печатаются как слово («Exclamation», «Note»):
+# шрифт awesomebox до LuaLaTeX не доезжает. В раздатке иконки не нужны.
+callout-icon: false
+
 format:
   pdf:
     documentclass: scrartcl

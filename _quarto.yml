@@ -54,7 +54,7 @@ format:
           tex: {
             macros: {
               E: "\\mathbb{E}",
-              Var: "\\mathbb{D}",
+              Var: "\\mathrm{D}",
               Prob: "\\mathbb{P}",
               Cov: "\\mathrm{cov}",
               indep: "\\perp\\!\\!\\!\\perp"
