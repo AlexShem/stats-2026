@@ -15,9 +15,11 @@ statements, figure labels, axis titles, and captions are Russian. Code
 identifiers, file names, and directory slugs stay in Latin script. Comments in
 code are Russian, matching the surrounding style.
 
-Schedule: 16 seminars, Tuesdays, 2026-09-01 through 2026-12-15 (seminar 1 was
-moved to Thursday 2026-09-03). The dates are generated, not hand-maintained —
-see `src/mephi_stats/schedule.py`.
+Schedule: 16 seminars, Tuesdays, 2026-09-08 through 2026-12-22. The series
+started a week after the calendar start of the semester, so seminar 3 falls on
+2026-09-22. The dates are generated, not hand-maintained — see
+`src/mephi_stats/schedule.py`; the chapters' own `date:` fields must agree with
+what it produces.
 
 ## `gmurman.pdf` — NEVER open this file
 
