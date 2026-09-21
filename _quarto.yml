@@ -19,6 +19,7 @@ book:
     - index.qmd
     - seminars/01-addition-multiplication/seminar-01.qmd
     - seminars/02-discrete-random-variables/seminar-02.qmd
+    - seminars/03-continuous-random-variables/seminar-03.qmd
 
 lang: ru
 date-format: "D MMMM YYYY"
@@ -53,7 +54,7 @@ format:
           tex: {
             macros: {
               E: "\\mathbb{E}",
-              Var: "\\mathbb{D}",
+              Var: "\\mathrm{D}",
               Prob: "\\mathbb{P}",
               Cov: "\\mathrm{cov}",
               indep: "\\perp\\!\\!\\!\\perp"

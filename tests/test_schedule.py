@@ -13,14 +13,13 @@ def test_semester_has_sixteen_tuesdays():
 
 
 def test_semester_boundaries():
-    assert SEMINAR_DATES[0] == dt.date(2026, 9, 1)
-    assert SEMINAR_DATES[-1] == dt.date(2026, 12, 15)
+    assert SEMINAR_DATES[0] == dt.date(2026, 9, 8)
+    assert SEMINAR_DATES[-1] == dt.date(2026, 12, 22)
 
 
-def test_seminar_02_falls_on_8_september():
-    # Дата на раздатке семинара 02; проверяем явно, потому что нумерация
-    # сдвинута относительно фактического четверга первой недели.
-    assert seminar_date(2) == dt.date(2026, 9, 8)
+def test_seminar_03_falls_on_22_september():
+    # Дата на раздатке семинара 03 — опорная точка всей серии.
+    assert seminar_date(3) == dt.date(2026, 9, 22)
 
 
 def test_seminar_date_is_one_indexed():
