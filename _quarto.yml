@@ -19,6 +19,7 @@ book:
     - index.qmd
     - seminars/01-addition-multiplication/seminar-01.qmd
     - seminars/02-discrete-random-variables/seminar-02.qmd
+    - seminars/03-continuous-random-variables/seminar-03.qmd
 
 lang: ru
 date-format: "D MMMM YYYY"

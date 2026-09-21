@@ -1,0 +1,92 @@
+---
+title: "Семинар 3. Непрерывные случайные величины: функция распределения и плотность"
+subtitle: "Теория вероятностей и математическая статистика · НИЯУ МИФИ"
+date: 2026-09-15
+---
+
+::: {.content-hidden when-profile="handout"}
+## Код для этой главы {#sec-s03-code}
+
+Все импорты и функции, которые используются в примерах главы, собраны
+в одной ячейке. Выполните её первой — остальные ячейки опираются на неё.
+
+```{python}
+#| label: s03-setup
+import numpy as np
+import matplotlib.pyplot as plt
+from fractions import Fraction as F
+from math import comb
+
+# Оформление графиков: шрифт с кириллицей и палитра, различимая при печати
+PALETTE = ["#0b5394", "#b45309", "#2e7d32", "#7b1fa2", "#c62828", "#00838f"]
+plt.rcParams.update({
+    "font.family": "sans-serif",
+    "font.sans-serif": ["DejaVu Sans", "Liberation Sans", "Noto Sans", "sans-serif"],
+    "axes.unicode_minus": False,
+    "axes.prop_cycle": plt.cycler(color=PALETTE),
+    "axes.spines.top": False,
+    "axes.spines.right": False,
+    "axes.grid": True,
+    "grid.alpha": 0.3,
+    "figure.dpi": 110,
+    "figure.constrained_layout.use": True,
+})
+
+# Генератор случайных чисел с фиксированным зерном: результаты воспроизводимы
+rng = np.random.default_rng(2026)
+
+
+def example_helper(x):
+    """Каждая функция главы определяется здесь, с кратким описанием."""
+    return x
+```
+:::
+
+## Краткая сводка
+
+Определения и формулы, нужные для задач ниже.
+
+## Блок A. Разминка
+
+### Задача 1 (Гмурман, гл. N § N, № NN) {#sec-s03-t1}
+
+Условие задачи — дословно из книги.
+
+::: {.content-hidden when-profile="handout"}
+::: {.callout-tip collapse="true" title="Решение"}
+Выкладка и ответ.
+
+Проверка: что именно считает код.
+
+```{python}
+#| label: s03-t1-check
+print(example_helper(1))
+```
+
+::: {.callout-warning title="Типичная ошибка"}
+Только если ошибка действительно частая и её легко описать одной-двумя фразами.
+:::
+:::
+:::
+
+### Задача 2 {#sec-s03-t2}
+
+Условие задачи, составленной для курса (без номера Гмурмана).
+
+::: {.content-hidden when-profile="handout"}
+::: {.callout-tip collapse="true" title="Решение"}
+Выкладка и ответ.
+:::
+:::
+
+## Задачи для самостоятельной работы
+
+1. …
+2. …
+
+::: {.content-hidden when-profile="handout"}
+::: {.callout-tip collapse="true" title="Ответы"}
+1. …
+2. …
+:::
+:::
