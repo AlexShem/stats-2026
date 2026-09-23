@@ -114,8 +114,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 window.MathJax = {
   tex: {
     macros: {
-      E: "\\mathbb{E}",
-      Var: "\\mathrm{D}",
+      E: "\\mathrm{E}",
+      Var: "\\mathrm{Var}",
       Prob: "\\mathbb{P}",
       Cov: "\\mathrm{cov}",
       indep: "\\perp\\!\\!\\!\\perp"
@@ -299,7 +299,7 @@ window.Quarto = {
 <p><a href="../../handouts/seminars/03-continuous-random-variables/seminar-03.pdf">Скачать PDF-раздатку этого семинара</a></p>
 <section id="sec-s03-code" class="level2" data-number="3.1">
 <h2 data-number="3.1" class="anchored" data-anchor-id="sec-s03-code"><span class="header-section-number">3.1</span> Код для этой главы</h2>
-<p>Все импорты и функции, которые используются в примерах главы, собраны в одной ячейке. Выполните её первой — остальные ячейки опираются на неё.</p>
+<p>Все импорты и функции, которые используются в примерах главы, собраны в одной ячейке. Выполните её первой. Остальные ячейки опираются на неё.</p>
 <div id="s03-setup" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -332,7 +332,7 @@ window.Quarto = {
 <span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Контроль нормировки, M(X), D(X) и sigma(X) для плотности expr на (a, b).</span></span>
 <span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="co">    Всё считается точно (sympy), поэтому дроби остаются дробями.</span></span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="co">    Возвращает словарь; ключ "норм" должен быть равен 1 — это первая проверка</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="co">    Возвращает словарь; ключ "норм" должен быть равен 1: это первая проверка</span></span>
 <span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="co">    любой задачи на плотность.</span></span>
 <span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
 <span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>    total <span class="op">=</span> sp.integrate(expr, (x, a, b))</span>
@@ -346,7 +346,7 @@ window.Quarto = {
 <span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> moments(expr, a, b, kmax<span class="op">=</span><span class="dv">4</span>):</span>
 <span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Начальные nu_k и центральные mu_k моменты плотности expr на (a, b).</span></span>
 <span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a><span class="co">    Центральные считаются прямым интегрированием, а не по формулам перехода, —</span></span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a><span class="co">    Центральные считаются прямым интегрированием, а не по формулам перехода,</span></span>
 <span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a><span class="co">    чтобы формулы перехода можно было проверить независимо.</span></span>
 <span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
 <span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>    nu <span class="op">=</span> [sp.integrate(x<span class="op">**</span>k <span class="op">*</span> expr, (x, a, b)) <span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, kmax <span class="op">+</span> <span class="dv">1</span>)]</span>
@@ -380,7 +380,7 @@ window.Quarto = {
 <span id="cb1-77"><a href="#cb1-77" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-78"><a href="#cb1-78" aria-hidden="true" tabindex="-1"></a><span class="co">    Важно: определение со СТРОГИМ неравенством, поэтому F непрерывна слева.</span></span>
 <span id="cb1-79"><a href="#cb1-79" aria-hidden="true" tabindex="-1"></a><span class="co">    В точке скачка закрашенный кружок стоит на НИЖНЕЙ ступени (значение</span></span>
-<span id="cb1-80"><a href="#cb1-80" aria-hidden="true" tabindex="-1"></a><span class="co">    достигается), пустой — на верхней.</span></span>
+<span id="cb1-80"><a href="#cb1-80" aria-hidden="true" tabindex="-1"></a><span class="co">    достигается), а пустой находится на верхней.</span></span>
 <span id="cb1-81"><a href="#cb1-81" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
 <span id="cb1-82"><a href="#cb1-82" aria-hidden="true" tabindex="-1"></a>    cum <span class="op">=</span> np.concatenate(([<span class="fl">0.0</span>], np.cumsum(probs)))</span>
 <span id="cb1-83"><a href="#cb1-83" aria-hidden="true" tabindex="-1"></a>    lo, hi <span class="op">=</span> values[<span class="dv">0</span>] <span class="op">-</span> <span class="dv">1</span>, values[<span class="op">-</span><span class="dv">1</span>] <span class="op">+</span> <span class="dv">1</span></span>
@@ -432,7 +432,7 @@ window.Quarto = {
 </section>
 <section id="краткая-сводка" class="level2" data-number="3.2">
 <h2 data-number="3.2" class="anchored" data-anchor-id="краткая-сводка"><span class="header-section-number">3.2</span> Краткая сводка</h2>
-<p><strong>Непрерывной</strong> называют случайную величину, возможные значения которой заполняют целый промежуток — конечный или бесконечный. Перечислить их, как у дискретной величины, нельзя, поэтому ряд распределения не годится и нужен другой способ задать закон.</p>
+<p><strong>Непрерывной</strong> называют случайную величину, возможные значения которой заполняют целый промежуток: конечный или бесконечный. Перечислить их, как у дискретной величины, нельзя, поэтому ряд распределения не годится и нужен другой способ задать закон.</p>
 <section id="функция-распределения" class="level3" data-number="3.2.1">
 <h3 data-number="3.2.1" class="anchored" data-anchor-id="функция-распределения"><span class="header-section-number">3.2.1</span> Функция распределения</h3>
 <p><strong>Функцией распределения</strong> называют <span id="eq-s03-cdf"><span class="math display">\[
@@ -451,10 +451,10 @@ F(x) = \Prob(X &lt; x).
 <p><strong>Неравенство строгое.</strong> Гмурман определяет <span class="math inline">\(F\)</span> через <span class="math inline">\(\Prob(X &lt; x)\)</span>, а не <span class="math inline">\(\Prob(X \leqslant x)\)</span>. Для непрерывной величины разницы нет, а для дискретной есть: <span class="math inline">\(F\)</span> оказывается непрерывной <strong>слева</strong>, и в точке скачка значение берётся нижнее. В задаче 1 это видно на графике.</p>
 </div>
 </div>
-<p>Свойства: <span class="math inline">\(0 \leqslant F(x) \leqslant 1\)</span>; <span class="math inline">\(F\)</span> не убывает; <span class="math inline">\(F(-\infty) = 0\)</span>, <span class="math inline">\(F(+\infty) = 1\)</span>. Главное рабочее следствие — <span id="eq-s03-interval"><span class="math display">\[
+<p>Свойства: <span class="math inline">\(0 \leqslant F(x) \leqslant 1\)</span>; <span class="math inline">\(F\)</span> не убывает; <span class="math inline">\(F(-\infty) = 0\)</span>, <span class="math inline">\(F(+\infty) = 1\)</span>. Главное рабочее следствие: <span id="eq-s03-interval"><span class="math display">\[
 \Prob(a &lt; X &lt; b) = F(b) - F(a),
 \tag{3.2}\]</span></span> то есть вероятность попасть в интервал есть <strong>приращение</strong> <span class="math inline">\(F\)</span> на нём.</p>
-<p>Для непрерывной величины <span class="math inline">\(\Prob(X = x_1) = 0\)</span>: отдельное значение имеет нулевую вероятность. Поэтому в <a href="#eq-s03-interval" class="quarto-xref">Уравнение&nbsp;<span>3.2</span></a> знаки <span class="math inline">\(&lt;\)</span> и <span class="math inline">\(\leqslant\)</span> можно менять как угодно — ответ не изменится. Это не значит, что событие невозможно; это значит, что «попасть ровно в точку» — событие нулевой вероятности.</p>
+<p>Для непрерывной величины <span class="math inline">\(\Prob(X = x_1) = 0\)</span>: отдельное значение имеет нулевую вероятность. Поэтому в <a href="#eq-s03-interval" class="quarto-xref">Уравнение&nbsp;<span>3.2</span></a> знаки <span class="math inline">\(&lt;\)</span> и <span class="math inline">\(\leqslant\)</span> можно менять как угодно; ответ не изменится. Это не значит, что событие невозможно; это значит, что «попасть ровно в точку»: событие нулевой вероятности.</p>
 </section>
 <section id="плотность-распределения" class="level3" data-number="3.2.2">
 <h3 data-number="3.2.2" class="anchored" data-anchor-id="плотность-распределения"><span class="header-section-number">3.2.2</span> Плотность распределения</h3>
@@ -476,21 +476,21 @@ f(x) = F'(x), \qquad F(x) = \int_{-\infty}^{x} f(t)\,dt.
 <div class="callout-body-container callout-body">
 <p><strong>Контроль.</strong> Всегда <span class="math inline">\(f(x) \geqslant 0\)</span> и <span id="eq-s03-norm"><span class="math display">\[
 \int_{-\infty}^{\infty} f(x)\,dx = 1.
-\tag{3.5}\]</span></span> Это аналог условия <span class="math inline">\(\sum p_i = 1\)</span> из семинара 2: там сумма, здесь интеграл. Проверяйте <a href="#eq-s03-norm" class="quarto-xref">Уравнение&nbsp;<span>3.5</span></a> первым делом — она ловит почти любую ошибку в выкладке и сразу даёт неизвестную постоянную, если та есть в условии.</p>
+\tag{3.5}\]</span></span> Это аналог условия <span class="math inline">\(\sum p_i = 1\)</span> из семинара 2: там сумма, здесь интеграл. Проверяйте <a href="#eq-s03-norm" class="quarto-xref">Уравнение&nbsp;<span>3.5</span></a> первым делом: она ловит почти любую ошибку в выкладке и сразу даёт неизвестную постоянную, если та есть в условии.</p>
 </div>
 </div>
 </section>
 <section id="числовые-характеристики" class="level3" data-number="3.2.3">
 <h3 data-number="3.2.3" class="anchored" data-anchor-id="числовые-характеристики"><span class="header-section-number">3.2.3</span> Числовые характеристики</h3>
-<p>Всюду ниже интегралы берутся по всем возможным значениям <span class="math inline">\(X\)</span> (если они заполняют интервал <span class="math inline">\((a, b)\)</span> — по нему):</p>
+<p>Всюду ниже интегралы берутся по всем возможным значениям <span class="math inline">\(X\)</span> (если они заполняют интервал <span class="math inline">\((a, b)\)</span>, по нему):</p>
 <p><span id="eq-s03-mean"><span class="math display">\[
-\E X = \int_{-\infty}^{\infty} x f(x)\,dx, \qquad
+\E(X) = \int_{-\infty}^{\infty} x f(x)\,dx, \qquad
 \E\big[\varphi(X)\big] = \int_{-\infty}^{\infty} \varphi(x) f(x)\,dx.
 \tag{3.6}\]</span></span></p>
 <p><span id="eq-s03-var"><span class="math display">\[
-\Var X = \int_{-\infty}^{\infty} \big[x - \E X\big]^2 f(x)\,dx
-= \int_{-\infty}^{\infty} x^2 f(x)\,dx - \big[\E X\big]^2,
-\qquad \sigma(X) = \sqrt{\Var X}.
+\Var(X) = \int_{-\infty}^{\infty} \big[x - \E(X)\big]^2 f(x)\,dx
+= \int_{-\infty}^{\infty} x^2 f(x)\,dx - \big[\E(X)\big]^2,
+\qquad \sigma(X) = \sqrt{\Var(X)}.
 \tag{3.7}\]</span></span></p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -502,18 +502,18 @@ f(x) = F'(x), \qquad F(x) = \int_{-\infty}^{x} f(t)\,dt.
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>Обозначения.</strong> В задачнике Гмурмана пишут <span class="math inline">\(M(X)\)</span> и <span class="math inline">\(D(X)\)</span> — это ровно то же самое, что <span class="math inline">\(\E X\)</span> и <span class="math inline">\(\Var X\)</span> здесь. Правая форма в <a href="#eq-s03-var" class="quarto-xref">Уравнение&nbsp;<span>3.7</span></a> — рабочая: считать <span class="math inline">\(\E X\)</span> и <span class="math inline">\(\E X^2\)</span>, а потом вычесть, почти всегда проще, чем интегрировать квадрат разности.</p>
+<p><strong>Обозначения.</strong> В задачнике Гмурмана пишут <span class="math inline">\(M(X)\)</span> и <span class="math inline">\(D(X)\)</span>: это ровно то же самое, что <span class="math inline">\(\E(X)\)</span> и <span class="math inline">\(\Var(X)\)</span> здесь. В литературе встречаются и другие формы записи: для среднего <span class="math inline">\(\mathbb{E}X\)</span>, <span class="math inline">\(EX\)</span>, <span class="math inline">\(E[X]\)</span>; для дисперсии <span class="math inline">\(\sigma^2(X)\)</span>, <span class="math inline">\(V(X)\)</span>, <span class="math inline">\(\mathbb{V}(X)\)</span>. Смысл везде один и тот же, различается только обозначение. Правая форма в <a href="#eq-s03-var" class="quarto-xref">Уравнение&nbsp;<span>3.7</span></a> удобнее для счёта: считать <span class="math inline">\(\E(X)\)</span> и <span class="math inline">\(\E(X^2)\)</span>, а потом вычесть, почти всегда проще, чем интегрировать квадрат разности.</p>
 </div>
 </div>
-<p><strong>Мода</strong> <span class="math inline">\(M_0(X)\)</span> — точка локального максимума плотности. <strong>Медиана</strong> <span class="math inline">\(M_e(X)\)</span> — значение, делящее площадь пополам: <span class="math inline">\(\Prob(X &lt; M_e) = \Prob(X &gt; M_e) = 1/2\)</span>. Ни та, ни другая может не существовать или быть не единственной; если кривая распределения симметрична относительно прямой <span class="math inline">\(x = C\)</span>, то <span class="math inline">\(\E X = M_0 = M_e = C\)</span>.</p>
+<p><strong>Мода</strong> <span class="math inline">\(M_0(X)\)</span>: точка локального максимума плотности. <strong>Медиана</strong> <span class="math inline">\(M_e(X)\)</span>: значение, делящее площадь пополам: <span class="math inline">\(\Prob(X &lt; M_e) = \Prob(X &gt; M_e) = 1/2\)</span>. Ни та, ни другая может не существовать или быть не единственной; если кривая распределения симметрична относительно прямой <span class="math inline">\(x = C\)</span>, то <span class="math inline">\(\E(X) = M_0 = M_e = C\)</span>.</p>
 </section>
 <section id="моменты" class="level3" data-number="3.2.4">
 <h3 data-number="3.2.4" class="anchored" data-anchor-id="моменты"><span class="header-section-number">3.2.4</span> Моменты</h3>
 <p><span id="eq-s03-moments"><span class="math display">\[
 \nu_k = \int x^k f(x)\,dx \quad (\text{начальный}), \qquad
-\mu_k = \int \big[x - \E X\big]^k f(x)\,dx \quad (\text{центральный}).
+\mu_k = \int \big[x - \E(X)\big]^k f(x)\,dx \quad (\text{центральный}).
 \tag{3.8}\]</span></span></p>
-<p>Очевидно <span class="math inline">\(\nu_1 = \E X\)</span>, <span class="math inline">\(\mu_1 = 0\)</span>, <span class="math inline">\(\mu_2 = \Var X\)</span>. Центральные моменты выражаются через начальные: <span id="eq-s03-moments-link"><span class="math display">\[
+<p>Очевидно <span class="math inline">\(\nu_1 = \E(X)\)</span>, <span class="math inline">\(\mu_1 = 0\)</span>, <span class="math inline">\(\mu_2 = \Var(X)\)</span>. Центральные моменты выражаются через начальные: <span id="eq-s03-moments-link"><span class="math display">\[
 \mu_2 = \nu_2 - \nu_1^2, \qquad
 \mu_3 = \nu_3 - 3\nu_2\nu_1 + 2\nu_1^3, \qquad
 \mu_4 = \nu_4 - 4\nu_3\nu_1 + 6\nu_2\nu_1^2 - 3\nu_1^4.
@@ -523,11 +523,11 @@ f(x) = F'(x), \qquad F(x) = \int_{-\infty}^{x} f(t)\,dt.
 <h3 data-number="3.2.5" class="anchored" data-anchor-id="два-распределения-которые-надо-знать-наизусть"><span class="header-section-number">3.2.5</span> Два распределения, которые надо знать наизусть</h3>
 <p><strong>Равномерное</strong> на <span class="math inline">\((a, b)\)</span>: <span id="eq-s03-uniform"><span class="math display">\[
 f(x) = \frac{1}{b-a}, \qquad F(x) = \frac{x-a}{b-a}, \qquad
-\E X = \frac{a+b}{2}, \qquad \Var X = \frac{(b-a)^2}{12}.
+\E(X) = \frac{a+b}{2}, \qquad \Var(X) = \frac{(b-a)^2}{12}.
 \tag{3.10}\]</span></span></p>
 <p><strong>Нормальное</strong> с параметрами <span class="math inline">\(a\)</span> и <span class="math inline">\(\sigma\)</span>: <span id="eq-s03-normal"><span class="math display">\[
 f(x) = \frac{1}{\sigma\sqrt{2\pi}}\, e^{-(x-a)^2/(2\sigma^2)},
-\qquad \E X = a, \quad \sigma(X) = \sigma.
+\qquad \E(X) = a, \quad \sigma(X) = \sigma.
 \tag{3.11}\]</span></span></p>
 <p>Интеграл от <a href="#eq-s03-normal" class="quarto-xref">Уравнение&nbsp;<span>3.11</span></a> в элементарных функциях не берётся, поэтому вводят <strong>функцию Лапласа</strong> <span id="eq-s03-laplace"><span class="math display">\[
 \Phi(t) = \frac{1}{\sqrt{2\pi}}\int_0^t e^{-z^2/2}\,dz
@@ -547,7 +547,7 @@ f(x) = \frac{1}{\sigma\sqrt{2\pi}}\, e^{-(x-a)^2/(2\sigma^2)},
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong><span class="math inline">\(\Phi\)</span> — не функция распределения.</strong> У функции Лапласа <a href="#eq-s03-laplace" class="quarto-xref">Уравнение&nbsp;<span>3.12</span></a> интеграл идёт <strong>от нуля</strong>: <span class="math inline">\(\Phi(0) = 0\)</span>, <span class="math inline">\(\Phi(+\infty) = 0{,}5\)</span>, и она нечётна, <span class="math inline">\(\Phi(-t) = -\Phi(t)\)</span>. В таблицах и пакетах часто встречается другая функция — <span class="math inline">\(F_0(t) = 0{,}5 + \Phi(t)\)</span>, у которой <span class="math inline">\(F_0(0) = 0{,}5\)</span>. Перед тем как брать число из таблицы, посмотрите, чему равно её значение в нуле.</p>
+<p><strong><span class="math inline">\(\Phi\)</span>: не функция распределения.</strong> У функции Лапласа <a href="#eq-s03-laplace" class="quarto-xref">Уравнение&nbsp;<span>3.12</span></a> интеграл идёт <strong>от нуля</strong>: <span class="math inline">\(\Phi(0) = 0\)</span>, <span class="math inline">\(\Phi(+\infty) = 0{,}5\)</span>, и она нечётна, <span class="math inline">\(\Phi(-t) = -\Phi(t)\)</span>. В таблицах и пакетах часто встречается другая функция: <span class="math inline">\(F_0(t) = 0{,}5 + \Phi(t)\)</span>, у которой <span class="math inline">\(F_0(0) = 0{,}5\)</span>. Перед тем как брать число из таблицы, посмотрите, чему равно её значение в нуле.</p>
 </div>
 </div>
 <p><strong>Правило трёх сигм.</strong> При <span class="math inline">\(\delta = 3\sigma\)</span> из <a href="#eq-s03-normal-prob" class="quarto-xref">Уравнение&nbsp;<span>3.13</span></a> <span id="eq-s03-three-sigma"><span class="math display">\[
@@ -593,8 +593,8 @@ f(x) = \frac{1}{\sigma\sqrt{2\pi}}\, e^{-(x-a)^2/(2\sigma^2)},
 </div>
 <div id="callout-7" class="callout-7-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Функция распределения определена для любой случайной величины, не только для непрерывной, — и с дискретной проще всего понять, что она означает. По <a href="#eq-s03-cdf" class="quarto-xref">Уравнение&nbsp;<span>3.1</span></a> надо для каждого <span class="math inline">\(x\)</span> сложить вероятности <strong>всех значений строго левее</strong> <span class="math inline">\(x\)</span>.</p>
-<p>Пока <span class="math inline">\(x \leqslant 3\)</span>, левее ничего нет: <span class="math inline">\(F(x) = 0\)</span>. Как только <span class="math inline">\(x\)</span> переходит через 3, добавляется <span class="math inline">\(p = 0{,}2\)</span>; после 4 — ещё <span class="math inline">\(0{,}1\)</span>; после 7 — ещё <span class="math inline">\(0{,}4\)</span>; после 10 набирается вся единица: <span class="math display">\[
+<p>Функция распределения определена для любой случайной величины, не только для непрерывной, и с дискретной проще всего понять, что она означает. По <a href="#eq-s03-cdf" class="quarto-xref">Уравнение&nbsp;<span>3.1</span></a> надо для каждого <span class="math inline">\(x\)</span> сложить вероятности <strong>всех значений строго левее</strong> <span class="math inline">\(x\)</span>.</p>
+<p>Пока <span class="math inline">\(x \leqslant 3\)</span>, левее ничего нет: <span class="math inline">\(F(x) = 0\)</span>. Как только <span class="math inline">\(x\)</span> переходит через 3, добавляется <span class="math inline">\(p = 0{,}2\)</span>; после 4 ещё <span class="math inline">\(0{,}1\)</span>; после 7 ещё <span class="math inline">\(0{,}4\)</span>; после 10 набирается вся единица: <span class="math display">\[
 F(x) = \begin{cases}
 0, &amp; x \leqslant 3, \\
 0{,}2, &amp; 3 &lt; x \leqslant 4, \\
@@ -603,7 +603,7 @@ F(x) = \begin{cases}
 1, &amp; x &gt; 10.
 \end{cases}
 \]</span></p>
-<p>График — лестница: горизонтальные ступени и скачки в точках 3, 4, 7, 10. <strong>Высота каждого скачка равна вероятности соответствующего значения</strong> — это и есть способ прочитать ряд распределения обратно по графику <span class="math inline">\(F\)</span>.</p>
+<p>График представляет собой лестницу: горизонтальные ступени и скачки в точках 3, 4, 7, 10. <strong>Высота каждого скачка равна вероятности соответствующего значения</strong>: это и есть способ прочитать ряд распределения обратно по графику <span class="math inline">\(F\)</span>.</p>
 <div id="cell-fig-s03-t1" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="fl">7.2</span>, <span class="fl">3.8</span>))</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>step_cdf(ax, [<span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">7</span>, <span class="dv">10</span>], [<span class="fl">0.2</span>, <span class="fl">0.1</span>, <span class="fl">0.4</span>, <span class="fl">0.3</span>])</span>
@@ -616,7 +616,7 @@ F(x) = \begin{cases}
 <img src="seminar-03_files/figure-html/fig-s03-t1-output-1.png" width="804" height="430" class="figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-s03-t1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Рисунок&nbsp;3.1: Функция распределения дискретной величины. Скачки равны вероятностям значений: 0,2; 0,1; 0,4; 0,3. Закрашенный кружок в точке скачка стоит на нижней ступени — из-за строгого неравенства в <a href="#eq-s03-cdf" class="quarto-xref">Уравнение&nbsp;<span>3.1</span></a> функция непрерывна слева.
+Рисунок&nbsp;3.1: Функция распределения дискретной величины. Скачки равны вероятностям значений: 0,2; 0,1; 0,4; 0,3. Закрашенный кружок в точке скачка стоит на нижней ступени: из-за строгого неравенства в <a href="#eq-s03-cdf" class="quarto-xref">Уравнение&nbsp;<span>3.1</span></a> функция непрерывна слева.
 </figcaption>
 </figure>
 </div>
@@ -632,7 +632,7 @@ F(x) = \begin{cases}
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Написать <span class="math inline">\(F(7) = 0{,}7\)</span>. Нет: <span class="math inline">\(F(7) = \Prob(X &lt; 7) = 0{,}2 + 0{,}1 = 0{,}3\)</span>, потому что само значение 7 в событие <span class="math inline">\(\{X &lt; 7\}\)</span> не входит. Значение <span class="math inline">\(0{,}7\)</span> функция принимает лишь <strong>правее</strong> семёрки. У непрерывной величины эта разница исчезает — ровно потому, что <span class="math inline">\(\Prob(X = x_1) = 0\)</span>.</p>
+<p>Написать <span class="math inline">\(F(7) = 0{,}7\)</span>. Нет: <span class="math inline">\(F(7) = \Prob(X &lt; 7) = 0{,}2 + 0{,}1 = 0{,}3\)</span>, потому что само значение 7 в событие <span class="math inline">\(\{X &lt; 7\}\)</span> не входит. Значение <span class="math inline">\(0{,}7\)</span> функция принимает лишь <strong>правее</strong> семёрки. У непрерывной величины эта разница исчезает: ровно потому, что <span class="math inline">\(\Prob(X = x_1) = 0\)</span>.</p>
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled" title="Для самопроверки">
@@ -673,7 +673,7 @@ F(x) = \begin{cases}
 </div>
 <div id="callout-9" class="callout-9-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Сначала проверим, что функция вообще годится: <span class="math inline">\(F(2) = 0\)</span>, <span class="math inline">\(F(4) = 1\)</span>, между ними растёт линейно — всё сходится. Дальше нужна только <a href="#eq-s03-cdf" class="quarto-xref">Уравнение&nbsp;<span>3.1</span></a>: значение <span class="math inline">\(F\)</span> в точке <strong>и есть</strong> вероятность оказаться левее неё.</p>
+<p>Сначала проверим, что функция вообще годится: <span class="math inline">\(F(2) = 0\)</span>, <span class="math inline">\(F(4) = 1\)</span>, между ними растёт линейно, всё сходится. Дальше нужна только <a href="#eq-s03-cdf" class="quarto-xref">Уравнение&nbsp;<span>3.1</span></a>: значение <span class="math inline">\(F\)</span> в точке <strong>и есть</strong> вероятность оказаться левее неё.</p>
 <p>а) Точка <span class="math inline">\(0{,}2\)</span> лежит в области, где <span class="math inline">\(F \equiv 0\)</span>: <span class="math display">\[\Prob(X &lt; 0{,}2) = F(0{,}2) = 0.\]</span></p>
 <p>б) Точка 3 попадает на средний кусок: <span class="math display">\[\Prob(X &lt; 3) = F(3) = 0{,}5\cdot 3 - 1 = 0{,}5.\]</span></p>
 <p>в) Событие <span class="math inline">\(\{X \geqslant 3\}\)</span> противоположно событию <span class="math inline">\(\{X &lt; 3\}\)</span>: <span class="math display">\[\Prob(X \geqslant 3) = 1 - \Prob(X &lt; 3) = 1 - 0{,}5 = 0{,}5.\]</span></p>
@@ -694,7 +694,7 @@ F(x) = \begin{cases}
 <img src="seminar-03_files/figure-html/fig-s03-t2-output-1.png" width="1057" height="408" class="figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-s03-t2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Рисунок&nbsp;3.2: Функция распределения из задачи 2 и её плотность. На <span class="math inline">\((2,4)\)</span> прямая с угловым коэффициентом <span class="math inline">\(0{,}5\)</span> — значит плотность там постоянна и равна <span class="math inline">\(0{,}5\)</span>: это равномерное распределение, к которому мы вернёмся в задаче 8.
+Рисунок&nbsp;3.2: Функция распределения из задачи 2 и её плотность. На <span class="math inline">\((2,4)\)</span> прямая с угловым коэффициентом <span class="math inline">\(0{,}5\)</span>: значит плотность там постоянна и равна <span class="math inline">\(0{,}5\)</span>: это равномерное распределение, к которому мы вернёмся в задаче 8.
 </figcaption>
 </figure>
 </div>
@@ -710,7 +710,7 @@ F(x) = \begin{cases}
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Считать, что «не меньшее трёх» — это <span class="math inline">\(1 - F(3)\)</span> только для непрерывной величины, и добавлять <span class="math inline">\(\Prob(X = 3)\)</span> «на всякий случай». Для непрерывной величины <span class="math inline">\(\Prob(X = 3) = 0\)</span>, и добавлять нечего; но если бы величина была дискретной, как в задаче 1, это слагаемое было бы существенным. Разница между <span class="math inline">\(\Prob(X &lt; 3)\)</span> и <span class="math inline">\(\Prob(X \leqslant 3)\)</span> — ровно <span class="math inline">\(\Prob(X = 3)\)</span>.</p>
+<p>Считать, что «не меньшее трёх»: это <span class="math inline">\(1 - F(3)\)</span> только для непрерывной величины, и добавлять <span class="math inline">\(\Prob(X = 3)\)</span> «на всякий случай». Для непрерывной величины <span class="math inline">\(\Prob(X = 3) = 0\)</span>, и добавлять нечего; но если бы величина была дискретной, как в задаче 1, это слагаемое было бы существенным. Разница между <span class="math inline">\(\Prob(X &lt; 3)\)</span> и <span class="math inline">\(\Prob(X \leqslant 3)\)</span>: ровно <span class="math inline">\(\Prob(X = 3)\)</span>.</p>
 </div>
 </div>
 </div>
@@ -752,18 +752,18 @@ F(x) = \begin{cases}
 1, &amp; x &gt; 2.
 \end{cases}
 \]</span></p>
-<p><strong>Сшивка</strong> — вторая проверка: <span class="math inline">\(F(1) = 0\)</span> и <span class="math inline">\(F(2) = (4-2)/2 = 1\)</span>. Функция выходит из нуля и приходит ровно в единицу, разрывов нет.</p>
+<p><strong>Сшивка</strong>: вторая проверка. <span class="math inline">\(F(1) = 0\)</span> и <span class="math inline">\(F(2) = (4-2)/2 = 1\)</span>. Функция выходит из нуля и приходит ровно в единицу, разрывов нет.</p>
 <p>Проверка: интеграл от плотности и обратный переход <span class="math inline">\(F' = f\)</span> в sympy.</p>
 <div id="s03-t3-check" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>f3 <span class="op">=</span> x <span class="op">-</span> sp.Rational(<span class="dv">1</span>, <span class="dv">2</span>)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>F3 <span class="op">=</span> sp.integrate(f3, (x, <span class="dv">1</span>, x))</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"норм ="</span>, sp.integrate(f3, (x, <span class="dv">1</span>, <span class="dv">2</span>)))</span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"F(x) ="</span>, sp.simplify(F3), <span class="st">"   F(1) ="</span>, F3.subs(x, <span class="dv">1</span>), <span class="st">"  F(2) ="</span>, F3.subs(x, <span class="dv">2</span>))</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"F'(x) ="</span>, sp.diff(F3, x), <span class="st">" — совпало с f(x)"</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"F'(x) ="</span>, sp.diff(F3, x), <span class="st">" (совпало с f(x))"</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>норм = 1
 F(x) = x*(x - 1)/2    F(1) = 0   F(2) = 1
-F'(x) = x - 1/2  — совпало с f(x)</code></pre>
+F'(x) = x - 1/2  (совпало с f(x))</code></pre>
 </div>
 </div>
 <div id="cell-fig-s03-t3" class="cell" data-execution_count="5">
@@ -781,7 +781,7 @@ F'(x) = x - 1/2  — совпало с f(x)</code></pre>
 <img src="seminar-03_files/figure-html/fig-s03-t3-output-1.png" width="1057" height="408" class="figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-s03-t3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Рисунок&nbsp;3.3: Плотность и функция распределения из задачи 3. Плотность растёт, поэтому <span class="math inline">\(F\)</span> идёт вверх всё круче: наклон <span class="math inline">\(F\)</span> в точке <span class="math inline">\(x\)</span> равен <span class="math inline">\(f(x)\)</span>. Площадь под левой кривой равна единице — это и есть значение, в которое приходит правая.
+Рисунок&nbsp;3.3: Плотность и функция распределения из задачи 3. Плотность растёт, поэтому <span class="math inline">\(F\)</span> идёт вверх всё круче: наклон <span class="math inline">\(F\)</span> в точке <span class="math inline">\(x\)</span> равен <span class="math inline">\(f(x)\)</span>. Площадь под левой кривой равна единице: это и есть значение, в которое приходит правая.
 </figcaption>
 </figure>
 </div>
@@ -819,17 +819,17 @@ F'(x) = x - 1/2  — совпало с f(x)</code></pre>
 </div>
 <div id="callout-12" class="callout-12-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p><strong>а)</strong> Постоянную всегда даёт <a href="#eq-s03-norm" class="quarto-xref">Уравнение&nbsp;<span>3.5</span></a> — других условий на неё нет: <span class="math display">\[
+<p><strong>а)</strong> Постоянную всегда даёт <a href="#eq-s03-norm" class="quarto-xref">Уравнение&nbsp;<span>3.5</span></a>; других условий на неё нет: <span class="math display">\[
 c\int_0^1 (x^2 + 2x)\,dx = c\left(\frac13 + 1\right) = \frac{4c}{3} = 1,
 \qquad c = \frac34.
 \]</span></p>
 <p><strong>б)</strong> Теперь плотность известна полностью, и по <a href="#eq-s03-mean" class="quarto-xref">Уравнение&nbsp;<span>3.6</span></a> <span class="math display">\[
-\E X = \frac34 \int_0^1 x(x^2 + 2x)\,dx
+\E(X) = \frac34 \int_0^1 x(x^2 + 2x)\,dx
 = \frac34 \int_0^1 (x^3 + 2x^2)\,dx
 = \frac34\left(\frac14 + \frac23\right)
 = \frac34 \cdot \frac{11}{12} = \frac{11}{16} = 0{,}6875.
 \]</span></p>
-<p><strong>Ответ разумен?</strong> Возможные значения лежат на <span class="math inline">\((0, 1)\)</span>, значит и среднее обязано лежать внутри — <span class="math inline">\(0{,}6875\)</span> лежит. Причём правее середины: плотность <span class="math inline">\(c(x^2+2x)\)</span> растёт, большие значения вероятнее.</p>
+<p><strong>Ответ разумен?</strong> Возможные значения лежат на <span class="math inline">\((0, 1)\)</span>, значит и среднее обязано лежать внутри: <span class="math inline">\(0{,}6875\)</span> лежит. Причём правее середины: плотность <span class="math inline">\(c(x^2+2x)\)</span> растёт, большие значения вероятнее.</p>
 <p>Проверка: точные дроби и контроль нормировки.</p>
 <div id="s03-t4-check" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> sp.symbols(<span class="st">"c"</span>, positive<span class="op">=</span><span class="va">True</span>)</span>
@@ -864,21 +864,21 @@ c\int_0^1 (x^2 + 2x)\,dx = c\left(\frac13 + 1\right) = \frac{4c}{3} = 1,
 <div id="callout-13" class="callout-13-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Контроль <a href="#eq-s03-norm" class="quarto-xref">Уравнение&nbsp;<span>3.5</span></a>: <span class="math inline">\(\int_0^5 \frac{2}{25}x\,dx = \frac{2}{25}\cdot\frac{25}{2} = 1\)</span>. <span class="math inline">\(\checkmark\)</span></p>
-<p>Дисперсию считаем по правой форме <a href="#eq-s03-var" class="quarto-xref">Уравнение&nbsp;<span>3.7</span></a> — через два интеграла: <span class="math display">\[
-\E X = \frac{2}{25}\int_0^5 x^2\,dx = \frac{2}{25}\cdot\frac{125}{3} = \frac{10}{3},
+<p>Дисперсию считаем по правой форме <a href="#eq-s03-var" class="quarto-xref">Уравнение&nbsp;<span>3.7</span></a>, через два интеграла: <span class="math display">\[
+\E(X) = \frac{2}{25}\int_0^5 x^2\,dx = \frac{2}{25}\cdot\frac{125}{3} = \frac{10}{3},
 \]</span> <span class="math display">\[
-\E X^2 = \frac{2}{25}\int_0^5 x^3\,dx = \frac{2}{25}\cdot\frac{625}{4} = \frac{25}{2},
+\E(X^2) = \frac{2}{25}\int_0^5 x^3\,dx = \frac{2}{25}\cdot\frac{625}{4} = \frac{25}{2},
 \]</span> <span class="math display">\[
-\Var X = \E X^2 - \big[\E X\big]^2 = \frac{25}{2} - \frac{100}{9}
+\Var(X) = \E(X^2) - \big[\E(X)\big]^2 = \frac{25}{2} - \frac{100}{9}
 = \frac{225 - 200}{18} = \frac{25}{18} \approx 1{,}39.
 \]</span> Отсюда <span class="math inline">\(\sigma(X) = 5/(3\sqrt2) \approx 1{,}18\)</span>.</p>
-<p><strong>Проверка на здравый смысл.</strong> Величина живёт на отрезке длины 5, а <span class="math inline">\(\sigma \approx 1{,}2\)</span> — примерно четверть этой длины. Так и должно быть: у любого распределения на отрезке длины <span class="math inline">\(L\)</span> среднее квадратическое отклонение не превосходит <span class="math inline">\(L/2\)</span>, а у «разумных» оказывается порядка <span class="math inline">\(L/4\)</span>.</p>
+<p><strong>Проверка на здравый смысл.</strong> Величина живёт на отрезке длины 5, а <span class="math inline">\(\sigma \approx 1{,}2\)</span>: примерно четверть этой длины. Так и должно быть: у любого распределения на отрезке длины <span class="math inline">\(L\)</span> среднее квадратическое отклонение не превосходит <span class="math inline">\(L/2\)</span>, а у «разумных» оказывается порядка <span class="math inline">\(L/4\)</span>.</p>
 <p>Проверка: точные дроби плюс симуляция методом обратной функции.</p>
 <div id="s03-t5-check" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>f5 <span class="op">=</span> sp.Rational(<span class="dv">2</span>, <span class="dv">25</span>) <span class="op">*</span> x</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(describe(f5, <span class="dv">0</span>, <span class="dv">5</span>))</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co"># F(x) = x^2/25, значит X = 5*sqrt(U) при U ~ R(0,1) — метод обратной функции</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co"># F(x) = x^2/25, значит X = 5*sqrt(U) при U ~ R(0,1): метод обратной функции</span></span>
 <span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>sample <span class="op">=</span> <span class="dv">5</span> <span class="op">*</span> np.sqrt(rng.random(<span class="dv">400_000</span>))</span>
 <span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">симуляция: M = </span><span class="sc">{</span>sample<span class="sc">.</span>mean()<span class="sc">:.4f}</span><span class="ss"> (точно </span><span class="sc">{</span><span class="dv">10</span><span class="op">/</span><span class="dv">3</span><span class="sc">:.4f}</span><span class="ss">),"</span></span>
 <span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>      <span class="ss">f"  D = </span><span class="sc">{</span>sample<span class="sc">.</span>var()<span class="sc">:.4f}</span><span class="ss"> (точно </span><span class="sc">{</span><span class="dv">25</span><span class="op">/</span><span class="dv">18</span><span class="sc">:.4f}</span><span class="ss">)"</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
@@ -914,7 +914,7 @@ c\int_0^1 (x^2 + 2x)\,dx = c\left(\frac13 + 1\right) = \frac{4c}{3} = 1,
 = -\frac34 (x - 3)^2 + \frac34 .
 \]</span></p>
 <p>Это парабола ветвями вниз с вершиной в точке <span class="math inline">\(x = 3\)</span>, то есть <span class="math display">\[M_0(X) = 3.\]</span></p>
-<p>Кривая <strong>симметрична относительно прямой <span class="math inline">\(x = 3\)</span></strong>, а отрезок <span class="math inline">\((2, 4)\)</span> расположен симметрично относительно неё же. Значит и центр тяжести площади, и точка, делящая площадь пополам, лежат в той же тройке: <span class="math display">\[\E X = 3, \qquad M_e(X) = 3.\]</span></p>
+<p>Кривая <strong>симметрична относительно прямой <span class="math inline">\(x = 3\)</span></strong>, а отрезок <span class="math inline">\((2, 4)\)</span> расположен симметрично относительно неё же. Значит и центр тяжести площади, и точка, делящая площадь пополам, лежат в той же тройке: <span class="math display">\[\E(X) = 3, \qquad M_e(X) = 3.\]</span></p>
 <p>Контроль <a href="#eq-s03-norm" class="quarto-xref">Уравнение&nbsp;<span>3.5</span></a>: <span class="math inline">\(\int_2^4 \left[-\frac34(x-3)^2 + \frac34\right] dx
 = -\frac34\cdot\frac23 + \frac34\cdot 2 = -\frac12 + \frac32 = 1\)</span>. <span class="math inline">\(\checkmark\)</span></p>
 <div class="callout callout-style-default callout-note callout-titled" title="Для самопроверки">
@@ -930,7 +930,7 @@ c\int_0^1 (x^2 + 2x)\,dx = c\left(\frac13 + 1\right) = \frac{4c}{3} = 1,
 <p>Гмурман, № 287: та же задача на <span class="math inline">\((3, 5)\)</span> с <span class="math inline">\(f(x) = -\frac34 x^2 + 6x - \frac{45}{4}\)</span>. <em>Ответ:</em> <span class="math inline">\(-\frac34(x-4)^2 + \frac34\)</span>, и всё равно <span class="math inline">\(4\)</span>.</p>
 </div>
 </div>
-<p><strong>Когда три характеристики расходятся.</strong> Совпадение <span class="math inline">\(M_0 = \E X = M_e\)</span> — следствие симметрии, а не общее правило. Для скошенной плотности все три разные, и на графике ниже это видно рядом.</p>
+<p><strong>Когда три характеристики расходятся.</strong> Совпадение <span class="math inline">\(M_0 = \E(X) = M_e\)</span>: следствие симметрии, а не общее правило. Для скошенной плотности все три разные, и на графике ниже это видно рядом.</p>
 <div id="s03-t6-check" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>f6 <span class="op">=</span> <span class="op">-</span>sp.Rational(<span class="dv">3</span>, <span class="dv">4</span>) <span class="op">*</span> x<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> sp.Rational(<span class="dv">9</span>, <span class="dv">2</span>) <span class="op">*</span> x <span class="op">-</span> <span class="dv">6</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"полный квадрат:"</span>, sp.simplify(f6 <span class="op">-</span> (<span class="op">-</span>sp.Rational(<span class="dv">3</span>, <span class="dv">4</span>) <span class="op">*</span> (x <span class="op">-</span> <span class="dv">3</span>)<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> sp.Rational(<span class="dv">3</span>, <span class="dv">4</span>))))</span>
@@ -939,13 +939,13 @@ c\int_0^1 (x^2 + 2x)\,dx = c\left(\frac13 + 1\right) = \frac{4c}{3} = 1,
 <span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>f6b <span class="op">=</span> <span class="dv">2</span> <span class="op">*</span> x                                    <span class="co"># скошенная плотность для сравнения</span></span>
 <span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">для f = 2x на (0,1):  M ="</span>, describe(f6b, <span class="dv">0</span>, <span class="dv">1</span>)[<span class="st">"M(X)"</span>],</span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>      <span class="st">" медиана ="</span>, median(f6b, <span class="dv">0</span>, <span class="dv">1</span>), <span class="st">" мода — на краю, внутри максимума нет"</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>      <span class="st">" медиана ="</span>, median(f6b, <span class="dv">0</span>, <span class="dv">1</span>), <span class="st">" мода: на краю, внутри максимума нет"</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>полный квадрат: 0
 {'норм': 1, 'M(X)': 3, 'M(X^2)': 46/5, 'D(X)': 1/5, 'sigma': sqrt(5)/5}
 медиана: [3]
 
-для f = 2x на (0,1):  M = 2/3  медиана = [sqrt(2)/2]  мода — на краю, внутри максимума нет</code></pre>
+для f = 2x на (0,1):  M = 2/3  медиана = [sqrt(2)/2]  мода: на краю, внутри максимума нет</code></pre>
 </div>
 </div>
 <div id="cell-fig-s03-t6" class="cell" data-execution_count="9">
@@ -983,7 +983,7 @@ c\int_0^1 (x^2 + 2x)\,dx = c\left(\frac13 + 1\right) = \frac{4c}{3} = 1,
 <img src="seminar-03_files/figure-html/fig-s03-t6-output-1.png" width="1090" height="430" class="figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-s03-t6-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Рисунок&nbsp;3.4: Слева симметричная плотность задачи 6: мода, среднее и медиана слиплись в одной точке. Справа скошенная плотность <span class="math inline">\(f = 2x\)</span> (задача 7): среднее <span class="math inline">\(2/3\)</span> левее медианы <span class="math inline">\(\sqrt2/2 \approx 0{,}707\)</span>, а максимума внутри интервала нет вовсе — моды не существует.
+Рисунок&nbsp;3.4: Слева симметричная плотность задачи 6: мода, среднее и медиана слиплись в одной точке. Справа скошенная плотность <span class="math inline">\(f = 2x\)</span> (задача 7): среднее <span class="math inline">\(2/3\)</span> левее медианы <span class="math inline">\(\sqrt2/2 \approx 0{,}707\)</span>, а максимума внутри интервала нет вовсе: моды не существует.
 </figcaption>
 </figure>
 </div>
@@ -999,7 +999,7 @@ c\int_0^1 (x^2 + 2x)\,dx = c\left(\frac13 + 1\right) = \frac{4c}{3} = 1,
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Искать моду как точку, где <span class="math inline">\(f' = 0\)</span>, и не проверять, лежит ли она <strong>внутри</strong> носителя. У плотности <span class="math inline">\(f = 2x\)</span> на <span class="math inline">\((0, 1)\)</span> производная нигде не обращается в нуль, максимум достигался бы в точке <span class="math inline">\(x = 1\)</span>, но она не принадлежит открытому интервалу — моды нет. Так же устроены задачи 285 и 288 задачника.</p>
+<p>Искать моду как точку, где <span class="math inline">\(f' = 0\)</span>, и не проверять, лежит ли она <strong>внутри</strong> носителя. У плотности <span class="math inline">\(f = 2x\)</span> на <span class="math inline">\((0, 1)\)</span> производная нигде не обращается в нуль, максимум достигался бы в точке <span class="math inline">\(x = 1\)</span>, но она не принадлежит открытому интервалу: моды нет. Так же устроены задачи 285 и 288 задачника.</p>
 </div>
 </div>
 </div>
@@ -1025,16 +1025,16 @@ c\int_0^1 (x^2 + 2x)\,dx = c\left(\frac13 + 1\right) = \frac{4c}{3} = 1,
 \nu_k = \int_0^1 x^k\cdot 2x\,dx = 2\int_0^1 x^{k+1}\,dx = \frac{2}{k+2},
 \]</span> откуда <span class="math display">\[
 \nu_1 = \frac23, \qquad \nu_2 = \frac12, \qquad \nu_3 = \frac25, \qquad \nu_4 = \frac13 .
-\]</span> Заодно <span class="math inline">\(\nu_1 = \E X = 2/3\)</span>, а <span class="math inline">\(\nu_0 = 1\)</span> — это снова <a href="#eq-s03-norm" class="quarto-xref">Уравнение&nbsp;<span>3.5</span></a>.</p>
-<p>Центральные удобнее не интегрировать, а получить из <a href="#eq-s03-moments-link" class="quarto-xref">Уравнение&nbsp;<span>3.9</span></a>. Первый равен нулю всегда: <span class="math display">\[\mu_1 = 0,\]</span> <span class="math display">\[\mu_2 = \nu_2 - \nu_1^2 = \frac12 - \frac49 = \frac{1}{18} = \Var X,\]</span> <span class="math display">\[\mu_3 = \nu_3 - 3\nu_2\nu_1 + 2\nu_1^3
+\]</span> Заодно <span class="math inline">\(\nu_1 = \E(X) = 2/3\)</span>, а <span class="math inline">\(\nu_0 = 1\)</span>: это снова <a href="#eq-s03-norm" class="quarto-xref">Уравнение&nbsp;<span>3.5</span></a>.</p>
+<p>Центральные удобнее не интегрировать, а получить из <a href="#eq-s03-moments-link" class="quarto-xref">Уравнение&nbsp;<span>3.9</span></a>. Первый равен нулю всегда: <span class="math display">\[\mu_1 = 0,\]</span> <span class="math display">\[\mu_2 = \nu_2 - \nu_1^2 = \frac12 - \frac49 = \frac{1}{18} = \Var(X),\]</span> <span class="math display">\[\mu_3 = \nu_3 - 3\nu_2\nu_1 + 2\nu_1^3
 = \frac25 - 3\cdot\frac12\cdot\frac23 + 2\cdot\frac{8}{27} = -\frac{1}{135},\]</span> <span class="math display">\[\mu_4 = \nu_4 - 4\nu_3\nu_1 + 6\nu_2\nu_1^2 - 3\nu_1^4
 = \frac13 - \frac{16}{15} + \frac43 - \frac{16}{27} = \frac{1}{135}.\]</span></p>
-<p><strong>Зачем они нужны.</strong> Третий и четвёртый моменты — это форма распределения: <span class="math display">\[
+<p><strong>Зачем они нужны.</strong> Третий и четвёртый моменты описывают форму распределения: <span class="math display">\[
 A_s = \frac{\mu_3}{\sigma^3} = -\frac{2\sqrt2}{5} \approx -0{,}57
 \quad(\text{асимметрия}), \qquad
 E_k = \frac{\mu_4}{\sigma^4} - 3 = -\frac35 = -0{,}6 \quad(\text{эксцесс}).
-\]</span> Знак <span class="math inline">\(\mu_3 &lt; 0\)</span> означает скос <strong>влево</strong>: длинный хвост уходит в сторону малых значений, и поэтому среднее <span class="math inline">\(2/3\)</span> оказалось левее медианы <span class="math inline">\(\sqrt2/2\)</span> (см. правую панель на рисунке к задаче 6). У нормального закона <span class="math inline">\(A_s = E_k = 0\)</span> — он и служит точкой отсчёта.</p>
-<p>Проверка: центральные моменты считаются <strong>двумя</strong> способами — прямым интегрированием и по формулам перехода <a href="#eq-s03-moments-link" class="quarto-xref">Уравнение&nbsp;<span>3.9</span></a>.</p>
+\]</span> Знак <span class="math inline">\(\mu_3 &lt; 0\)</span> означает скос <strong>влево</strong>: длинный хвост уходит в сторону малых значений, и поэтому среднее <span class="math inline">\(2/3\)</span> оказалось левее медианы <span class="math inline">\(\sqrt2/2\)</span> (см. правую панель на рисунке к задаче 6). У нормального закона <span class="math inline">\(A_s = E_k = 0\)</span>: он и служит точкой отсчёта.</p>
+<p>Проверка: центральные моменты считаются <strong>двумя</strong> способами, прямым интегрированием и по формулам перехода <a href="#eq-s03-moments-link" class="quarto-xref">Уравнение&nbsp;<span>3.9</span></a>.</p>
 <div id="s03-t7-check" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>nu, mu <span class="op">=</span> moments(<span class="dv">2</span> <span class="op">*</span> x, <span class="dv">0</span>, <span class="dv">1</span>)</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>link <span class="op">=</span> [sp.Integer(<span class="dv">0</span>),</span>
@@ -1066,7 +1066,7 @@ E_k = -3/5</code></pre>
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Считать <span class="math inline">\(\mu_k\)</span> как <span class="math inline">\(\int (x - \nu_1)^k f\,dx\)</span> и подставлять в качестве <span class="math inline">\(\nu_1\)</span> <strong>середину интервала</strong> вместо математического ожидания. Здесь середина равна <span class="math inline">\(0{,}5\)</span>, а <span class="math inline">\(\E X = 2/3\)</span>; с неверным центром <span class="math inline">\(\mu_1\)</span> не обратится в нуль, и это первый признак ошибки — всегда проверяйте <span class="math inline">\(\mu_1 = 0\)</span>.</p>
+<p>Считать <span class="math inline">\(\mu_k\)</span> как <span class="math inline">\(\int (x - \nu_1)^k f\,dx\)</span> и подставлять в качестве <span class="math inline">\(\nu_1\)</span> <strong>середину интервала</strong> вместо математического ожидания. Здесь середина равна <span class="math inline">\(0{,}5\)</span>, а <span class="math inline">\(\E(X) = 2/3\)</span>; с неверным центром <span class="math inline">\(\mu_1\)</span> не обратится в нуль, и это первый признак ошибки: всегда проверяйте <span class="math inline">\(\mu_1 = 0\)</span>.</p>
 </div>
 </div>
 </div>
@@ -1088,21 +1088,21 @@ E_k = -3/5</code></pre>
 </div>
 <div id="callout-19" class="callout-19-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p><strong>Плотность.</strong> «Равномерно» означает, что на <span class="math inline">\((a, b)\)</span> плотность постоянна: <span class="math inline">\(f(x) = C\)</span>. Постоянную даёт <a href="#eq-s03-norm" class="quarto-xref">Уравнение&nbsp;<span>3.5</span></a>: <span class="math inline">\(C(b - a) = 1\)</span>, то есть <span class="math inline">\(C = 1/(b-a)\)</span> — это <a href="#eq-s03-uniform" class="quarto-xref">Уравнение&nbsp;<span>3.10</span></a>.</p>
+<p><strong>Плотность.</strong> «Равномерно» означает, что на <span class="math inline">\((a, b)\)</span> плотность постоянна: <span class="math inline">\(f(x) = C\)</span>. Постоянную даёт <a href="#eq-s03-norm" class="quarto-xref">Уравнение&nbsp;<span>3.5</span></a>: <span class="math inline">\(C(b - a) = 1\)</span>, то есть <span class="math inline">\(C = 1/(b-a)\)</span>: это <a href="#eq-s03-uniform" class="quarto-xref">Уравнение&nbsp;<span>3.10</span></a>.</p>
 <p><strong>Математическое ожидание</strong> можно не считать: график плотности симметричен относительно середины отрезка, поэтому <span class="math display">\[
-\E X = \frac{a + b}{2}.
+\E(X) = \frac{a + b}{2}.
 \]</span> Прямой счёт даёт то же самое: <span class="math inline">\(\frac{1}{b-a}\int_a^b x\,dx = \frac{b^2 - a^2}{2(b-a)} = \frac{a+b}{2}\)</span>.</p>
-<p><strong>Дисперсия</strong> — по правой форме <a href="#eq-s03-var" class="quarto-xref">Уравнение&nbsp;<span>3.7</span></a>: <span class="math display">\[
-\E X^2 = \frac{1}{b-a}\int_a^b x^2\,dx = \frac{b^3 - a^3}{3(b-a)}
+<p><strong>Дисперсия</strong>, по правой форме <a href="#eq-s03-var" class="quarto-xref">Уравнение&nbsp;<span>3.7</span></a>: <span class="math display">\[
+\E(X^2) = \frac{1}{b-a}\int_a^b x^2\,dx = \frac{b^3 - a^3}{3(b-a)}
 = \frac{a^2 + ab + b^2}{3},
 \]</span> <span class="math display">\[
-\Var X = \frac{a^2 + ab + b^2}{3} - \frac{(a+b)^2}{4}
+\Var(X) = \frac{a^2 + ab + b^2}{3} - \frac{(a+b)^2}{4}
 = \frac{4a^2 + 4ab + 4b^2 - 3a^2 - 6ab - 3b^2}{12}
 = \frac{(b - a)^2}{12},
 \]</span> <span class="math display">\[
 \sigma(X) = \frac{b - a}{2\sqrt3} \approx 0{,}289\,(b - a).
 \]</span></p>
-<p><strong>Что стоит запомнить.</strong> Дисперсия зависит только от <strong>длины</strong> отрезка, а не от его положения — сдвиг величины на константу её не меняет. И <span class="math inline">\(\sigma\)</span> составляет примерно <span class="math inline">\(29\%\)</span> длины: для <span class="math inline">\(R \sim R(0,1)\)</span> это <span class="math inline">\(\E R = 1/2\)</span>, <span class="math inline">\(\Var R = 1/12\)</span>, <span class="math inline">\(\sigma(R) \approx 0{,}289\)</span>.</p>
+<p><strong>Что стоит запомнить.</strong> Дисперсия зависит только от <strong>длины</strong> отрезка, а не от его положения: сдвиг величины на константу её не меняет. И <span class="math inline">\(\sigma\)</span> составляет примерно <span class="math inline">\(29\%\)</span> длины: для <span class="math inline">\(R \sim R(0,1)\)</span> это <span class="math inline">\(\E(R) = 1/2\)</span>, <span class="math inline">\(\Var(R) = 1/12\)</span>, <span class="math inline">\(\sigma(R) \approx 0{,}289\)</span>.</p>
 <div id="s03-t8-check" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>a_s, L <span class="op">=</span> sp.symbols(<span class="st">"a L"</span>, real<span class="op">=</span><span class="va">True</span>, positive<span class="op">=</span><span class="va">True</span>)   <span class="co"># L = b - a, длина отрезка</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>f8 <span class="op">=</span> <span class="dv">1</span> <span class="op">/</span> L</span>
@@ -1134,7 +1134,7 @@ D(X) = L**2/12    sigma = sqrt(3)*L/6 = 0.2887 * L</code></pre>
 <img src="seminar-03_files/figure-html/fig-s03-t8-output-1.png" width="1057" height="408" class="figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-s03-t8-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Рисунок&nbsp;3.5: Равномерное распределение на <span class="math inline">\((2, 8)\)</span>: плотность — «полка» высотой <span class="math inline">\(1/6\)</span>, функция распределения — прямая от 0 до 1. Пунктиром отмечены <span class="math inline">\(\mathsf{E}X = 5\)</span> и полоса <span class="math inline">\(\pm\sigma \approx \pm 1{,}73\)</span>, в которую попадает около 58 % значений.
+Рисунок&nbsp;3.5: Равномерное распределение на <span class="math inline">\((2, 8)\)</span>: плотность имеет вид «полки» высотой <span class="math inline">\(1/6\)</span>, а функция распределения растёт по прямой от 0 до 1. Пунктиром отмечены <span class="math inline">\(\mathsf{E}X = 5\)</span> и полоса <span class="math inline">\(\pm\sigma \approx \pm 1{,}73\)</span>, в которую попадает около 58 % значений.
 </figcaption>
 </figure>
 </div>
@@ -1162,19 +1162,19 @@ D(X) = L**2/12    sigma = sqrt(3)*L/6 = 0.2887 * L</code></pre>
 </div>
 <div id="callout-21" class="callout-21-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Задача про то, <strong>как распознать равномерное распределение в тексте</strong>. Стрелка может остановиться где угодно между двумя соседними делениями, и ни одно положение не выделено — значит её положение <span class="math inline">\(X\)</span> внутри деления распределено равномерно на интервале длины <span class="math inline">\(0{,}1\)</span>. По <a href="#eq-s03-uniform" class="quarto-xref">Уравнение&nbsp;<span>3.10</span></a> <span class="math display">\[
+<p>Задача про то, <strong>как распознать равномерное распределение в тексте</strong>. Стрелка может остановиться где угодно между двумя соседними делениями, и ни одно положение не выделено: значит её положение <span class="math inline">\(X\)</span> внутри деления распределено равномерно на интервале длины <span class="math inline">\(0{,}1\)</span>. По <a href="#eq-s03-uniform" class="quarto-xref">Уравнение&nbsp;<span>3.10</span></a> <span class="math display">\[
 f(x) = \frac{1}{0{,}1} = 10.
 \]</span></p>
-<p>Дальше нужно понять, <strong>когда ошибка округления превышает <span class="math inline">\(0{,}02\)</span></strong>. Округляют до ближайшего деления, поэтому ошибка — это расстояние до ближайшего конца интервала. Она мала у краёв и велика в середине:</p>
+<p>Дальше нужно понять, <strong>когда ошибка округления превышает <span class="math inline">\(0{,}02\)</span></strong>. Округляют до ближайшего деления, поэтому ошибка: расстояние до ближайшего конца интервала. Она мала у краёв и велика в середине:</p>
 <ul>
-<li>если <span class="math inline">\(X &lt; 0{,}02\)</span>, округлили вниз, ошибка <span class="math inline">\(X\)</span> — маленькая;</li>
-<li>если <span class="math inline">\(X &gt; 0{,}08\)</span>, округлили вверх, ошибка <span class="math inline">\(0{,}1 - X\)</span> — тоже маленькая;</li>
+<li>если <span class="math inline">\(X &lt; 0{,}02\)</span>, округлили вниз, ошибка <span class="math inline">\(X\)</span> маленькая;</li>
+<li>если <span class="math inline">\(X &gt; 0{,}08\)</span>, округлили вверх, ошибка <span class="math inline">\(0{,}1 - X\)</span> тоже маленькая;</li>
 <li>между ними ошибка больше <span class="math inline">\(0{,}02\)</span>.</li>
 </ul>
-<p>Значит искомое событие — это <span class="math inline">\(0{,}02 &lt; X &lt; 0{,}08\)</span>, и по <a href="#eq-s03-prob" class="quarto-xref">Уравнение&nbsp;<span>3.4</span></a> <span class="math display">\[
+<p>Значит искомое событие: <span class="math inline">\(0{,}02 &lt; X &lt; 0{,}08\)</span>, и по <a href="#eq-s03-prob" class="quarto-xref">Уравнение&nbsp;<span>3.4</span></a> <span class="math display">\[
 \Prob(0{,}02 &lt; X &lt; 0{,}08) = \int_{0{,}02}^{0{,}08} 10\,dx = 10 \cdot 0{,}06 = 0{,}6.
 \]</span></p>
-<p>Считать интеграл тут, конечно, необязательно: у равномерного распределения вероятность — это просто доля длины, <span class="math inline">\(0{,}06 / 0{,}1 = 0{,}6\)</span>.</p>
+<p>Считать интеграл тут, конечно, необязательно: у равномерного распределения вероятность: просто доля длины, <span class="math inline">\(0{,}06 / 0{,}1 = 0{,}6\)</span>.</p>
 <p>Проверка: симуляция ста тысяч отсчётов.</p>
 <div id="s03-t9-check" class="cell" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>reading <span class="op">=</span> rng.uniform(<span class="dv">0</span>, <span class="fl">0.1</span>, <span class="dv">200_000</span>)</span>
@@ -1216,13 +1216,13 @@ f(x) = \frac{1}{0{,}1} = 10.
 </div>
 <div id="callout-23" class="callout-23-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>«Без систематических ошибок» — это и есть условие <span class="math inline">\(a = \E X = 0\)</span>: случайные ошибки одинаково часто бывают в обе стороны. Спрашивают <span class="math inline">\(\Prob(|X| &lt; 15)\)</span> — отклонение от нуля по модулю, поэтому годится вторая формула <a href="#eq-s03-normal-prob" class="quarto-xref">Уравнение&nbsp;<span>3.13</span></a>: <span class="math display">\[
+<p>«Без систематических ошибок» означает условие <span class="math inline">\(a = \E(X) = 0\)</span>: случайные ошибки одинаково часто бывают в обе стороны. Спрашивают <span class="math inline">\(\Prob(|X| &lt; 15)\)</span>: отклонение от нуля по модулю, поэтому годится вторая формула <a href="#eq-s03-normal-prob" class="quarto-xref">Уравнение&nbsp;<span>3.13</span></a>: <span class="math display">\[
 \Prob\big(|X| &lt; \delta\big) = 2\Phi\!\left(\frac{\delta}{\sigma}\right)
 = 2\Phi\!\left(\frac{15}{10}\right) = 2\Phi(1{,}5).
 \]</span> По таблице <span class="math inline">\(\Phi(1{,}5) = 0{,}4332\)</span>, откуда <span class="math display">\[
 \Prob(|X| &lt; 15) = 2\cdot 0{,}4332 = 0{,}8664.
 \]</span></p>
-<p><strong>Почему не надо вычитать.</strong> Общая формула дала бы <span class="math inline">\(\Phi(1{,}5) - \Phi(-1{,}5)\)</span>, но <span class="math inline">\(\Phi\)</span> нечётна, и <span class="math inline">\(-\Phi(-1{,}5) = \Phi(1{,}5)\)</span> — отсюда и берётся двойка. Проверяйте себя этим, если забыли формулу.</p>
+<p><strong>Почему не надо вычитать.</strong> Общая формула дала бы <span class="math inline">\(\Phi(1{,}5) - \Phi(-1{,}5)\)</span>, но <span class="math inline">\(\Phi\)</span> нечётна, и <span class="math inline">\(-\Phi(-1{,}5) = \Phi(1{,}5)\)</span>: отсюда и берётся двойка. Проверяйте себя этим, если забыли формулу.</p>
 <div id="s03-t10-check" class="cell" data-execution_count="14">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Ф(1,5) = </span><span class="sc">{</span>laplace_phi(<span class="fl">1.5</span>)<span class="sc">:.4f}</span><span class="ss">    2Ф(1,5) = </span><span class="sc">{</span><span class="dv">2</span> <span class="op">*</span> laplace_phi(<span class="fl">1.5</span>)<span class="sc">:.4f}</span><span class="ss">"</span>)</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"через общую формулу: Ф(1,5) - Ф(-1,5) = "</span></span>
@@ -1248,7 +1248,7 @@ f(x) = \frac{1}{0{,}1} = 10.
 <img src="seminar-03_files/figure-html/fig-s03-t10-output-1.png" width="804" height="430" class="figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-s03-t10-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Рисунок&nbsp;3.6: Нормальная кривая ошибок (<span class="math inline">\(a = 0\)</span>, <span class="math inline">\(\sigma = 10\)</span>). Закрашена область <span class="math inline">\(|x| &lt; 15\)</span>, то есть полтора сигма в каждую сторону; её площадь и есть 0,8664. Оставшиеся 13 % — два хвоста по 6,7 %.
+Рисунок&nbsp;3.6: Нормальная кривая ошибок (<span class="math inline">\(a = 0\)</span>, <span class="math inline">\(\sigma = 10\)</span>). Закрашена область <span class="math inline">\(|x| &lt; 15\)</span>, то есть полтора сигма в каждую сторону; её площадь и есть 0,8664. Оставшиеся 13 %: два хвоста по 6,7 %.
 </figcaption>
 </figure>
 </div>
@@ -1264,7 +1264,7 @@ f(x) = \frac{1}{0{,}1} = 10.
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Взять из таблицы значение функции, у которой <span class="math inline">\(F_0(0) = 0{,}5\)</span>, и всё равно умножить на два — получится больше единицы. Если в вашей таблице <span class="math inline">\(F_0(1{,}5) = 0{,}9332\)</span>, то это <span class="math inline">\(0{,}5 + \Phi(1{,}5)\)</span>, и считать надо <span class="math inline">\(2F_0(1{,}5) - 1 = 0{,}8664\)</span>.</p>
+<p>Взять из таблицы значение функции, у которой <span class="math inline">\(F_0(0) = 0{,}5\)</span>, и всё равно умножить на два: получится больше единицы. Если в вашей таблице <span class="math inline">\(F_0(1{,}5) = 0{,}9332\)</span>, то это <span class="math inline">\(0{,}5 + \Phi(1{,}5)\)</span>, и считать надо <span class="math inline">\(2F_0(1{,}5) - 1 = 0{,}8664\)</span>.</p>
 </div>
 </div>
 </div>
@@ -1317,7 +1317,7 @@ f(x) = \frac{1}{0{,}1} = 10.
 </tr>
 </tbody>
 </table>
-<p>Отсюда видно, почему нормируют именно «три сигмы»: за пределами такого допуска оказывается настолько мало значений, что событие считают практически невозможным. И обратно — если допуск заказчика равен <span class="math inline">\(2\sigma\)</span>, то около 4,5 % деталей в брак, и уменьшать надо <span class="math inline">\(\sigma\)</span>, а не надеяться на удачу.</p>
+<p>Отсюда видно, почему нормируют именно «три сигмы»: за пределами такого допуска оказывается настолько мало значений, что событие считают практически невозможным. И обратно, если допуск заказчика равен <span class="math inline">\(2\sigma\)</span>, то около 4,5 % деталей в брак, и уменьшать надо <span class="math inline">\(\sigma\)</span>, а не надеяться на удачу.</p>
 <div id="s03-t11-check" class="cell" data-execution_count="16">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> t <span class="kw">in</span> (<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>):</span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>    p <span class="op">=</span> <span class="dv">2</span> <span class="op">*</span> laplace_phi(t)</span>
@@ -1350,7 +1350,7 @@ f(x) = \frac{1}{0{,}1} = 10.
 <img src="seminar-03_files/figure-html/fig-s03-t11-output-1.png" width="804" height="430" class="figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-s03-t11-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Рисунок&nbsp;3.7: Доля годных деталей как функция допуска, выраженного в сигмах. Кривая быстро выходит на насыщение: расширять допуск с <span class="math inline">\(2\sigma\)</span> до <span class="math inline">\(3\sigma\)</span> ещё имеет смысл, дальше — почти нет.
+Рисунок&nbsp;3.7: Доля годных деталей как функция допуска, выраженного в сигмах. Кривая быстро выходит на насыщение: расширять допуск с <span class="math inline">\(2\sigma\)</span> до <span class="math inline">\(3\sigma\)</span> ещё имеет смысл, дальше почти нет.
 </figcaption>
 </figure>
 </div>
@@ -1375,17 +1375,17 @@ f(x) = \frac{1}{0{,}1} = 10.
 </div>
 <div id="callout-26" class="callout-26-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p><strong>а)</strong> Мост — прямоугольник. Бомба попала, если она уложилась и по длине, и по ширине. Оси проведены через центр, поэтому условия симметричны: <span class="math display">\[
+<p><strong>а)</strong> Мост имеет форму прямоугольника. Бомба попала, если она уложилась и по длине, и по ширине. Оси проведены через центр, поэтому условия симметричны: <span class="math display">\[
 |X| &lt; \frac{30}{2} = 15, \qquad |Y| &lt; \frac{8}{2} = 4.
-\]</span> Каждое — отклонение от нуля, и каждое считается по <a href="#eq-s03-normal-prob" class="quarto-xref">Уравнение&nbsp;<span>3.13</span></a>: <span class="math display">\[
+\]</span> Каждое из этих условий описывает отклонение от нуля, и каждое считается по <a href="#eq-s03-normal-prob" class="quarto-xref">Уравнение&nbsp;<span>3.13</span></a>: <span class="math display">\[
 \Prob(|X| &lt; 15) = 2\Phi\!\left(\frac{15}{6}\right) = 2\Phi(2{,}5) = 0{,}9876,
 \]</span> <span class="math display">\[
 \Prob(|Y| &lt; 4) = 2\Phi\!\left(\frac{4}{4}\right) = 2\Phi(1) = 0{,}6826.
 \]</span> Величины <strong>независимы</strong>, поэтому вероятности перемножаются: <span class="math display">\[
 p = 0{,}9876 \cdot 0{,}6826 = 0{,}6741.
 \]</span></p>
-<p>Обратите внимание, где узкое место: вдоль моста промахнуться почти невозможно (<span class="math inline">\(2{,}5\sigma\)</span> запаса), а поперёк — запросто, ширины хватает лишь на одну сигму. Итоговые две трети целиком определяются поперечным рассеиванием.</p>
-<p><strong>б)</strong> «Достаточно одного попадания из двух» — это схема «хотя бы один раз» с семинара 1: переходим к противоположному событию «обе мимо»: <span class="math display">\[
+<p>Обратите внимание, где узкое место: вдоль моста промахнуться почти невозможно (<span class="math inline">\(2{,}5\sigma\)</span> запаса), а поперёк запросто, ширины хватает лишь на одну сигму. Итоговые две трети целиком определяются поперечным рассеиванием.</p>
+<p><strong>б)</strong> «Достаточно одного попадания из двух»: это схема «хотя бы один раз» с семинара 1: переходим к противоположному событию «обе мимо»: <span class="math display">\[
 \Prob(\text{разрушен}) = 1 - (1 - p)^2 = 1 - 0{,}3259^2 = 0{,}8938.
 \]</span></p>
 <p>Проверка: точные значения функции Лапласа и симуляция.</p>
@@ -1430,7 +1430,7 @@ p = 0{,}9876 \cdot 0{,}6826 = 0{,}6741.
 <img src="seminar-03_files/figure-html/fig-s03-t12-output-1.png" width="649" height="474" class="figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-s03-t12-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Рисунок&nbsp;3.8: Две тысячи бомбометаний. Прямоугольник — мост, 30 на 8 метров. Вдоль моста рассеивание втрое меньше его длины, поперёк — сравнимо с шириной, поэтому почти все промахи уходят вверх и вниз, а не вбок.
+Рисунок&nbsp;3.8: Две тысячи бомбометаний. Прямоугольник изображает мост, 30 на 8 метров. Вдоль моста рассеивание втрое меньше его длины, поперёк сравнимо с шириной, поэтому почти все промахи уходят вверх и вниз, а не вбок.
 </figcaption>
 </figure>
 </div>
@@ -1446,7 +1446,7 @@ p = 0{,}9876 \cdot 0{,}6826 = 0{,}6741.
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Сложить вероятности вместо того, чтобы перемножить: <span class="math inline">\(0{,}9876 + 0{,}6826 &gt; 1\)</span>. Попадание — это пересечение двух событий («уложился по длине» <strong>и</strong> «уложился по ширине»), а не объединение. Перемножать можно именно потому, что <span class="math inline">\(X\)</span> и <span class="math inline">\(Y\)</span> независимы; если бы бомбы сносило по диагонали, так делать было бы нельзя.</p>
+<p>Сложить вероятности вместо того, чтобы перемножить: <span class="math inline">\(0{,}9876 + 0{,}6826 &gt; 1\)</span>. Попадание: пересечение двух событий («уложился по длине» <strong>и</strong> «уложился по ширине»), а не объединение. Перемножать можно именно потому, что <span class="math inline">\(X\)</span> и <span class="math inline">\(Y\)</span> независимы; если бы бомбы сносило по диагонали, так делать было бы нельзя.</p>
 </div>
 </div>
 </div>
@@ -1477,8 +1477,8 @@ p = 0{,}9876 \cdot 0{,}6826 = 0{,}6741.
 <ol type="1">
 <li><span class="math inline">\(F(x_1) = 1 - 1/6 = 5/6\)</span>, откуда <span class="math inline">\(\frac1\pi\operatorname{arctg}\frac{x_1}{2} = \frac13\)</span>, <span class="math inline">\(\operatorname{arctg}\frac{x_1}{2} = \frac\pi3\)</span> и <span class="math inline">\(x_1 = 2\sqrt3 \approx 3{,}46\)</span>.</li>
 <li><span class="math inline">\(\nu_1 = 4/3\)</span>, <span class="math inline">\(\nu_2 = 2\)</span>, <span class="math inline">\(\nu_3 = 3{,}2\)</span>, <span class="math inline">\(\nu_4 = 16/3\)</span>; <span class="math inline">\(\mu_1 = 0\)</span>, <span class="math inline">\(\mu_2 = 2/9\)</span>, <span class="math inline">\(\mu_3 = -8/135\)</span>, <span class="math inline">\(\mu_4 = 16/135\)</span>. Скос снова влево, как и в задаче 7: плотность растёт на всём носителе.</li>
-<li>Середина интервала равна <span class="math inline">\(a\)</span>, длина равна <span class="math inline">\(2l\)</span>, поэтому по <a href="#eq-s03-uniform" class="quarto-xref">Уравнение&nbsp;<span>3.10</span></a> <span class="math inline">\(\E X = a\)</span> и <span class="math inline">\(\Var X = (2l)^2/12 = l^2/3\)</span> (и <span class="math inline">\(\sigma = l/\sqrt3\)</span>).</li>
-<li><span class="math inline">\(\Prob(|X| &lt; 10) = 2\Phi(10/20) = 2\Phi(0{,}5) = 2\cdot 0{,}1915 = 0{,}383\)</span>. Меньше половины — допуск здесь всего половина сигмы (ср. таблицу в задаче 11).</li>
+<li>Середина интервала равна <span class="math inline">\(a\)</span>, длина равна <span class="math inline">\(2l\)</span>, поэтому по <a href="#eq-s03-uniform" class="quarto-xref">Уравнение&nbsp;<span>3.10</span></a> <span class="math inline">\(\E(X) = a\)</span> и <span class="math inline">\(\Var(X) = (2l)^2/12 = l^2/3\)</span> (и <span class="math inline">\(\sigma = l/\sqrt3\)</span>).</li>
+<li><span class="math inline">\(\Prob(|X| &lt; 10) = 2\Phi(10/20) = 2\Phi(0{,}5) = 2\cdot 0{,}1915 = 0{,}383\)</span>. Меньше половины: допуск здесь всего половина сигмы (ср. таблицу в задаче 11).</li>
 </ol>
 </div>
 </div>

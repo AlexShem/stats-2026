@@ -114,8 +114,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 window.MathJax = {
   tex: {
     macros: {
-      E: "\\mathbb{E}",
-      Var: "\\mathrm{D}",
+      E: "\\mathrm{E}",
+      Var: "\\mathrm{Var}",
       Prob: "\\mathbb{P}",
       Cov: "\\mathrm{cov}",
       indep: "\\perp\\!\\!\\!\\perp"
@@ -243,25 +243,25 @@ window.MathJax = {
 <h2 class="unnumbered anchored" data-anchor-id="как-устроены-материалы">Как устроены материалы</h2>
 <p>Каждому семинару соответствует <strong>глава книги</strong> и <strong>раздатка</strong>:</p>
 <ul>
-<li><strong>Раздатка</strong> — PDF с условиями задач, её выдают на занятии. В ней краткая сводка теории, задачи и домашнее задание, но нет решений. Ссылки на PDF собраны в таблице расписания ниже.</li>
-<li><strong>Глава книги</strong> — те же задачи с полными решениями. Решение каждой задачи спрятано в свёрнутом блоке «Решение»: сначала попробуйте решить сами, потом откройте и сверьтесь.</li>
+<li><strong>Раздатка</strong>: PDF с условиями задач, её выдают на занятии. В ней краткая сводка теории, задачи и домашнее задание, но нет решений. Ссылки на PDF собраны в таблице расписания ниже.</li>
+<li><strong>Глава книги</strong>: те же задачи с полными решениями. Решение каждой задачи спрятано в свёрнутом блоке «Решение»: сначала попробуйте решить сами, потом откройте и сверьтесь.</li>
 </ul>
-<p>Задачи сгруппированы в три блока: <strong>A</strong> — разминка, <strong>B</strong> — основные задачи темы, <strong>C</strong> — задачи повышенной сложности либо отдельная подтема, вынесенная в конец занятия. Задачи из задачника указаны с номером: «Гмурман, гл. 2 § 1, № 47» — это</p>
+<p>Задачи сгруппированы в три блока: <strong>A</strong> (разминка), <strong>B</strong> (основные задачи темы), <strong>C</strong> (задачи повышенной сложности либо отдельная подтема, вынесенная в конец занятия). Задачи из задачника указаны с номером: «Гмурман, гл. 2 § 1, № 47»: это ссылка на</p>
 <blockquote class="blockquote">
-<p>Гмурман В. Е. Руководство к решению задач по теории вероятностей и математической статистике. — М.: Высшая школа, 1979.</p>
+<p>Гмурман В. Е. Руководство к решению задач по теории вероятностей и математической статистике. М.: Высшая школа, 1979.</p>
 </blockquote>
 </section>
 <section id="код-на-python" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="код-на-python">Код на Python</h2>
 <p>Почти каждое решение сопровождается расчётом на Python: точными дробями, полным перебором исходов или симуляцией. Код проверяет ответ и показывает, как ту же задачу решает компьютер.</p>
-<p>В начале каждой главы есть раздел <strong>«Код для этой главы»</strong>: там собраны все импорты и все функции, которые встречаются в примерах. Ниже по тексту новых функций не появляется — если в примере вызывается функция, её определение находится в этом разделе.</p>
+<p>В начале каждой главы есть раздел <strong>«Код для этой главы»</strong>: там собраны все импорты и все функции, которые встречаются в примерах. Ниже по тексту новых функций не появляется: если в примере вызывается функция, её определение находится в этом разделе.</p>
 <p>Чтобы запустить примеры у себя, нужен Python 3.12 или новее и несколько библиотек:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install numpy matplotlib sympy</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Скопируйте в Jupyter-блокнот сначала ячейку из раздела «Код для этой главы», затем нужный пример. Случайные числа порождаются генератором с фиксированным зерном (<code>np.random.default_rng(2026)</code>), поэтому результаты симуляций совпадут с напечатанными, если выполнять ячейки по порядку.</p>
 </section>
 <section id="расписание" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="расписание">Расписание</h2>
-<p>Семинары проходят по вторникам с 8 сентября по 22 декабря 2026 года — всего 16 занятий.</p>
+<p>Семинары проходят по вторникам с 8 сентября по 22 декабря 2026 года, всего 16 занятий.</p>
 <div class="cell" data-execution_count="1">
 <div id="tbl-schedule" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="1">
 <figure class="quarto-float quarto-float-tbl figure">
@@ -301,79 +301,79 @@ window.MathJax = {
 <tr class="even">
 <td style="text-align: right;">4</td>
 <td style="text-align: left;">29 сентября 2026</td>
-<td style="text-align: left;">—</td>
+<td style="text-align: left;">–</td>
 <td style="text-align: left;"></td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">5</td>
 <td style="text-align: left;">6 октября 2026</td>
-<td style="text-align: left;">—</td>
+<td style="text-align: left;">–</td>
 <td style="text-align: left;"></td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">6</td>
 <td style="text-align: left;">13 октября 2026</td>
-<td style="text-align: left;">—</td>
+<td style="text-align: left;">–</td>
 <td style="text-align: left;"></td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">7</td>
 <td style="text-align: left;">20 октября 2026</td>
-<td style="text-align: left;">—</td>
+<td style="text-align: left;">–</td>
 <td style="text-align: left;"></td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">8</td>
 <td style="text-align: left;">27 октября 2026</td>
-<td style="text-align: left;">—</td>
+<td style="text-align: left;">–</td>
 <td style="text-align: left;"></td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">9</td>
 <td style="text-align: left;">3 ноября 2026</td>
-<td style="text-align: left;">—</td>
+<td style="text-align: left;">–</td>
 <td style="text-align: left;"></td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">10</td>
 <td style="text-align: left;">10 ноября 2026</td>
-<td style="text-align: left;">—</td>
+<td style="text-align: left;">–</td>
 <td style="text-align: left;"></td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">11</td>
 <td style="text-align: left;">17 ноября 2026</td>
-<td style="text-align: left;">—</td>
+<td style="text-align: left;">–</td>
 <td style="text-align: left;"></td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">12</td>
 <td style="text-align: left;">24 ноября 2026</td>
-<td style="text-align: left;">—</td>
+<td style="text-align: left;">–</td>
 <td style="text-align: left;"></td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">13</td>
 <td style="text-align: left;">1 декабря 2026</td>
-<td style="text-align: left;">—</td>
+<td style="text-align: left;">–</td>
 <td style="text-align: left;"></td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">14</td>
 <td style="text-align: left;">8 декабря 2026</td>
-<td style="text-align: left;">—</td>
+<td style="text-align: left;">–</td>
 <td style="text-align: left;"></td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">15</td>
 <td style="text-align: left;">15 декабря 2026</td>
-<td style="text-align: left;">—</td>
+<td style="text-align: left;">–</td>
 <td style="text-align: left;"></td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">16</td>
 <td style="text-align: left;">22 декабря 2026</td>
-<td style="text-align: left;">—</td>
+<td style="text-align: left;">–</td>
 <td style="text-align: left;"></td>
 </tr>
 </tbody>

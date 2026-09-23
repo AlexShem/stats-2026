@@ -115,8 +115,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 window.MathJax = {
   tex: {
     macros: {
-      E: "\\mathbb{E}",
-      Var: "\\mathrm{D}",
+      E: "\\mathrm{E}",
+      Var: "\\mathrm{Var}",
       Prob: "\\mathbb{P}",
       Cov: "\\mathrm{cov}",
       indep: "\\perp\\!\\!\\!\\perp"
@@ -293,7 +293,7 @@ window.Quarto = {
 <p><a href="../../handouts/seminars/02-discrete-random-variables/seminar-02.pdf">Скачать PDF-раздатку этого семинара</a></p>
 <section id="sec-s02-code" class="level2" data-number="2.1">
 <h2 data-number="2.1" class="anchored" data-anchor-id="sec-s02-code"><span class="header-section-number">2.1</span> Код для этой главы</h2>
-<p>Все импорты и функции, которые используются в примерах главы, собраны в одной ячейке. Выполните её первой — остальные ячейки опираются на неё.</p>
+<p>Все импорты и функции, которые используются в примерах главы, собраны в одной ячейке. Выполните её первой: остальные ячейки опираются на неё.</p>
 <div id="s02-setup" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -322,7 +322,7 @@ window.Quarto = {
 <span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> binom_pmf(n, p, k):</span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""P(X = k) для X ~ Bi(n, p). Если p — Fraction, ответ получается точной дробью."""</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""P(X = k) для X ~ Bi(n, p). Если p задан как Fraction, ответ получается точной дробью."""</span></span>
 <span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> comb(n, k) <span class="op">*</span> p<span class="op">**</span>k <span class="op">*</span> (<span class="dv">1</span> <span class="op">-</span> p) <span class="op">**</span> (n <span class="op">-</span> k)</span>
 <span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a></span>
@@ -335,7 +335,7 @@ window.Quarto = {
 <span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""P(X = k) для закона Пуассона с параметром lam.</span></span>
 <span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a><span class="co">    Считается через логарифмы: прямая формула lam^k · e^(-lam) / k! переполняется</span></span>
-<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a><span class="co">    уже при lam = 50, k = 199 — числитель и знаменатель огромны по отдельности,</span></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a><span class="co">    уже при lam = 50, k = 199: числитель и знаменатель огромны по отдельности,</span></span>
 <span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a><span class="co">    хотя их частное мало.</span></span>
 <span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
 <span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> exp(k <span class="op">*</span> log(lam) <span class="op">-</span> lam <span class="op">-</span> lgamma(k <span class="op">+</span> <span class="dv">1</span>))</span>
@@ -375,7 +375,7 @@ window.Quarto = {
 <span id="cb1-78"><a href="#cb1-78" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Симуляция n независимых поединков двух орудий (задача 9).</span></span>
 <span id="cb1-79"><a href="#cb1-79" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-80"><a href="#cb1-80" aria-hidden="true" tabindex="-1"></a><span class="co">    Орудия стреляют по очереди, начиная с первого, до первого попадания.</span></span>
-<span id="cb1-81"><a href="#cb1-81" aria-hidden="true" tabindex="-1"></a><span class="co">    Возвращает массивы x, y — число снарядов, израсходованных каждым орудием.</span></span>
+<span id="cb1-81"><a href="#cb1-81" aria-hidden="true" tabindex="-1"></a><span class="co">    Возвращает массивы x, y: число снарядов, израсходованных каждым орудием.</span></span>
 <span id="cb1-82"><a href="#cb1-82" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
 <span id="cb1-83"><a href="#cb1-83" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> np.zeros(n, dtype<span class="op">=</span><span class="bu">int</span>)</span>
 <span id="cb1-84"><a href="#cb1-84" aria-hidden="true" tabindex="-1"></a>    y <span class="op">=</span> np.zeros(n, dtype<span class="op">=</span><span class="bu">int</span>)</span>
@@ -385,15 +385,15 @@ window.Quarto = {
 <span id="cb1-88"><a href="#cb1-88" aria-hidden="true" tabindex="-1"></a>            <span class="cf">break</span></span>
 <span id="cb1-89"><a href="#cb1-89" aria-hidden="true" tabindex="-1"></a>        x[active] <span class="op">+=</span> <span class="dv">1</span>                        <span class="co"># стреляет первое орудие</span></span>
 <span id="cb1-90"><a href="#cb1-90" aria-hidden="true" tabindex="-1"></a>        active <span class="op">&amp;=</span> <span class="op">~</span>(rng.random(n) <span class="op">&lt;</span> p1)</span>
-<span id="cb1-91"><a href="#cb1-91" aria-hidden="true" tabindex="-1"></a>        y[active] <span class="op">+=</span> <span class="dv">1</span>                        <span class="co"># если промах — стреляет второе</span></span>
+<span id="cb1-91"><a href="#cb1-91" aria-hidden="true" tabindex="-1"></a>        y[active] <span class="op">+=</span> <span class="dv">1</span>                        <span class="co"># если промах, стреляет второе</span></span>
 <span id="cb1-92"><a href="#cb1-92" aria-hidden="true" tabindex="-1"></a>        active <span class="op">&amp;=</span> <span class="op">~</span>(rng.random(n) <span class="op">&lt;</span> p2)</span>
 <span id="cb1-93"><a href="#cb1-93" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> x, y</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="краткая-сводка" class="level2" data-number="2.2">
 <h2 data-number="2.2" class="anchored" data-anchor-id="краткая-сводка"><span class="header-section-number">2.2</span> Краткая сводка</h2>
-<p><strong>Случайная величина</strong> — величина, которая в результате опыта принимает одно из возможных значений, заранее неизвестно какое. <strong>Дискретной</strong> называют такую, чьи возможные значения можно перенумеровать (конечное или счётное множество).</p>
-<p><strong>Закон распределения</strong> дискретной величины <span class="math inline">\(X\)</span> — перечень возможных значений <span class="math inline">\(x_1, x_2, \dots\)</span> и их вероятностей <span class="math inline">\(p_i = \Prob(X = x_i)\)</span>. Задаётся таблицей (<strong>ряд распределения</strong>):</p>
+<p><strong>Случайная величина</strong>: величина, которая в результате опыта принимает одно из возможных значений, заранее неизвестно какое. <strong>Дискретной</strong> называют такую, чьи возможные значения можно перенумеровать (конечное или счётное множество).</p>
+<p><strong>Закон распределения</strong> дискретной величины <span class="math inline">\(X\)</span>: перечень возможных значений <span class="math inline">\(x_1, x_2, \dots\)</span> и их вероятностей <span class="math inline">\(p_i = \Prob(X = x_i)\)</span>. Задаётся таблицей (<strong>ряд распределения</strong>):</p>
 <table class="caption-top table">
 <thead>
 <tr class="header">
@@ -426,23 +426,23 @@ window.Quarto = {
 <div class="callout-body-container callout-body">
 <p><strong>Контроль.</strong> Всегда <span id="eq-s02-norm"><span class="math display">\[
 \sum_i p_i = 1,
-\tag{2.1}\]</span></span> потому что события <span class="math inline">\(\{X = x_i\}\)</span> несовместны и образуют полную группу. Для бесконечного ряда — это сходящийся ряд с суммой 1. Проверяйте <a href="#eq-s02-norm" class="quarto-xref">Уравнение&nbsp;<span>2.1</span></a> в каждой задаче: почти любая арифметическая ошибка себя тут выдаёт.</p>
+\tag{2.1}\]</span></span> потому что события <span class="math inline">\(\{X = x_i\}\)</span> несовместны и образуют полную группу. Для бесконечного ряда: это сходящийся ряд с суммой 1. Проверяйте <a href="#eq-s02-norm" class="quarto-xref">Уравнение&nbsp;<span>2.1</span></a> в каждой задаче: почти любая арифметическая ошибка себя тут выдаёт.</p>
 </div>
 </div>
-<p><strong>Многоугольник распределения</strong> — ломаная через точки <span class="math inline">\((x_i, p_i)\)</span>.</p>
-<p><strong>Биномиальный закон.</strong> <span class="math inline">\(X\)</span> — число появлений события в <span class="math inline">\(n\)</span> независимых испытаниях с одинаковой вероятностью успеха <span class="math inline">\(p\)</span> (<span class="math inline">\(q = 1 - p\)</span>): <span id="eq-s02-bernoulli"><span class="math display">\[
+<p><strong>Многоугольник распределения</strong>: ломаная через точки <span class="math inline">\((x_i, p_i)\)</span>.</p>
+<p><strong>Биномиальный закон.</strong> <span class="math inline">\(X\)</span>: число появлений события в <span class="math inline">\(n\)</span> независимых испытаниях с одинаковой вероятностью успеха <span class="math inline">\(p\)</span> (<span class="math inline">\(q = 1 - p\)</span>): <span id="eq-s02-bernoulli"><span class="math display">\[
 P_n(k) = \Prob(X = k) = C_n^k\, p^k q^{\,n-k}, \qquad k = 0, 1, \dots, n.
 \tag{2.2}\]</span></span> Обозначение: <span class="math inline">\(X \sim \mathrm{Bi}(n, p)\)</span>.</p>
 <p><strong>Закон Пуассона.</strong> Если <span class="math inline">\(n\)</span> велико, а <span class="math inline">\(p\)</span> мало, то при <span class="math inline">\(\lambda = np\)</span> <span id="eq-s02-poisson"><span class="math display">\[
 P_n(k) \approx \frac{\lambda^k e^{-\lambda}}{k!}, \qquad k = 0, 1, 2, \dots
-\tag{2.3}\]</span></span> Параметр <span class="math inline">\(\lambda\)</span> — среднее число появлений события в <span class="math inline">\(n\)</span> испытаниях.</p>
-<p><strong>Геометрический закон.</strong> Испытания повторяются до первого «стоп-события» с вероятностью <span class="math inline">\(q\)</span> в каждом; <span class="math inline">\(X\)</span> — номер испытания, на котором оно случилось: <span id="eq-s02-geom"><span class="math display">\[
+\tag{2.3}\]</span></span> Параметр <span class="math inline">\(\lambda\)</span>: среднее число появлений события в <span class="math inline">\(n\)</span> испытаниях.</p>
+<p><strong>Геометрический закон.</strong> Испытания повторяются до первого «стоп-события» с вероятностью <span class="math inline">\(q\)</span> в каждом; <span class="math inline">\(X\)</span>: номер испытания, на котором оно случилось: <span id="eq-s02-geom"><span class="math display">\[
 \Prob(X = k) = (1-q)^{\,k-1} q, \qquad k = 1, 2, \dots
-\tag{2.4}\]</span></span> Проверка <a href="#eq-s02-norm" class="quarto-xref">Уравнение&nbsp;<span>2.1</span></a> — сумма геометрической прогрессии: <span class="math inline">\(q/(1 - (1-q)) = 1\)</span>.</p>
-<p><strong>Гипергеометрический закон.</strong> Из <span class="math inline">\(N\)</span> объектов, среди которых <span class="math inline">\(K\)</span> «удачных», выбирают <span class="math inline">\(n\)</span> <strong>без возвращения</strong>; <span class="math inline">\(X\)</span> — число удачных среди выбранных: <span id="eq-s02-hyper"><span class="math display">\[
+\tag{2.4}\]</span></span> Проверка <a href="#eq-s02-norm" class="quarto-xref">Уравнение&nbsp;<span>2.1</span></a>, сумма геометрической прогрессии: <span class="math inline">\(q/(1 - (1-q)) = 1\)</span>.</p>
+<p><strong>Гипергеометрический закон.</strong> Из <span class="math inline">\(N\)</span> объектов, среди которых <span class="math inline">\(K\)</span> «удачных», выбирают <span class="math inline">\(n\)</span> <strong>без возвращения</strong>; <span class="math inline">\(X\)</span>: число удачных среди выбранных: <span id="eq-s02-hyper"><span class="math display">\[
 \Prob(X = k) = \frac{C_K^k\, C_{N-K}^{\,n-k}}{C_N^n}.
 \tag{2.5}\]</span></span></p>
-<p>Геометрический и гипергеометрический законы выводятся прямо из теорем сложения и умножения (семинар 1) — отдельной теории для них не нужно.</p>
+<p>Геометрический и гипергеометрический законы выводятся прямо из теорем сложения и умножения (семинар 1): отдельной теории для них не нужно.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -453,7 +453,7 @@ P_n(k) \approx \frac{\lambda^k e^{-\lambda}}{k!}, \qquad k = 0, 1, 2, \dots
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>Как отличить одно от другого.</strong> Формула Бернулли <a href="#eq-s02-bernoulli" class="quarto-xref">Уравнение&nbsp;<span>2.2</span></a> требует, чтобы испытания были <strong>независимы</strong> и вероятность успеха <strong>не менялась</strong>. Взяли деталь и не вернули — вероятность изменилась, и работает <a href="#eq-s02-hyper" class="quarto-xref">Уравнение&nbsp;<span>2.5</span></a>, а не <a href="#eq-s02-bernoulli" class="quarto-xref">Уравнение&nbsp;<span>2.2</span></a>. Ждём до первого промаха — число испытаний не фиксировано, и работает <a href="#eq-s02-geom" class="quarto-xref">Уравнение&nbsp;<span>2.4</span></a>. Первый вопрос к любой задаче этой темы: <strong>что здесь за схема?</strong></p>
+<p><strong>Как отличить одно от другого.</strong> Формула Бернулли <a href="#eq-s02-bernoulli" class="quarto-xref">Уравнение&nbsp;<span>2.2</span></a> требует, чтобы испытания были <strong>независимы</strong> и вероятность успеха <strong>не менялась</strong>. Взяли деталь и не вернули: вероятность изменилась, и работает <a href="#eq-s02-hyper" class="quarto-xref">Уравнение&nbsp;<span>2.5</span></a>, а не <a href="#eq-s02-bernoulli" class="quarto-xref">Уравнение&nbsp;<span>2.2</span></a>. Ждём до первого промаха: число испытаний не фиксировано, и работает <a href="#eq-s02-geom" class="quarto-xref">Уравнение&nbsp;<span>2.4</span></a>. Первый вопрос к любой задаче этой темы: <strong>что здесь за схема?</strong></p>
 </div>
 </div>
 </section>
@@ -515,7 +515,7 @@ P_n(k) \approx \frac{\lambda^k e^{-\lambda}}{k!}, \qquad k = 0, 1, 2, \dots
 </div>
 <div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Надо отложить точки <span class="math inline">\((x_i, p_i)\)</span> и соединить их отрезками. Перед построением — контроль <a href="#eq-s02-norm" class="quarto-xref">Уравнение&nbsp;<span>2.1</span></a>: <span class="math display">\[
+<p>Надо отложить точки <span class="math inline">\((x_i, p_i)\)</span> и соединить их отрезками. Перед построением: контроль <a href="#eq-s02-norm" class="quarto-xref">Уравнение&nbsp;<span>2.1</span></a>: <span class="math display">\[
 \text{а)}\; 0{,}3 + 0{,}1 + 0{,}2 + 0{,}4 = 1, \qquad
 \text{б)}\; 0{,}1 + 0{,}7 + 0{,}2 = 1.
 \]</span> Оба ряда корректны.</p>
@@ -563,7 +563,7 @@ P_n(k) \approx \frac{\lambda^k e^{-\lambda}}{k!}, \qquad k = 0, 1, 2, \dots
 </section>
 <section id="sec-s02-t2" class="level3" data-number="2.3.2">
 <h3 data-number="2.3.2" class="anchored" data-anchor-id="sec-s02-t2"><span class="header-section-number">2.3.2</span> Задача 2 (Гмурман, гл. 4 § 1, № 167)</h3>
-<p>В партии 10% нестандартных деталей. Наудачу отобраны четыре детали. Написать биномиальный закон распределения дискретной случайной величины <span class="math inline">\(X\)</span> — числа нестандартных деталей среди четырёх отобранных и построить многоугольник полученного распределения.</p>
+<p>В партии 10% нестандартных деталей. Наудачу отобраны четыре детали. Написать биномиальный закон распределения дискретной случайной величины <span class="math inline">\(X\)</span>: числа нестандартных деталей среди четырёх отобранных и построить многоугольник полученного распределения.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Решение">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -607,7 +607,7 @@ P_4(4) = 0{,}0001.
 </tbody>
 </table>
 <p>Контроль <a href="#eq-s02-norm" class="quarto-xref">Уравнение&nbsp;<span>2.1</span></a> выполнен.</p>
-<p><strong>Почему здесь можно применять формулу Бернулли.</strong> Детали отбирают из партии, то есть без возвращения, — строго говоря, это <a href="#eq-s02-hyper" class="quarto-xref">Уравнение&nbsp;<span>2.5</span></a>. Формула Бернулли годится потому, что партия большая: доля 10% практически не меняется от изъятия четырёх деталей. В задаче 4 партия состоит из шести деталей, и там так уже нельзя.</p>
+<p><strong>Почему здесь можно применять формулу Бернулли.</strong> Детали отбирают из партии, то есть без возвращения, строго говоря, это <a href="#eq-s02-hyper" class="quarto-xref">Уравнение&nbsp;<span>2.5</span></a>. Формула Бернулли годится потому, что партия большая: доля 10% практически не меняется от изъятия четырёх деталей. В задаче 4 партия состоит из шести деталей, и там так уже нельзя.</p>
 <div id="s02-t2-check" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>row <span class="op">=</span> binom_row(<span class="dv">4</span>, <span class="fl">0.1</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(show_row(<span class="bu">range</span>(<span class="dv">5</span>), row))</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
@@ -641,7 +641,7 @@ p:   0.6561    0.2916    0.0486    0.0036    0.0001
 </section>
 <section id="sec-s02-t3" class="level3" data-number="2.3.3">
 <h3 data-number="2.3.3" class="anchored" data-anchor-id="sec-s02-t3"><span class="header-section-number">2.3.3</span> Задача 3 (Гмурман, гл. 4 § 1, № 169)</h3>
-<p>Две игральные кости одновременно бросают два раза. Написать биномиальный закон распределения дискретной случайной величины <span class="math inline">\(X\)</span> — числа выпадений чётного числа очков на двух игральных костях.</p>
+<p>Две игральные кости одновременно бросают два раза. Написать биномиальный закон распределения дискретной случайной величины <span class="math inline">\(X\)</span>: числа выпадений чётного числа очков на двух игральных костях.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Решение">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -654,9 +654,9 @@ p:   0.6561    0.2916    0.0486    0.0036    0.0001
 </div>
 <div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Главное в задаче — правильно выделить испытание и вычислить вероятность успеха; формула Бернулли дальше применяется механически.</p>
-<p><strong>Испытание</strong> — один бросок пары костей, значит <span class="math inline">\(n = 2\)</span> (бросают дважды).</p>
-<p><strong>Успех</strong> — «выпало чётное число очков на двух костях», то есть чётное число очков на <strong>каждой</strong> из них: <span class="math display">\[
+<p>Главное в задаче: правильно выделить испытание и вычислить вероятность успеха; формула Бернулли дальше применяется механически.</p>
+<p><strong>Испытание</strong>: один бросок пары костей, значит <span class="math inline">\(n = 2\)</span> (бросают дважды).</p>
+<p><strong>Успех</strong>: «выпало чётное число очков на двух костях», то есть чётное число очков на <strong>каждой</strong> из них: <span class="math display">\[
 p = \tfrac12 \cdot \tfrac12 = \tfrac14, \qquad q = \tfrac34.
 \]</span> Дальше <a href="#eq-s02-bernoulli" class="quarto-xref">Уравнение&nbsp;<span>2.2</span></a>: <span class="math display">\[
 P_2(0) = \left(\tfrac34\right)^2 = \tfrac{9}{16}, \qquad
@@ -682,7 +682,7 @@ P_2(2) = \left(\tfrac14\right)^2 = \tfrac{1}{16}.
 </tbody>
 </table>
 <p>Контроль: <span class="math inline">\(9/16 + 6/16 + 1/16 = 1\)</span>.</p>
-<p><strong>Двусмысленность условия.</strong> Условие можно прочитать и как «выпала чётная <strong>сумма</strong> очков» — тогда <span class="math inline">\(p = 1/2\)</span>, и ряд был бы <span class="math inline">\(1/4\)</span>, <span class="math inline">\(1/2\)</span>, <span class="math inline">\(1/4\)</span>. Ответ Гмурмана (<span class="math inline">\(9/16\)</span>, <span class="math inline">\(6/16\)</span>, <span class="math inline">\(1/16\)</span>) соответствует <span class="math inline">\(p = 1/4\)</span>, то есть книга имеет в виду «на каждой кости чётное». Когда условие допускает два прочтения, зафиксируйте своё явно в начале решения.</p>
+<p><strong>Двусмысленность условия.</strong> Условие можно прочитать и как «выпала чётная <strong>сумма</strong> очков», тогда <span class="math inline">\(p = 1/2\)</span>, и ряд был бы <span class="math inline">\(1/4\)</span>, <span class="math inline">\(1/2\)</span>, <span class="math inline">\(1/4\)</span>. Ответ Гмурмана (<span class="math inline">\(9/16\)</span>, <span class="math inline">\(6/16\)</span>, <span class="math inline">\(1/16\)</span>) соответствует <span class="math inline">\(p = 1/4\)</span>, то есть книга имеет в виду «на каждой кости чётное». Когда условие допускает два прочтения, зафиксируйте своё явно в начале решения.</p>
 <p>Проверка: перебор всех 36 исходов броска пары костей для обеих трактовок.</p>
 <div id="s02-t3-check" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>pairs <span class="op">=</span> [(a, b) <span class="cf">for</span> a <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">7</span>) <span class="cf">for</span> b <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">7</span>)]</span>
@@ -717,7 +717,7 @@ p:   0.2500    0.5000    0.2500
 </section>
 <section id="sec-s02-t4" class="level3" data-number="2.3.4">
 <h3 data-number="2.3.4" class="anchored" data-anchor-id="sec-s02-t4"><span class="header-section-number">2.3.4</span> Задача 4 (Гмурман, гл. 4 § 1, № 171)</h3>
-<p>В партии из шести деталей имеется четыре стандартных. Наудачу отобраны три детали. Составить закон распределения дискретной случайной величины <span class="math inline">\(X\)</span> — числа стандартных деталей среди отобранных.</p>
+<p>В партии из шести деталей имеется четыре стандартных. Наудачу отобраны три детали. Составить закон распределения дискретной случайной величины <span class="math inline">\(X\)</span>: числа стандартных деталей среди отобранных.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Решение">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -730,7 +730,7 @@ p:   0.2500    0.5000    0.2500
 </div>
 <div id="callout-8" class="callout-8-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p><strong>Здесь формула Бернулли не работает.</strong> Партия из шести деталей, берут три без возвращения: вероятность вытащить стандартную меняется от извлечения к извлечению. Схема — <a href="#eq-s02-hyper" class="quarto-xref">Уравнение&nbsp;<span>2.5</span></a> с <span class="math inline">\(N = 6\)</span>, <span class="math inline">\(K = 4\)</span>, <span class="math inline">\(n = 3\)</span>.</p>
+<p><strong>Здесь формула Бернулли не работает.</strong> Партия из шести деталей, берут три без возвращения: вероятность вытащить стандартную меняется от извлечения к извлечению. Схема: <a href="#eq-s02-hyper" class="quarto-xref">Уравнение&nbsp;<span>2.5</span></a> с <span class="math inline">\(N = 6\)</span>, <span class="math inline">\(K = 4\)</span>, <span class="math inline">\(n = 3\)</span>.</p>
 <p><strong>Возможные значения.</strong> Нестандартных всего две, значит среди трёх отобранных стандартных не меньше одной: <span class="math inline">\(X \in \{1, 2, 3\}\)</span>, и значения <span class="math inline">\(0\)</span> у величины <strong>нет</strong>. Знаменатель <span class="math inline">\(C_6^3 = 20\)</span>: <span class="math display">\[
 \Prob(X = 1) = \frac{C_4^1 C_2^2}{20} = \frac{4}{20} = \frac15, \qquad
 \Prob(X = 2) = \frac{C_4^2 C_2^1}{20} = \frac{12}{20} = \frac35,
@@ -783,7 +783,7 @@ p:   0.2500    0.5000    0.2500
 перебор всех C(6,3) = 20 троек: k=1: 4/20  k=2: 12/20  k=3: 4/20</code></pre>
 </div>
 </div>
-<p><strong>Сравнение с биномиальным расчётом.</strong> Формула <a href="#eq-s02-bernoulli" class="quarto-xref">Уравнение&nbsp;<span>2.2</span></a> с <span class="math inline">\(p = 4/6 = 2/3\)</span> дала бы другой ряд — и ненулевую вероятность <span class="math inline">\(\Prob(X = 0) = 1/27\)</span> значения, которого в этой задаче не бывает (<a href="#fig-s02-t4" class="quarto-xref">Рисунок&nbsp;<span>2.3</span></a>).</p>
+<p><strong>Сравнение с биномиальным расчётом.</strong> Формула <a href="#eq-s02-bernoulli" class="quarto-xref">Уравнение&nbsp;<span>2.2</span></a> с <span class="math inline">\(p = 4/6 = 2/3\)</span> дала бы другой ряд, и ненулевую вероятность <span class="math inline">\(\Prob(X = 0) = 1/27\)</span> значения, которого в этой задаче не бывает (<a href="#fig-s02-t4" class="quarto-xref">Рисунок&nbsp;<span>2.3</span></a>).</p>
 <div id="cell-fig-s02-t4" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>row_b <span class="op">=</span> binom_row(<span class="dv">3</span>, F(<span class="dv">2</span>, <span class="dv">3</span>))</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -819,8 +819,8 @@ p:   0.2500    0.5000    0.2500
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Применять формулу Бернулли с <span class="math inline">\(p = 2/3\)</span> к выбору без возвращения из маленькой партии. Признак ошибки — в ряду появляется <span class="math inline">\(\Prob(X = 0) = 1/27 \ne 0\)</span>, хотя вытащить три нестандартные детали из партии, где их всего две, нельзя.</p>
-<p>Перечень возможных значений — часть ответа: в таблице должны стоять только <span class="math inline">\(1, 2, 3\)</span>.</p>
+<p>Применять формулу Бернулли с <span class="math inline">\(p = 2/3\)</span> к выбору без возвращения из маленькой партии. Признак ошибки: в ряду появляется <span class="math inline">\(\Prob(X = 0) = 1/27 \ne 0\)</span>, хотя вытащить три нестандартные детали из партии, где их всего две, нельзя.</p>
+<p>Перечень возможных значений, часть ответа: в таблице должны стоять только <span class="math inline">\(1, 2, 3\)</span>.</p>
 </div>
 </div>
 </div>
@@ -845,21 +845,21 @@ p:   0.2500    0.5000    0.2500
 </div>
 <div id="callout-9" class="callout-9-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p><span class="math inline">\(n = 1000\)</span> велико, <span class="math inline">\(p = 0{,}003\)</span> мало, события независимы — применима <a href="#eq-s02-poisson" class="quarto-xref">Уравнение&nbsp;<span>2.3</span></a> с <span class="math display">\[
+<p><span class="math inline">\(n = 1000\)</span> велико, <span class="math inline">\(p = 0{,}003\)</span> мало, события независимы: применима <a href="#eq-s02-poisson" class="quarto-xref">Уравнение&nbsp;<span>2.3</span></a> с <span class="math display">\[
 \lambda = np = 1000 \cdot 0{,}003 = 3.
 \]</span> На лекции разобрана такая же задача с <span class="math inline">\(\lambda = 1\)</span> (500 билетов).</p>
 <p>а) <span class="math inline">\(\Prob(X = 2) = \dfrac{3^2 e^{-3}}{2!} = \dfrac{9}{2}\,e^{-3} \approx 0{,}224\)</span>.</p>
-<p>б) «Менее двух» — это <span class="math inline">\(k = 0\)</span> и <span class="math inline">\(k = 1\)</span>: <span class="math display">\[
+<p>б) «Менее двух», это <span class="math inline">\(k = 0\)</span> и <span class="math inline">\(k = 1\)</span>: <span class="math display">\[
 \Prob(X &lt; 2) = e^{-3} + 3e^{-3} = 4e^{-3} \approx 0{,}1992.
 \]</span></p>
-<p>в) «Более двух» — только через противоположное событие: прямая сумма <span class="math inline">\(\Prob(X=3) + \Prob(X=4) + \dots\)</span> бесконечна. <span class="math display">\[
+<p>в) «Более двух», только через противоположное событие: прямая сумма <span class="math inline">\(\Prob(X=3) + \Prob(X=4) + \dots\)</span> бесконечна. <span class="math display">\[
 \Prob(X &gt; 2) = 1 - \big[\Prob(X&lt;2) + \Prob(X=2)\big]
 = 1 - (0{,}1992 + 0{,}2240) \approx 0{,}5768.
 \]</span></p>
-<p>г) «Хотя бы одна» — тоже через противоположное событие (приём семинара 1): <span class="math display">\[
+<p>г) «Хотя бы одна», тоже через противоположное событие (приём семинара 1): <span class="math display">\[
 \Prob(X \geqslant 1) = 1 - \Prob(X = 0) = 1 - e^{-3} \approx 0{,}950.
 \]</span></p>
-<p><strong>Итог:</strong> четыре пункта — четыре стандартных типа вопроса, и три из них решаются переходом к противоположному событию.</p>
+<p><strong>Итог:</strong> четыре пункта, четыре стандартных типа вопроса, и три из них решаются переходом к противоположному событию.</p>
 <p>Проверка: пуассоновские вероятности рядом с ответами книги и точным биномиальным расчётом.</p>
 <div id="s02-t5-check" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>lam <span class="op">=</span> <span class="fl">3.0</span></span>
@@ -870,7 +870,7 @@ p:   0.2500    0.5000    0.2500
 <span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"в) более двух   P(X&gt;2)  = </span><span class="sc">%.5f</span><span class="st">   (книга 0,5766)"</span> <span class="op">%</span> (<span class="dv">1</span> <span class="op">-</span> <span class="bu">sum</span>(p[:<span class="dv">3</span>])))</span>
 <span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"г) хотя бы одна P(X≥1)  = </span><span class="sc">%.5f</span><span class="st">   (книга 0,95)"</span> <span class="op">%</span> (<span class="dv">1</span> <span class="op">-</span> p[<span class="dv">0</span>]))</span>
 <span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Точный биномиальный расчёт — насколько хорошо приближение</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Точный биномиальный расчёт: насколько хорошо приближение</span></span>
 <span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>exact <span class="op">=</span> [binom_pmf(<span class="dv">1000</span>, <span class="fl">0.003</span>, k) <span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">15</span>)]</span>
 <span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">точно по Бернулли (n=1000, p=0.003):"</span>)</span>
 <span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"  а) </span><span class="sc">%.5f</span><span class="st">   б) </span><span class="sc">%.5f</span><span class="st">   в) </span><span class="sc">%.5f</span><span class="st">   г) </span><span class="sc">%.5f</span><span class="st">"</span></span>
@@ -951,7 +951,7 @@ p:   0.2500    0.5000    0.2500
 <img src="seminar-02_files/figure-html/fig-s02-t6-output-1.png" width="826" height="474" class="figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-s02-t6-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Рисунок&nbsp;2.4: Одно <span class="math inline">\(\lambda = 2\)</span>, два разных биномиальных распределения. При <span class="math inline">\(n = 200\)</span> и <span class="math inline">\(n = 1000\)</span> точные ряды практически неразличимы и оба ложатся на пуассоновский предел — приближение работает тем лучше, чем больше <span class="math inline">\(n\)</span> при фиксированном <span class="math inline">\(np\)</span>.
+Рисунок&nbsp;2.4: Одно <span class="math inline">\(\lambda = 2\)</span>, два разных биномиальных распределения. При <span class="math inline">\(n = 200\)</span> и <span class="math inline">\(n = 1000\)</span> точные ряды практически неразличимы и оба ложатся на пуассоновский предел; приближение работает тем лучше, чем больше <span class="math inline">\(n\)</span> при фиксированном <span class="math inline">\(np\)</span>.
 </figcaption>
 </figure>
 </div>
@@ -967,7 +967,7 @@ p:   0.2500    0.5000    0.2500
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Подставлять в формулу Пуассона <span class="math inline">\(n\)</span> или <span class="math inline">\(p\)</span> вместо их произведения. Параметр закона — <span class="math inline">\(\lambda = np\)</span>, и только он.</p>
+<p>Подставлять в формулу Пуассона <span class="math inline">\(n\)</span> или <span class="math inline">\(p\)</span> вместо их произведения. Параметр закона: <span class="math inline">\(\lambda = np\)</span>, и только он.</p>
 </div>
 </div>
 </div>
@@ -976,7 +976,7 @@ p:   0.2500    0.5000    0.2500
 </section>
 <section id="sec-s02-t7" class="level3" data-number="2.4.3">
 <h3 data-number="2.4.3" class="anchored" data-anchor-id="sec-s02-t7"><span class="header-section-number">2.4.3</span> Задача 7 (Гмурман, гл. 4 § 1, № 173)</h3>
-<p>Вероятность того, что стрелок попадёт в мишень при одном выстреле, равна <span class="math inline">\(0{,}8\)</span>. Стрелку выдаются патроны до тех пор, пока он не промахнётся. Требуется: а) составить закон распределения дискретной случайной величины <span class="math inline">\(X\)</span> — числа патронов, выданных стрелку; б) найти наивероятнейшее число <span class="math inline">\(k_0\)</span> выданных стрелку патронов.</p>
+<p>Вероятность того, что стрелок попадёт в мишень при одном выстреле, равна <span class="math inline">\(0{,}8\)</span>. Стрелку выдаются патроны до тех пор, пока он не промахнётся. Требуется: а) составить закон распределения дискретной случайной величины <span class="math inline">\(X\)</span>: числа патронов, выданных стрелку; б) найти наивероятнейшее число <span class="math inline">\(k_0\)</span> выданных стрелку патронов.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Решение">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -989,8 +989,8 @@ p:   0.2500    0.5000    0.2500
 </div>
 <div id="callout-13" class="callout-13-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p><strong>Новая схема:</strong> число испытаний не задано заранее, стрельба идёт до первого промаха. Формула Бернулли неприменима — в ней <span class="math inline">\(n\)</span> фиксировано.</p>
-<p>а) Стрелку выдан ровно <span class="math inline">\(k\)</span>-й патрон, если первые <span class="math inline">\(k-1\)</span> выстрелов были попаданиями, а <span class="math inline">\(k\)</span>-й — промахом. Выстрелы независимы, поэтому по теореме умножения <span class="math display">\[
+<p><strong>Новая схема:</strong> число испытаний не задано заранее, стрельба идёт до первого промаха. Формула Бернулли неприменима: в ней <span class="math inline">\(n\)</span> фиксировано.</p>
+<p>а) Стрелку выдан ровно <span class="math inline">\(k\)</span>-й патрон, если первые <span class="math inline">\(k-1\)</span> выстрелов были попаданиями, а <span class="math inline">\(k\)</span>-й, промахом. Выстрелы независимы, поэтому по теореме умножения <span class="math display">\[
 \Prob(X = k) = \underbrace{0{,}8 \cdots 0{,}8}_{k-1} \cdot 0{,}2
 = 0{,}8^{\,k-1} \cdot 0{,}2, \qquad k = 1, 2, \dots
 \]</span> Это <a href="#eq-s02-geom" class="quarto-xref">Уравнение&nbsp;<span>2.4</span></a> с <span class="math inline">\(q = 0{,}2\)</span>.</p>
@@ -1018,16 +1018,16 @@ p:   0.2500    0.5000    0.2500
 </tr>
 </tbody>
 </table>
-<p><strong>Контроль <a href="#eq-s02-norm" class="quarto-xref">Уравнение&nbsp;<span>2.1</span></a></strong> — сумма бесконечной геометрической прогрессии: <span class="math display">\[
+<p><strong>Контроль <a href="#eq-s02-norm" class="quarto-xref">Уравнение&nbsp;<span>2.1</span></a></strong>, сумма бесконечной геометрической прогрессии: <span class="math display">\[
 \sum_{k=1}^{\infty} 0{,}8^{\,k-1} \cdot 0{,}2
 = \frac{0{,}2}{1 - 0{,}8} = 1. \;\checkmark
 \]</span></p>
-<p>б) Последовательность <span class="math inline">\(0{,}8^{k-1}\cdot 0{,}2\)</span> строго убывает по <span class="math inline">\(k\)</span>, значит наибольшая вероятность — у самого первого значения: <span class="math display">\[
+<p>б) Последовательность <span class="math inline">\(0{,}8^{k-1}\cdot 0{,}2\)</span> строго убывает по <span class="math inline">\(k\)</span>, значит наибольшая вероятность, у самого первого значения: <span class="math display">\[
 k_0 = 1.
 \]</span></p>
-<p><strong>Почему ответ кажется странным.</strong> Стрелок хороший, а вероятнее всего ему выдадут один патрон? Да: <span class="math inline">\(\Prob(X = 1) = 0{,}2\)</span> больше любой другой отдельной вероятности, хотя и мало само по себе. Величина <span class="math inline">\(k_0\)</span> — это <strong>мода</strong> (самое вероятное значение), а не среднее. Среднее здесь <span class="math inline">\(\E X = 1/q = 1/0{,}2 = 5\)</span> — оно и отвечает интуиции. Для скошенных распределений мода и среднее далеко расходятся (<a href="#fig-s02-t7" class="quarto-xref">Рисунок&nbsp;<span>2.5</span></a>). Математическое ожидание — тема следующего занятия.</p>
+<p><strong>Почему ответ кажется странным.</strong> Стрелок хороший, а вероятнее всего ему выдадут один патрон? Да: <span class="math inline">\(\Prob(X = 1) = 0{,}2\)</span> больше любой другой отдельной вероятности, хотя и мало само по себе. Величина <span class="math inline">\(k_0\)</span>: это <strong>мода</strong> (самое вероятное значение), а не среднее. Среднее здесь <span class="math inline">\(\E(X) = 1/q = 1/0{,}2 = 5\)</span>; оно и отвечает интуиции. Для скошенных распределений мода и среднее далеко расходятся (<a href="#fig-s02-t7" class="quarto-xref">Рисунок&nbsp;<span>2.5</span></a>). Математическое ожидание: тема следующего занятия.</p>
 <p>Ряд убывает при любой вероятности попадания меньше 1, поэтому у геометрического распределения мода всегда равна 1, а среднее может быть сколь угодно большим.</p>
-<p>Проверка: сумма ряда, мода и среднее — аналитически и симуляцией.</p>
+<p>Проверка: сумма ряда, мода и среднее, аналитически и симуляцией.</p>
 <div id="s02-t7-check" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>q <span class="op">=</span> <span class="fl">0.2</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>row_g <span class="op">=</span> [(<span class="dv">1</span> <span class="op">-</span> q) <span class="op">**</span> (k <span class="op">-</span> <span class="dv">1</span>) <span class="op">*</span> q <span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">41</span>)]</span>
@@ -1069,7 +1069,7 @@ p:   0.2000    0.1600    0.1280    0.1024    0.0819
 <img src="seminar-02_files/figure-html/fig-s02-t7-output-1.png" width="826" height="452" class="figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-s02-t7-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Рисунок&nbsp;2.5: Геометрическое распределение числа выданных патронов, <span class="math inline">\(q = 0{,}2\)</span>. Мода <span class="math inline">\(k_0 = 1\)</span> — в самом левом столбце, а среднее <span class="math inline">\(\mathsf{E}X = 5\)</span> лежит далеко справа: у скошенных распределений «самое вероятное» и «в среднем» — разные числа.
+Рисунок&nbsp;2.5: Геометрическое распределение числа выданных патронов, <span class="math inline">\(q = 0{,}2\)</span>. Мода <span class="math inline">\(k_0 = 1\)</span>, в самом левом столбце, а среднее <span class="math inline">\(\mathsf{E}X = 5\)</span> лежит далеко справа: у скошенных распределений «самое вероятное» и «в среднем»: разные числа.
 </figcaption>
 </figure>
 </div>
@@ -1085,7 +1085,7 @@ p:   0.2000    0.1600    0.1280    0.1024    0.0819
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Путать «наивероятнейшее число» со средним и отвечать <span class="math inline">\(k_0 = 5\)</span>. Наивероятнейшее значение — то, у которого наибольшая вероятность.</p>
+<p>Путать «наивероятнейшее число» со средним и отвечать <span class="math inline">\(k_0 = 5\)</span>. Наивероятнейшее значение: то, у которого наибольшая вероятность.</p>
 </div>
 </div>
 </div>
@@ -1107,7 +1107,7 @@ p:   0.2000    0.1600    0.1280    0.1024    0.0819
 </div>
 <div id="callout-15" class="callout-15-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Обратная задача: дана вероятность, найти <span class="math inline">\(n\)</span>. Схема — «хотя бы один» через противоположное событие, <span class="math inline">\(\Prob(A) = 1 - \Prob(\bar A)\)</span>, как в семинаре 1, но с пуассоновским приближением.</p>
+<p>Обратная задача: дана вероятность, найти <span class="math inline">\(n\)</span>. Схема: «хотя бы один» через противоположное событие, <span class="math inline">\(\Prob(A) = 1 - \Prob(\bar A)\)</span>, как в семинаре 1, но с пуассоновским приближением.</p>
 <p>Вероятность выигрыша мала, число билетов заведомо велико, поэтому число выигрышных билетов приближённо распределено по Пуассону с <span class="math inline">\(\lambda = np\)</span>. Полагая <span class="math inline">\(k = 0\)</span> в <a href="#eq-s02-poisson" class="quarto-xref">Уравнение&nbsp;<span>2.3</span></a>, получаем <span class="math inline">\(\Prob(X = 0) = e^{-\lambda}\)</span>, откуда <span class="math display">\[
 P = 1 - \Prob(X = 0) = 1 - e^{-\lambda} \geqslant 0{,}95
 \;\Longleftrightarrow\;
@@ -1119,7 +1119,7 @@ n \geqslant \frac{3}{0{,}01} = 300.
 \]</span></p>
 <p><strong>Ответ: не менее 300 билетов.</strong></p>
 <p><strong>Точный расчёт.</strong> Без приближения условие имеет вид <span class="math inline">\(1 - 0{,}99^n \geqslant
-0{,}95\)</span>, откуда <span class="math inline">\(n \geqslant \ln 0{,}05/\ln 0{,}99 = 298{,}07\)</span>, то есть <span class="math inline">\(n \geqslant 299\)</span>. Пуассоновское приближение ошиблось на один билет из трёхсот — это и есть его точность. Ответ 300 заведомо безопасен: билетов куплено с запасом.</p>
+0{,}95\)</span>, откуда <span class="math inline">\(n \geqslant \ln 0{,}05/\ln 0{,}99 = 298{,}07\)</span>, то есть <span class="math inline">\(n \geqslant 299\)</span>. Пуассоновское приближение ошиблось на один билет из трёхсот, это и есть его точность. Ответ 300 заведомо безопасен: билетов куплено с запасом.</p>
 <div id="s02-t8-check" class="cell" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># пуассоновское приближение</span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>lam_min <span class="op">=</span> <span class="op">-</span>log(<span class="fl">0.05</span>)</span>
@@ -1161,7 +1161,7 @@ n \geqslant \frac{3}{0{,}01} = 300.
 <h2 data-number="2.5" class="anchored" data-anchor-id="блок-c.-повышенная-сложность"><span class="header-section-number">2.5</span> Блок C. Повышенная сложность</h2>
 <section id="sec-s02-t9" class="level3" data-number="2.5.1">
 <h3 data-number="2.5.1" class="anchored" data-anchor-id="sec-s02-t9"><span class="header-section-number">2.5.1</span> Задача 9 (Гмурман, гл. 4 § 1, № 174)</h3>
-<p>Из двух орудий поочерёдно ведётся стрельба по цели до попадания одним из орудий. Вероятность попадания в цель первым орудием равна <span class="math inline">\(0{,}3\)</span>, вторым — <span class="math inline">\(0{,}7\)</span>. Начинает стрельбу первое орудие. Составить законы распределения дискретных случайных величин <span class="math inline">\(X\)</span> и <span class="math inline">\(Y\)</span> — числа израсходованных снарядов соответственно первым и вторым орудием.</p>
+<p>Из двух орудий поочерёдно ведётся стрельба по цели до попадания одним из орудий. Вероятность попадания в цель первым орудием равна <span class="math inline">\(0{,}3\)</span>, вторым равна <span class="math inline">\(0{,}7\)</span>. Начинает стрельбу первое орудие. Составить законы распределения дискретных случайных величин <span class="math inline">\(X\)</span> и <span class="math inline">\(Y\)</span>: числа израсходованных снарядов соответственно первым и вторым орудием.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Решение">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-17-contents" aria-controls="callout-17" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -1175,7 +1175,7 @@ n \geqslant \frac{3}{0{,}01} = 300.
 <div id="callout-17" class="callout-17-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Из одного эксперимента получаются <strong>две разные случайные величины</strong>.</p>
-<p>Обозначим <span class="math inline">\(p_1 = 0{,}3\)</span>, <span class="math inline">\(q_1 = 0{,}7\)</span> — вероятности попадания и промаха первого орудия, <span class="math inline">\(p_2 = 0{,}7\)</span>, <span class="math inline">\(q_2 = 0{,}3\)</span> — второго.</p>
+<p>Обозначим <span class="math inline">\(p_1 = 0{,}3\)</span>, <span class="math inline">\(q_1 = 0{,}7\)</span>: вероятности попадания и промаха первого орудия, <span class="math inline">\(p_2 = 0{,}7\)</span>, <span class="math inline">\(q_2 = 0{,}3\)</span>, второго.</p>
 <p><strong>Ключевое наблюдение.</strong> Стрельба идёт раундами: выстрел первого орудия, затем, если промах, выстрел второго. Раунд завершает стрельбу, если попало хоть одно орудие; стрельба продолжается только после двух промахов, вероятность чего <span class="math display">\[
 r = q_1 q_2 = 0{,}7 \cdot 0{,}3 = 0{,}21.
 \]</span> Значит <strong>обе</strong> величины образуют геометрические прогрессии со знаменателем <span class="math inline">\(0{,}21\)</span> и различаются только первым членом.</p>
@@ -1206,8 +1206,8 @@ r = q_1 q_2 = 0{,}7 \cdot 0{,}3 = 0{,}21.
 <span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>xs, ys <span class="op">=</span> duel(<span class="dv">200_000</span>, p1, p2, rng)</span>
 <span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">           k=0      k=1      k=2      k=3"</span>)</span>
-<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"X сим.        —   "</span> <span class="op">+</span> <span class="st">"  "</span>.join(<span class="ss">f"</span><span class="sc">{</span>(xs <span class="op">==</span> k)<span class="sc">.</span>mean()<span class="sc">:.4f}</span><span class="ss">"</span> <span class="cf">for</span> k <span class="kw">in</span> (<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)))</span>
-<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"X теор.       —   "</span> <span class="op">+</span> <span class="st">"  "</span>.join(<span class="ss">f"</span><span class="sc">{</span>X1 <span class="op">*</span> r<span class="op">**</span>(k <span class="op">-</span> <span class="dv">1</span>)<span class="sc">:.4f}</span><span class="ss">"</span> <span class="cf">for</span> k <span class="kw">in</span> (<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)))</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"X сим.        -   "</span> <span class="op">+</span> <span class="st">"  "</span>.join(<span class="ss">f"</span><span class="sc">{</span>(xs <span class="op">==</span> k)<span class="sc">.</span>mean()<span class="sc">:.4f}</span><span class="ss">"</span> <span class="cf">for</span> k <span class="kw">in</span> (<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)))</span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"X теор.       -   "</span> <span class="op">+</span> <span class="st">"  "</span>.join(<span class="ss">f"</span><span class="sc">{</span>X1 <span class="op">*</span> r<span class="op">**</span>(k <span class="op">-</span> <span class="dv">1</span>)<span class="sc">:.4f}</span><span class="ss">"</span> <span class="cf">for</span> k <span class="kw">in</span> (<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)))</span>
 <span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Y сим.   </span><span class="sc">{</span>(ys <span class="op">==</span> <span class="dv">0</span>)<span class="sc">.</span>mean()<span class="sc">:.4f}</span><span class="ss">   "</span> <span class="op">+</span> <span class="st">"  "</span>.join(<span class="ss">f"</span><span class="sc">{</span>(ys <span class="op">==</span> k)<span class="sc">.</span>mean()<span class="sc">:.4f}</span><span class="ss">"</span> <span class="cf">for</span> k <span class="kw">in</span> (<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)))</span>
 <span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Y теор.  </span><span class="sc">{</span>Y0<span class="sc">:.4f}</span><span class="ss">   "</span> <span class="op">+</span> <span class="st">"  "</span>.join(<span class="ss">f"</span><span class="sc">{</span>Y1 <span class="op">*</span> r<span class="op">**</span>(k <span class="op">-</span> <span class="dv">1</span>)<span class="sc">:.4f}</span><span class="ss">"</span> <span class="cf">for</span> k <span class="kw">in</span> (<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)))</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -1216,8 +1216,8 @@ P(X=1) = 0.790    P(Y=0) = 0.300    P(Y=1) = 0.553
 контроль ΣP(X) = 1.000000    ΣP(Y) = 1.000000
 
            k=0      k=1      k=2      k=3
-X сим.        —   0.7890  0.1663  0.0355
-X теор.       —   0.7900  0.1659  0.0348
+X сим.        -   0.7890  0.1663  0.0355
+X теор.       -   0.7900  0.1659  0.0348
 Y сим.   0.2987   0.5538  0.1161  0.0248
 Y теор.  0.3000   0.5530  0.1161  0.0244</code></pre>
 </div>
@@ -1228,8 +1228,8 @@ Y теор.  0.3000   0.5530  0.1161  0.0244</code></pre>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>py <span class="op">=</span> np.array([Y0] <span class="op">+</span> [Y1 <span class="op">*</span> r <span class="op">**</span> (k <span class="op">-</span> <span class="dv">1</span>) <span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">6</span>)])</span>
 <span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="fl">7.4</span>, <span class="fl">4.2</span>))</span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>ax.bar(ks <span class="op">-</span> <span class="fl">0.17</span>, px, width<span class="op">=</span><span class="fl">0.32</span>, color<span class="op">=</span><span class="st">"#0b5394"</span>, alpha<span class="op">=</span><span class="fl">0.9</span>, label<span class="op">=</span><span class="st">"$X$ — первое орудие"</span>)</span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>ax.bar(ks <span class="op">+</span> <span class="fl">0.17</span>, py, width<span class="op">=</span><span class="fl">0.32</span>, color<span class="op">=</span><span class="st">"#b45309"</span>, alpha<span class="op">=</span><span class="fl">0.9</span>, label<span class="op">=</span><span class="st">"$Y$ — второе орудие"</span>)</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>ax.bar(ks <span class="op">-</span> <span class="fl">0.17</span>, px, width<span class="op">=</span><span class="fl">0.32</span>, color<span class="op">=</span><span class="st">"#0b5394"</span>, alpha<span class="op">=</span><span class="fl">0.9</span>, label<span class="op">=</span><span class="st">"$X$: первое орудие"</span>)</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>ax.bar(ks <span class="op">+</span> <span class="fl">0.17</span>, py, width<span class="op">=</span><span class="fl">0.32</span>, color<span class="op">=</span><span class="st">"#b45309"</span>, alpha<span class="op">=</span><span class="fl">0.9</span>, label<span class="op">=</span><span class="st">"$Y$: второе орудие"</span>)</span>
 <span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">"Число израсходованных снарядов, $k$"</span>)</span>
 <span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"$</span><span class="ch">\\</span><span class="st">mathsf</span><span class="sc">{P}</span><span class="st">$"</span>)</span>
 <span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>ax.set_xticks(ks)</span>
@@ -1242,7 +1242,7 @@ Y теор.  0.3000   0.5530  0.1161  0.0244</code></pre>
 <img src="seminar-02_files/figure-html/fig-s02-t9-output-1.png" width="826" height="474" class="figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-s02-t9-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Рисунок&nbsp;2.6: Ряды распределения <span class="math inline">\(X\)</span> и <span class="math inline">\(Y\)</span>. Знаменатель прогрессии у обеих один — <span class="math inline">\(0{,}21\)</span>, — но <span class="math inline">\(Y\)</span> начинается с нуля (первое орудие могло попасть первым же выстрелом), а <span class="math inline">\(X\)</span> — с единицы: первое орудие стреляет всегда.
+Рисунок&nbsp;2.6: Ряды распределения <span class="math inline">\(X\)</span> и <span class="math inline">\(Y\)</span>. Знаменатель прогрессии у обеих один (<span class="math inline">\(0{,}21\)</span>), но <span class="math inline">\(Y\)</span> начинается с нуля (первое орудие могло попасть первым же выстрелом), а <span class="math inline">\(X\)</span>, с единицы: первое орудие стреляет всегда.
 </figcaption>
 </figure>
 </div>
@@ -1267,7 +1267,7 @@ Y теор.  0.3000   0.5530  0.1161  0.0244</code></pre>
 </section>
 <section id="sec-s02-t10" class="level3" data-number="2.5.2">
 <h3 data-number="2.5.2" class="anchored" data-anchor-id="sec-s02-t10"><span class="header-section-number">2.5.2</span> Задача 10 (Гмурман, гл. 4 § 1, № 175)</h3>
-<p>Два бомбардировщика поочерёдно сбрасывают бомбы на цель до первого попадания. Вероятность попадания в цель первым бомбардировщиком равна <span class="math inline">\(0{,}7\)</span>, вторым — <span class="math inline">\(0{,}8\)</span>. Вначале сбрасывает бомбы первый бомбардировщик. Составить первые четыре члена закона распределения дискретной случайной величины <span class="math inline">\(X\)</span> — числа сброшенных бомб обоими бомбардировщиками (т. е. ограничиться возможными значениями <span class="math inline">\(X\)</span>, равными 1, 2, 3 и 4).</p>
+<p>Два бомбардировщика поочерёдно сбрасывают бомбы на цель до первого попадания. Вероятность попадания в цель первым бомбардировщиком равна <span class="math inline">\(0{,}7\)</span>, вторым равна <span class="math inline">\(0{,}8\)</span>. Вначале сбрасывает бомбы первый бомбардировщик. Составить первые четыре члена закона распределения дискретной случайной величины <span class="math inline">\(X\)</span>: числа сброшенных бомб обоими бомбардировщиками (т. е. ограничиться возможными значениями <span class="math inline">\(X\)</span>, равными 1, 2, 3 и 4).</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Решение">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-18-contents" aria-controls="callout-18" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -1280,8 +1280,8 @@ Y теор.  0.3000   0.5530  0.1161  0.0244</code></pre>
 </div>
 <div id="callout-18" class="callout-18-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Сюжет тот же, что в задаче 9, но вопрос другой: там считали снаряды каждого орудия отдельно (две величины), здесь — общее число бомб (одна величина). <span class="math inline">\(X\)</span> — номер броска, на котором случилось первое попадание.</p>
-<p>Броски чередуются: нечётные — первый бомбардировщик (<span class="math inline">\(0{,}7\)</span>), чётные — второй (<span class="math inline">\(0{,}8\)</span>). Значит, <span class="math inline">\(X = k\)</span> означает «первые <span class="math inline">\(k-1\)</span> бросков — промахи, <span class="math inline">\(k\)</span>-й — попадание»: <span class="math display">\[
+<p>Сюжет тот же, что в задаче 9, но вопрос другой: там считали снаряды каждого орудия отдельно (две величины), здесь, общее число бомб (одна величина). <span class="math inline">\(X\)</span>: номер броска, на котором случилось первое попадание.</p>
+<p>Броски чередуются: нечётные, первый бомбардировщик (<span class="math inline">\(0{,}7\)</span>), чётные, второй (<span class="math inline">\(0{,}8\)</span>). Значит, <span class="math inline">\(X = k\)</span> означает «первые <span class="math inline">\(k-1\)</span> бросков: промахи, <span class="math inline">\(k\)</span>-й: попадание»: <span class="math display">\[
 \Prob(X = 1) = 0{,}7;
 \]</span> <span class="math display">\[
 \Prob(X = 2) = 0{,}3 \cdot 0{,}8 = 0{,}24;
@@ -1320,7 +1320,7 @@ Y теор.  0.3000   0.5530  0.1161  0.0244</code></pre>
 <div id="s02-t10-check" class="cell" data-execution_count="16">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>a, b <span class="op">=</span> <span class="fl">0.7</span>, <span class="fl">0.8</span></span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>row <span class="op">=</span> [a, (<span class="dv">1</span> <span class="op">-</span> a) <span class="op">*</span> b, (<span class="dv">1</span> <span class="op">-</span> a) <span class="op">*</span> (<span class="dv">1</span> <span class="op">-</span> b) <span class="op">*</span> a, (<span class="dv">1</span> <span class="op">-</span> a) <span class="op">*</span> (<span class="dv">1</span> <span class="op">-</span> b) <span class="op">*</span> (<span class="dv">1</span> <span class="op">-</span> a) <span class="op">*</span> b]</span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(show_row(<span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">5</span>), row, fmt<span class="op">=</span><span class="st">"</span><span class="sc">{:.4f}</span><span class="st">"</span>), <span class="st">" (первые четыре члена, сумма &lt; 1 — ряд продолжается)"</span>)</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(show_row(<span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">5</span>), row, fmt<span class="op">=</span><span class="st">"</span><span class="sc">{:.4f}</span><span class="st">"</span>), <span class="st">" (первые четыре члена, сумма &lt; 1, ряд продолжается)"</span>)</span>
 <span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">знаменатель по парам: </span><span class="sc">{</span>(<span class="dv">1</span> <span class="op">-</span> a) <span class="op">*</span> (<span class="dv">1</span> <span class="op">-</span> b)<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
 <span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"сумма полного ряда: </span><span class="sc">{</span>(a <span class="op">+</span> (<span class="dv">1</span> <span class="op">-</span> a) <span class="op">*</span> b) <span class="op">/</span> (<span class="dv">1</span> <span class="op">-</span> (<span class="dv">1</span> <span class="op">-</span> a) <span class="op">*</span> (<span class="dv">1</span> <span class="op">-</span> b))<span class="sc">:.6f}</span><span class="ss">"</span>)</span>
 <span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a></span>
@@ -1333,7 +1333,7 @@ Y теор.  0.3000   0.5530  0.1161  0.0244</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>X:        1         2         3         4
 p:   0.7000    0.2400    0.0420    0.0144
-Σp = 0.9964000000  (первые четыре члена, сумма &lt; 1 — ряд продолжается)
+Σp = 0.9964000000  (первые четыре члена, сумма &lt; 1, ряд продолжается)
 
 знаменатель по парам: 0.06
 сумма полного ряда: 1.000000
@@ -1365,13 +1365,13 @@ p:   0.7000    0.2400    0.0420    0.0144
 \sum_{k=0}^{\infty} P_n(k)
 = \sum_{k=0}^{\infty} \frac{\lambda^k e^{-\lambda}}{k!}
 = e^{-\lambda} \sum_{k=0}^{\infty} \frac{\lambda^k}{k!}.
-\]</span> Оставшаяся сумма — ряд Маклорена для экспоненты, <span class="math display">\[
+\]</span> Оставшаяся сумма: ряд Маклорена для экспоненты, <span class="math display">\[
 e^{x} = \sum_{k=0}^{\infty} \frac{x^k}{k!},
 \]</span> сходящийся при любом <span class="math inline">\(x\)</span>; при <span class="math inline">\(x = \lambda\)</span> он равен <span class="math inline">\(e^{\lambda}\)</span>. Значит, <span class="math display">\[
 \sum_{k=0}^{\infty} P_n(k) = e^{-\lambda} \cdot e^{\lambda} = e^{0} = 1.
 \qquad \blacksquare
 \]</span></p>
-<p><strong>Зачем это доказывать.</strong> Гмурман замечает, что утверждение следует из того, что сумма вероятностей событий полной группы равна единице. Для биномиального закона это так: события «ровно <span class="math inline">\(k\)</span> успехов», <span class="math inline">\(k = 0, \dots, n\)</span>, образуют полную группу, и <a href="#eq-s02-norm" class="quarto-xref">Уравнение&nbsp;<span>2.1</span></a> выполняется по построению. Но пуассоновские вероятности <a href="#eq-s02-poisson" class="quarto-xref">Уравнение&nbsp;<span>2.3</span></a> — <strong>приближение</strong> биномиальных, и то, что приближённые числа тоже дают в сумме ровно 1, требует отдельной проверки. Выкладка выше её и делает.</p>
+<p><strong>Зачем это доказывать.</strong> Гмурман замечает, что утверждение следует из того, что сумма вероятностей событий полной группы равна единице. Для биномиального закона это так: события «ровно <span class="math inline">\(k\)</span> успехов», <span class="math inline">\(k = 0, \dots, n\)</span>, образуют полную группу, и <a href="#eq-s02-norm" class="quarto-xref">Уравнение&nbsp;<span>2.1</span></a> выполняется по построению. Но пуассоновские вероятности <a href="#eq-s02-poisson" class="quarto-xref">Уравнение&nbsp;<span>2.3</span></a>: <strong>приближение</strong> биномиальных, и то, что приближённые числа тоже дают в сумме ровно 1, требует отдельной проверки. Выкладка выше её и делает.</p>
 <p>Проверка: частичные суммы ряда при разных <span class="math inline">\(\lambda\)</span>.</p>
 <div id="s02-t11-check" class="cell" data-execution_count="17">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> lam_ <span class="kw">in</span> (<span class="fl">0.5</span>, <span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">10</span>, <span class="dv">50</span>):</span>
@@ -1408,7 +1408,7 @@ P_t(k) = \frac{(\lambda t)^k e^{-\lambda t}}{k!},
 <div id="callout-21" class="callout-21-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Проверяем три свойства по очереди.</p>
-<p><strong>Стационарность.</strong> В правой части <a href="#eq-s02-flow" class="quarto-xref">Уравнение&nbsp;<span>2.6</span></a> стоят только <span class="math inline">\(k\)</span>, <span class="math inline">\(t\)</span> и постоянная <span class="math inline">\(\lambda\)</span>. Момент начала промежутка в формулу не входит — значит, вероятность зависит лишь от <span class="math inline">\(k\)</span> и длительности <span class="math inline">\(t\)</span>. ✓</p>
+<p><strong>Стационарность.</strong> В правой части <a href="#eq-s02-flow" class="quarto-xref">Уравнение&nbsp;<span>2.6</span></a> стоят только <span class="math inline">\(k\)</span>, <span class="math inline">\(t\)</span> и постоянная <span class="math inline">\(\lambda\)</span>. Момент начала промежутка в формулу не входит, значит, вероятность зависит лишь от <span class="math inline">\(k\)</span> и длительности <span class="math inline">\(t\)</span>. ✓</p>
 <p><strong>Отсутствие последействия.</strong> Формула <a href="#eq-s02-flow" class="quarto-xref">Уравнение&nbsp;<span>2.6</span></a> не содержит никакой информации о том, что происходило до начала промежутка: нет ни числа предшествующих событий, ни моментов их наступления. ✓</p>
 <p><strong>Ординарность.</strong> Положим <span class="math inline">\(k = 0\)</span> и <span class="math inline">\(k = 1\)</span>: <span class="math display">\[
 P_t(0) = e^{-\lambda t}, \qquad P_t(1) = \lambda t\, e^{-\lambda t}.
@@ -1420,8 +1420,8 @@ P_t(k &gt; 1) = \frac{(\lambda t)^2}{2} - \frac{(\lambda t)^3}{3} + \dots
 \]</span> Сравним с <span class="math inline">\(P_t(1) \approx \lambda t\)</span> при малых <span class="math inline">\(t\)</span>: отношение <span class="math display">\[
 \frac{P_t(k&gt;1)}{P_t(1)} \approx \frac{\lambda t}{2} \xrightarrow[t \to 0]{} 0.
 \]</span> Значит, при малых <span class="math inline">\(t\)</span> вероятность появления более одного события пренебрежимо мала по сравнению с вероятностью одного. ✓</p>
-<p>Все три свойства выполнены, поэтому <a href="#eq-s02-flow" class="quarto-xref">Уравнение&nbsp;<span>2.6</span></a> — математическая модель простейшего потока. <span class="math inline">\(\blacksquare\)</span></p>
-<p><strong>Параметр <span class="math inline">\(\lambda\)</span> сменил смысл.</strong> В <a href="#eq-s02-poisson" class="quarto-xref">Уравнение&nbsp;<span>2.3</span></a> было <span class="math inline">\(\lambda = np\)</span> — среднее число появлений за <span class="math inline">\(n\)</span> испытаний. В <a href="#eq-s02-flow" class="quarto-xref">Уравнение&nbsp;<span>2.6</span></a> <span class="math inline">\(\lambda\)</span> — интенсивность, среднее число событий <strong>в единицу времени</strong>, а роль числа испытаний играет время:</p>
+<p>Все три свойства выполнены, поэтому <a href="#eq-s02-flow" class="quarto-xref">Уравнение&nbsp;<span>2.6</span></a>: математическая модель простейшего потока. <span class="math inline">\(\blacksquare\)</span></p>
+<p><strong>Параметр <span class="math inline">\(\lambda\)</span> сменил смысл.</strong> В <a href="#eq-s02-poisson" class="quarto-xref">Уравнение&nbsp;<span>2.3</span></a> было <span class="math inline">\(\lambda = np\)</span>: среднее число появлений за <span class="math inline">\(n\)</span> испытаний. В <a href="#eq-s02-flow" class="quarto-xref">Уравнение&nbsp;<span>2.6</span></a> <span class="math inline">\(\lambda\)</span>: интенсивность, среднее число событий <strong>в единицу времени</strong>, а роль числа испытаний играет время:</p>
 <table class="caption-top table">
 <thead>
 <tr class="header">
@@ -1431,8 +1431,8 @@ P_t(k &gt; 1) = \frac{(\lambda t)^2}{2} - \frac{(\lambda t)^3}{3} + \dots
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;"><span class="math inline">\(n\)</span> — число испытаний</td>
-<td style="text-align: left;"><span class="math inline">\(t\)</span> — длительность промежутка</td>
+<td style="text-align: left;"><span class="math inline">\(n\)</span>: число испытаний</td>
+<td style="text-align: left;"><span class="math inline">\(t\)</span>: длительность промежутка</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><span class="math inline">\(\lambda = np\)</span></td>
@@ -1474,7 +1474,7 @@ P_t(k &gt; 1) = \frac{(\lambda t)^2}{2} - \frac{(\lambda t)^3}{3} + \dots
 <img src="seminar-02_files/figure-html/fig-s02-t12-output-1.png" width="804" height="474" class="figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-s02-t12-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Рисунок&nbsp;2.7: Ординарность простейшего потока: при малых <span class="math inline">\(t\)</span> вероятность одного события растёт как <span class="math inline">\(\lambda t\)</span>, а вероятность двух и более — как <span class="math inline">\((\lambda t)^2/2\)</span>, то есть на порядок медленнее. Оси логарифмические.
+Рисунок&nbsp;2.7: Ординарность простейшего потока: при малых <span class="math inline">\(t\)</span> вероятность одного события растёт как <span class="math inline">\(\lambda t\)</span>, а вероятность двух и более, как <span class="math inline">\((\lambda t)^2/2\)</span>, то есть на порядок медленнее. Оси логарифмические.
 </figcaption>
 </figure>
 </div>
