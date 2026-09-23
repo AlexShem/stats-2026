@@ -1,4 +1,4 @@
-# Сборка материалов. Переменная N — номер семинара, например: make handout N=01
+# Сборка материалов. Переменная N: номер семинара, например make handout N=01
 
 VENV := uv run
 SEM  := $(wildcard seminars/$(N)-*/seminar-$(N).qmd)

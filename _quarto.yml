@@ -7,7 +7,7 @@ project:
 
 # Книга для студентов (HTML): теория, задачи, решения и примеры на Python.
 # Профиль `handout` (см. _quarto-handout.yml) даёт PDF-раздатку с одними
-# условиями задач — всё, что обёрнуто в
+# условиями задач: всё, что обёрнуто в
 # ::: {.content-hidden when-profile="handout"}, в раздатку не попадает.
 
 book:
@@ -48,7 +48,7 @@ format:
       margin-width: 270px
     fig-width: 7
     fig-height: 4.5
-    # Математические макросы для MathJax — зеркало include-in-header
+    # Математические макросы для MathJax: зеркало include-in-header
     # из _quarto-handout.yml. Добавляя макрос, правьте оба файла.
     include-in-header:
       text: |

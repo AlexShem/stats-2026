@@ -28,7 +28,7 @@ def test_imports_and_functions_only_in_first_cell(path):
     assert cells, "в главе нет ячеек с кодом"
     for number, cell in enumerate(cells[1:], start=2):
         hits = [m.group(0).strip() for m in DEFINITION.finditer(cell)]
-        assert not hits, f"ячейка {number}: {hits} — перенесите в первую ячейку"
+        assert not hits, f"ячейка {number}: {hits}; перенесите в первую ячейку"
 
 
 @pytest.mark.parametrize("path", CHAPTERS, ids=lambda p: p.name)

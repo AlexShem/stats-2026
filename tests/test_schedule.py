@@ -18,7 +18,7 @@ def test_semester_boundaries():
 
 
 def test_seminar_03_falls_on_22_september():
-    # Дата на раздатке семинара 03 — опорная точка всей серии.
+    # Дата на раздатке семинара 03: опорная точка всей серии.
     assert seminar_date(3) == dt.date(2026, 9, 22)
 
 

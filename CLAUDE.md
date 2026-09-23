@@ -17,7 +17,7 @@ code are Russian, matching the surrounding style.
 
 Schedule: 16 seminars, Tuesdays, 2026-09-08 through 2026-12-22. The series
 started a week after the calendar start of the semester, so seminar 3 falls on
-2026-09-22. The dates are generated, not hand-maintained — see
+2026-09-22. The dates are generated, not hand-maintained: see
 `src/mephi_stats/schedule.py`; the chapters' own `date:` fields must agree with
 what it produces.
 
@@ -25,7 +25,7 @@ what it produces.
 
 Работа над новым семинаром всегда начинается в отдельной ветке, никогда не
 прямо в `main`: `make new N=04 SLUG=random-variables` сам создаёт и
-переключает на ветку `seminar-04` (и откажется работать, если текущая ветка —
+переключает на ветку `seminar-04` (и откажется работать, если текущая ветка
 не `main`). `main` получает семинар только через слияние, когда глава готова:
 
 ```bash
@@ -36,9 +36,9 @@ git push
 make publish   # когда пора обновить сайт
 ```
 
-Слияние — ручной шаг, автоматической цели для него нет. Причина в
+Слияние делается вручную: автоматической цели для него нет. Причина в
 безопасности: если репозиторий когда-нибудь станет публичным или его увидят
-студенты, `main` — то, что видно по умолчанию, — не должен показывать
+студенты, `main` (то, что видно по умолчанию) не должен показывать
 недописанный семинар.
 
 ## Local-only files (gitignored)
@@ -46,16 +46,16 @@ make publish   # когда пора обновить сайт
 `gmurman.pdf`, `gmurman-contents.md`, `problems/` and `lectures/` are **not in
 git** (copyright / the lecturer's material) and were purged from the history
 before the repo was published. They exist only on Alex's machine. On a fresh
-clone they are absent: do not treat that as a bug and do not recreate them —
-ask Alex. Never `git add -f` them.
+clone they are absent: do not treat that as a bug and do not recreate them;
+ask Alex instead. Never `git add -f` them.
 
-## `gmurman.pdf` — NEVER open this file
+## `gmurman.pdf`: NEVER open this file
 
 `gmurman.pdf` in the repo root is Гмурман, "Руководство к решению задач по теории
 вероятностей и математической статистике" (Высшая школа, 1979), the book seminar
 problems are drawn from.
 
-**Do not read it, ever — with any tool.** Not `Read`, not `pdftotext`, not page
+**Do not read it, ever, with any tool.** Not `Read`, not `pdftotext`, not page
 extraction, not a subagent. It is a 16 MB scan: the pages are images with no text
 layer, so every attempt returns nothing usable and burns a large amount of
 context. It is gitignored and stays local.
@@ -63,10 +63,10 @@ context. It is gitignored and stays local.
 Two machine-readable substitutes exist, and both should be checked before asking
 Alex for anything:
 
-- **`gmurman-contents.md`** — the full table of contents with page numbers, plus
+- **`gmurman-contents.md`**: the full table of contents with page numbers, plus
   a seminar-to-paragraph mapping table. Use it to work out *which pages to ask
   for*.
-- **`problems/`** — the problem bank: pages Alex has already transcribed, with
+- **`problems/`**, the problem bank: pages Alex has already transcribed, with
   statements, solutions and answers in plain Markdown. If a problem is in there,
   it is already available; do not ask for it again. See `problems/README.md`.
 
@@ -76,7 +76,7 @@ chapter, paragraph and page range from `gmurman-contents.md`, and ask him to ope
 the PDF there and paste the statements (and the answers from «Ответы», p. 373).
 Never invent a problem and attribute it to Гмурман, and never guess a problem
 number. Problems Alex pastes are transcribed verbatim, keeping the book's
-numbering; problems written from scratch are marked as such — see the source
+numbering; problems written from scratch are marked as such. See the source
 convention below.
 
 Keep the mapping table at the bottom of `gmurman-contents.md` up to date as
@@ -88,9 +88,9 @@ Each seminar is a single file `seminars/NN-slug/seminar-NN.qmd` that is both a
 **chapter of the book** and the source of **that seminar's handout**. Both
 outputs are read by students.
 
-- **Book** — HTML, the default render. `_quarto.yml` has `project: type: book`
+- **Book**: HTML, the default render. `_quarto.yml` has `project: type: book`
   and lists every chapter under `book.chapters`. Output: `_output/book/`.
-- **Handout** — PDF, one per seminar: summary, problem statements, homework;
+- **Handout**, PDF, one per seminar: summary, problem statements, homework;
   no solutions, no code. Produced by the profile `handout`
   (`_quarto-handout.yml`), which switches the project type to `default` so each
   chapter renders as its own PDF. Output: `_output/handouts/`.
@@ -166,7 +166,7 @@ top of that chapter:
 - The first `{python}` cell (under «Код для этой главы», `echo: true`) holds
   **all** imports, the matplotlib `rcParams` setup, `rng`, and **every**
   `def`. Each function gets a short Russian docstring.
-- Later cells contain no `import`, `def` or `lambda` — move them up.
+- Later cells contain no `import`, `def` or `lambda`; move them up.
 - Chapters do not import from `mephi_stats`. Shared plotting code is copied
   into each chapter on purpose, so every chapter reads on its own.
 - Before a check cell, one sentence says what the code verifies
@@ -177,6 +177,14 @@ top of that chapter:
 chapters, label uniqueness, and that every chapter is listed in the book.
 
 ## Conventions that are easy to get wrong
+
+**No em dashes.** Nowhere in this repo, prose or code comments, student-facing
+or this file: skip the em dash (—). Next to a number or a variable it reads
+like a minus sign («5—10», «$x$—среднее»), and in text that is a habit worth
+breaking anyway. Reach for a colon to introduce an explanation, a semicolon to
+join two related clauses, a comma for an aside, parentheses for a true
+parenthetical, or just start a new sentence. The en dash in numeric ranges
+(«46–88») is a different character and stays.
 
 **Heading levels.** Chapter title comes from YAML `title`. In the body:
 `##` for «Код для этой главы», «Краткая сводка», blocks and homework; `###` for
@@ -195,7 +203,7 @@ live in the MathJax `include-in-header` of `_quarto.yml` *and* in the LaTeX
 files, or it silently renders as literal text in one of the two outputs.
 
 **Plots.** The setup cell sets a Cyrillic-capable font (matplotlib's default
-has no Cyrillic — labels become boxes) and a palette that survives greyscale
+has no Cyrillic; labels become boxes) and a palette that survives greyscale
 printing. Copy that block from `_templates/seminar.qmd`.
 
 **Randomness must be reproducible.** Seed with
@@ -215,19 +223,19 @@ touch the `.qmd`.
 
 ## `problems/`
 
-The transcribed problem bank — `problems/gmurman/ch<NN>-<S>.md`, one file per
+The transcribed problem bank: `problems/gmurman/ch<NN>-<S>.md`, one file per
 book paragraph, currently гл. 2 §§ 1–2 (problems 46–88). Each entry has the
 statement verbatim, a type/difficulty line, a solution, and the answer.
 
 Solutions are labelled by origin and the distinction matters:
 
-- **Решение книжное** — printed in the book, transcribed as-is. Do not rewrite it
+- **Решение книжное**: printed in the book, transcribed as-is. Do not rewrite it
   into a slicker form; it is the reference for what students may have seen.
-- **Решение наше** — the book leaves the problem for self-study, so the solution
+- **Решение наше**: the book leaves the problem for self-study, so the solution
   was written here.
 
 **A book answer is not evidence on its own.** The book is assumed to contain
-typos, so every answer — the book's included — gets recomputed independently
+typos, so every answer (the book's included) gets recomputed independently
 before it is trusted. That verdict lives in each problem's **Статус** field:
 ✅ сверено (book answer on p. 373, matched our computation), ✅ проверено (no
 p. 373 entry, our recomputation confirmed the printed derivation),
@@ -235,7 +243,7 @@ p. 373 entry, our recomputation confirmed the printed derivation),
 raise a status without actually running the check. `problems/README.md` lists
 what each check consisted of.
 
-Chapter `.qmd` files do **not** include these files — they restate the problems
+Chapter `.qmd` files do **not** include these files; they restate the problems
 they use. The duplication is deliberate: a seminar may trim or reorder a
 statement, while the bank keeps the book's original.
 
@@ -250,12 +258,12 @@ and record the verdict in **Статус** before committing, then update the ta
 
 Lecture notes from the course lecturer land here as they arrive, named
 `NN-topic.*` to line up with seminar numbers. When preparing a seminar, check
-the matching lecture first — notation and the order of results in the exercises
+the matching lecture first: notation and the order of results in the exercises
 should follow the lecture, not a textbook's own conventions.
 
 ## `src/mephi_stats/`
 
 Build-side Python, installed as an editable package by `uv sync`:
 `schedule.py` (semester dates, used by the schedule table in `index.qmd`).
-It is **not** for chapter code — chapters define their helpers inline (see
+It is **not** for chapter code; chapters define their helpers inline (see
 «Explicit Python»).
