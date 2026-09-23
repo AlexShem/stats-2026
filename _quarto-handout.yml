@@ -44,8 +44,8 @@ format:
       text: |
         \usepackage{amsmath,amssymb,mathtools}
         \usepackage{float}
-        \newcommand{\E}{\mathbb{E}}
-        \newcommand{\Var}{\mathrm{D}}
+        \newcommand{\E}{\mathrm{E}}
+        \newcommand{\Var}{\mathrm{Var}}
         \newcommand{\Prob}{\mathbb{P}}
         \newcommand{\Cov}{\mathrm{cov}}
         \newcommand{\indep}{\perp\!\!\!\perp}

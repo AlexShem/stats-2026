@@ -56,8 +56,8 @@ format:
         window.MathJax = {
           tex: {
             macros: {
-              E: "\\mathbb{E}",
-              Var: "\\mathrm{D}",
+              E: "\\mathrm{E}",
+              Var: "\\mathrm{Var}",
               Prob: "\\mathbb{P}",
               Cov: "\\mathrm{cov}",
               indep: "\\perp\\!\\!\\!\\perp"
