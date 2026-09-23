@@ -5,6 +5,8 @@ date: 2026-09-22
 ---
 
 ::: {.content-hidden when-profile="handout"}
+[Скачать PDF-раздатку этого семинара](../../handouts/seminars/03-continuous-random-variables/seminar-03.pdf)
+
 ## Код для этой главы {#sec-s03-code}
 
 Все импорты и функции, которые используются в примерах главы, собраны

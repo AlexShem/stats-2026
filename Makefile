@@ -28,13 +28,19 @@ publish: all  ## собрать всё и выложить на GitHub Pages (в
 	cp -r _output/handouts _output/book/handouts
 	$(VENV) quarto publish gh-pages --no-render --no-prompt
 
-new:  ## новый семинар из шаблона: make new N=03 SLUG=random-variables
+new:  ## новый семинар из шаблона и ветки: make new N=03 SLUG=random-variables
 	@test -n "$(N)" && test -n "$(SLUG)" || { echo "Нужны N и SLUG"; exit 1; }
+	@[ "$$(git symbolic-ref --short HEAD)" = main ] || \
+	  { echo "Сначала переключитесь на main: git checkout main"; exit 1; }
+	git checkout -b seminar-$(N)
 	mkdir -p seminars/$(N)-$(SLUG)
-	sed -e "s/Семинар NN/Семинар $$(expr $(N) + 0)/" -e "s/sNN-/s$(N)-/g" _templates/seminar.qmd \
-	  > seminars/$(N)-$(SLUG)/seminar-$(N).qmd
-	@echo "Создан seminars/$(N)-$(SLUG)/seminar-$(N).qmd — впишите тему и дату"
-	@echo "и добавьте его в book.chapters в _quarto.yml"
+	sed -e "s/Семинар NN/Семинар $$(expr $(N) + 0)/" \
+	    -e "s/sNN-/s$(N)-/g" \
+	    -e "s/NN-SLUG/$(N)-$(SLUG)/g" \
+	    -e "s/\bNN\b/$(N)/g" \
+	    _templates/seminar.qmd > seminars/$(N)-$(SLUG)/seminar-$(N).qmd
+	@echo "Создан seminars/$(N)-$(SLUG)/seminar-$(N).qmd на ветке seminar-$(N)"
+	@echo "Впишите тему и дату и добавьте главу в book.chapters в _quarto.yml"
 
 lint:  ## проверить python-код
 	$(VENV) ruff check .

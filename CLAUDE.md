@@ -21,6 +21,26 @@ started a week after the calendar start of the semester, so seminar 3 falls on
 `src/mephi_stats/schedule.py`; the chapters' own `date:` fields must agree with
 what it produces.
 
+## Git-ветки для новых семинаров
+
+Работа над новым семинаром всегда начинается в отдельной ветке, никогда не
+прямо в `main`: `make new N=04 SLUG=random-variables` сам создаёт и
+переключает на ветку `seminar-04` (и откажется работать, если текущая ветка —
+не `main`). `main` получает семинар только через слияние, когда глава готова:
+
+```bash
+git checkout main
+git merge --no-ff seminar-04
+git branch -d seminar-04
+git push
+make publish   # когда пора обновить сайт
+```
+
+Слияние — ручной шаг, автоматической цели для него нет. Причина в
+безопасности: если репозиторий когда-нибудь станет публичным или его увидят
+студенты, `main` — то, что видно по умолчанию, — не должен показывать
+недописанный семинар.
+
 ## Local-only files (gitignored)
 
 `gmurman.pdf`, `gmurman-contents.md`, `problems/` and `lectures/` are **not in
@@ -115,15 +135,17 @@ make handout N=01                             # one student PDF
 make handouts                                 # all student PDFs
 make all                                      # book + all handouts
 make publish                                  # make all + push the site to GitHub Pages (gh-pages)
-make new N=03 SLUG=random-variables           # scaffold from _templates/seminar.qmd
+make new N=03 SLUG=random-variables           # branch seminar-03 + scaffold from _templates/seminar.qmd
 make test                                     # pytest (incl. chapter rules)
 make lint                                     # ruff check + format --check
 make clean                                    # drop _output, .quarto, _freeze
 uv run pytest tests/test_schedule.py::test_format_ru   # a single test
 ```
 
-`make new` does not touch `_quarto.yml`: add the new chapter to
-`book.chapters` by hand (`tests/test_chapters.py` fails until you do).
+`make new` creates and checks out `seminar-NN`, refusing to run unless the
+current branch is `main` (see «Git-ветки для новых семинаров» above). It
+does not touch `_quarto.yml`: add the new chapter to `book.chapters` by hand
+(`tests/test_chapters.py` fails until you do).
 
 Quarto must run inside the project venv so the `jupyter` engine finds the
 dependencies: always `uv run quarto render …`, never bare `quarto render`.

@@ -5,6 +5,8 @@ date: 2026-09-15
 ---
 
 ::: {.content-hidden when-profile="handout"}
+[Скачать PDF-раздатку этого семинара](../../handouts/seminars/02-discrete-random-variables/seminar-02.pdf)
+
 ## Код для этой главы {#sec-s02-code}
 
 Все импорты и функции, которые используются в примерах главы, собраны

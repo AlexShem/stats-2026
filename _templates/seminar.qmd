@@ -5,6 +5,8 @@ date: 2026-01-01
 ---
 
 ::: {.content-hidden when-profile="handout"}
+[Скачать PDF-раздатку этого семинара](../../handouts/seminars/NN-SLUG/seminar-NN.pdf)
+
 ## Код для этой главы {#sec-sNN-code}
 
 Все импорты и функции, которые используются в примерах главы, собраны
