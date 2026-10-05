@@ -24,6 +24,7 @@ book:
     - seminars/02-discrete-random-variables/seminar-02.qmd
     - seminars/03-continuous-random-variables/seminar-03.qmd
     - seminars/04-exponential-distribution/seminar-04.qmd
+    - seminars/05-two-random-variables/seminar-05.qmd
 
 lang: ru
 date-format: "D MMMM YYYY"

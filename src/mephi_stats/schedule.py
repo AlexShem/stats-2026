@@ -1,4 +1,4 @@
-"""Расписание семинаров: осенний семестр 2026, вторники."""
+"""Расписание семинаров: осенний семестр 2026, вторники (с переносами)."""
 
 from __future__ import annotations
 
@@ -11,8 +11,17 @@ FIRST_SEMINAR = dt.date(2026, 9, 8)
 #: Число семинаров в семестре.
 SEMINAR_COUNT = 16
 
-#: Даты всех семинаров семестра, по порядку.
-SEMINAR_DATES: list[dt.date] = [FIRST_SEMINAR + dt.timedelta(weeks=i) for i in range(SEMINAR_COUNT)]
+#: Перенесённые занятия: плановый вторник → фактическая дата.
+#: Семинар 6 проведён в пятницу 9 октября вместо вторника 13 октября.
+RESCHEDULED: dict[dt.date, dt.date] = {
+    dt.date(2026, 10, 13): dt.date(2026, 10, 9),
+}
+
+#: Плановые вторники серии, без учёта переносов.
+TUESDAYS: list[dt.date] = [FIRST_SEMINAR + dt.timedelta(weeks=i) for i in range(SEMINAR_COUNT)]
+
+#: Фактические даты всех семинаров семестра, по порядку.
+SEMINAR_DATES: list[dt.date] = [RESCHEDULED.get(d, d) for d in TUESDAYS]
 
 
 def seminar_date(number: int) -> dt.date:
