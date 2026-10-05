@@ -186,6 +186,15 @@ join two related clauses, a comma for an aside, parentheses for a true
 parenthetical, or just start a new sentence. The en dash in numeric ranges
 («46–88») is a different character and stays.
 
+**Notation: standard, not the lecturer's or the book's.** Formulas shown to
+students use modern standard notation: $\E(X)$, $\Var(X)$, $\Cov(X, Y)$,
+$\rho(X, Y)$, marginals $f_X$, $F_Y$, conditionals with a bar,
+$f_{Y|X}(y \mid x)$, $\Prob(A \mid B)$. Where the lecturer (`f_1(x)`, `f(y/x)`,
+`K_{xy}`, `r_{xy}`, `M[X]`, `D[X]`) or Гмурман (`φ(x|y)`, `ψ(y|x)`, `μ_{xy}`)
+write it differently, say once per chapter in a note how their symbols map to
+ours; do not adopt theirs. Order of results still follows the lecture.
+Transcriptions in `problems/` keep the book's notation verbatim.
+
 **Heading levels.** Chapter title comes from YAML `title`. In the body:
 `##` for «Код для этой главы», «Краткая сводка», blocks and homework; `###` for
 tasks. A body `#` would be numbered as a separate chapter. The handout profile
