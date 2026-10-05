@@ -2,14 +2,24 @@ import datetime as dt
 
 import pytest
 
-from mephi_stats.schedule import SEMINAR_DATES, format_ru, seminar_date
+from mephi_stats.schedule import RESCHEDULED, SEMINAR_DATES, TUESDAYS, format_ru, seminar_date
 
 TUESDAY = 1
 
 
 def test_semester_has_sixteen_tuesdays():
-    assert len(SEMINAR_DATES) == 16
-    assert all(d.weekday() == TUESDAY for d in SEMINAR_DATES)
+    assert len(TUESDAYS) == len(SEMINAR_DATES) == 16
+    assert all(d.weekday() == TUESDAY for d in TUESDAYS)
+
+
+def test_only_rescheduled_dates_leave_tuesday():
+    off = [d for d in SEMINAR_DATES if d.weekday() != TUESDAY]
+    assert off == sorted(RESCHEDULED.values())
+    assert SEMINAR_DATES == sorted(SEMINAR_DATES)
+
+
+def test_seminar_06_moved_to_friday_9_october():
+    assert seminar_date(6) == dt.date(2026, 10, 9)
 
 
 def test_semester_boundaries():
