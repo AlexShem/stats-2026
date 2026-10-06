@@ -621,8 +621,10 @@ p_{ij} = p_i\,p_j \ \text{для всех } i, j.
 \tag{5.15}\]</span></span> <span id="eq-s05-linVar"><span class="math display">\[
 \Var(aX + bY + c) = a^2\Var X + b^2\Var Y + 2ab\,\Cov(X, Y).
 \tag{5.16}\]</span></span> Ковариация <strong>линейна по каждому аргументу</strong> и симметрична: <span id="eq-s05-bilin"><span class="math display">\[
-\Cov(aX + bY, Z) = a\Cov(X, Z) + b\Cov(Y, Z), \qquad
-\Cov(X, Y) = \Cov(Y, X), \qquad \Cov(X, X) = \Var X, \qquad \Cov(X, c) = 0.
+\begin{gathered}
+\Cov(aX + bY, Z) = a\Cov(X, Z) + b\Cov(Y, Z), \qquad \Cov(X, Y) = \Cov(Y, X), \\
+\Cov(X, X) = \Var X, \qquad \Cov(X, c) = 0.
+\end{gathered}
 \tag{5.17}\]</span></span> Из определения ещё <span class="math inline">\(\E(XY) = \E X\,\E Y + \Cov(X, Y)\)</span>, а для независимых <span class="math inline">\(\Var(XY) = \Var X\,\Var Y + (\E X)^2\Var Y + (\E Y)^2\Var X\)</span>.</p>
 <p>Сумма некоррелированных величин: <span class="math inline">\(\Var(X + Y) = \Var X + \Var Y\)</span>. Отсюда главный практический вывод: <strong>ошибки складываются квадратами</strong>, и среднее <span class="math inline">\(n\)</span> независимых измерений имеет дисперсию в <span class="math inline">\(n\)</span> раз меньше.</p>
 </section>
