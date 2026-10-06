@@ -352,8 +352,10 @@ $$
 $$ {#eq-s05-linVar}
 Ковариация **линейна по каждому аргументу** и симметрична:
 $$
-\Cov(aX + bY, Z) = a\Cov(X, Z) + b\Cov(Y, Z), \qquad
-\Cov(X, Y) = \Cov(Y, X), \qquad \Cov(X, X) = \Var X, \qquad \Cov(X, c) = 0.
+\begin{gathered}
+\Cov(aX + bY, Z) = a\Cov(X, Z) + b\Cov(Y, Z), \qquad \Cov(X, Y) = \Cov(Y, X), \\
+\Cov(X, X) = \Var X, \qquad \Cov(X, c) = 0.
+\end{gathered}
 $$ {#eq-s05-bilin}
 Из определения ещё $\E(XY) = \E X\,\E Y + \Cov(X, Y)$, а для независимых
 $\Var(XY) = \Var X\,\Var Y + (\E X)^2\Var Y + (\E Y)^2\Var X$.

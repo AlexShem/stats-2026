@@ -28,7 +28,8 @@ format:
     papersize: a4
     geometry:
       - top=20mm
-      - bottom=20mm
+      - bottom=25mm
+      - footskip=12mm
       - left=20mm
       - right=20mm
     fontsize: 11pt
