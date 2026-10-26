@@ -15,11 +15,30 @@ statements, figure labels, axis titles, and captions are Russian. Code
 identifiers, file names, and directory slugs stay in Latin script. Comments in
 code are Russian, matching the surrounding style.
 
-Schedule: 16 seminars, Tuesdays, 2026-09-08 through 2026-12-22. The series
-started a week after the calendar start of the semester, so seminar 3 falls on
-2026-09-22. The dates are generated, not hand-maintained: see
-`src/mephi_stats/schedule.py`; the chapters' own `date:` fields must agree with
-what it produces.
+Schedule: Tuesdays, 2026-09-08 through 2026-12-22, 16 planned slots. The
+series started a week after the calendar start of the semester, so seminar 3
+falls on 2026-09-22. Seminar 6 moved to Fri 2026-10-09, and the 2026-10-20 slot
+moved to Fri 2026-11-06, where the probability midterm is held. A midterm is
+a class but not a seminar: no chapter, no handout, no seminar number
+(`MIDTERMS`). So there are 16 classes (`CLASS_DATES`) and 15 seminars
+(`SEMINAR_DATES`), numbered in date order: seminar 7 is 2026-10-27, seminar 9
+is 2026-11-10. The dates are generated, not hand-maintained: see
+`src/mephi_stats/schedule.py`; the chapters' own `date:` fields must agree
+with what it produces.
+
+## Semester plan and decisions: `PLANNING.md`
+
+**Read `PLANNING.md` before planning or writing a seminar.** It holds the
+schedule as actually held, the log of decisions (which topics go into which
+seminar and why, the midterm date, what moved to the statistics half), open
+questions for Alex, and which Гмурман pages the next seminar still needs.
+When a decision is made in conversation, append it to the log there with the
+date and update its table; when the dates change, change `schedule.py` too.
+
+The repo is public, so `PLANNING.md` holds schedule and topics only. Which
+problems are kept back for a контрольная goes in the local, gitignored
+`gmurman-contents.md` («Не разобраны … Свободны для контрольной»), never in
+a tracked file.
 
 ## Git-ветки для новых семинаров
 
@@ -186,14 +205,23 @@ join two related clauses, a comma for an aside, parentheses for a true
 parenthetical, or just start a new sentence. The en dash in numeric ranges
 («46–88») is a different character and stays.
 
-**Notation: standard, not the lecturer's or the book's.** Formulas shown to
-students use modern standard notation: $\E(X)$, $\Var(X)$, $\Cov(X, Y)$,
-$\rho(X, Y)$, marginals $f_X$, $F_Y$, conditionals with a bar,
-$f_{Y|X}(y \mid x)$, $\Prob(A \mid B)$. Where the lecturer (`f_1(x)`, `f(y/x)`,
-`K_{xy}`, `r_{xy}`, `M[X]`, `D[X]`) or Гмурман (`φ(x|y)`, `ψ(y|x)`, `μ_{xy}`)
-write it differently, say once per chapter in a note how their symbols map to
-ours; do not adopt theirs. Order of results still follows the lecture.
-Transcriptions in `problems/` keep the book's notation verbatim.
+**Notation: standard, not the lecturer's or the book's.** Everything shown
+to students uses the standard notation of the field: $\E(X)$, $\Var(X)$,
+$\Cov(X, Y)$, $\rho(X, Y)$, marginals $f_X$, $F_Y$, conditionals with a bar,
+$f_{Y|X}(y \mid x)$, $\E(Y \mid X = x)$, $\Prob(A \mid B)$; parameters
+$\mu$, $\sigma$, $N(\mu, \sigma^2)$, $\Sigma$; functions of a random variable
+$g(X)$; $\Phi$ is the standard normal CDF ($\Phi(0) = 0{,}5$), not Гмурман's
+Laplace function. The lecturer (`f_1(x)`, `f(y/x)`, `K_{xy}`, `r_{xy}`,
+`M[X]`, `D[X]`, `m_x`) and Гмурман (`φ(x|y)`, `ψ(y|x)`, `μ_{xy}`, `a`, Laplace
+`Φ` from 0) write things differently. **Their notation appears in exactly one
+place: the «Обозначения» table at the beginning of the chapter** (a
+`callout-note` at the top of «Краткая сводка»). Nowhere else: not in the
+summary text, not in task statements (restate Гмурман's problems in standard
+notation), not in solutions, captions or code output, and no asides like
+«(у лектора: …)». Order of results still follows the lecture. Transcriptions
+in `problems/` keep the book's notation verbatim. Seminars 3 and 5 predate
+this rule (seminar 3 still uses the Laplace `Φ`); see the open questions in
+`PLANNING.md`.
 
 **Heading levels.** Chapter title comes from YAML `title`. In the body:
 `##` for «Код для этой главы», «Краткая сводка», blocks and homework; `###` for

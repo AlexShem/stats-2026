@@ -2,24 +2,43 @@ import datetime as dt
 
 import pytest
 
-from mephi_stats.schedule import RESCHEDULED, SEMINAR_DATES, TUESDAYS, format_ru, seminar_date
+from mephi_stats.schedule import (
+    CLASS_DATES,
+    MIDTERMS,
+    RESCHEDULED,
+    SEMINAR_DATES,
+    TUESDAYS,
+    format_ru,
+    seminar_date,
+)
 
 TUESDAY = 1
 
 
-def test_semester_has_sixteen_tuesdays():
-    assert len(TUESDAYS) == len(SEMINAR_DATES) == 16
+def test_sixteen_classes_one_of_them_a_midterm():
+    assert len(TUESDAYS) == len(CLASS_DATES) == 16
     assert all(d.weekday() == TUESDAY for d in TUESDAYS)
+    assert set(MIDTERMS) <= set(CLASS_DATES)
+    assert len(SEMINAR_DATES) == 16 - len(MIDTERMS) == 15
 
 
 def test_only_rescheduled_dates_leave_tuesday():
-    off = [d for d in SEMINAR_DATES if d.weekday() != TUESDAY]
+    off = [d for d in CLASS_DATES if d.weekday() != TUESDAY]
     assert off == sorted(RESCHEDULED.values())
     assert SEMINAR_DATES == sorted(SEMINAR_DATES)
 
 
 def test_seminar_06_moved_to_friday_9_october():
     assert seminar_date(6) == dt.date(2026, 10, 9)
+
+
+def test_20_october_moved_to_6_november_midterm():
+    # Занятие 20 октября стало контрольной 6 ноября; номера семинара она не берёт.
+    assert dt.date(2026, 10, 20) not in CLASS_DATES
+    assert dt.date(2026, 11, 6) in MIDTERMS
+    assert seminar_date(7) == dt.date(2026, 10, 27)
+    assert seminar_date(8) == dt.date(2026, 11, 3)
+    assert seminar_date(9) == dt.date(2026, 11, 10)
 
 
 def test_semester_boundaries():
@@ -37,7 +56,7 @@ def test_seminar_date_is_one_indexed():
     with pytest.raises(ValueError):
         seminar_date(0)
     with pytest.raises(ValueError):
-        seminar_date(17)
+        seminar_date(16)
 
 
 def test_format_ru():

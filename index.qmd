@@ -48,8 +48,10 @@ pip install numpy matplotlib sympy
 
 ## Расписание {.unnumbered}
 
-Семинары проходят по вторникам с 8 сентября по 22 декабря 2026 года, всего 16
-занятий. Семинар 6 перенесён со вторника 13 октября на пятницу 9 октября.
+Занятия проходят по вторникам с 8 сентября по 22 декабря 2026 года: 15
+семинаров и контрольная работа. Семинар 6 перенесён со вторника 13 октября на
+пятницу 9 октября, занятие 20 октября перенесено на пятницу 6 ноября, на нём
+контрольная работа по теории вероятностей.
 
 ```{python}
 #| label: tbl-schedule
@@ -59,7 +61,7 @@ from pathlib import Path
 import pandas as pd
 from IPython.display import Markdown
 
-from mephi_stats.schedule import SEMINAR_DATES, format_ru
+from mephi_stats.schedule import CLASS_DATES, MIDTERMS, SEMINAR_DATES, format_ru
 
 
 # Глава и тема берутся из seminar-NN.qmd, если глава уже написана.
@@ -91,6 +93,12 @@ def row(number: int, date) -> dict:
     }
 
 
-rows = [row(i, d) for i, d in enumerate(SEMINAR_DATES, start=1)]
+# Контрольная стоит в таблице отдельной строкой, без номера семинара.
+rows = [
+    {"№": "", "Дата": format_ru(d), "Тема": f"**{MIDTERMS[d]}**", "Раздатка": ""}
+    if d in MIDTERMS
+    else row(SEMINAR_DATES.index(d) + 1, d)
+    for d in CLASS_DATES
+]
 Markdown(pd.DataFrame(rows).to_markdown(index=False))
 ```
