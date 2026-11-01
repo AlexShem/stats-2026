@@ -1,0 +1,1712 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru" xml:lang="ru"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="А. Шемендюк">
+
+<title>6&nbsp; Семинар 7. Нормальный закон на плоскости. Функции случайных величин – Теория вероятностей и математическая статистика</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../seminars/05-two-random-variables/seminar-05.html" rel="prev">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-1aa567b42d78015c3b7cfc07166ec9b5.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Поиск не дал результатов",
+    "search-matching-documents-text": "Результаты поиска",
+    "search-copy-link-title": "Скопировать ссылку",
+    "search-hide-matches-text": "Скрыть дополнительные результаты",
+    "search-more-match-text": "дополнительный результат в этом документе",
+    "search-more-matches-text": "дополнительных результата(-ов) в этом документе",
+    "search-clear-button-title": "Очистить",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Отменить",
+    "search-submit-button-title": "Найти",
+    "search-label": "Поиск"
+  }
+}</script>
+<script>
+window.MathJax = {
+  tex: {
+    macros: {
+      E: "\\mathrm{E}",
+      Var: "\\mathrm{Var}",
+      Prob: "\\mathbb{P}",
+      Cov: "\\mathrm{cov}",
+      indep: "\\perp\\!\\!\\!\\perp"
+    }
+  }
+};
+</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Переключить боковую панель навигации" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../seminars/07-normal-plane-functions/seminar-07.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Семинар 7. Нормальный закон на плоскости. Функции случайных величин</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Переключить боковую панель навигации" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Поиск" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../../">Теория вероятностей и математическая статистика</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/AlexShem/stats-2026/" title="Исходный код" class="quarto-navigation-tool px-1" aria-label="Исходный код"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Поиск"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">О книге</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../seminars/01-addition-multiplication/seminar-01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Семинар 1. Теоремы сложения и умножения вероятностей</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../seminars/02-discrete-random-variables/seminar-02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Семинар 2. Дискретные случайные величины: биномиальный закон и закон Пуассона</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../seminars/03-continuous-random-variables/seminar-03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Семинар 3. Непрерывные случайные величины</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../seminars/04-exponential-distribution/seminar-04.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Семинар 4. Показательное распределение</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../seminars/05-two-random-variables/seminar-05.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Семинар 5. Системы двух случайных величин</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../seminars/07-normal-plane-functions/seminar-07.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Семинар 7. Нормальный закон на плоскости. Функции случайных величин</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Содержание</h2>
+   
+  <ul>
+  <li><a href="#sec-s07-code" id="toc-sec-s07-code" class="nav-link active" data-scroll-target="#sec-s07-code"><span class="header-section-number">6.1</span> Код для этой главы</a></li>
+  <li><a href="#краткая-сводка" id="toc-краткая-сводка" class="nav-link" data-scroll-target="#краткая-сводка"><span class="header-section-number">6.2</span> Краткая сводка</a>
+  <ul class="collapse">
+  <li><a href="#нормальный-закон-на-плоскости" id="toc-нормальный-закон-на-плоскости" class="nav-link" data-scroll-target="#нормальный-закон-на-плоскости"><span class="header-section-number">6.2.1</span> Нормальный закон на плоскости</a></li>
+  <li><a href="#числовые-характеристики-функций" id="toc-числовые-характеристики-функций" class="nav-link" data-scroll-target="#числовые-характеристики-функций"><span class="header-section-number">6.2.2</span> Числовые характеристики функций</a></li>
+  <li><a href="#линеаризация" id="toc-линеаризация" class="nav-link" data-scroll-target="#линеаризация"><span class="header-section-number">6.2.3</span> Линеаризация</a></li>
+  </ul></li>
+  <li><a href="#блок-a.-нормальный-закон-на-плоскости" id="toc-блок-a.-нормальный-закон-на-плоскости" class="nav-link" data-scroll-target="#блок-a.-нормальный-закон-на-плоскости"><span class="header-section-number">6.3</span> Блок A. Нормальный закон на плоскости</a>
+  <ul class="collapse">
+  <li><a href="#sec-s07-t1" id="toc-sec-s07-t1" class="nav-link" data-scroll-target="#sec-s07-t1"><span class="header-section-number">6.3.1</span> Задача 1</a></li>
+  <li><a href="#sec-s07-t2" id="toc-sec-s07-t2" class="nav-link" data-scroll-target="#sec-s07-t2"><span class="header-section-number">6.3.2</span> Задача 2</a></li>
+  <li><a href="#sec-s07-t3" id="toc-sec-s07-t3" class="nav-link" data-scroll-target="#sec-s07-t3"><span class="header-section-number">6.3.3</span> Задача 3</a></li>
+  <li><a href="#sec-s07-t4" id="toc-sec-s07-t4" class="nav-link" data-scroll-target="#sec-s07-t4"><span class="header-section-number">6.3.4</span> Задача 4</a></li>
+  </ul></li>
+  <li><a href="#блок-b.-числовые-характеристики-функций" id="toc-блок-b.-числовые-характеристики-функций" class="nav-link" data-scroll-target="#блок-b.-числовые-характеристики-функций"><span class="header-section-number">6.4</span> Блок B. Числовые характеристики функций</a>
+  <ul class="collapse">
+  <li><a href="#sec-s07-t5" id="toc-sec-s07-t5" class="nav-link" data-scroll-target="#sec-s07-t5"><span class="header-section-number">6.4.1</span> Задача 5</a></li>
+  <li><a href="#sec-s07-t6" id="toc-sec-s07-t6" class="nav-link" data-scroll-target="#sec-s07-t6"><span class="header-section-number">6.4.2</span> Задача 6 (Гмурман, гл. 6 § 3, № 282 и 299)</a></li>
+  <li><a href="#sec-s07-t7" id="toc-sec-s07-t7" class="nav-link" data-scroll-target="#sec-s07-t7"><span class="header-section-number">6.4.3</span> Задача 7 (Гмурман, гл. 6 § 4, № 318, дополнена)</a></li>
+  <li><a href="#sec-s07-t8" id="toc-sec-s07-t8" class="nav-link" data-scroll-target="#sec-s07-t8"><span class="header-section-number">6.4.4</span> Задача 8</a></li>
+  </ul></li>
+  <li><a href="#блок-c.-линеаризация-и-погрешности" id="toc-блок-c.-линеаризация-и-погрешности" class="nav-link" data-scroll-target="#блок-c.-линеаризация-и-погрешности"><span class="header-section-number">6.5</span> Блок C. Линеаризация и погрешности</a>
+  <ul class="collapse">
+  <li><a href="#sec-s07-t9" id="toc-sec-s07-t9" class="nav-link" data-scroll-target="#sec-s07-t9"><span class="header-section-number">6.5.1</span> Задача 9</a></li>
+  <li><a href="#sec-s07-t10" id="toc-sec-s07-t10" class="nav-link" data-scroll-target="#sec-s07-t10"><span class="header-section-number">6.5.2</span> Задача 10</a></li>
+  <li><a href="#sec-s07-t11" id="toc-sec-s07-t11" class="nav-link" data-scroll-target="#sec-s07-t11"><span class="header-section-number">6.5.3</span> Задача 11</a></li>
+  </ul></li>
+  <li><a href="#задачи-для-самостоятельной-работы" id="toc-задачи-для-самостоятельной-работы" class="nav-link" data-scroll-target="#задачи-для-самостоятельной-работы"><span class="header-section-number">6.6</span> Задачи для самостоятельной работы</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/AlexShem/stats-2026/issues/new" class="toc-action"><i class="bi bi-github"></i>Сообщить о проблеме</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Семинар 7. Нормальный закон на плоскости. Функции случайных величин</span></h1>
+<p class="subtitle lead">Теория вероятностей и математическая статистика · НИЯУ МИФИ</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Автор</div>
+    <div class="quarto-title-meta-contents">
+             <p>А. Шемендюк </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Дата публикации</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">27 октября 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p><a href="../../handouts/seminars/07-normal-plane-functions/seminar-07.pdf">Скачать PDF-раздатку этого семинара</a></p>
+<section id="sec-s07-code" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="sec-s07-code"><span class="header-section-number">6.1</span> Код для этой главы</h2>
+<p>Все импорты и функции, которые используются в примерах главы, собраны в одной ячейке. Выполните её первой. Остальные ячейки опираются на неё.</p>
+<div id="s07-setup" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sympy <span class="im">as</span> sp</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> math <span class="im">import</span> erf, exp, log, pi, sqrt</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Оформление графиков: шрифт с кириллицей и палитра, различимая при печати</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>PALETTE <span class="op">=</span> [<span class="st">"#0b5394"</span>, <span class="st">"#b45309"</span>, <span class="st">"#2e7d32"</span>, <span class="st">"#7b1fa2"</span>, <span class="st">"#c62828"</span>, <span class="st">"#00838f"</span>]</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>plt.rcParams.update({</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"font.family"</span>: <span class="st">"sans-serif"</span>,</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"font.sans-serif"</span>: [<span class="st">"DejaVu Sans"</span>, <span class="st">"Liberation Sans"</span>, <span class="st">"Noto Sans"</span>, <span class="st">"sans-serif"</span>],</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"axes.unicode_minus"</span>: <span class="va">False</span>,</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"axes.prop_cycle"</span>: plt.cycler(color<span class="op">=</span>PALETTE),</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"axes.spines.top"</span>: <span class="va">False</span>,</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">"axes.spines.right"</span>: <span class="va">False</span>,</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">"axes.grid"</span>: <span class="va">True</span>,</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    <span class="st">"grid.alpha"</span>: <span class="fl">0.3</span>,</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    <span class="st">"figure.dpi"</span>: <span class="dv">110</span>,</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    <span class="st">"figure.constrained_layout.use"</span>: <span class="va">True</span>,</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Генератор случайных чисел с фиксированным зерном: результаты воспроизводимы</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>rng <span class="op">=</span> np.random.default_rng(<span class="dv">2026</span>)</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Символьные переменные для выкладок</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>x, y <span class="op">=</span> sp.symbols(<span class="st">"x y"</span>, real<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> norm_cdf(t):</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Функция распределения стандартного нормального закона, Phi(t) = P(Z &lt; t)."""</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="fl">0.5</span> <span class="op">*</span> (<span class="dv">1</span> <span class="op">+</span> erf(t <span class="op">/</span> sqrt(<span class="dv">2</span>)))</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> normal2_pdf(xs, ys, mu_x, mu_y, s_x, s_y, r):</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Плотность нормального закона на плоскости с параметрами mu_x, mu_y, s_x, s_y, r."""</span></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>    u, v <span class="op">=</span> (xs <span class="op">-</span> mu_x) <span class="op">/</span> s_x, (ys <span class="op">-</span> mu_y) <span class="op">/</span> s_y</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>    q <span class="op">=</span> (u<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> <span class="dv">2</span> <span class="op">*</span> r <span class="op">*</span> u <span class="op">*</span> v <span class="op">+</span> v<span class="op">**</span><span class="dv">2</span>) <span class="op">/</span> (<span class="dv">1</span> <span class="op">-</span> r<span class="op">**</span><span class="dv">2</span>)</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.exp(<span class="op">-</span>q <span class="op">/</span> <span class="dv">2</span>) <span class="op">/</span> (<span class="dv">2</span> <span class="op">*</span> np.pi <span class="op">*</span> s_x <span class="op">*</span> s_y <span class="op">*</span> np.sqrt(<span class="dv">1</span> <span class="op">-</span> r<span class="op">**</span><span class="dv">2</span>))</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> sample_normal2(n, mu_x, mu_y, s_x, s_y, r):</span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""n пар (X, Y) с нормальным законом на плоскости.</span></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a><span class="co">    X = mu_x + s_x Z1, Y = mu_y + s_y (r Z1 + sqrt(1 - r^2) Z2), Z1, Z2 независимы, N(0, 1).</span></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>    z1, z2 <span class="op">=</span> rng.standard_normal(n), rng.standard_normal(n)</span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> mu_x <span class="op">+</span> s_x <span class="op">*</span> z1, mu_y <span class="op">+</span> s_y <span class="op">*</span> (r <span class="op">*</span> z1 <span class="op">+</span> np.sqrt(<span class="dv">1</span> <span class="op">-</span> r<span class="op">**</span><span class="dv">2</span>) <span class="op">*</span> z2)</span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> regression(x0, mu_x, mu_y, s_x, s_y, r):</span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Условный закон Y при X = x0: среднее (линия регрессии) и стандартное отклонение."""</span></span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> mu_y <span class="op">+</span> r <span class="op">*</span> s_y <span class="op">/</span> s_x <span class="op">*</span> (x0 <span class="op">-</span> mu_x), s_y <span class="op">*</span> np.sqrt(<span class="dv">1</span> <span class="op">-</span> r<span class="op">**</span><span class="dv">2</span>)</span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> linearized_var(grad, cov):</span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Дисперсия по линеаризации: grad^T Sigma grad.</span></span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a><span class="co">    grad: частные производные функции в точке средних; cov: ковариационная матрица.</span></span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>    grad <span class="op">=</span> np.asarray(grad, dtype<span class="op">=</span><span class="bu">float</span>)</span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">float</span>(grad <span class="op">@</span> np.asarray(cov, dtype<span class="op">=</span><span class="bu">float</span>) <span class="op">@</span> grad)</span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> compare(name, a, b, labels<span class="op">=</span>(<span class="st">"точно"</span>, <span class="st">"симуляция"</span>)):</span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Печатает два значения одной величины рядом, с подписями labels."""</span></span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>name<span class="sc">:&gt;14}</span><span class="ss">:  </span><span class="sc">{</span>labels[<span class="dv">0</span>]<span class="sc">}</span><span class="ss"> </span><span class="sc">{</span>a<span class="sc">:10.5f}</span><span class="ss">   </span><span class="sc">{</span>labels[<span class="dv">1</span>]<span class="sc">}</span><span class="ss"> </span><span class="sc">{</span>b<span class="sc">:10.5f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="краткая-сводка" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="краткая-сводка"><span class="header-section-number">6.2</span> Краткая сводка</h2>
+<p>Семинар продолжает тему систем двух величин (семинар 5) и закрывает лекцию 9. Две темы:</p>
+<ul>
+<li><strong>нормальный закон на плоскости</strong>: самый важный совместный закон. Рост и вес, две координаты точки попадания, ошибки двух приборов чаще всего описывают именно им;</li>
+<li><strong>числовые характеристики функций</strong> случайных величин: как найти среднее и разброс величины, вычисленной по измеренным (площадь по сторонам, ускорение по длине и периоду маятника), не находя её закона.</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Уведомление
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Обозначения.</strong> В главе используются стандартные обозначения. У лектора и в задачнике то же самое записано иначе:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Здесь</th>
+<th style="text-align: left;">Лекция</th>
+<th style="text-align: left;">Гмурман</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(\mu_X = \E X\)</span>, <span class="math inline">\(\sigma_X\)</span>, <span class="math inline">\(\rho\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(m_x\)</span>, <span class="math inline">\(\sigma_x\)</span>, <span class="math inline">\(r_{xy}\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(a\)</span>, <span class="math inline">\(\sigma\)</span>, <span class="math inline">\(r_{xy}\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(X \sim N(\mu, \sigma^2)\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(N(m, \sigma)\)</span></td>
+<td style="text-align: left;">«нормальна с параметрами <span class="math inline">\(a\)</span>, <span class="math inline">\(\sigma\)</span>»</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(f_{Y\mid X}(y \mid x)\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(f(y/x)\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\psi(y \mid x)\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(\E(Y \mid X = x)\)</span>, <span class="math inline">\(\sigma(Y \mid X = x)\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(m_{y/x}\)</span>, <span class="math inline">\(\sigma_{y/x}\)</span></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(\E g(X)\)</span>, <span class="math inline">\(\Var g(X)\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(M[\varphi(X)]\)</span>, <span class="math inline">\(D[\varphi(X)]\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(M[\varphi(X)]\)</span>, <span class="math inline">\(D[\varphi(X)]\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(\Sigma\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\hat K\)</span></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(\Phi(t) = \Prob(Z &lt; t)\)</span>, <span class="math inline">\(Z \sim N(0, 1)\)</span></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><span class="math inline">\(\Phi(t) - 0{,}5\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Функция <span class="math inline">\(\Phi\)</span>.</strong> Здесь <span class="math inline">\(\Phi\)</span> есть функция распределения стандартного нормального закона: <span class="math inline">\(\Phi(0) = 0{,}5\)</span>, <span class="math inline">\(\Phi(-t) = 1 - \Phi(t)\)</span>. Функция Лапласа из задачника (и из семинара 3) берёт интеграл от нуля и меньше на <span class="math inline">\(0{,}5\)</span>. Для <span class="math inline">\(X \sim N(\mu, \sigma^2)\)</span> <span class="math display">\[
+\Prob(\alpha &lt; X &lt; \beta) = \Phi\Big(\frac{\beta - \mu}{\sigma}\Big) - \Phi\Big(\frac{\alpha - \mu}{\sigma}\Big),
+\qquad \Prob(|X - \mu| &lt; k\sigma) = 2\Phi(k) - 1.
+\]</span></p>
+</div>
+</div>
+<section id="нормальный-закон-на-плоскости" class="level3" data-number="6.2.1">
+<h3 data-number="6.2.1" class="anchored" data-anchor-id="нормальный-закон-на-плоскости"><span class="header-section-number">6.2.1</span> Нормальный закон на плоскости</h3>
+<p>Пара <span class="math inline">\((X, Y)\)</span> распределена по <strong>нормальному закону на плоскости</strong> (двумерному нормальному), если её плотность <span id="eq-s07-normal2"><span class="math display">\[
+f(x, y) = \frac{1}{2\pi\sigma_X\sigma_Y\sqrt{1 - \rho^2}}
+\exp\left\{-\frac{1}{2(1 - \rho^2)}\left[\frac{(x - \mu_X)^2}{\sigma_X^2}
+- 2\rho\,\frac{(x - \mu_X)(y - \mu_Y)}{\sigma_X\sigma_Y}
++ \frac{(y - \mu_Y)^2}{\sigma_Y^2}\right]\right\}.
+\tag{6.1}\]</span></span> Пять параметров имеют прямой смысл: <span class="math inline">\(\mu_X = \E X\)</span>, <span class="math inline">\(\mu_Y = \E Y\)</span>, <span class="math inline">\(\sigma_X\)</span> и <span class="math inline">\(\sigma_Y\)</span> есть стандартные отклонения составляющих, <span class="math inline">\(\rho = \rho(X, Y)\)</span>, <span class="math inline">\(|\rho| &lt; 1\)</span>. Закон целиком задаётся средними, дисперсиями и ковариацией.</p>
+<p>В матричной записи, с <span class="math inline">\(\mathbf z = (x, y)^{\mathsf T}\)</span>, вектором средних <span class="math inline">\(\boldsymbol\mu = (\mu_X, \mu_Y)^{\mathsf T}\)</span> и ковариационной матрицей <span id="eq-s07-normal2-matrix"><span class="math display">\[
+\Sigma = \begin{pmatrix} \sigma_X^2 &amp; \rho\sigma_X\sigma_Y \\ \rho\sigma_X\sigma_Y &amp; \sigma_Y^2 \end{pmatrix},
+\qquad
+f(\mathbf z) = \frac{1}{2\pi\sqrt{\det\Sigma}}
+\exp\Big\{-\tfrac12(\mathbf z - \boldsymbol\mu)^{\mathsf T}\Sigma^{-1}(\mathbf z - \boldsymbol\mu)\Big\}.
+\tag{6.2}\]</span></span> Коротко пишут <span class="math inline">\((X, Y) \sim N(\boldsymbol\mu, \Sigma)\)</span>. Матричная форма удобна, когда плотность дана «в готовом виде» и параметры надо узнать (задача 1): квадратичная форма в показателе есть <span class="math inline">\(\Sigma^{-1}\)</span>.</p>
+<p><strong>Свойства.</strong></p>
+<ol type="1">
+<li><strong>Составляющие нормальны:</strong> <span class="math inline">\(X \sim N(\mu_X, \sigma_X^2)\)</span>, <span class="math inline">\(Y \sim N(\mu_Y, \sigma_Y^2)\)</span>. Обратное неверно: две нормальные величины не обязаны образовывать нормальный закон на плоскости (задача 3).</li>
+<li><strong>Некоррелированность равносильна независимости.</strong> При <span class="math inline">\(\rho = 0\)</span> перекрёстное слагаемое в <a href="#eq-s07-normal2" class="quarto-xref">Уравнение&nbsp;<span>6.1</span></a> исчезает, и плотность распадается в произведение <span class="math inline">\(f_X(x)f_Y(y)\)</span>. Для произвольных величин из <span class="math inline">\(\rho = 0\)</span> независимость не следует (семинар 5); для нормального закона на плоскости следует.</li>
+<li><strong>Условные законы нормальны:</strong> <span id="eq-s07-cond"><span class="math display">\[
+Y \mid X = x \ \sim\ N\Big(\mu_Y + \rho\frac{\sigma_Y}{\sigma_X}(x - \mu_X),\ \ \sigma_Y^2(1 - \rho^2)\Big).
+\tag{6.3}\]</span></span> Линия регрессии <span class="math inline">\(\E(Y \mid X = x) = \mu_Y + \rho\frac{\sigma_Y}{\sigma_X}(x - \mu_X)\)</span> <strong>прямая</strong>, а условная дисперсия <span class="math inline">\(\sigma_Y^2(1 - \rho^2)\)</span> <strong>от <span class="math inline">\(x\)</span> не зависит</strong>. Знание <span class="math inline">\(X\)</span> уменьшает дисперсию <span class="math inline">\(Y\)</span> в <span class="math inline">\(1/(1 - \rho^2)\)</span> раз: доля <span class="math inline">\(\rho^2\)</span> разброса <span class="math inline">\(Y\)</span> объясняется значением <span class="math inline">\(X\)</span>.</li>
+<li><strong>Две линии регрессии.</strong> По симметрии <span class="math inline">\(\E(X \mid Y = y) = \mu_X + \rho\frac{\sigma_X}{\sigma_Y}(y - \mu_Y)\)</span>. Обе прямые проходят через центр <span class="math inline">\((\mu_X, \mu_Y)\)</span>, но это <strong>разные прямые</strong>: вторая не получается обращением первой. Совпадают они только при <span class="math inline">\(|\rho| = 1\)</span> (задача 2).</li>
+<li><strong>Линии равной плотности есть эллипсы</strong> (эллипсы рассеивания) с центром <span class="math inline">\((\mu_X, \mu_Y)\)</span>: на них показатель в <a href="#eq-s07-normal2" class="quarto-xref">Уравнение&nbsp;<span>6.1</span></a> постоянен. При <span class="math inline">\(\rho = 0\)</span> оси эллипсов параллельны осям координат, при <span class="math inline">\(\rho = 0\)</span> и <span class="math inline">\(\sigma_X = \sigma_Y\)</span> эллипсы становятся окружностями (задача 4).</li>
+</ol>
+<div id="cell-fig-s07-contours" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>grid <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">241</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>gx, gy <span class="op">=</span> np.meshgrid(grid, grid)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">3</span>, figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="fl">3.4</span>), sharex<span class="op">=</span><span class="va">True</span>, sharey<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> ax, r <span class="kw">in</span> <span class="bu">zip</span>(axes, [<span class="op">-</span><span class="fl">0.7</span>, <span class="fl">0.0</span>, <span class="fl">0.7</span>]):</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    ax.contour(gx, gy, normal2_pdf(gx, gy, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, r), levels<span class="op">=</span><span class="dv">6</span>, colors<span class="op">=</span>PALETTE[<span class="dv">0</span>], linewidths<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    ax.plot(grid, r <span class="op">*</span> grid, color<span class="op">=</span>PALETTE[<span class="dv">1</span>], lw<span class="op">=</span><span class="dv">2</span>, label<span class="op">=</span><span class="st">"$</span><span class="ch">\\</span><span class="st">mathrm</span><span class="sc">{E}</span><span class="st">(Y</span><span class="ch">\\</span><span class="st">mid X=x)$"</span>)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> r <span class="op">!=</span> <span class="dv">0</span>:</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>        ax.plot(r <span class="op">*</span> grid, grid, color<span class="op">=</span>PALETTE[<span class="dv">2</span>], lw<span class="op">=</span><span class="dv">2</span>, ls<span class="op">=</span><span class="st">"--"</span>, label<span class="op">=</span><span class="st">"$</span><span class="ch">\\</span><span class="st">mathrm</span><span class="sc">{E}</span><span class="st">(X</span><span class="ch">\\</span><span class="st">mid Y=y)$"</span>)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>        ax.axvline(<span class="dv">0</span>, color<span class="op">=</span>PALETTE[<span class="dv">2</span>], lw<span class="op">=</span><span class="dv">2</span>, ls<span class="op">=</span><span class="st">"--"</span>)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    ax.set_title(<span class="ss">f"ρ = </span><span class="sc">{</span>r<span class="sc">:g}</span><span class="ss">"</span>.replace(<span class="st">"."</span>, <span class="st">","</span>), fontsize<span class="op">=</span><span class="dv">10</span>)</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    ax.set_xlim(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>)</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    ax.set_ylim(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>)</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    ax.set_aspect(<span class="st">"equal"</span>)</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    ax.set_xlabel(<span class="st">"$x$"</span>)</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].set_ylabel(<span class="st">"$y$"</span>)</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">2</span>].legend(fontsize<span class="op">=</span><span class="dv">8</span>, loc<span class="op">=</span><span class="st">"upper left"</span>)</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div id="fig-s07-contours" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-s07-contours-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="seminar-07_files/figure-html/fig-s07-contours-output-1.png" width="1078" height="386" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-s07-contours-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;6.1: Линии равной плотности нормального закона на плоскости при <span class="math inline">\(\sigma_X = \sigma_Y = 1\)</span> и трёх значениях <span class="math inline">\(\rho\)</span>. Сплошная прямая: регрессия <span class="math inline">\(Y\)</span> на <span class="math inline">\(X\)</span>, пунктир: регрессия <span class="math inline">\(X\)</span> на <span class="math inline">\(Y\)</span>. При <span class="math inline">\(\rho = 0\)</span> обе совпадают с осями, при <span class="math inline">\(|\rho| \to 1\)</span> эллипсы сплющиваются, а прямые сближаются.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="числовые-характеристики-функций" class="level3" data-number="6.2.2">
+<h3 data-number="6.2.2" class="anchored" data-anchor-id="числовые-характеристики-функций"><span class="header-section-number">6.2.2</span> Числовые характеристики функций</h3>
+<p>Пусть <span class="math inline">\(Y = g(X)\)</span>. Чтобы найти <span class="math inline">\(\E Y\)</span> и <span class="math inline">\(\Var Y\)</span>, <strong>закон <span class="math inline">\(Y\)</span> искать не нужно</strong>: достаточно закона аргумента. <span id="eq-s07-Eg"><span class="math display">\[
+\E g(X) = \sum_i g(x_i)\,p_i, \qquad \E g(X) = \int_{-\infty}^{\infty} g(x)\,f(x)\,dx,
+\tag{6.4}\]</span></span> <span id="eq-s07-Varg"><span class="math display">\[
+\Var g(X) = \E\big[g(X)^2\big] - \big(\E g(X)\big)^2.
+\tag{6.5}\]</span></span> Для функции двух аргументов так же, по совместному закону: <span class="math inline">\(\E g(X, Y) = \iint g(x, y)\,f(x, y)\,dx\,dy\)</span> (семинар 5).</p>
+<p>Для <strong>линейной</strong> функции хватает средних, дисперсий и ковариаций аргументов (свойства из семинара 5): <span class="math inline">\(\E(aX + bY + c) = a\E X + b\E Y + c\)</span>, <span class="math inline">\(\Var(aX + bY + c) = a^2\Var X + b^2\Var Y + 2ab\Cov(X, Y)\)</span>. Для <strong>произведения</strong> <span class="math inline">\(\E(XY) = \E X\,\E Y + \Cov(X, Y)\)</span>, а для независимых <span class="math inline">\(X\)</span> и <span class="math inline">\(Y\)</span> <span id="eq-s07-varprod"><span class="math display">\[
+\Var(XY) = \Var X\,\Var Y + (\E X)^2\Var Y + (\E Y)^2\Var X.
+\tag{6.6}\]</span></span></p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Важное уведомление
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong><span class="math inline">\(\E g(X) \ne g(\E X)\)</span>, если <span class="math inline">\(g\)</span> не линейна.</strong> Средний квадрат не равен квадрату среднего (их разность есть дисперсия), среднее время в пути не равно пути, делённому на среднюю скорость (задача 5). Для выпуклой вниз функции <span class="math inline">\(g\)</span> (как <span class="math inline">\(x^2\)</span>, <span class="math inline">\(1/x\)</span> при <span class="math inline">\(x &gt; 0\)</span>, <span class="math inline">\(e^x\)</span>) всегда <span class="math inline">\(\E g(X) \geqslant g(\E X)\)</span>: это <strong>неравенство Йенсена</strong>.</p>
+</div>
+</div>
+</section>
+<section id="линеаризация" class="level3" data-number="6.2.3">
+<h3 data-number="6.2.3" class="anchored" data-anchor-id="линеаризация"><span class="header-section-number">6.2.3</span> Линеаризация</h3>
+<p>Часто <span class="math inline">\(g\)</span> сложна, а закон <span class="math inline">\(X\)</span> известен не полностью: известны только среднее <span class="math inline">\(\mu\)</span> и дисперсия (так обычно задают погрешность измерения). Если <span class="math inline">\(X\)</span> мало отклоняется от <span class="math inline">\(\mu\)</span>, функцию заменяют касательной, <span class="math inline">\(g(X) \approx g(\mu) + g'(\mu)(X - \mu)\)</span>, и получают <span id="eq-s07-lin1"><span class="math display">\[
+\E g(X) \approx g(\mu), \qquad \Var g(X) \approx g'(\mu)^2\,\Var X.
+\tag{6.7}\]</span></span> Для функции нескольких аргументов <span class="math inline">\(\mathbf X = (X_1, \dots, X_n)\)</span> со средними <span class="math inline">\(\boldsymbol\mu\)</span> и ковариационной матрицей <span class="math inline">\(\Sigma\)</span> так же (производные берутся в точке <span class="math inline">\(\boldsymbol\mu\)</span>): <span id="eq-s07-linn"><span class="math display">\[
+\Var g(\mathbf X) \approx \sum_i \Big(\frac{\partial g}{\partial x_i}\Big)^2\Var X_i
++ 2\sum_{i&lt;j}\frac{\partial g}{\partial x_i}\frac{\partial g}{\partial x_j}\Cov(X_i, X_j)
+= \nabla g^{\mathsf T}\,\Sigma\,\nabla g.
+\tag{6.8}\]</span></span> Важный частный случай: <span class="math inline">\(g = c\,x_1^{k_1}\cdots x_n^{k_n}\)</span> при независимых аргументах. Тогда <span class="math inline">\(\partial g/\partial x_i = k_i g/x_i\)</span>, и <strong>относительные погрешности</strong> <span class="math inline">\(\delta = \sigma/\mu\)</span> складываются квадратами с весами-показателями: <span id="eq-s07-rel"><span class="math display">\[
+\delta_g^2 \approx \sum_i k_i^2\,\delta_i^2.
+\tag{6.9}\]</span></span></p>
+<p><strong>Поправка второго порядка.</strong> Если удержать в формуле Тейлора ещё слагаемое <span class="math inline">\(\tfrac12 g''(\mu)(X - \mu)^2\)</span>, то <span id="eq-s07-lin2"><span class="math display">\[
+\E g(X) \approx g(\mu) + \tfrac12 g''(\mu)\Var X, \qquad
+\Var g(X) \approx g'(\mu)^2\Var X + \tfrac12 g''(\mu)^2(\Var X)^2 \quad (X \text{ нормальна}).
+\tag{6.10}\]</span></span> Вторая формула использует моменты нормального закона: <span class="math inline">\(\E(X - \mu)^3 = 0\)</span>, <span class="math inline">\(\E(X - \mu)^4 = 3\sigma^4\)</span>. Поправка показывает, когда линеаризации можно верить: пока <span class="math inline">\(\tfrac12|g''|\sigma^2\)</span> мало по сравнению с <span class="math inline">\(|g'|\sigma\)</span>, то есть пока на масштабе <span class="math inline">\(\sigma\)</span> функция почти не изгибается (задача 11).</p>
+</section>
+</section>
+<section id="блок-a.-нормальный-закон-на-плоскости" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="блок-a.-нормальный-закон-на-плоскости"><span class="header-section-number">6.3</span> Блок A. Нормальный закон на плоскости</h2>
+<section id="sec-s07-t1" class="level3" data-number="6.3.1">
+<h3 data-number="6.3.1" class="anchored" data-anchor-id="sec-s07-t1"><span class="header-section-number">6.3.1</span> Задача 1</h3>
+<p>Плотность пары <span class="math inline">\((X, Y)\)</span> имеет вид <span class="math display">\[
+f(x, y) = C\exp\Big\{-(x - 1)^2 + (x - 1)(y + 2) - \tfrac12(y + 2)^2\Big\}.
+\]</span> а) Найти <span class="math inline">\(C\)</span> и плотность составляющей <span class="math inline">\(X\)</span>. б) Найти условный закон <span class="math inline">\(Y\)</span> при <span class="math inline">\(X = x\)</span> и линию регрессии <span class="math inline">\(Y\)</span> на <span class="math inline">\(X\)</span>. в) Найти <span class="math inline">\(\mu_X\)</span>, <span class="math inline">\(\mu_Y\)</span>, <span class="math inline">\(\sigma_X\)</span>, <span class="math inline">\(\sigma_Y\)</span>, <span class="math inline">\(\rho\)</span>. Независимы ли <span class="math inline">\(X\)</span> и <span class="math inline">\(Y\)</span>?</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Решение">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Совет</span>Решение
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Обозначим <span class="math inline">\(u = x - 1\)</span>, <span class="math inline">\(v = y + 2\)</span>. В показателе стоит <span class="math inline">\(-(u^2 - uv + \tfrac12 v^2)\)</span>. Выделим полный квадрат по <span class="math inline">\(v\)</span>: <span class="math display">\[
+u^2 - uv + \tfrac12 v^2 = \tfrac12(v - u)^2 + \tfrac12 u^2,
+\qquad
+f(x, y) = C\,e^{-u^2/2}\,e^{-(v - u)^2/2}.
+\]</span></p>
+<p><strong>а)</strong> Интеграл по <span class="math inline">\(y\)</span> (то есть по <span class="math inline">\(v\)</span>) от <span class="math inline">\(e^{-(v - u)^2/2}\)</span> равен <span class="math inline">\(\sqrt{2\pi}\)</span> при любом <span class="math inline">\(u\)</span>, интеграл по <span class="math inline">\(u\)</span> от <span class="math inline">\(e^{-u^2/2}\)</span> тоже <span class="math inline">\(\sqrt{2\pi}\)</span>. Нормировка: <span class="math inline">\(C\cdot2\pi = 1\)</span>, <span class="math inline">\(C = \dfrac{1}{2\pi}\)</span>. Плотность <span class="math inline">\(X\)</span>: <span class="math display">\[
+f_X(x) = \int_{-\infty}^{\infty} f(x, y)\,dy = \frac{1}{2\pi}\,e^{-u^2/2}\sqrt{2\pi}
+= \frac{1}{\sqrt{2\pi}}\,e^{-(x - 1)^2/2}: \qquad X \sim N(1, 1).
+\]</span></p>
+<p><strong>б)</strong> Делим совместную плотность на маргинальную: <span class="math display">\[
+f_{Y\mid X}(y \mid x) = \frac{f(x, y)}{f_X(x)} = \frac{1}{\sqrt{2\pi}}\,e^{-(v - u)^2/2}
+= \frac{1}{\sqrt{2\pi}}\,e^{-(y - x + 3)^2/2}.
+\]</span> При <span class="math inline">\(X = x\)</span> величина <span class="math inline">\(Y\)</span> нормальна со средним <span class="math inline">\(x - 3\)</span> и дисперсией 1. Линия регрессии <span class="math inline">\(\E(Y \mid X = x) = x - 3\)</span>, условная дисперсия от <span class="math inline">\(x\)</span> не зависит, как и должно быть по <a href="#eq-s07-cond" class="quarto-xref">Уравнение&nbsp;<span>6.3</span></a>.</p>
+<p><strong>в)</strong> Из б) следует представление <span class="math inline">\(Y + 2 = (X - 1) + W\)</span>, где <span class="math inline">\(W \sim N(0, 1)\)</span> не зависит от <span class="math inline">\(X\)</span> (условный закон <span class="math inline">\(W\)</span> один и тот же при всех <span class="math inline">\(x\)</span>). Отсюда <span class="math display">\[
+\mu_X = 1, \quad \mu_Y = -2, \quad \sigma_X^2 = 1, \quad
+\sigma_Y^2 = \Var X + \Var W = 2, \quad
+\Cov(X, Y) = \Cov(X, X + W) = \Var X = 1,
+\]</span> <span class="math display">\[
+\rho = \frac{1}{1\cdot\sqrt2} = \frac{1}{\sqrt2} \approx 0{,}71.
+\]</span> <span class="math inline">\(\rho \ne 0\)</span>, значит, <span class="math inline">\(X\)</span> и <span class="math inline">\(Y\)</span> <strong>зависимы</strong>; это видно и из б): условный закон <span class="math inline">\(Y\)</span> зависит от <span class="math inline">\(x\)</span>.</p>
+<p><strong>Контроль через <a href="#eq-s07-normal2-matrix" class="quarto-xref">Уравнение&nbsp;<span>6.2</span></a>.</strong> Показатель равен <span class="math inline">\(-\tfrac12(2u^2 - 2uv + v^2)\)</span>, то есть <span class="math inline">\(\Sigma^{-1} = \begin{pmatrix} 2 &amp; -1 \\ -1 &amp; 1 \end{pmatrix}\)</span>. Обращая, <span class="math inline">\(\Sigma = \begin{pmatrix} 1 &amp; 1 \\ 1 &amp; 2 \end{pmatrix}\)</span>: те же <span class="math inline">\(\Var X = 1\)</span>, <span class="math inline">\(\Var Y = 2\)</span>, <span class="math inline">\(\Cov = 1\)</span>. И <span class="math inline">\(\det\Sigma = 1\)</span>, поэтому <span class="math inline">\(C = 1/(2\pi\sqrt{\det\Sigma}) = 1/(2\pi)\)</span>.</p>
+<p>Проверка: интегралы в sympy и обращение матрицы.</p>
+<div id="s07-t1-check" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>g1 <span class="op">=</span> sp.exp(<span class="op">-</span>(x <span class="op">-</span> <span class="dv">1</span>)<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> (x <span class="op">-</span> <span class="dv">1</span>) <span class="op">*</span> (y <span class="op">+</span> <span class="dv">2</span>) <span class="op">-</span> (y <span class="op">+</span> <span class="dv">2</span>)<span class="op">**</span><span class="dv">2</span> <span class="op">/</span> <span class="dv">2</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>C1 <span class="op">=</span> sp.simplify(<span class="dv">1</span> <span class="op">/</span> sp.integrate(g1, (x, <span class="op">-</span>sp.oo, sp.oo), (y, <span class="op">-</span>sp.oo, sp.oo)))</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>fx1 <span class="op">=</span> sp.simplify(sp.integrate(C1 <span class="op">*</span> g1, (y, <span class="op">-</span>sp.oo, sp.oo)))</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>cond1 <span class="op">=</span> sp.simplify(C1 <span class="op">*</span> g1 <span class="op">/</span> fx1)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"C ="</span>, C1)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"f_X(x) ="</span>, fx1)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"f(y|x) / N(x-3, 1):"</span>, sp.simplify(cond1 <span class="op">/</span> (sp.exp(<span class="op">-</span>(y <span class="op">-</span> x <span class="op">+</span> <span class="dv">3</span>)<span class="op">**</span><span class="dv">2</span> <span class="op">/</span> <span class="dv">2</span>) <span class="op">/</span> sp.sqrt(<span class="dv">2</span> <span class="op">*</span> sp.pi))))</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Sigma ="</span>, sp.Matrix([[<span class="dv">2</span>, <span class="op">-</span><span class="dv">1</span>], [<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>]]).inv().tolist())</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>C = 1/(2*pi)
+f_X(x) = sqrt(2)*exp(-x**2/2 + x - 1/2)/(2*sqrt(pi))
+f(y|x) / N(x-3, 1): 1
+Sigma = [[1, 1], [1, 2]]</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning callout-titled" title="Типичная ошибка">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Предупреждение</span>Типичная ошибка
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Читать <span class="math inline">\(\sigma_X^2\)</span> прямо по коэффициенту при <span class="math inline">\((x - \mu_X)^2\)</span>, как в одномерном случае. Коэффициент при <span class="math inline">\(u^2\)</span> здесь равен <span class="math inline">\(1/(2(1 - \rho^2)\sigma_X^2)\)</span>, а не <span class="math inline">\(1/(2\sigma_X^2)\)</span>: при <span class="math inline">\(\rho \ne 0\)</span> в него входит и корреляция. Надёжнее выделить полный квадрат или обратить матрицу квадратичной формы.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="sec-s07-t2" class="level3" data-number="6.3.2">
+<h3 data-number="6.3.2" class="anchored" data-anchor-id="sec-s07-t2"><span class="header-section-number">6.3.2</span> Задача 2</h3>
+<p>Рост <span class="math inline">\(X\)</span> (см) и вес <span class="math inline">\(Y\)</span> (кг) взрослых мужчин распределены по нормальному закону на плоскости с параметрами <span class="math inline">\(\mu_X = 176\)</span>, <span class="math inline">\(\sigma_X = 7\)</span>, <span class="math inline">\(\mu_Y = 74\)</span>, <span class="math inline">\(\sigma_Y = 10\)</span>, <span class="math inline">\(\rho = 0{,}7\)</span>.</p>
+<p>а) Найти линию регрессии <span class="math inline">\(Y\)</span> на <span class="math inline">\(X\)</span> и условное стандартное отклонение веса при известном росте. б) Каков средний вес мужчин ростом 183 см? Какая доля из них весит больше 85 кг? Сравнить с долей таких среди всех мужчин. в) Найти средний рост мужчин весом 85 кг. Почему ответ не получается подстановкой <span class="math inline">\(y = 85\)</span> в прямую из а)?</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Решение">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Совет</span>Решение
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>а)</strong> По <a href="#eq-s07-cond" class="quarto-xref">Уравнение&nbsp;<span>6.3</span></a> наклон <span class="math inline">\(\rho\sigma_Y/\sigma_X = 0{,}7\cdot10/7 = 1\)</span> кг/см: <span class="math display">\[
+\E(Y \mid X = x) = 74 + (x - 176), \qquad
+\sigma(Y \mid X = x) = 10\sqrt{1 - 0{,}49} \approx 7{,}14 \text{ кг}.
+\]</span> Каждый лишний сантиметр роста добавляет в среднем 1 кг. Разброс веса при известном росте 7,14 кг вместо 10 кг: рост объясняет <span class="math inline">\(\rho^2 = 49\,\%\)</span> дисперсии веса.</p>
+<p><strong>б)</strong> При <span class="math inline">\(x = 183\)</span> средний вес <span class="math inline">\(74 + 7 = 81\)</span> кг, и <span class="math display">\[
+\Prob(Y &gt; 85 \mid X = 183) = 1 - \Phi\Big(\frac{85 - 81}{7{,}14}\Big) = 1 - \Phi(0{,}56) \approx 0{,}288,
+\qquad
+\Prob(Y &gt; 85) = 1 - \Phi\Big(\frac{85 - 74}{10}\Big) = 1 - \Phi(1{,}1) \approx 0{,}136.
+\]</span> Среди высоких мужчин тяжёлых вдвое больше, чем в среднем.</p>
+<p><strong>в)</strong> Регрессия <span class="math inline">\(X\)</span> на <span class="math inline">\(Y\)</span> имеет наклон <span class="math inline">\(\rho\sigma_X/\sigma_Y = 0{,}49\)</span> см/кг: <span class="math display">\[
+\E(X \mid Y = 85) = 176 + 0{,}49\cdot(85 - 74) \approx 181{,}4 \text{ см}.
+\]</span> Обращение прямой из а) дало бы <span class="math inline">\(x = 176 + 11 = 187\)</span> см. Разница в том, что прямые отвечают на <strong>разные вопросы</strong>: «каков средний вес при данном росте» и «каков средний рост при данном весе». Человек весом 85 кг тяжелее среднего на 1,1 <span class="math inline">\(\sigma_Y\)</span>, но выше среднего в среднем только на <span class="math inline">\(0{,}7\cdot1{,}1 = 0{,}77\,\sigma_X\)</span>. Это <strong>регрессия к среднему</strong>: при <span class="math inline">\(|\rho| &lt; 1\)</span> условное среднее отклоняется от общего (в единицах <span class="math inline">\(\sigma\)</span>) меньше, чем условие.</p>
+<p>Проверка: формулы и симуляция <span class="math inline">\(10^6\)</span> мужчин.</p>
+<div id="s07-t2-check" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>par2 <span class="op">=</span> (<span class="dv">176</span>, <span class="dv">74</span>, <span class="dv">7</span>, <span class="dv">10</span>, <span class="fl">0.7</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>m183, s_cond <span class="op">=</span> regression(<span class="dv">183</span>, <span class="op">*</span>par2)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"E(Y|X=183) = </span><span class="sc">{</span>m183<span class="sc">:.2f}</span><span class="ss">,  sigma(Y|X) = </span><span class="sc">{</span>s_cond<span class="sc">:.3f}</span><span class="ss">"</span>)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>hx, hy <span class="op">=</span> sample_normal2(<span class="dv">1_000_000</span>, <span class="op">*</span>par2)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>near183 <span class="op">=</span> np.<span class="bu">abs</span>(hx <span class="op">-</span> <span class="dv">183</span>) <span class="op">&lt;</span> <span class="fl">0.5</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>compare(<span class="st">"P(Y&gt;85|X=183)"</span>, <span class="dv">1</span> <span class="op">-</span> norm_cdf((<span class="dv">85</span> <span class="op">-</span> m183) <span class="op">/</span> s_cond), (hy[near183] <span class="op">&gt;</span> <span class="dv">85</span>).mean())</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>compare(<span class="st">"P(Y&gt;85)"</span>, <span class="dv">1</span> <span class="op">-</span> norm_cdf((<span class="dv">85</span> <span class="op">-</span> <span class="dv">74</span>) <span class="op">/</span> <span class="dv">10</span>), (hy <span class="op">&gt;</span> <span class="dv">85</span>).mean())</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>compare(<span class="st">"E(X|Y=85)"</span>, <span class="dv">176</span> <span class="op">+</span> <span class="fl">0.7</span> <span class="op">*</span> <span class="dv">7</span> <span class="op">/</span> <span class="dv">10</span> <span class="op">*</span> (<span class="dv">85</span> <span class="op">-</span> <span class="dv">74</span>), hx[np.<span class="bu">abs</span>(hy <span class="op">-</span> <span class="dv">85</span>) <span class="op">&lt;</span> <span class="fl">0.5</span>].mean())</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>E(Y|X=183) = 81.00,  sigma(Y|X) = 7.141
+ P(Y&gt;85|X=183):  точно    0.28770   симуляция    0.28573
+       P(Y&gt;85):  точно    0.13567   симуляция    0.13594
+     E(X|Y=85):  точно  181.39000   симуляция  181.38704</code></pre>
+</div>
+</div>
+<div id="cell-fig-s07-t2" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>px, py <span class="op">=</span> sample_normal2(<span class="dv">2000</span>, <span class="op">*</span>par2)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>xg <span class="op">=</span> np.linspace(<span class="dv">150</span>, <span class="dv">202</span>, <span class="dv">100</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="fl">4.4</span>))</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>ax.scatter(px, py, s<span class="op">=</span><span class="dv">4</span>, alpha<span class="op">=</span><span class="fl">0.35</span>, color<span class="op">=</span>PALETTE[<span class="dv">0</span>])</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>ax.plot(xg, <span class="dv">74</span> <span class="op">+</span> (xg <span class="op">-</span> <span class="dv">176</span>), color<span class="op">=</span>PALETTE[<span class="dv">1</span>], lw<span class="op">=</span><span class="dv">2</span>, label<span class="op">=</span><span class="st">"$</span><span class="ch">\\</span><span class="st">mathrm</span><span class="sc">{E}</span><span class="st">(Y </span><span class="ch">\\</span><span class="st">mid X = x)$"</span>)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>yg <span class="op">=</span> np.linspace(<span class="dv">40</span>, <span class="dv">108</span>, <span class="dv">100</span>)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>ax.plot(<span class="dv">176</span> <span class="op">+</span> <span class="fl">0.49</span> <span class="op">*</span> (yg <span class="op">-</span> <span class="dv">74</span>), yg, color<span class="op">=</span>PALETTE[<span class="dv">2</span>], lw<span class="op">=</span><span class="dv">2</span>, ls<span class="op">=</span><span class="st">"--"</span>, label<span class="op">=</span><span class="st">"$</span><span class="ch">\\</span><span class="st">mathrm</span><span class="sc">{E}</span><span class="st">(X </span><span class="ch">\\</span><span class="st">mid Y = y)$"</span>)</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>ax.plot(xg, <span class="dv">74</span> <span class="op">+</span> <span class="dv">10</span> <span class="op">/</span> <span class="dv">7</span> <span class="op">*</span> (xg <span class="op">-</span> <span class="dv">176</span>), color<span class="op">=</span><span class="st">"grey"</span>, lw<span class="op">=</span><span class="fl">1.2</span>, ls<span class="op">=</span><span class="st">":"</span>, label<span class="op">=</span><span class="st">"наклон $</span><span class="ch">\\</span><span class="st">sigma_Y/</span><span class="ch">\\</span><span class="st">sigma_X$"</span>)</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>ax.set_xlim(<span class="dv">150</span>, <span class="dv">202</span>)</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>ax.set_ylim(<span class="dv">40</span>, <span class="dv">108</span>)</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">"рост $x$, см"</span>)</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"вес $y$, кг"</span>)</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>ax.legend(fontsize<span class="op">=</span><span class="dv">9</span>, loc<span class="op">=</span><span class="st">"upper left"</span>)</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div id="fig-s07-t2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-s07-t2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="seminar-07_files/figure-html/fig-s07-t2-output-1.png" width="782" height="496" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-s07-t2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;6.2: 2000 мужчин из задачи 2. Сплошная прямая: средний вес при данном росте, пунктир: средний рост при данном весе. Серая точечная прямая с наклоном <span class="math inline">\(\sigma_Y/\sigma_X\)</span> идёт по диагонали облака. Регрессия <span class="math inline">\(Y\)</span> на <span class="math inline">\(X\)</span> положе её, регрессия <span class="math inline">\(X\)</span> на <span class="math inline">\(Y\)</span> круче: каждая тянет к среднему своей переменной.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning callout-titled" title="Типичная ошибка">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Предупреждение</span>Типичная ошибка
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Получать регрессию <span class="math inline">\(X\)</span> на <span class="math inline">\(Y\)</span>, выражая <span class="math inline">\(x\)</span> из прямой регрессии <span class="math inline">\(Y\)</span> на <span class="math inline">\(X\)</span>. Так выходит прямая с наклоном <span class="math inline">\(\sigma_X/(\rho\sigma_Y)\)</span> вместо <span class="math inline">\(\rho\sigma_X/\sigma_Y\)</span>; они совпадают только при <span class="math inline">\(|\rho| = 1\)</span>.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Для самопроверки">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Уведомление</span>Для самопроверки
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Для тех же мужчин: какая доля мужчин ростом 169 см весит меньше 70 кг? <em>Ответ:</em> <span class="math inline">\(\E(Y \mid X = 169) = 67\)</span>, <span class="math inline">\(\Phi(3/7{,}14) = \Phi(0{,}42) \approx 0{,}66\)</span>.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="sec-s07-t3" class="level3" data-number="6.3.3">
+<h3 data-number="6.3.3" class="anchored" data-anchor-id="sec-s07-t3"><span class="header-section-number">6.3.3</span> Задача 3</h3>
+<p><span class="math inline">\(X \sim N(0, 1)\)</span>. Независимо от <span class="math inline">\(X\)</span> бросают монету и полагают <span class="math inline">\(S = 1\)</span> при гербе, <span class="math inline">\(S = -1\)</span> при решке; <span class="math inline">\(Y = SX\)</span>. а) Доказать, что <span class="math inline">\(Y \sim N(0, 1)\)</span>. б) Найти <span class="math inline">\(\Cov(X, Y)\)</span>. в) Независимы ли <span class="math inline">\(X\)</span> и <span class="math inline">\(Y\)</span>? Распределена ли пара <span class="math inline">\((X, Y)\)</span> по нормальному закону на плоскости?</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Решение">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Совет</span>Решение
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>а)</strong> По формуле полной вероятности, с симметрией <span class="math inline">\(\Prob(-X &lt; t) = \Prob(X &gt; -t) = \Phi(t)\)</span>: <span class="math display">\[
+\Prob(Y &lt; t) = \tfrac12\Prob(X &lt; t) + \tfrac12\Prob(-X &lt; t) = \tfrac12\Phi(t) + \tfrac12\Phi(t) = \Phi(t).
+\]</span></p>
+<p><strong>б)</strong> <span class="math inline">\(S\)</span> и <span class="math inline">\(X\)</span> независимы, <span class="math inline">\(\E S = 0\)</span>, поэтому <span class="math inline">\(\E(XY) = \E(SX^2) = \E S\cdot\E X^2 = 0\)</span> и <span class="math inline">\(\Cov(X, Y) = 0 - 0 = 0\)</span>.</p>
+<p><strong>в)</strong> <strong>Зависимы:</strong> <span class="math inline">\(|Y| = |X|\)</span> всегда. Например, <span class="math inline">\(\Prob(|X| &lt; 1,\ |Y| &gt; 1) = 0\)</span>, а <span class="math inline">\(\Prob(|X| &lt; 1)\,\Prob(|Y| &gt; 1) = 0{,}683\cdot0{,}317 \ne 0\)</span>.</p>
+<p>Значит, пара <strong>не</strong> распределена по нормальному закону на плоскости: иначе из <span class="math inline">\(\rho = 0\)</span> следовала бы независимость (свойство 2). Все точки <span class="math inline">\((X, Y)\)</span> лежат на двух прямых <span class="math inline">\(y = \pm x\)</span>, плотности на плоскости у пары вообще нет.</p>
+<p>Вывод: <strong>нормальность каждой составляющей не делает нормальной пару.</strong> Свойство «некоррелированы, значит, независимы» требует нормальности совместного закона, а не только маргинальных.</p>
+<p>Проверка: симуляция.</p>
+<div id="s07-t3-check" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>z3 <span class="op">=</span> rng.standard_normal(<span class="dv">1_000_000</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>y3 <span class="op">=</span> rng.choice([<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>], size<span class="op">=</span>z3.size) <span class="op">*</span> z3</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"доля Y &lt; 1:"</span>, (y3 <span class="op">&lt;</span> <span class="dv">1</span>).mean().<span class="bu">round</span>(<span class="dv">4</span>), <span class="st">"  Phi(1) ="</span>, <span class="bu">round</span>(norm_cdf(<span class="dv">1</span>), <span class="dv">4</span>))</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"выборочная корреляция:"</span>, np.corrcoef(z3, y3)[<span class="dv">0</span>, <span class="dv">1</span>].<span class="bu">round</span>(<span class="dv">4</span>))</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"P(|X|&lt;1, |Y|&gt;1) ="</span>, ((np.<span class="bu">abs</span>(z3) <span class="op">&lt;</span> <span class="dv">1</span>) <span class="op">&amp;</span> (np.<span class="bu">abs</span>(y3) <span class="op">&gt;</span> <span class="dv">1</span>)).mean(),</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>      <span class="st">"  произведение:"</span>, <span class="bu">round</span>(<span class="bu">float</span>((np.<span class="bu">abs</span>(z3) <span class="op">&lt;</span> <span class="dv">1</span>).mean() <span class="op">*</span> (np.<span class="bu">abs</span>(y3) <span class="op">&gt;</span> <span class="dv">1</span>).mean()), <span class="dv">4</span>))</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>доля Y &lt; 1: 0.8418   Phi(1) = 0.8413
+выборочная корреляция: 0.0031
+P(|X|&lt;1, |Y|&gt;1) = 0.0   произведение: 0.2166</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="sec-s07-t4" class="level3" data-number="6.3.4">
+<h3 data-number="6.3.4" class="anchored" data-anchor-id="sec-s07-t4"><span class="header-section-number">6.3.4</span> Задача 4</h3>
+<p>При стрельбе отклонения точки попадания от центра мишени по горизонтали <span class="math inline">\(X\)</span> и по вертикали <span class="math inline">\(Y\)</span> независимы и распределены по закону <span class="math inline">\(N(0, \sigma^2)\)</span>. а) Найти вероятность попадания в круг радиуса <span class="math inline">\(a\)</span> с центром в центре мишени. б) <span class="math inline">\(\sigma = 5\)</span> см. Найти вероятность попадания в круг радиуса 10 см. Сравнить с вероятностью <span class="math inline">\(\Prob(|X| &lt; 10)\)</span>. в) При каком радиусе вероятность попадания равна <span class="math inline">\(1/2\)</span>?</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Решение">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Совет</span>Решение
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>а)</strong> Величины независимы, поэтому плотность пары есть произведение: <span class="math display">\[
+f(x, y) = \frac{1}{2\pi\sigma^2}\,e^{-(x^2 + y^2)/(2\sigma^2)}.
+\]</span> Она зависит только от расстояния до центра: эллипсы рассеивания здесь окружности. В полярных координатах, <span class="math inline">\(dx\,dy = r\,dr\,d\theta\)</span>: <span class="math display">\[
+\Prob\big(X^2 + Y^2 &lt; a^2\big) = \frac{1}{2\pi\sigma^2}\int_0^{2\pi}\!d\theta\int_0^a e^{-r^2/(2\sigma^2)}\,r\,dr
+= 1 - e^{-a^2/(2\sigma^2)}.
+\]</span></p>
+<p><strong>б)</strong> <span class="math inline">\(a = 2\sigma\)</span>: <span class="math inline">\(\Prob = 1 - e^{-2} \approx 0{,}865\)</span>. Для одной координаты <span class="math inline">\(\Prob(|X| &lt; 2\sigma) = 2\Phi(2) - 1 \approx 0{,}954\)</span>. На плоскости вероятность меньше: чтобы попасть в круг, малыми должны быть <strong>оба</strong> отклонения сразу.</p>
+<p><strong>в)</strong> <span class="math inline">\(1 - e^{-a^2/(2\sigma^2)} = 1/2\)</span>, откуда <span class="math inline">\(a = \sigma\sqrt{2\ln 2} \approx 1{,}177\sigma \approx 5{,}89\)</span> см. Этот радиус называют <strong>срединным отклонением</strong> (круговым вероятным отклонением): половина пуль ложится внутри него.</p>
+<p><strong>Замечание.</strong> В пункте а) по сути найдена функция распределения расстояния <span class="math inline">\(R = \sqrt{X^2 + Y^2}\)</span>: <span class="math inline">\(F_R(a) = 1 - e^{-a^2/(2\sigma^2)}\)</span> при <span class="math inline">\(a &gt; 0\)</span> (закон Рэлея). Это первый пример закона функции двух случайных величин; систематически такие задачи решаются на семинаре 8.</p>
+<p>Проверка: формула и симуляция.</p>
+<div id="s07-t4-check" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>sx4, sy4 <span class="op">=</span> sample_normal2(<span class="dv">1_000_000</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">0</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>dist4 <span class="op">=</span> np.hypot(sx4, sy4)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>compare(<span class="st">"P(R &lt; 10)"</span>, <span class="dv">1</span> <span class="op">-</span> exp(<span class="op">-</span><span class="dv">2</span>), (dist4 <span class="op">&lt;</span> <span class="dv">10</span>).mean())</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>compare(<span class="st">"P(|X| &lt; 10)"</span>, <span class="dv">2</span> <span class="op">*</span> norm_cdf(<span class="dv">2</span>) <span class="op">-</span> <span class="dv">1</span>, (np.<span class="bu">abs</span>(sx4) <span class="op">&lt;</span> <span class="dv">10</span>).mean())</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>compare(<span class="st">"медиана R"</span>, <span class="dv">5</span> <span class="op">*</span> sqrt(<span class="dv">2</span> <span class="op">*</span> log(<span class="dv">2</span>)), <span class="bu">float</span>(np.median(dist4)))</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     P(R &lt; 10):  точно    0.86466   симуляция    0.86446
+   P(|X| &lt; 10):  точно    0.95450   симуляция    0.95464
+     медиана R:  точно    5.88705   симуляция    5.88588</code></pre>
+</div>
+</div>
+<div id="cell-fig-s07-t4" class="cell" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>th <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">2</span> <span class="op">*</span> np.pi, <span class="dv">200</span>)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="fl">4.6</span>, <span class="fl">4.6</span>))</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>ax.scatter(sx4[:<span class="dv">1500</span>], sy4[:<span class="dv">1500</span>], s<span class="op">=</span><span class="dv">4</span>, alpha<span class="op">=</span><span class="fl">0.4</span>, color<span class="op">=</span>PALETTE[<span class="dv">0</span>])</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> rad, col, ls <span class="kw">in</span> [(<span class="dv">5</span>, PALETTE[<span class="dv">1</span>], <span class="st">"-"</span>), (<span class="dv">10</span>, PALETTE[<span class="dv">2</span>], <span class="st">"-"</span>), (<span class="dv">5</span> <span class="op">*</span> sqrt(<span class="dv">2</span> <span class="op">*</span> log(<span class="dv">2</span>)), PALETTE[<span class="dv">3</span>], <span class="st">"--"</span>)]:</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    ax.plot(rad <span class="op">*</span> np.cos(th), rad <span class="op">*</span> np.sin(th), color<span class="op">=</span>col, lw<span class="op">=</span><span class="dv">2</span>, ls<span class="op">=</span>ls)</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>ax.set_aspect(<span class="st">"equal"</span>)</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>ax.set_xlim(<span class="op">-</span><span class="dv">17</span>, <span class="dv">17</span>)</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>ax.set_ylim(<span class="op">-</span><span class="dv">17</span>, <span class="dv">17</span>)</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">"$x$, см"</span>)</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"$y$, см"</span>)</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div id="fig-s07-t4" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-s07-t4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="seminar-07_files/figure-html/fig-s07-t4-output-1.png" width="518" height="508" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-s07-t4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;6.3: 1500 попаданий при <span class="math inline">\(\sigma = 5\)</span> см. Внутри окружности радиуса <span class="math inline">\(\sigma\)</span> лежит 39 % пуль, внутри <span class="math inline">\(2\sigma\)</span> примерно 86 %; пунктир: срединное отклонение 5,89 см, внутри половина пуль.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Для самопроверки">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Уведомление</span>Для самопроверки
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Какова вероятность попасть в круг радиуса <span class="math inline">\(3\sigma\)</span>? Сравнить с правилом трёх сигм для одной координаты. <em>Ответ:</em> <span class="math inline">\(1 - e^{-4{,}5} \approx 0{,}989\)</span> против <span class="math inline">\(0{,}9973\)</span>.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="блок-b.-числовые-характеристики-функций" class="level2" data-number="6.4">
+<h2 data-number="6.4" class="anchored" data-anchor-id="блок-b.-числовые-характеристики-функций"><span class="header-section-number">6.4</span> Блок B. Числовые характеристики функций</h2>
+<section id="sec-s07-t5" class="level3" data-number="6.4.1">
+<h3 data-number="6.4.1" class="anchored" data-anchor-id="sec-s07-t5"><span class="header-section-number">6.4.1</span> Задача 5</h3>
+<p>Автобус проходит перегон длиной 12 км со скоростью <span class="math inline">\(V\)</span>, которая в зависимости от пробок равна 20, 40 или 60 км/ч с вероятностями 0,3; 0,5; 0,2. Найти среднюю скорость <span class="math inline">\(\E V\)</span>, среднее время <span class="math inline">\(T\)</span> прохождения перегона (в минутах) и его стандартное отклонение. Сравнить <span class="math inline">\(\E T\)</span> со временем <span class="math inline">\(12/\E V\)</span>.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Решение">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Совет</span>Решение
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><span class="math inline">\(\E V = 20\cdot0{,}3 + 40\cdot0{,}5 + 60\cdot0{,}2 = 38\)</span> км/ч.</p>
+<p><span class="math inline">\(T = g(V) = 720/V\)</span> минут. По <a href="#eq-s07-Eg" class="quarto-xref">Уравнение&nbsp;<span>6.4</span></a> закон <span class="math inline">\(T\)</span> отдельно строить не нужно: подставляем значения <span class="math inline">\(g\)</span> с вероятностями значений <span class="math inline">\(V\)</span>. <span class="math display">\[
+\E T = 36\cdot0{,}3 + 18\cdot0{,}5 + 12\cdot0{,}2 = 22{,}2 \text{ мин}, \qquad
+\E T^2 = 1296\cdot0{,}3 + 324\cdot0{,}5 + 144\cdot0{,}2 = 579{,}6,
+\]</span> <span class="math display">\[
+\Var T = 579{,}6 - 22{,}2^2 = 86{,}76, \qquad \sigma(T) \approx 9{,}3 \text{ мин}.
+\]</span> А <span class="math inline">\(12/\E V = 720/38 \approx 18{,}9\)</span> мин: на 3,3 минуты меньше. Медленные поездки длятся дольше и поэтому весят в среднем времени больше, чем быстрые. Функция <span class="math inline">\(720/v\)</span> выпукла вниз, и по неравенству Йенсена <span class="math inline">\(\E T \geqslant 720/\E V\)</span>.</p>
+<p>Проверка: точный расчёт и симуляция <span class="math inline">\(10^6\)</span> поездок.</p>
+<div id="s07-t5-check" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>v5, p5 <span class="op">=</span> np.array([<span class="dv">20</span>, <span class="dv">40</span>, <span class="dv">60</span>]), np.array([<span class="fl">0.3</span>, <span class="fl">0.5</span>, <span class="fl">0.2</span>])</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>t5 <span class="op">=</span> <span class="dv">720</span> <span class="op">/</span> v5</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>et5 <span class="op">=</span> (t5 <span class="op">*</span> p5).<span class="bu">sum</span>()</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>sd5 <span class="op">=</span> sqrt((t5<span class="op">**</span><span class="dv">2</span> <span class="op">*</span> p5).<span class="bu">sum</span>() <span class="op">-</span> et5<span class="op">**</span><span class="dv">2</span>)</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"E V = </span><span class="sc">{</span>(v5 <span class="op">*</span> p5)<span class="sc">.</span><span class="bu">sum</span>()<span class="sc">:.1f}</span><span class="ss">,  E T = </span><span class="sc">{</span>et5<span class="sc">:.2f}</span><span class="ss">,  sigma T = </span><span class="sc">{</span>sd5<span class="sc">:.3f}</span><span class="ss">,  720/E V = </span><span class="sc">{</span><span class="dv">720</span> <span class="op">/</span> (v5 <span class="op">*</span> p5)<span class="sc">.</span><span class="bu">sum</span>()<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>sim5 <span class="op">=</span> <span class="dv">720</span> <span class="op">/</span> rng.choice(v5, size<span class="op">=</span><span class="dv">1_000_000</span>, p<span class="op">=</span>p5)</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>compare(<span class="st">"E T"</span>, et5, sim5.mean())</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>compare(<span class="st">"sigma T"</span>, sd5, sim5.std())</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>E V = 38.0,  E T = 22.20,  sigma T = 9.315,  720/E V = 18.95
+           E T:  точно   22.20000   симуляция   22.19944
+       sigma T:  точно    9.31450   симуляция    9.31571</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning callout-titled" title="Типичная ошибка">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Предупреждение</span>Типичная ошибка
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Считать <span class="math inline">\(\E g(X)\)</span> как <span class="math inline">\(g(\E X)\)</span>. Для линейной <span class="math inline">\(g\)</span> это верно, для нелинейной нет: здесь ошибка 3,3 минуты из 22.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="sec-s07-t6" class="level3" data-number="6.4.2">
+<h3 data-number="6.4.2" class="anchored" data-anchor-id="sec-s07-t6"><span class="header-section-number">6.4.2</span> Задача 6 (Гмурман, гл. 6 § 3, № 282 и 299)</h3>
+<p>Случайная величина <span class="math inline">\(X\)</span> задана плотностью <span class="math inline">\(f(x) = \tfrac12\sin x\)</span> в интервале <span class="math inline">\((0, \pi)\)</span>; вне этого интервала <span class="math inline">\(f(x) = 0\)</span>. Найти математическое ожидание и дисперсию величины <span class="math inline">\(Y = X^2\)</span>, не находя плотности распределения <span class="math inline">\(Y\)</span>.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Решение">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Совет</span>Решение
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-14" class="callout-14-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>По <a href="#eq-s07-Eg" class="quarto-xref">Уравнение&nbsp;<span>6.4</span></a> и <a href="#eq-s07-Varg" class="quarto-xref">Уравнение&nbsp;<span>6.5</span></a> нужны <span class="math inline">\(\E X^2\)</span> и <span class="math inline">\(\E X^4\)</span>. Обозначим <span class="math inline">\(I_n = \int_0^\pi x^n\sin x\,dx\)</span>. Дважды по частям: <span class="math display">\[
+I_n = \big[-x^n\cos x\big]_0^\pi + n\int_0^\pi x^{n-1}\cos x\,dx
+= \pi^n - n(n - 1)\,I_{n-2}, \qquad I_0 = 2.
+\]</span> Отсюда <span class="math inline">\(I_2 = \pi^2 - 4\)</span>, <span class="math inline">\(I_4 = \pi^4 - 12I_2 = \pi^4 - 12\pi^2 + 48\)</span>. <span class="math display">\[
+\E Y = \E X^2 = \tfrac12 I_2 = \frac{\pi^2 - 4}{2} \approx 2{,}93,
+\]</span> <span class="math display">\[
+\Var Y = \E X^4 - (\E X^2)^2 = \frac{\pi^4 - 12\pi^2 + 48}{2} - \frac{(\pi^2 - 4)^2}{4}
+= \frac{\pi^4 - 16\pi^2 + 80}{4} \approx 4{,}87.
+\]</span></p>
+<p>Проверка: интегралы в sympy и симуляция. <span class="math inline">\(X\)</span> разыгрываем через обратную функцию распределения: <span class="math inline">\(F(x) = (1 - \cos x)/2\)</span>, <span class="math inline">\(X = \arccos(1 - 2U)\)</span>.</p>
+<div id="s07-t6-check" class="cell" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>f6 <span class="op">=</span> sp.sin(x) <span class="op">/</span> <span class="dv">2</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>ey6 <span class="op">=</span> sp.integrate(x<span class="op">**</span><span class="dv">2</span> <span class="op">*</span> f6, (x, <span class="dv">0</span>, sp.pi))</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>vy6 <span class="op">=</span> sp.simplify(sp.integrate(x<span class="op">**</span><span class="dv">4</span> <span class="op">*</span> f6, (x, <span class="dv">0</span>, sp.pi)) <span class="op">-</span> ey6<span class="op">**</span><span class="dv">2</span>)</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"E Y ="</span>, ey6, <span class="st">"  Var Y ="</span>, sp.expand(vy6))</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>x6 <span class="op">=</span> np.arccos(<span class="dv">1</span> <span class="op">-</span> <span class="dv">2</span> <span class="op">*</span> rng.random(<span class="dv">1_000_000</span>))</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>compare(<span class="st">"E X^2"</span>, <span class="bu">float</span>(ey6), (x6<span class="op">**</span><span class="dv">2</span>).mean())</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>compare(<span class="st">"Var X^2"</span>, <span class="bu">float</span>(vy6), (x6<span class="op">**</span><span class="dv">2</span>).var())</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>E Y = -2 + pi**2/2   Var Y = -4*pi**2 + 20 + pi**4/4
+         E X^2:  точно    2.93480   симуляция    2.93783
+       Var X^2:  точно    4.87386   симуляция    4.86940</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Для самопроверки">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Уведомление</span>Для самопроверки
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Гмурман, № 283 и 300: та же задача для <span class="math inline">\(f(x) = \cos x\)</span> на <span class="math inline">\((0, \pi/2)\)</span>. <em>Ответ:</em> <span class="math inline">\(\E X^2 = (\pi^2 - 8)/4 \approx 0{,}467\)</span>, <span class="math inline">\(\Var X^2 = 20 - 2\pi^2 \approx 0{,}261\)</span>.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="sec-s07-t7" class="level3" data-number="6.4.3">
+<h3 data-number="6.4.3" class="anchored" data-anchor-id="sec-s07-t7"><span class="header-section-number">6.4.3</span> Задача 7 (Гмурман, гл. 6 § 4, № 318, дополнена)</h3>
+<p>Диаметр круга измерен приближённо, причём <span class="math inline">\(a \leqslant x \leqslant b\)</span>. Рассматривая диаметр как случайную величину <span class="math inline">\(X\)</span>, распределённую равномерно в интервале <span class="math inline">\((a, b)\)</span>, найти математическое ожидание и дисперсию площади круга.</p>
+<p>а) Найти их в общем виде. б) Вычислить их при <span class="math inline">\(a = 9{,}8\)</span> см, <span class="math inline">\(b = 10{,}2\)</span> см и сравнить с линеаризацией <a href="#eq-s07-lin1" class="quarto-xref">Уравнение&nbsp;<span>6.7</span></a>.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Решение">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Совет</span>Решение
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-15" class="callout-15-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>а)</strong> Площадь <span class="math inline">\(S = \pi X^2/4\)</span>, <span class="math inline">\(f(x) = 1/(b - a)\)</span> на <span class="math inline">\((a, b)\)</span>: <span class="math display">\[
+\E S = \frac{\pi}{4(b - a)}\int_a^b x^2\,dx = \frac{\pi(b^3 - a^3)}{12(b - a)} = \frac{\pi(a^2 + ab + b^2)}{12},
+\]</span> <span class="math display">\[
+\E S^2 = \frac{\pi^2}{16(b - a)}\int_a^b x^4\,dx = \frac{\pi^2(a^4 + a^3b + a^2b^2 + ab^3 + b^4)}{80},
+\]</span> и после приведения <span class="math display">\[
+\Var S = \E S^2 - (\E S)^2 = \frac{\pi^2(b - a)^2(4a^2 + 7ab + 4b^2)}{720}.
+\]</span></p>
+<p><strong>б)</strong> <span class="math inline">\(\E S = \pi\cdot300{,}04/12 \approx 78{,}550\)</span> см², <span class="math inline">\(\sigma(S) \approx 1{,}8138\)</span> см².</p>
+<p>Линеаризация в точке <span class="math inline">\(\mu = 10\)</span>: <span class="math inline">\(g(\mu) = \pi\cdot100/4 \approx 78{,}540\)</span>, <span class="math inline">\(g'(\mu) = \pi\mu/2 \approx 15{,}71\)</span>, <span class="math inline">\(\sigma(X) = 0{,}4/\sqrt{12} \approx 0{,}1155\)</span>, <span class="math display">\[
+\sigma(S) \approx 15{,}71\cdot0{,}1155 \approx 1{,}8138 \text{ см}^2.
+\]</span> Совпадение до четырёх знаков: погрешность диаметра 1 % мала, и на её масштабе парабола почти не изгибается. Среднее линеаризация занижает на <span class="math inline">\(\pi(b - a)^2/48 \approx 0{,}0105\)</span> см². Это ровно поправка второго порядка <span class="math inline">\(\tfrac12 g''(\mu)\Var X\)</span> из <a href="#eq-s07-lin2" class="quarto-xref">Уравнение&nbsp;<span>6.10</span></a>: для квадратичной <span class="math inline">\(g\)</span> формула Тейлора второго порядка точна.</p>
+<p>Проверка: символьный расчёт, подстановка и линеаризация.</p>
+<div id="s07-t7-check" class="cell" data-execution_count="11">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>a7, b7 <span class="op">=</span> sp.symbols(<span class="st">"a b"</span>, positive<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>es7 <span class="op">=</span> sp.integrate(sp.pi <span class="op">*</span> x<span class="op">**</span><span class="dv">2</span> <span class="op">/</span> <span class="dv">4</span> <span class="op">/</span> (b7 <span class="op">-</span> a7), (x, a7, b7))</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>vs7 <span class="op">=</span> sp.integrate((sp.pi <span class="op">*</span> x<span class="op">**</span><span class="dv">2</span> <span class="op">/</span> <span class="dv">4</span>)<span class="op">**</span><span class="dv">2</span> <span class="op">/</span> (b7 <span class="op">-</span> a7), (x, a7, b7)) <span class="op">-</span> es7<span class="op">**</span><span class="dv">2</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"E S ="</span>, sp.factor(es7), <span class="st">"   Var S ="</span>, sp.factor(vs7))</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>num7 <span class="op">=</span> {a7: sp.Rational(<span class="dv">49</span>, <span class="dv">5</span>), b7: sp.Rational(<span class="dv">51</span>, <span class="dv">5</span>)}</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>compare(<span class="st">"E S"</span>, <span class="bu">float</span>(es7.subs(num7)), pi <span class="op">*</span> <span class="dv">10</span><span class="op">**</span><span class="dv">2</span> <span class="op">/</span> <span class="dv">4</span>, (<span class="st">"точно"</span>, <span class="st">"линеаризация"</span>))</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>compare(<span class="st">"sigma S"</span>, <span class="bu">float</span>(sp.sqrt(vs7.subs(num7))), pi <span class="op">*</span> <span class="dv">10</span> <span class="op">/</span> <span class="dv">2</span> <span class="op">*</span> <span class="fl">0.4</span> <span class="op">/</span> sqrt(<span class="dv">12</span>), (<span class="st">"точно"</span>, <span class="st">"линеаризация"</span>))</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>E S = pi*(a**2 + a*b + b**2)/12    Var S = pi**2*(a - b)**2*(4*a**2 + 7*a*b + 4*b**2)/720
+           E S:  точно   78.55029   линеаризация   78.53982
+       sigma S:  точно    1.81382   линеаризация    1.81380</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="sec-s07-t8" class="level3" data-number="6.4.4">
+<h3 data-number="6.4.4" class="anchored" data-anchor-id="sec-s07-t8"><span class="header-section-number">6.4.4</span> Задача 8</h3>
+<p>Стороны прямоугольной пластины <span class="math inline">\(X\)</span> и <span class="math inline">\(Y\)</span> изготовлены независимо: <span class="math inline">\(\E X = 10\)</span> см, <span class="math inline">\(\sigma(X) = 0{,}2\)</span> см, <span class="math inline">\(\E Y = 5\)</span> см, <span class="math inline">\(\sigma(Y) = 0{,}1\)</span> см. Найти среднее и стандартное отклонение площади <span class="math inline">\(S = XY\)</span>. Нужно ли знать законы распределения сторон?</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Решение">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Совет</span>Решение
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-16" class="callout-16-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Независимые величины некоррелированы, поэтому <span class="math inline">\(\E S = \E X\,\E Y = 50\)</span> см². По <a href="#eq-s07-varprod" class="quarto-xref">Уравнение&nbsp;<span>6.6</span></a> <span class="math display">\[
+\Var S = 0{,}04\cdot0{,}01 + 10^2\cdot0{,}01 + 5^2\cdot0{,}04 = 0{,}0004 + 1 + 1 = 2{,}0004,
+\qquad \sigma(S) \approx 1{,}414 \text{ см}^2.
+\]</span> Законы сторон <strong>не нужны</strong>: для произведения независимых величин среднее и дисперсия выражаются только через средние и дисперсии сомножителей. Вклады двух сторон одинаковы (по 1 см²), хотя абсолютная погрешность длинной стороны вдвое больше: у обеих относительная погрешность 2 %.</p>
+<p>Проверка: симуляция с двумя разными законами сторон (равномерным и нормальным) с теми же средними и дисперсиями; ответ один.</p>
+<div id="s07-t8-check" class="cell" data-execution_count="12">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>y8 <span class="op">=</span> rng.normal(<span class="dv">5</span>, <span class="fl">0.1</span>, <span class="dv">1_000_000</span>)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>half8 <span class="op">=</span> <span class="fl">0.2</span> <span class="op">*</span> sqrt(<span class="dv">3</span>)</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> label8, x8 <span class="kw">in</span> [(<span class="st">"X нормальна  "</span>, rng.normal(<span class="dv">10</span>, <span class="fl">0.2</span>, y8.size)),</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>                   (<span class="st">"X равномерна "</span>, rng.uniform(<span class="dv">10</span> <span class="op">-</span> half8, <span class="dv">10</span> <span class="op">+</span> half8, y8.size))]:</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>    s8 <span class="op">=</span> x8 <span class="op">*</span> y8</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>label8<span class="sc">}</span><span class="ss">: E S = </span><span class="sc">{</span>s8<span class="sc">.</span>mean()<span class="sc">:.4f}</span><span class="ss">,  Var S = </span><span class="sc">{</span>s8<span class="sc">.</span>var()<span class="sc">:.4f}</span><span class="ss">   (точно 50 и 2,0004)"</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>X нормальна  : E S = 49.9980,  Var S = 2.0089   (точно 50 и 2,0004)
+X равномерна : E S = 50.0001,  Var S = 2.0057   (точно 50 и 2,0004)</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="блок-c.-линеаризация-и-погрешности" class="level2" data-number="6.5">
+<h2 data-number="6.5" class="anchored" data-anchor-id="блок-c.-линеаризация-и-погрешности"><span class="header-section-number">6.5</span> Блок C. Линеаризация и погрешности</h2>
+<section id="sec-s07-t9" class="level3" data-number="6.5.1">
+<h3 data-number="6.5.1" class="anchored" data-anchor-id="sec-s07-t9"><span class="header-section-number">6.5.1</span> Задача 9</h3>
+<p>а) Для пластины из задачи 8 найти <span class="math inline">\(\Var S\)</span> по линеаризации <a href="#eq-s07-linn" class="quarto-xref">Уравнение&nbsp;<span>6.8</span></a> и сравнить с точным ответом. б) Стороны размечают одним и тем же шаблоном, и их ошибки коррелированы: <span class="math inline">\(\rho(X, Y) = 0{,}5\)</span> (средние и стандартные отклонения прежние). Найти <span class="math inline">\(\E S\)</span> точно и <span class="math inline">\(\sigma(S)\)</span> по линеаризации.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Решение">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-17-contents" aria-controls="callout-17" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Совет</span>Решение
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-17" class="callout-17-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><span class="math inline">\(g(x, y) = xy\)</span>, в точке средних <span class="math inline">\(\partial g/\partial x = \E Y = 5\)</span>, <span class="math inline">\(\partial g/\partial y = \E X = 10\)</span>.</p>
+<p><strong>а)</strong> <span class="math inline">\(\Var S \approx 5^2\cdot0{,}04 + 10^2\cdot0{,}01 = 2\)</span>. Точный ответ <span class="math inline">\(2{,}0004\)</span>: линеаризация потеряла только слагаемое <span class="math inline">\(\Var X\,\Var Y = 0{,}0004\)</span>, произведение двух малых.</p>
+<p><strong>б)</strong> <span class="math inline">\(\Cov(X, Y) = 0{,}5\cdot0{,}2\cdot0{,}1 = 0{,}01\)</span>. Точно <span class="math inline">\(\E S = \E X\,\E Y + \Cov(X, Y) = 50{,}01\)</span>. По <a href="#eq-s07-linn" class="quarto-xref">Уравнение&nbsp;<span>6.8</span></a> <span class="math display">\[
+\Var S \approx 25\cdot0{,}04 + 100\cdot0{,}01 + 2\cdot5\cdot10\cdot0{,}01 = 3,
+\qquad \sigma(S) \approx 1{,}73 \text{ см}^2.
+\]</span> Положительная корреляция увеличила разброс площади в полтора раза по дисперсии: ошибки сторон теперь чаще идут в одну сторону и не гасят друг друга.</p>
+<p>Проверка: линеаризация через <span class="math inline">\(\nabla g^{\mathsf T}\Sigma\nabla g\)</span> и симуляция с нормальным законом сторон.</p>
+<div id="s07-t9-check" class="cell" data-execution_count="13">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>grad9 <span class="op">=</span> [<span class="dv">5</span>, <span class="dv">10</span>]</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> r9 <span class="kw">in</span> [<span class="fl">0.0</span>, <span class="fl">0.5</span>]:</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    cov9 <span class="op">=</span> [[<span class="fl">0.04</span>, r9 <span class="op">*</span> <span class="fl">0.02</span>], [r9 <span class="op">*</span> <span class="fl">0.02</span>, <span class="fl">0.01</span>]]</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    x9, y9 <span class="op">=</span> sample_normal2(<span class="dv">1_000_000</span>, <span class="dv">10</span>, <span class="dv">5</span>, <span class="fl">0.2</span>, <span class="fl">0.1</span>, r9)</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"rho = </span><span class="sc">{</span>r9<span class="sc">}</span><span class="ss">:  E S = </span><span class="sc">{</span>(x9 <span class="op">*</span> y9)<span class="sc">.</span>mean()<span class="sc">:.4f}</span><span class="ss">"</span>)</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>    compare(<span class="st">"Var S"</span>, (x9 <span class="op">*</span> y9).var(), linearized_var(grad9, cov9), (<span class="st">"симуляция"</span>, <span class="st">"линеаризация"</span>))</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>rho = 0.0:  E S = 49.9988
+         Var S:  симуляция    2.00121   линеаризация    2.00000
+rho = 0.5:  E S = 50.0093
+         Var S:  симуляция    3.00219   линеаризация    3.00000</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="sec-s07-t10" class="level3" data-number="6.5.2">
+<h3 data-number="6.5.2" class="anchored" data-anchor-id="sec-s07-t10"><span class="header-section-number">6.5.2</span> Задача 10</h3>
+<p>Ускорение свободного падения находят по маятнику: <span class="math inline">\(g = 4\pi^2 L/T^2\)</span>. Длина нити <span class="math inline">\(L = 1{,}000\)</span> м измерена со стандартным отклонением 2 мм, период <span class="math inline">\(T = 2{,}006\)</span> с со стандартным отклонением 0,004 с; ошибки независимы. а) Найти <span class="math inline">\(g\)</span> и его стандартное отклонение. б) Какое измерение выгоднее улучшать? Как изменится погрешность, если засекать время 10 колебаний с той же погрешностью секундомера 0,004 с?</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Решение">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-19-contents" aria-controls="callout-19" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Совет</span>Решение
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-19" class="callout-19-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>а)</strong> <span class="math inline">\(g = 4\pi^2\cdot1/2{,}006^2 \approx 9{,}811\)</span> м/с². Функция есть произведение степеней <span class="math inline">\(L^1 T^{-2}\)</span>, поэтому по <a href="#eq-s07-rel" class="quarto-xref">Уравнение&nbsp;<span>6.9</span></a> <span class="math display">\[
+\delta_L = \frac{0{,}002}{1} = 0{,}2\,\%, \qquad
+\delta_T = \frac{0{,}004}{2{,}006} \approx 0{,}2\,\%, \qquad
+\delta_g \approx \sqrt{0{,}2^2 + (2\cdot0{,}2)^2}\,\% \approx 0{,}45\,\%,
+\]</span> <span class="math inline">\(\sigma(g) \approx 0{,}0045\cdot9{,}811 \approx 0{,}044\)</span> м/с².</p>
+<p><strong>б)</strong> Период входит в квадрате, и его вклад <span class="math inline">\((2\delta_T)^2\)</span> вчетверо больше вклада длины. Если засечь время 10 колебаний, погрешность периода станет <span class="math inline">\(0{,}0004\)</span> с, <span class="math inline">\(2\delta_T \approx 0{,}04\,\%\)</span>, и <span class="math inline">\(\delta_g \approx \sqrt{0{,}2^2 + 0{,}04^2}\,\% \approx 0{,}20\,\%\)</span>, <span class="math inline">\(\sigma(g) \approx 0{,}020\)</span> м/с². Погрешность уменьшилась вдвое; дальше её ограничивает уже длина.</p>
+<p>Проверка: симуляция <span class="math inline">\(10^6\)</span> опытов с нормальными ошибками.</p>
+<div id="s07-t10-check" class="cell" data-execution_count="14">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>g10 <span class="op">=</span> <span class="dv">4</span> <span class="op">*</span> pi<span class="op">**</span><span class="dv">2</span> <span class="op">*</span> <span class="fl">1.0</span> <span class="op">/</span> <span class="fl">2.006</span><span class="op">**</span><span class="dv">2</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> label10, s_t <span class="kw">in</span> [(<span class="st">"одно колебание"</span>, <span class="fl">0.004</span>), (<span class="st">"10 колебаний  "</span>, <span class="fl">0.0004</span>)]:</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    l10 <span class="op">=</span> rng.normal(<span class="fl">1.0</span>, <span class="fl">0.002</span>, <span class="dv">1_000_000</span>)</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>    t10 <span class="op">=</span> rng.normal(<span class="fl">2.006</span>, s_t, l10.size)</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>    approx10 <span class="op">=</span> g10 <span class="op">*</span> sqrt(<span class="fl">0.002</span><span class="op">**</span><span class="dv">2</span> <span class="op">+</span> (<span class="dv">2</span> <span class="op">*</span> s_t <span class="op">/</span> <span class="fl">2.006</span>)<span class="op">**</span><span class="dv">2</span>)</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(label10, end<span class="op">=</span><span class="st">": "</span>)</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>    compare(<span class="st">"sigma g"</span>, (<span class="dv">4</span> <span class="op">*</span> pi<span class="op">**</span><span class="dv">2</span> <span class="op">*</span> l10 <span class="op">/</span> t10<span class="op">**</span><span class="dv">2</span>).std(), approx10, (<span class="st">"симуляция"</span>, <span class="st">"линеаризация"</span>))</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>одно колебание:        sigma g:  симуляция    0.04379   линеаризация    0.04377
+10 колебаний  :        sigma g:  симуляция    0.02000   линеаризация    0.02001</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning callout-titled" title="Типичная ошибка">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Предупреждение</span>Типичная ошибка
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Складывать относительные погрешности, а не их квадраты (<span class="math inline">\(0{,}2 + 0{,}4 = 0{,}6\,\%\)</span>), или забыть множитель 2 при <span class="math inline">\(T^2\)</span>. Независимые ошибки складываются квадратами: это <a href="#eq-s07-linn" class="quarto-xref">Уравнение&nbsp;<span>6.8</span></a> при нулевых ковариациях.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="sec-s07-t11" class="level3" data-number="6.5.3">
+<h3 data-number="6.5.3" class="anchored" data-anchor-id="sec-s07-t11"><span class="header-section-number">6.5.3</span> Задача 11</h3>
+<p><span class="math inline">\(X \sim N(\mu, \sigma^2)\)</span>, <span class="math inline">\(Y = e^X\)</span> (так, например, связаны годовая логарифмическая доходность акции <span class="math inline">\(X\)</span> и множитель роста её цены <span class="math inline">\(Y\)</span>). а) Найти точно <span class="math inline">\(\E Y\)</span> и <span class="math inline">\(\Var Y\)</span>. б) При <span class="math inline">\(\mu = 0\)</span> и <span class="math inline">\(\sigma = 0{,}1\)</span>; <span class="math inline">\(0{,}5\)</span>; <span class="math inline">\(1\)</span> сравнить их с линеаризацией <a href="#eq-s07-lin1" class="quarto-xref">Уравнение&nbsp;<span>6.7</span></a> и с поправкой второго порядка <a href="#eq-s07-lin2" class="quarto-xref">Уравнение&nbsp;<span>6.10</span></a>.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Решение">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-20-contents" aria-controls="callout-20" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Совет</span>Решение
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-20" class="callout-20-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>а)</strong> По <a href="#eq-s07-Eg" class="quarto-xref">Уравнение&nbsp;<span>6.4</span></a> <span class="math display">\[
+\E e^X = \frac{1}{\sigma\sqrt{2\pi}}\int_{-\infty}^{\infty} e^{x}\,e^{-(x - \mu)^2/(2\sigma^2)}\,dx.
+\]</span> Выделим полный квадрат в показателе: <span class="math inline">\(x - \frac{(x - \mu)^2}{2\sigma^2} = -\frac{(x - \mu - \sigma^2)^2}{2\sigma^2} + \mu + \frac{\sigma^2}{2}\)</span>. Оставшийся интеграл есть интеграл нормальной плотности, он равен 1: <span class="math display">\[
+\E Y = e^{\mu + \sigma^2/2}.
+\]</span> <span class="math inline">\(e^{2X}\)</span> есть та же функция от <span class="math inline">\(2X \sim N(2\mu, 4\sigma^2)\)</span>, поэтому <span class="math inline">\(\E Y^2 = e^{2\mu + 2\sigma^2}\)</span> и <span class="math display">\[
+\Var Y = e^{2\mu + 2\sigma^2} - e^{2\mu + \sigma^2} = e^{2\mu + \sigma^2}\big(e^{\sigma^2} - 1\big).
+\]</span></p>
+<p><strong>б)</strong> При <span class="math inline">\(\mu = 0\)</span>: <span class="math inline">\(g = g' = g'' = 1\)</span> в точке <span class="math inline">\(\mu\)</span>. Линеаризация: <span class="math inline">\(\E Y \approx 1\)</span>, <span class="math inline">\(\Var Y \approx \sigma^2\)</span>. Второй порядок: <span class="math inline">\(\E Y \approx 1 + \sigma^2/2\)</span>, <span class="math inline">\(\Var Y \approx \sigma^2 + \sigma^4/2\)</span>.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><span class="math inline">\(\sigma\)</span></th>
+<th style="text-align: right;"><span class="math inline">\(\E Y\)</span> точно</th>
+<th style="text-align: right;">1-й пор.</th>
+<th style="text-align: right;">2-й пор.</th>
+<th style="text-align: right;"><span class="math inline">\(\Var Y\)</span> точно</th>
+<th style="text-align: right;">1-й пор.</th>
+<th style="text-align: right;">2-й пор.</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">0,1</td>
+<td style="text-align: right;">1,0050</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1,0050</td>
+<td style="text-align: right;">0,0102</td>
+<td style="text-align: right;">0,0100</td>
+<td style="text-align: right;">0,0101</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">0,5</td>
+<td style="text-align: right;">1,1331</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1,125</td>
+<td style="text-align: right;">0,365</td>
+<td style="text-align: right;">0,250</td>
+<td style="text-align: right;">0,281</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">1</td>
+<td style="text-align: right;">1,6487</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1,5</td>
+<td style="text-align: right;">4,67</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1,5</td>
+</tr>
+</tbody>
+</table>
+<p>При <span class="math inline">\(\sigma = 0{,}1\)</span> линеаризация отличная, при <span class="math inline">\(\sigma = 0{,}5\)</span> она занижает дисперсию на треть, при <span class="math inline">\(\sigma = 1\)</span> бесполезна: на масштабе <span class="math inline">\(\sigma\)</span> экспонента изгибается сильно. Поправка второго порядка заранее предупреждает об этом: при <span class="math inline">\(\sigma = 1\)</span> она того же размера, что и главный член.</p>
+<p>Проверка: точные формулы, приближения и симуляция.</p>
+<div id="s07-t11-check" class="cell" data-execution_count="15">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> s11 <span class="kw">in</span> [<span class="fl">0.1</span>, <span class="fl">0.5</span>, <span class="fl">1.0</span>]:</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>    y11 <span class="op">=</span> np.exp(rng.normal(<span class="dv">0</span>, s11, <span class="dv">1_000_000</span>))</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"sigma = </span><span class="sc">{</span>s11<span class="sc">}</span><span class="ss">:  E Y точно </span><span class="sc">{</span>exp(s11<span class="op">**</span><span class="dv">2</span> <span class="op">/</span> <span class="dv">2</span>)<span class="sc">:.4f}</span><span class="ss">, симуляция </span><span class="sc">{</span>y11<span class="sc">.</span>mean()<span class="sc">:.4f}</span><span class="ss">, "</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>          <span class="ss">f"2-й порядок </span><span class="sc">{</span><span class="dv">1</span> <span class="op">+</span> s11<span class="op">**</span><span class="dv">2</span> <span class="op">/</span> <span class="dv">2</span><span class="sc">:.4f}</span><span class="ss">;   Var Y точно </span><span class="sc">{</span>exp(s11<span class="op">**</span><span class="dv">2</span>) <span class="op">*</span> (exp(s11<span class="op">**</span><span class="dv">2</span>) <span class="op">-</span> <span class="dv">1</span>)<span class="sc">:.4f}</span><span class="ss">, "</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>          <span class="ss">f"симуляция </span><span class="sc">{</span>y11<span class="sc">.</span>var()<span class="sc">:.4f}</span><span class="ss">, 1-й </span><span class="sc">{</span>s11<span class="op">**</span><span class="dv">2</span><span class="sc">:.4f}</span><span class="ss">, 2-й </span><span class="sc">{</span>s11<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> s11<span class="op">**</span><span class="dv">4</span> <span class="op">/</span> <span class="dv">2</span><span class="sc">:.4f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>sigma = 0.1:  E Y точно 1.0050, симуляция 1.0050, 2-й порядок 1.0050;   Var Y точно 0.0102, симуляция 0.0101, 1-й 0.0100, 2-й 0.0101
+sigma = 0.5:  E Y точно 1.1331, симуляция 1.1327, 2-й порядок 1.1250;   Var Y точно 0.3647, симуляция 0.3643, 1-й 0.2500, 2-й 0.2812
+sigma = 1.0:  E Y точно 1.6487, симуляция 1.6525, 2-й порядок 1.5000;   Var Y точно 4.6708, симуляция 4.7256, 1-й 1.0000, 2-й 1.5000</code></pre>
+</div>
+</div>
+<div id="cell-fig-s07-t11" class="cell" data-execution_count="16">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>s_grid <span class="op">=</span> np.linspace(<span class="fl">0.01</span>, <span class="fl">1.0</span>, <span class="dv">200</span>)</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="fl">3.6</span>))</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>ax.plot(s_grid, np.exp(s_grid<span class="op">**</span><span class="dv">2</span>) <span class="op">*</span> (np.exp(s_grid<span class="op">**</span><span class="dv">2</span>) <span class="op">-</span> <span class="dv">1</span>), lw<span class="op">=</span><span class="dv">2</span>, label<span class="op">=</span><span class="st">"точно"</span>)</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>ax.plot(s_grid, s_grid<span class="op">**</span><span class="dv">2</span>, lw<span class="op">=</span><span class="dv">2</span>, ls<span class="op">=</span><span class="st">"--"</span>, label<span class="op">=</span><span class="st">"линеаризация $</span><span class="ch">\\</span><span class="st">sigma^2$"</span>)</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>ax.plot(s_grid, s_grid<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> s_grid<span class="op">**</span><span class="dv">4</span> <span class="op">/</span> <span class="dv">2</span>, lw<span class="op">=</span><span class="dv">2</span>, ls<span class="op">=</span><span class="st">":"</span>, label<span class="op">=</span><span class="st">"второй порядок"</span>)</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">"$</span><span class="ch">\\</span><span class="st">sigma$"</span>)</span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"$</span><span class="ch">\\</span><span class="st">mathrm</span><span class="sc">{Var}</span><span class="ch">\\</span><span class="st">, e^X$"</span>)</span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>ax.legend(fontsize<span class="op">=</span><span class="dv">9</span>)</span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div id="fig-s07-t11" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-s07-t11-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="seminar-07_files/figure-html/fig-s07-t11-output-1.png" width="782" height="408" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-s07-t11-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;6.4: Дисперсия <span class="math inline">\(e^X\)</span> при <span class="math inline">\(X \sim N(0, \sigma^2)\)</span>: точная и два приближения. До <span class="math inline">\(\sigma \approx 0{,}2\)</span> линии неразличимы, дальше линеаризация быстро отстаёт.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="задачи-для-самостоятельной-работы" class="level2" data-number="6.6">
+<h2 data-number="6.6" class="anchored" data-anchor-id="задачи-для-самостоятельной-работы"><span class="header-section-number">6.6</span> Задачи для самостоятельной работы</h2>
+<ol type="1">
+<li>Пара <span class="math inline">\((X, Y)\)</span> распределена по нормальному закону на плоскости с <span class="math inline">\(\mu_X = \mu_Y = 0\)</span>, <span class="math inline">\(\sigma_X = 2\)</span>, <span class="math inline">\(\sigma_Y = 1\)</span>, <span class="math inline">\(\rho = -1/2\)</span>. Записать плотность. Найти обе линии регрессии и <span class="math inline">\(\Prob(Y &gt; 1 \mid X = 2)\)</span>.</li>
+<li><span class="math inline">\(X\)</span> распределена по закону Пуассона с параметром <span class="math inline">\(\lambda\)</span>. Найти <span class="math inline">\(\E\dfrac{1}{1 + X}\)</span> и сравнить с <span class="math inline">\(\dfrac{1}{1 + \E X}\)</span> при <span class="math inline">\(\lambda = 2\)</span>.</li>
+<li>Диаметр шара <span class="math inline">\(D\)</span> измерен со средним 10 см и стандартным отклонением 0,05 см. Найти приближённо среднее и стандартное отклонение объёма шара. Во сколько раз относительная погрешность объёма больше относительной погрешности диаметра?</li>
+<li>Для стрельбы из задачи 4 найти среднее расстояние <span class="math inline">\(\E R\)</span> от точки попадания до центра мишени. Вычислить при <span class="math inline">\(\sigma = 5\)</span> см.</li>
+<li><span class="math inline">\(X\)</span> равномерна на <span class="math inline">\((0, 1)\)</span>, <span class="math inline">\(Y = -\ln X\)</span>. Найти <span class="math inline">\(\E Y\)</span> и <span class="math inline">\(\Var Y\)</span>.</li>
+</ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Ответы">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-21-contents" aria-controls="callout-21" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Совет</span>Ответы
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-21" class="callout-21-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><span class="math inline">\(f(x, y) = \dfrac{1}{2\sqrt3\,\pi}\exp\Big\{-\dfrac{x^2 + 2xy + 4y^2}{6}\Big\}\)</span>; <span class="math inline">\(\E(Y \mid X = x) = -x/4\)</span>, <span class="math inline">\(\E(X \mid Y = y) = -y\)</span>; при <span class="math inline">\(X = 2\)</span> условный закон <span class="math inline">\(Y\)</span> есть <span class="math inline">\(N(-0{,}5;\ 0{,}75)\)</span>, и <span class="math inline">\(\Prob(Y &gt; 1 \mid X = 2) = 1 - \Phi(1{,}5/\sqrt{0{,}75}) = 1 - \Phi(1{,}73) \approx 0{,}042\)</span>.</li>
+<li><span class="math inline">\(\E\dfrac{1}{1 + X} = \dfrac{1 - e^{-\lambda}}{\lambda}\)</span>; при <span class="math inline">\(\lambda = 2\)</span> это <span class="math inline">\(0{,}432\)</span> против <span class="math inline">\(1/3\)</span>.</li>
+<li><span class="math inline">\(V = \pi D^3/6\)</span>: <span class="math inline">\(\E V \approx 523{,}6\)</span> см³, <span class="math inline">\(\sigma(V) \approx \tfrac{\pi D^2}{2}\,\sigma(D) \approx 7{,}85\)</span> см³; относительная погрешность <span class="math inline">\(1{,}5\,\%\)</span>, втрое больше <span class="math inline">\(0{,}5\,\%\)</span> диаметра. Поправка второго порядка к среднему <span class="math inline">\(\tfrac12\cdot\pi\cdot10\cdot0{,}0025 \approx 0{,}04\)</span> см³ ничтожна.</li>
+<li><span class="math inline">\(\E R = \sigma\sqrt{\pi/2} \approx 1{,}253\sigma \approx 6{,}27\)</span> см.</li>
+<li><span class="math inline">\(\E Y = \int_0^1(-\ln x)\,dx = 1\)</span>, <span class="math inline">\(\E Y^2 = \int_0^1 \ln^2 x\,dx = 2\)</span>, <span class="math inline">\(\Var Y = 1\)</span>. На семинаре 8 выяснится, что <span class="math inline">\(Y\)</span> показательна с <span class="math inline">\(\lambda = 1\)</span>.</li>
+</ol>
+</div>
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Скопировано");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Скопировано");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/alexshem\.github\.io\/stats-2026\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../../seminars/05-two-random-variables/seminar-05.html" class="pagination-link" aria-label="Семинар 5. Системы двух случайных величин">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Семинар 5. Системы двух случайных величин</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/AlexShem/stats-2026/issues/new" class="toc-action"><i class="bi bi-github"></i>Сообщить о проблеме</a></li></ul></div></div></div></footer></body></html>

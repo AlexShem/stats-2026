@@ -72,6 +72,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
+<link href="../../seminars/07-normal-plane-functions/seminar-07.html" rel="next">
 <link href="../../seminars/04-exponential-distribution/seminar-04.html" rel="prev">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -227,6 +228,12 @@ window.Quarto = {
   <div class="sidebar-item-container"> 
   <a href="../../seminars/05-two-random-variables/seminar-05.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Семинар 5. Системы двух случайных величин</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../seminars/07-normal-plane-functions/seminar-07.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Семинар 7. Нормальный закон на плоскости. Функции случайных величин</span></span></a>
   </div>
 </li>
     </ul>
@@ -581,7 +588,7 @@ p_{ij} = p_i\,p_j \ \text{для всех } i, j.
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>Независимые величины некоррелированы. Обратное неверно.</strong> Если <span class="math inline">\(X\)</span> и <span class="math inline">\(Y\)</span> независимы, то <span class="math inline">\(\E(XY) = \E(X)\E(Y)\)</span> и <span class="math inline">\(\Cov = 0\)</span>. Но <span class="math inline">\(\Cov = 0\)</span> означает только отсутствие <strong>линейной</strong> связи: величины могут быть жёстко связаны нелинейно (задачи 3 и 9). Исключение: для <strong>нормального</strong> закона на плоскости некоррелированность равносильна независимости (семинар 6).</p>
+<p><strong>Независимые величины некоррелированы. Обратное неверно.</strong> Если <span class="math inline">\(X\)</span> и <span class="math inline">\(Y\)</span> независимы, то <span class="math inline">\(\E(XY) = \E(X)\E(Y)\)</span> и <span class="math inline">\(\Cov = 0\)</span>. Но <span class="math inline">\(\Cov = 0\)</span> означает только отсутствие <strong>линейной</strong> связи: величины могут быть жёстко связаны нелинейно (задачи 3 и 9). Исключение: для <strong>нормального</strong> закона на плоскости некоррелированность равносильна независимости (семинар 7).</p>
 </div>
 </div>
 <div id="cell-fig-s05-clouds" class="cell" data-execution_count="2">
@@ -1206,7 +1213,7 @@ f_Y(y) = \frac{\sqrt3}{\sqrt\pi}e^{-3y^2}.
 <p><strong>в)</strong> Делим совместную плотность на маргинальные; общие множители сокращаются, и остаются как раз полные квадраты: <span class="math display">\[
 f_{X\mid Y}(x \mid y) = \frac{1}{\sqrt\pi}e^{-(x + y)^2}, \qquad
 f_{Y\mid X}(y \mid x) = \frac{2}{\sqrt\pi}e^{-4(y + x/4)^2} = \frac{2}{\sqrt\pi}e^{-(x + 4y)^2/4}.
-\]</span> Условные законы тоже нормальны: при <span class="math inline">\(Y = y\)</span> величина <span class="math inline">\(X\)</span> нормальна со средним <span class="math inline">\(-y\)</span> и дисперсией <span class="math inline">\(1/2\)</span>; при <span class="math inline">\(X = x\)</span> величина <span class="math inline">\(Y\)</span> нормальна со средним <span class="math inline">\(-x/4\)</span> и дисперсией <span class="math inline">\(1/8\)</span>. Линии регрессии <span class="math inline">\(\E(X \mid y) = -y\)</span> и <span class="math inline">\(\E(Y \mid x) = -x/4\)</span> прямые с отрицательным наклоном, а условные дисперсии от условия не зависят. Это и есть <strong>нормальный закон на плоскости</strong>; его общий вид разбирается на семинаре 6. Здесь <span class="math inline">\(\rho = -1/2\)</span>.</p>
+\]</span> Условные законы тоже нормальны: при <span class="math inline">\(Y = y\)</span> величина <span class="math inline">\(X\)</span> нормальна со средним <span class="math inline">\(-y\)</span> и дисперсией <span class="math inline">\(1/2\)</span>; при <span class="math inline">\(X = x\)</span> величина <span class="math inline">\(Y\)</span> нормальна со средним <span class="math inline">\(-x/4\)</span> и дисперсией <span class="math inline">\(1/8\)</span>. Линии регрессии <span class="math inline">\(\E(X \mid y) = -y\)</span> и <span class="math inline">\(\E(Y \mid x) = -x/4\)</span> прямые с отрицательным наклоном, а условные дисперсии от условия не зависят. Это и есть <strong>нормальный закон на плоскости</strong>; его общий вид разбирается на семинаре 7. Здесь <span class="math inline">\(\rho = -1/2\)</span>.</p>
 <p>Проверка: sympy, разность с найденными формулами должна быть нулём.</p>
 <div id="s05-t7-check" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>g424 <span class="op">=</span> sp.exp(<span class="op">-</span>x<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> <span class="dv">2</span> <span class="op">*</span> x <span class="op">*</span> y <span class="op">-</span> <span class="dv">4</span> <span class="op">*</span> y<span class="op">**</span><span class="dv">2</span>)</span>
@@ -1454,7 +1461,7 @@ Var(2X-3Y+5) по выборке: 132.9   Cov(X+Y, X-Y): -4.98</code></pre>
 \rho = \frac{a\sigma_X^2}{\sigma_X\cdot|a|\sigma_X} = \frac{a}{|a|} = \pm1.
 \]</span></p>
 <p><strong>в)</strong> Если <span class="math inline">\(\rho = 1\)</span>, то <span class="math inline">\(\Var(X^* - Y^*) = 0\)</span>, значит, <span class="math inline">\(X^* - Y^*\)</span> есть константа, а она равна своему среднему, нулю. Отсюда <span class="math inline">\(Y^* = X^*\)</span>, то есть <span class="math inline">\(Y = \E Y + \frac{\sigma_Y}{\sigma_X}(X - \E X)\)</span>: линейная функция с <span class="math inline">\(a &gt; 0\)</span>. При <span class="math inline">\(\rho = -1\)</span> так же из <span class="math inline">\(\Var(X^* + Y^*) = 0\)</span>, и <span class="math inline">\(a &lt; 0\)</span>.</p>
-<p>Смысл: <span class="math inline">\(\rho\)</span> показывает, <strong>насколько облако точек близко к прямой</strong>. <span class="math inline">\(1 - \rho^2\)</span> есть доля дисперсии <span class="math inline">\(Y^*\)</span>, которую не объясняет лучшая линейная функция от <span class="math inline">\(X^*\)</span>; это будет видно на семинаре 6 в формуле <span class="math inline">\(\Var(Y \mid X) = \sigma_Y^2(1 - \rho^2)\)</span> для нормального закона.</p>
+<p>Смысл: <span class="math inline">\(\rho\)</span> показывает, <strong>насколько облако точек близко к прямой</strong>. <span class="math inline">\(1 - \rho^2\)</span> есть доля дисперсии <span class="math inline">\(Y^*\)</span>, которую не объясняет лучшая линейная функция от <span class="math inline">\(X^*\)</span>; это будет видно на семинаре 7 в формуле <span class="math inline">\(\Var(Y \mid X) = \sigma_Y^2(1 - \rho^2)\)</span> для нормального закона.</p>
 <p>Проверка: выборочная корреляция для точной линейной связи и для «почти линейной».</p>
 <div id="s05-t11-check" class="cell" data-execution_count="14">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>lx <span class="op">=</span> rng.normal(size<span class="op">=</span><span class="dv">100_000</span>)</span>
@@ -2007,6 +2014,9 @@ rho = 0.5:  лучший w = 1.000,  Var = 1.0000,  простое средне�
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="../../seminars/07-normal-plane-functions/seminar-07.html" class="pagination-link" aria-label="Семинар 7. Нормальный закон на плоскости. Функции случайных величин">
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Семинар 7. Нормальный закон на плоскости. Функции случайных величин</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->
