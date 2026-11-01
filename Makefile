@@ -3,7 +3,7 @@
 VENV := uv run
 SEM  := $(wildcard seminars/$(N)-*/seminar-$(N).qmd)
 
-.PHONY: help book preview handout handouts all publish clean lint test new
+.PHONY: help book preview handout handouts mock all publish clean lint test new
 
 help:  ## показать список целей
 	@grep -E '^[a-z-]+:.*##' $(MAKEFILE_LIST) | sed 's/:.*##/\t/' | expand -t 12
@@ -17,6 +17,9 @@ preview:  ## книга с автообновлением в браузере
 handout:  ## PDF-раздатка одного семинара: make handout N=01
 	@test -n "$(SEM)" || { echo "Нет семинара с N=$(N)"; exit 1; }
 	$(VENV) quarto render $(SEM) --profile handout --to pdf
+
+mock:  ## PDF пробной контрольной: _output/handouts/exams/
+	$(VENV) quarto render exams/mock-midterm.qmd --profile handout --to pdf
 
 handouts:  ## PDF-раздатки всех семинаров: _output/handouts/
 	$(VENV) quarto render --profile handout --to pdf
