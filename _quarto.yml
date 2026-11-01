@@ -25,6 +25,7 @@ book:
     - seminars/03-continuous-random-variables/seminar-03.qmd
     - seminars/04-exponential-distribution/seminar-04.qmd
     - seminars/05-two-random-variables/seminar-05.qmd
+    - seminars/07-normal-plane-functions/seminar-07.qmd
 
 lang: ru
 date-format: "D MMMM YYYY"
