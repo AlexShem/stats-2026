@@ -32,12 +32,13 @@ def test_seminar_06_moved_to_friday_9_october():
     assert seminar_date(6) == dt.date(2026, 10, 9)
 
 
-def test_20_october_moved_to_6_november_midterm():
-    # Занятие 20 октября стало контрольной 6 ноября; номера семинара она не берёт.
+def test_midterm_3_november_and_20_october_moved_to_6_november():
+    # Контрольная 3 ноября номера семинара не берёт; занятие 20 октября
+    # перенесено на пятницу 6 ноября и стало семинаром 8.
     assert dt.date(2026, 10, 20) not in CLASS_DATES
-    assert dt.date(2026, 11, 6) in MIDTERMS
+    assert dt.date(2026, 11, 3) in MIDTERMS
     assert seminar_date(7) == dt.date(2026, 10, 27)
-    assert seminar_date(8) == dt.date(2026, 11, 3)
+    assert seminar_date(8) == dt.date(2026, 11, 6)
     assert seminar_date(9) == dt.date(2026, 11, 10)
 
 

@@ -8,7 +8,8 @@ import pytest
 import yaml
 
 ROOT = Path(__file__).resolve().parent.parent
-CHAPTERS = sorted(ROOT.glob("seminars/*/seminar-*.qmd"))
+# Главы семинаров и пробная контрольная (exams/): правила для них одни.
+CHAPTERS = sorted(ROOT.glob("seminars/*/seminar-*.qmd")) + sorted(ROOT.glob("exams/*.qmd"))
 
 CELL = re.compile(r"^```\{python\}\n(.*?)^```", re.DOTALL | re.MULTILINE)
 # import, from … import, def и lambda-выражение (но не слово lambda в строке или в LaTeX)
