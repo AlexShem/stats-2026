@@ -1,0 +1,1732 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru" xml:lang="ru"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>7&nbsp; Пробная контрольная работа по теории вероятностей – Теория вероятностей и математическая статистика</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../seminars/07-normal-plane-functions/seminar-07.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-1aa567b42d78015c3b7cfc07166ec9b5.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Поиск не дал результатов",
+    "search-matching-documents-text": "Результаты поиска",
+    "search-copy-link-title": "Скопировать ссылку",
+    "search-hide-matches-text": "Скрыть дополнительные результаты",
+    "search-more-match-text": "дополнительный результат в этом документе",
+    "search-more-matches-text": "дополнительных результата(-ов) в этом документе",
+    "search-clear-button-title": "Очистить",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Отменить",
+    "search-submit-button-title": "Найти",
+    "search-label": "Поиск"
+  }
+}</script>
+<script>
+window.MathJax = {
+  tex: {
+    macros: {
+      E: "\\mathrm{E}",
+      Var: "\\mathrm{Var}",
+      Prob: "\\mathbb{P}",
+      Cov: "\\mathrm{cov}",
+      indep: "\\perp\\!\\!\\!\\perp"
+    }
+  }
+};
+</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Переключить боковую панель навигации" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../exams/mock-midterm.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Пробная контрольная работа по теории вероятностей</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Переключить боковую панель навигации" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Поиск" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Теория вероятностей и математическая статистика</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/AlexShem/stats-2026/" title="Исходный код" class="quarto-navigation-tool px-1" aria-label="Исходный код"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Поиск"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">О книге</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../seminars/01-addition-multiplication/seminar-01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Семинар 1. Теоремы сложения и умножения вероятностей</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../seminars/02-discrete-random-variables/seminar-02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Семинар 2. Дискретные случайные величины: биномиальный закон и закон Пуассона</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../seminars/03-continuous-random-variables/seminar-03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Семинар 3. Непрерывные случайные величины</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../seminars/04-exponential-distribution/seminar-04.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Семинар 4. Показательное распределение</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../seminars/05-two-random-variables/seminar-05.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Семинар 5. Системы двух случайных величин</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../seminars/07-normal-plane-functions/seminar-07.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Семинар 7. Нормальный закон на плоскости. Функции случайных величин</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exams/mock-midterm.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Пробная контрольная работа по теории вероятностей</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Содержание</h2>
+   
+  <ul>
+  <li><a href="#sec-mock-code" id="toc-sec-mock-code" class="nav-link active" data-scroll-target="#sec-mock-code"><span class="header-section-number">7.1</span> Код для этой главы</a></li>
+  <li><a href="#как-устроена-контрольная" id="toc-как-устроена-контрольная" class="nav-link" data-scroll-target="#как-устроена-контрольная"><span class="header-section-number">7.2</span> Как устроена контрольная</a></li>
+  <li><a href="#задачи" id="toc-задачи" class="nav-link" data-scroll-target="#задачи"><span class="header-section-number">7.3</span> Задачи</a>
+  <ul class="collapse">
+  <li><a href="#sec-mock-t1" id="toc-sec-mock-t1" class="nav-link" data-scroll-target="#sec-mock-t1"><span class="header-section-number">7.3.1</span> Задача 1</a></li>
+  <li><a href="#sec-mock-t2" id="toc-sec-mock-t2" class="nav-link" data-scroll-target="#sec-mock-t2"><span class="header-section-number">7.3.2</span> Задача 2</a></li>
+  <li><a href="#sec-mock-t3" id="toc-sec-mock-t3" class="nav-link" data-scroll-target="#sec-mock-t3"><span class="header-section-number">7.3.3</span> Задача 3</a></li>
+  <li><a href="#sec-mock-t4" id="toc-sec-mock-t4" class="nav-link" data-scroll-target="#sec-mock-t4"><span class="header-section-number">7.3.4</span> Задача 4 (Гмурман, гл. 6 § 5, № 333, дополнена)</a></li>
+  <li><a href="#sec-mock-t5" id="toc-sec-mock-t5" class="nav-link" data-scroll-target="#sec-mock-t5"><span class="header-section-number">7.3.5</span> Задача 5</a></li>
+  </ul></li>
+  <li><a href="#sec-mock-phi" id="toc-sec-mock-phi" class="nav-link" data-scroll-target="#sec-mock-phi"><span class="header-section-number">7.4</span> Таблица функции <span class="math inline">\(\Phi\)</span></a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/AlexShem/stats-2026/issues/new" class="toc-action"><i class="bi bi-github"></i>Сообщить о проблеме</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Пробная контрольная работа по теории вероятностей</span></h1>
+<p class="subtitle lead">Теория вероятностей и математическая статистика · НИЯУ МИФИ</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Дата публикации</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">3 ноября 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p><a href="../handouts/exams/mock-midterm.pdf">Скачать PDF пробного варианта</a></p>
+<section id="sec-mock-code" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="sec-mock-code"><span class="header-section-number">7.1</span> Код для этой главы</h2>
+<p>Все импорты и функции, которые используются в проверках, собраны в одной ячейке. Выполните её первой. Остальные ячейки опираются на неё.</p>
+<div id="mock-setup" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sympy <span class="im">as</span> sp</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> fractions <span class="im">import</span> Fraction <span class="im">as</span> Fr</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> itertools <span class="im">import</span> product</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> math <span class="im">import</span> comb, exp, sqrt</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> Markdown</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> norm</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Оформление графиков: шрифт с кириллицей и палитра, различимая при печати</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>PALETTE <span class="op">=</span> [<span class="st">"#0b5394"</span>, <span class="st">"#b45309"</span>, <span class="st">"#2e7d32"</span>, <span class="st">"#7b1fa2"</span>, <span class="st">"#c62828"</span>, <span class="st">"#00838f"</span>]</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>plt.rcParams.update({</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">"font.family"</span>: <span class="st">"sans-serif"</span>,</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">"font.sans-serif"</span>: [<span class="st">"DejaVu Sans"</span>, <span class="st">"Liberation Sans"</span>, <span class="st">"Noto Sans"</span>, <span class="st">"sans-serif"</span>],</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    <span class="st">"axes.unicode_minus"</span>: <span class="va">False</span>,</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    <span class="st">"axes.prop_cycle"</span>: plt.cycler(color<span class="op">=</span>PALETTE),</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    <span class="st">"axes.spines.top"</span>: <span class="va">False</span>,</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    <span class="st">"axes.spines.right"</span>: <span class="va">False</span>,</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>    <span class="st">"axes.grid"</span>: <span class="va">True</span>,</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    <span class="st">"grid.alpha"</span>: <span class="fl">0.3</span>,</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>    <span class="st">"figure.dpi"</span>: <span class="dv">110</span>,</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    <span class="st">"figure.constrained_layout.use"</span>: <span class="va">True</span>,</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Генератор случайных чисел с фиксированным зерном: результаты воспроизводимы</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>rng <span class="op">=</span> np.random.default_rng(<span class="dv">2026</span>)</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Символьная переменная для задачи 3</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> sp.symbols(<span class="st">"x"</span>, real<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> exactly(ps, k):</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Вероятность ровно k успехов в независимых испытаниях с вероятностями успеха ps."""</span></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>    total <span class="op">=</span> <span class="fl">0.0</span></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> bits <span class="kw">in</span> product([<span class="dv">0</span>, <span class="dv">1</span>], repeat<span class="op">=</span><span class="bu">len</span>(ps)):</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">sum</span>(bits) <span class="op">==</span> k:</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>            pr <span class="op">=</span> <span class="fl">1.0</span></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> b, p <span class="kw">in</span> <span class="bu">zip</span>(bits, ps):</span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>                pr <span class="op">*=</span> p <span class="cf">if</span> b <span class="cf">else</span> <span class="dv">1</span> <span class="op">-</span> p</span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>            total <span class="op">+=</span> pr</span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> total</span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> moments(values, probs):</span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Среднее и дисперсия дискретной величины по ряду распределения."""</span></span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>    e <span class="op">=</span> <span class="bu">sum</span>(v <span class="op">*</span> p <span class="cf">for</span> v, p <span class="kw">in</span> <span class="bu">zip</span>(values, probs))</span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>    e2 <span class="op">=</span> <span class="bu">sum</span>(v <span class="op">*</span> v <span class="op">*</span> p <span class="cf">for</span> v, p <span class="kw">in</span> <span class="bu">zip</span>(values, probs))</span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> e, e2 <span class="op">-</span> e <span class="op">*</span> e</span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> phi_table():</span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Таблица Phi(x) = P(Z &lt;= x), Z ~ N(0, 1): строки 0,0 … 3,0, столбцы сотые 0 … 9."""</span></span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>    rows <span class="op">=</span> []</span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">31</span>):</span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>        row <span class="op">=</span> {<span class="st">"$x$"</span>: <span class="ss">f"</span><span class="sc">{</span>i <span class="op">/</span> <span class="dv">10</span><span class="sc">:.1f}</span><span class="ss">"</span>.replace(<span class="st">"."</span>, <span class="st">","</span>)}</span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">10</span>):</span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>            row[<span class="bu">str</span>(j)] <span class="op">=</span> <span class="ss">f"</span><span class="sc">{</span>norm<span class="sc">.</span>cdf(i <span class="op">/</span> <span class="dv">10</span> <span class="op">+</span> j <span class="op">/</span> <span class="dv">100</span>)<span class="sc">:.4f}</span><span class="ss">"</span>.replace(<span class="st">"."</span>, <span class="st">","</span>)</span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>        rows.append(row)</span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> Markdown(pd.DataFrame(rows).to_markdown(index<span class="op">=</span><span class="va">False</span>, disable_numparse<span class="op">=</span><span class="va">True</span>))</span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> compare(name, a, b, labels<span class="op">=</span>(<span class="st">"точно"</span>, <span class="st">"симуляция"</span>)):</span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Печатает два значения одной величины рядом, с подписями labels."""</span></span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>name<span class="sc">:&gt;16}</span><span class="ss">:  </span><span class="sc">{</span>labels[<span class="dv">0</span>]<span class="sc">}</span><span class="ss"> </span><span class="sc">{</span>a<span class="sc">:9.4f}</span><span class="ss">   </span><span class="sc">{</span>labels[<span class="dv">1</span>]<span class="sc">}</span><span class="ss"> </span><span class="sc">{</span>b<span class="sc">:9.4f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="как-устроена-контрольная" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="как-устроена-контрольная"><span class="header-section-number">7.2</span> Как устроена контрольная</h2>
+<p>Контрольная работа по теории вероятностей проходит <strong>во вторник 3 ноября</strong> и длится <strong>80 минут</strong>. Этот пробный вариант устроен так же, как настоящий: те же темы, тот же объём, сопоставимая трудность. Решите его за 80 минут, не подглядывая в решения, и только потом сверьтесь.</p>
+<ul>
+<li><p><strong>Темы:</strong> семинары 1–7. Пять задач, по одной на каждую линию:</p>
+<ol type="1">
+<li>события: теоремы сложения и умножения, «хотя бы одно»; надёжность и показательный закон;</li>
+<li>дискретная случайная величина: ряд распределения по описанию опыта, <span class="math inline">\(\E(X)\)</span>, <span class="math inline">\(\Var(X)\)</span>, функция распределения;</li>
+<li>непрерывная случайная величина: постоянная в плотности, <span class="math inline">\(F(x)\)</span>, вероятность попадания в интервал, <span class="math inline">\(\E(X)\)</span>, <span class="math inline">\(\Var(X)\)</span>, медиана;</li>
+<li>нормальный закон: вероятность по таблице <span class="math inline">\(\Phi\)</span> и обратная задача;</li>
+<li>система двух дискретных величин: законы составляющих, зависимость, ковариация и корреляция, условный закон, дисперсия линейной комбинации.</li>
+</ol></li>
+<li><p><strong>Баллы:</strong> всего 20; за каждый пункт задачи балл указан в условии. Оценивается решение, а не только ответ: верный ход с арифметической ошибкой получает большую часть балла, ответ без решения не засчитывается. Ошибка, перенесённая в следующий пункт, второй раз не штрафуется.</p></li>
+<li><p><strong>Оценка</strong> по 10-балльной шкале: половина набранных баллов, округлённая до целого (половина округляется вверх), но не меньше 1.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Баллы</th>
+<th style="text-align: center;">19–20</th>
+<th style="text-align: center;">17–18,5</th>
+<th style="text-align: center;">15–16,5</th>
+<th style="text-align: center;">13–14,5</th>
+<th style="text-align: center;">11–12,5</th>
+<th style="text-align: center;">9–10,5</th>
+<th style="text-align: center;">7–8,5</th>
+<th style="text-align: center;">5–6,5</th>
+<th style="text-align: center;">3–4,5</th>
+<th style="text-align: center;">0–2,5</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Оценка</strong></td>
+<td style="text-align: center;">10</td>
+<td style="text-align: center;">9</td>
+<td style="text-align: center;">8</td>
+<td style="text-align: center;">7</td>
+<td style="text-align: center;">6</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">1</td>
+</tr>
+</tbody>
+</table></li>
+<li><p><strong>Разрешено:</strong> калькулятор (непрограммируемый), один лист A4 со своими формулами и таблица функции <span class="math inline">\(\Phi\)</span>, которую выдаём мы (та же, что в конце этого варианта).</p></li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Уведомление
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Обозначения.</strong> <span class="math inline">\(\Phi(x) = \Prob(Z \leqslant x)\)</span> есть функция распределения стандартного нормального закона <span class="math inline">\(Z \sim N(0, 1)\)</span>: <span class="math inline">\(\Phi(0) = 0{,}5\)</span>, <span class="math inline">\(\Phi(-x) = 1 - \Phi(x)\)</span>. Это <strong>не</strong> функция Лапласа из учебника лектора и задачника (там интеграл берётся от нуля, и она меньше на <span class="math inline">\(0{,}5\)</span>).</p>
+<p><strong>Функция распределения</strong> везде <span class="math inline">\(F(x) = \Prob(X \leqslant x)\)</span>, со знаком <span class="math inline">\(\leqslant\)</span>. Это стандартное определение. В задачнике и на семинарах 3 и 5 писали <span class="math inline">\(\Prob(X &lt; x)\)</span>: для непрерывной величины разницы нет, а у дискретной меняется только то, какому из соседних интервалов принадлежит точка скачка. Для <span class="math inline">\(X \sim N(\mu, \sigma^2)\)</span> <span class="math display">\[
+\Prob(\alpha &lt; X &lt; \beta) = \Phi\Big(\frac{\beta - \mu}{\sigma}\Big) - \Phi\Big(\frac{\alpha - \mu}{\sigma}\Big),
+\qquad \Prob(|X - \mu| &lt; \delta) = 2\Phi\Big(\frac{\delta}{\sigma}\Big) - 1.
+\]</span></p>
+</div>
+</div>
+</section>
+<section id="задачи" class="level2" data-number="7.3">
+<h2 data-number="7.3" class="anchored" data-anchor-id="задачи"><span class="header-section-number">7.3</span> Задачи</h2>
+<section id="sec-mock-t1" class="level3" data-number="7.3.1">
+<h3 data-number="7.3.1" class="anchored" data-anchor-id="sec-mock-t1"><span class="header-section-number">7.3.1</span> Задача 1</h3>
+<p>Устройство содержит три одинаковых элемента, которые работают независимо друг от друга. Время безотказной работы каждого элемента (в часах) распределено по показательному закону с параметром <span class="math inline">\(\lambda = 0{,}1\)</span>. Найти вероятность того, что</p>
+<p>а) отдельный элемент проработает без отказа 5 ч <em>(0,5 балла)</em>;</p>
+<p>б) за 5 ч безотказно проработают ровно два элемента из трёх <em>(1 балл)</em>;</p>
+<p>в) за 5 ч безотказно проработает хотя бы один элемент <em>(1 балл)</em>;</p>
+<p>г) элемент, который уже проработал без отказа 10 ч, проработает ещё не менее 5 ч <em>(0,5 балла)</em>.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Решение">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Совет</span>Решение
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>а) Вероятность безотказной работы за время <span class="math inline">\(t\)</span> есть функция надёжности <span class="math inline">\(R(t) = \Prob(T &gt; t) = 1 - F(t) = e^{-\lambda t}\)</span>: <span class="math display">\[
+p = e^{-0{,}1 \cdot 5} = e^{-0{,}5} \approx 0{,}6065.
+\]</span></p>
+<p>б) Элементы одинаковы и независимы, поэтому число работающих элементов распределено по биномиальному закону с <span class="math inline">\(n = 3\)</span>, <span class="math inline">\(p = 0{,}6065\)</span>: <span class="math display">\[
+\Prob(\text{ровно два}) = C_3^2\, p^2 (1 - p) = 3 \cdot 0{,}6065^2 \cdot 0{,}3935 \approx 0{,}4342.
+\]</span></p>
+<p>в) Через противоположное событие «все три отказали»: <span class="math display">\[
+\Prob(\text{хотя бы один}) = 1 - (1 - p)^3 = 1 - 0{,}3935^3 \approx 0{,}9391.
+\]</span></p>
+<p>г) Условная вероятность: <span class="math display">\[
+\Prob(T &gt; 15 \mid T &gt; 10) = \frac{\Prob(T &gt; 15)}{\Prob(T &gt; 10)}
+= \frac{e^{-1{,}5}}{e^{-1}} = e^{-0{,}5} \approx 0{,}6065.
+\]</span> Ответ совпал с пунктом а): это свойство отсутствия последействия. Элемент, проработавший 10 ч, «не помнит» прошлого и работает как новый.</p>
+<p><strong>Ответ:</strong> а) <span class="math inline">\(0{,}6065\)</span>; б) <span class="math inline">\(0{,}4342\)</span>; в) <span class="math inline">\(0{,}9391\)</span>; г) <span class="math inline">\(0{,}6065\)</span>.</p>
+<p>Проверка: симуляция <span class="math inline">\(10^6\)</span> устройств из трёх элементов.</p>
+<div id="mock-t1-check" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> exp(<span class="op">-</span><span class="fl">0.1</span> <span class="op">*</span> <span class="dv">5</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>T <span class="op">=</span> rng.exponential(<span class="dv">1</span> <span class="op">/</span> <span class="fl">0.1</span>, size<span class="op">=</span>(<span class="dv">10</span><span class="op">**</span><span class="dv">6</span>, <span class="dv">3</span>))</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>works <span class="op">=</span> (T <span class="op">&gt;</span> <span class="dv">5</span>).<span class="bu">sum</span>(axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>compare(<span class="st">"а) один элемент"</span>, p, np.mean(T[:, <span class="dv">0</span>] <span class="op">&gt;</span> <span class="dv">5</span>))</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>compare(<span class="st">"б) ровно два"</span>, exactly([p] <span class="op">*</span> <span class="dv">3</span>, <span class="dv">2</span>), np.mean(works <span class="op">==</span> <span class="dv">2</span>))</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>compare(<span class="st">"в) хотя бы один"</span>, <span class="dv">1</span> <span class="op">-</span> (<span class="dv">1</span> <span class="op">-</span> p) <span class="op">**</span> <span class="dv">3</span>, np.mean(works <span class="op">&gt;=</span> <span class="dv">1</span>))</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>old <span class="op">=</span> T[:, <span class="dv">0</span>][T[:, <span class="dv">0</span>] <span class="op">&gt;</span> <span class="dv">10</span>]</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>compare(<span class="st">"г) ещё 5 ч"</span>, p, np.mean(old <span class="op">&gt;</span> <span class="dv">15</span>))</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> а) один элемент:  точно    0.6065   симуляция    0.6065
+    б) ровно два:  точно    0.4342   симуляция    0.4349
+ в) хотя бы один:  точно    0.9391   симуляция    0.9391
+      г) ещё 5 ч:  точно    0.6065   симуляция    0.6072</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning callout-titled" title="Типичная ошибка">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Предупреждение</span>Типичная ошибка
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>В пункте г) ответить <span class="math inline">\(e^{-1{,}5}\)</span>, то есть вероятность проработать 15 ч с самого начала. Условие «уже проработал 10 ч» делает эти 10 ч известными, и считать надо только оставшиеся 5 ч.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="sec-mock-t2" class="level3" data-number="7.3.2">
+<h3 data-number="7.3.2" class="anchored" data-anchor-id="sec-mock-t2"><span class="header-section-number">7.3.2</span> Задача 2</h3>
+<p>У стрелка 3 патрона. Он стреляет по мишени до первого попадания или пока не кончатся патроны. Вероятность попадания при каждом выстреле равна <span class="math inline">\(0{,}6\)</span>, выстрелы независимы. Случайная величина <span class="math inline">\(X\)</span> есть число израсходованных патронов.</p>
+<p>а) Построить ряд распределения <span class="math inline">\(X\)</span> <em>(1,5 балла)</em>.</p>
+<p>б) Найти <span class="math inline">\(\E(X)\)</span> и <span class="math inline">\(\Var(X)\)</span> <em>(1 балл)</em>.</p>
+<p>в) Найти функцию распределения <span class="math inline">\(F(x) = \Prob(X \leqslant x)\)</span> <em>(0,5 балла)</em>.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Решение">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Совет</span>Решение
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>а) <span class="math inline">\(X\)</span> принимает значения 1, 2, 3.</p>
+<ul>
+<li><span class="math inline">\(X = 1\)</span>: первый выстрел попал, <span class="math inline">\(\Prob = 0{,}6\)</span>.</li>
+<li><span class="math inline">\(X = 2\)</span>: первый промах, второй попал, <span class="math inline">\(\Prob = 0{,}4 \cdot 0{,}6 = 0{,}24\)</span>.</li>
+<li><span class="math inline">\(X = 3\)</span>: первые два выстрела промахнулись. Третий выстрел последний при любом исходе, поэтому <span class="math inline">\(\Prob = 0{,}4^2 = 0{,}16\)</span>.</li>
+</ul>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;"><span class="math inline">\(x\)</span></th>
+<th style="text-align: center;">1</th>
+<th style="text-align: center;">2</th>
+<th style="text-align: center;">3</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(\Prob(X = x)\)</span></td>
+<td style="text-align: center;">0,6</td>
+<td style="text-align: center;">0,24</td>
+<td style="text-align: center;">0,16</td>
+</tr>
+</tbody>
+</table>
+<p>Контроль: <span class="math inline">\(0{,}6 + 0{,}24 + 0{,}16 = 1\)</span>.</p>
+<p>б) <span class="math display">\[
+\E(X) = 1 \cdot 0{,}6 + 2 \cdot 0{,}24 + 3 \cdot 0{,}16 = 1{,}56,
+\qquad
+\E(X^2) = 0{,}6 + 4 \cdot 0{,}24 + 9 \cdot 0{,}16 = 3,
+\]</span> <span class="math display">\[
+\Var(X) = \E(X^2) - \E(X)^2 = 3 - 1{,}56^2 = 0{,}5664.
+\]</span></p>
+<p>в) <span class="math inline">\(F(x) = \Prob(X \leqslant x)\)</span> накапливает вероятности значений, не больших <span class="math inline">\(x\)</span>; в точке скачка значение уже включено: <span class="math display">\[
+F(x) = \begin{cases}
+0, &amp; x &lt; 1,\\
+0{,}6, &amp; 1 \leqslant x &lt; 2,\\
+0{,}84, &amp; 2 \leqslant x &lt; 3,\\
+1, &amp; x \geqslant 3.
+\end{cases}
+\]</span></p>
+<p><strong>Ответ:</strong> ряд <span class="math inline">\(0{,}6;\ 0{,}24;\ 0{,}16\)</span>; <span class="math inline">\(\E(X) = 1{,}56\)</span>, <span class="math inline">\(\Var(X) = 0{,}5664\)</span>.</p>
+<p>Проверка: точные дроби и симуляция <span class="math inline">\(10^6\)</span> серий стрельбы.</p>
+<div id="mock-t2-check" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>q <span class="op">=</span> Fr(<span class="dv">3</span>, <span class="dv">5</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>probs <span class="op">=</span> [q, (<span class="dv">1</span> <span class="op">-</span> q) <span class="op">*</span> q, (<span class="dv">1</span> <span class="op">-</span> q) <span class="op">**</span> <span class="dv">2</span>]</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"ряд:"</span>, [<span class="bu">str</span>(v) <span class="cf">for</span> v <span class="kw">in</span> probs], <span class="st">" сумма:"</span>, <span class="bu">sum</span>(probs))</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>e, v <span class="op">=</span> moments([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>], probs)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>hits <span class="op">=</span> rng.random((<span class="dv">10</span><span class="op">**</span><span class="dv">6</span>, <span class="dv">3</span>)) <span class="op">&lt;</span> <span class="fl">0.6</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>first <span class="op">=</span> np.where(hits.<span class="bu">any</span>(axis<span class="op">=</span><span class="dv">1</span>), hits.argmax(axis<span class="op">=</span><span class="dv">1</span>) <span class="op">+</span> <span class="dv">1</span>, <span class="dv">3</span>)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>compare(<span class="st">"E(X)"</span>, <span class="bu">float</span>(e), first.mean())</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>compare(<span class="st">"Var(X)"</span>, <span class="bu">float</span>(v), first.var())</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>ряд: ['3/5', '6/25', '4/25']  сумма: 1
+            E(X):  точно    1.5600   симуляция    1.5598
+          Var(X):  точно    0.5664   симуляция    0.5666</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning callout-titled" title="Типичная ошибка">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Предупреждение</span>Типичная ошибка
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Взять <span class="math inline">\(\Prob(X = 3) = 0{,}4^2 \cdot 0{,}6\)</span>, как будто третий выстрел обязательно попадает. Тогда сумма вероятностей <span class="math inline">\(0{,}936 \ne 1\)</span>: контроль <span class="math inline">\(\sum p_i = 1\)</span> сразу ловит эту ошибку.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="sec-mock-t3" class="level3" data-number="7.3.3">
+<h3 data-number="7.3.3" class="anchored" data-anchor-id="sec-mock-t3"><span class="header-section-number">7.3.3</span> Задача 3</h3>
+<p>Плотность распределения случайной величины <span class="math inline">\(X\)</span> равна <span class="math inline">\(f(x) = C(1 + x)\)</span> в интервале <span class="math inline">\((0, 2)\)</span> и <span class="math inline">\(f(x) = 0\)</span> вне его.</p>
+<p>а) Найти постоянную <span class="math inline">\(C\)</span> <em>(0,5 балла)</em>.</p>
+<p>б) Найти функцию распределения <span class="math inline">\(F(x) = \Prob(X \leqslant x)\)</span> <em>(1 балл)</em>.</p>
+<p>в) Найти <span class="math inline">\(\Prob(1 &lt; X &lt; 2)\)</span> <em>(0,5 балла)</em>.</p>
+<p>г) Найти <span class="math inline">\(\E(X)\)</span> и <span class="math inline">\(\Var(X)\)</span> <em>(1,5 балла)</em>.</p>
+<p>д) Найти медиану <span class="math inline">\(X\)</span> <em>(0,5 балла)</em>.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Решение">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Совет</span>Решение
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>а) Условие нормировки: <span class="math inline">\(\int_0^2 C(1 + x)\,dx = C\,(2 + 2) = 4C = 1\)</span>, откуда <span class="math inline">\(C = 1/4\)</span>.</p>
+<p>б) При <span class="math inline">\(0 \leqslant x \leqslant 2\)</span>: <span class="math inline">\(F(x) = \int_0^x \tfrac14(1 + t)\,dt = \tfrac14\big(x + \tfrac{x^2}{2}\big) = \tfrac{x^2 + 2x}{8}\)</span>. <span class="math display">\[
+F(x) = \begin{cases}
+0, &amp; x &lt; 0,\\
+(x^2 + 2x)/8, &amp; 0 \leqslant x \leqslant 2,\\
+1, &amp; x &gt; 2.
+\end{cases}
+\]</span> Контроль: <span class="math inline">\(F(2) = 8/8 = 1\)</span>.</p>
+<p>в) <span class="math inline">\(\Prob(1 &lt; X &lt; 2) = F(2) - F(1) = 1 - 3/8 = 5/8 = 0{,}625\)</span>.</p>
+<p>г) <span class="math display">\[
+\E(X) = \frac14\int_0^2 (x + x^2)\,dx = \frac14\Big(2 + \frac83\Big) = \frac76 \approx 1{,}167,
+\qquad
+\E(X^2) = \frac14\int_0^2 (x^2 + x^3)\,dx = \frac14\Big(\frac83 + 4\Big) = \frac53,
+\]</span> <span class="math display">\[
+\Var(X) = \frac53 - \frac{49}{36} = \frac{11}{36} \approx 0{,}306.
+\]</span></p>
+<p>д) Медиана <span class="math inline">\(m\)</span> решает <span class="math inline">\(F(m) = 1/2\)</span>: <span class="math inline">\(m^2 + 2m - 4 = 0\)</span>, <span class="math inline">\(m = -1 + \sqrt5
+\approx 1{,}236\)</span> (второй корень отрицателен и не лежит в <span class="math inline">\((0, 2)\)</span>). Плотность возрастает, масса сдвинута вправо, поэтому медиана правее середины интервала.</p>
+<p><strong>Ответ:</strong> <span class="math inline">\(C = 1/4\)</span>; <span class="math inline">\(\Prob = 5/8\)</span>; <span class="math inline">\(\E(X) = 7/6\)</span>, <span class="math inline">\(\Var(X) = 11/36\)</span>; медиана <span class="math inline">\(\sqrt5 - 1 \approx 1{,}236\)</span>.</p>
+<p>Проверка: символьные интегралы.</p>
+<div id="mock-t3-check" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> (<span class="dv">1</span> <span class="op">+</span> x) <span class="op">/</span> <span class="dv">4</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"нормировка:"</span>, sp.integrate(f, (x, <span class="dv">0</span>, <span class="dv">2</span>)))</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>Fx <span class="op">=</span> sp.integrate(f, (x, <span class="dv">0</span>, x))</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"F(x) ="</span>, sp.expand(Fx), <span class="st">"  P(1&lt;X&lt;2) ="</span>, sp.integrate(f, (x, <span class="dv">1</span>, <span class="dv">2</span>)))</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>e <span class="op">=</span> sp.integrate(x <span class="op">*</span> f, (x, <span class="dv">0</span>, <span class="dv">2</span>))</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"E ="</span>, e, <span class="st">"  Var ="</span>, sp.integrate(x<span class="op">**</span><span class="dv">2</span> <span class="op">*</span> f, (x, <span class="dv">0</span>, <span class="dv">2</span>)) <span class="op">-</span> e<span class="op">**</span><span class="dv">2</span>)</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"медиана:"</span>, [m <span class="cf">for</span> m <span class="kw">in</span> sp.solve(Fx <span class="op">-</span> sp.Rational(<span class="dv">1</span>, <span class="dv">2</span>), x) <span class="cf">if</span> m <span class="op">&gt;</span> <span class="dv">0</span>])</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>нормировка: 1
+F(x) = x**2/8 + x/4   P(1&lt;X&lt;2) = 5/8
+E = 7/6   Var = 11/36
+медиана: [-1 + sqrt(5)]</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="sec-mock-t4" class="level3" data-number="7.3.4">
+<h3 data-number="7.3.4" class="anchored" data-anchor-id="sec-mock-t4"><span class="header-section-number">7.3.4</span> Задача 4 (Гмурман, гл. 6 § 5, № 333, дополнена)</h3>
+<p>Случайная ошибка измерения <span class="math inline">\(X\)</span> распределена нормально, <span class="math inline">\(X \sim N(0, 20^2)\)</span> (в миллиметрах). Измерения независимы.</p>
+<p>а) Найти вероятность того, что ошибка одного измерения не превзойдёт по абсолютной величине 4 мм <em>(1,5 балла)</em>.</p>
+<p>б) Найти вероятность того, что из трёх независимых измерений ошибка хотя бы одного не превзойдёт по абсолютной величине 4 мм <em>(1 балл)</em>.</p>
+<p>в) Каким должно быть <span class="math inline">\(\sigma\)</span> (при <span class="math inline">\(\mu = 0\)</span>), чтобы ошибка одного измерения не превосходила по абсолютной величине 4 мм с вероятностью <span class="math inline">\(0{,}9\)</span>? <em>(1,5 балла)</em></p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Решение">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Совет</span>Решение
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>а) Интервал симметричен относительно <span class="math inline">\(\mu = 0\)</span>: <span class="math display">\[
+q = \Prob(|X| \leqslant 4) = 2\Phi\Big(\frac{4}{20}\Big) - 1 = 2\Phi(0{,}2) - 1
+= 2 \cdot 0{,}5793 - 1 = 0{,}1586.
+\]</span> Точное значение <span class="math inline">\(0{,}1585\)</span>; последняя цифра расходится из-за округления табличного <span class="math inline">\(\Phi(0{,}2)\)</span>, это не ошибка.</p>
+<p>б) Через противоположное событие «во всех трёх измерениях ошибка больше 4 мм»: <span class="math display">\[
+1 - (1 - q)^3 = 1 - 0{,}8414^3 \approx 0{,}404.
+\]</span> Ответ книги: <span class="math inline">\(\approx 0{,}4\)</span>.</p>
+<p>в) Нужно <span class="math inline">\(2\Phi(4/\sigma) - 1 = 0{,}9\)</span>, то есть <span class="math inline">\(\Phi(4/\sigma) = 0{,}95\)</span>. По таблице <span class="math inline">\(\Phi(1{,}64) = 0{,}9495\)</span> и <span class="math inline">\(\Phi(1{,}65) = 0{,}9505\)</span>, так что <span class="math inline">\(4/\sigma \approx 1{,}645\)</span> и <span class="math display">\[
+\sigma \approx \frac{4}{1{,}645} \approx 2{,}43 \text{ мм}.
+\]</span></p>
+<p><strong>Ответ:</strong> а) <span class="math inline">\(0{,}1586\)</span>; б) <span class="math inline">\(0{,}404\)</span>; в) <span class="math inline">\(\sigma \approx 2{,}43\)</span> мм.</p>
+<p>Проверка: точные значения <span class="math inline">\(\Phi\)</span> и обратной к ней функции.</p>
+<div id="mock-t4-check" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>q <span class="op">=</span> <span class="dv">2</span> <span class="op">*</span> norm.cdf(<span class="dv">4</span> <span class="op">/</span> <span class="dv">20</span>) <span class="op">-</span> <span class="dv">1</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"а) </span><span class="sc">{</span>q<span class="sc">:.4f}</span><span class="ss">   б) </span><span class="sc">{</span><span class="dv">1</span> <span class="op">-</span> (<span class="dv">1</span> <span class="op">-</span> q) <span class="op">**</span> <span class="dv">3</span><span class="sc">:.4f}</span><span class="ss">   в) sigma = </span><span class="sc">{</span><span class="dv">4</span> <span class="op">/</span> norm<span class="sc">.</span>ppf(<span class="fl">0.95</span>)<span class="sc">:.3f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>а) 0.1585   б) 0.4042   в) sigma = 2.432</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning callout-titled" title="Типичная ошибка">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Предупреждение</span>Типичная ошибка
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Смешать две функции: подставить в <span class="math inline">\(2\Phi(t) - 1\)</span> значение функции Лапласа из задачника (<span class="math inline">\(\Phi_0(0{,}2) = 0{,}0793\)</span>) и получить отрицательную вероятность. Таблица, которую выдают на контрольной, даёт <span class="math inline">\(\Phi(x) =
+\Prob(Z \leqslant x)\)</span>, у неё <span class="math inline">\(\Phi(0) = 0{,}5\)</span>.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="sec-mock-t5" class="level3" data-number="7.3.5">
+<h3 data-number="7.3.5" class="anchored" data-anchor-id="sec-mock-t5"><span class="header-section-number">7.3.5</span> Задача 5</h3>
+<p>Совместный закон распределения дискретных величин <span class="math inline">\(X\)</span> и <span class="math inline">\(Y\)</span> задан таблицей:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: center;"><span class="math inline">\(X = 1\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(X = 2\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(X = 3\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(Y = -1\)</span></td>
+<td style="text-align: center;">0,2</td>
+<td style="text-align: center;">0,1</td>
+<td style="text-align: center;">0,1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(Y = 1\)</span></td>
+<td style="text-align: center;">0,1</td>
+<td style="text-align: center;">0,1</td>
+<td style="text-align: center;">0,4</td>
+</tr>
+</tbody>
+</table>
+<p>а) Найти законы распределения составляющих <span class="math inline">\(X\)</span> и <span class="math inline">\(Y\)</span> <em>(1 балл)</em>.</p>
+<p>б) Зависимы ли <span class="math inline">\(X\)</span> и <span class="math inline">\(Y\)</span>? <em>(0,5 балла)</em></p>
+<p>в) Найти <span class="math inline">\(\E(X)\)</span>, <span class="math inline">\(\E(Y)\)</span>, <span class="math inline">\(\Var(X)\)</span>, <span class="math inline">\(\Var(Y)\)</span>, <span class="math inline">\(\Cov(X, Y)\)</span> и <span class="math inline">\(\rho(X, Y)\)</span> <em>(2,5 балла)</em>.</p>
+<p>г) Найти условный закон распределения <span class="math inline">\(Y\)</span> при <span class="math inline">\(X = 3\)</span> и <span class="math inline">\(\E(Y \mid X = 3)\)</span> <em>(1 балл)</em>.</p>
+<p>д) Найти <span class="math inline">\(\Var(X - 2Y)\)</span> <em>(1 балл)</em>.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Решение">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Совет</span>Решение
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>а) Суммы по столбцам и строкам:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;"><span class="math inline">\(x\)</span></th>
+<th style="text-align: center;">1</th>
+<th style="text-align: center;">2</th>
+<th style="text-align: center;">3</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(\Prob(X = x)\)</span></td>
+<td style="text-align: center;">0,3</td>
+<td style="text-align: center;">0,2</td>
+<td style="text-align: center;">0,5</td>
+</tr>
+</tbody>
+</table>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;"><span class="math inline">\(y\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(-1\)</span></th>
+<th style="text-align: center;">1</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(\Prob(Y = y)\)</span></td>
+<td style="text-align: center;">0,4</td>
+<td style="text-align: center;">0,6</td>
+</tr>
+</tbody>
+</table>
+<p>б) <span class="math inline">\(\Prob(X = 1, Y = -1) = 0{,}2\)</span>, а <span class="math inline">\(\Prob(X = 1)\Prob(Y = -1) = 0{,}3 \cdot
+0{,}4 = 0{,}12\)</span>. Достаточно одной клетки, где равенство нарушено: величины <strong>зависимы</strong>.</p>
+<p>в) <span class="math display">\[
+\E(X) = 0{,}3 + 0{,}4 + 1{,}5 = 2{,}2,\quad \E(X^2) = 0{,}3 + 0{,}8 + 4{,}5 = 5{,}6,\quad
+\Var(X) = 5{,}6 - 4{,}84 = 0{,}76;
+\]</span> <span class="math display">\[
+\E(Y) = -0{,}4 + 0{,}6 = 0{,}2,\quad \E(Y^2) = 1,\quad \Var(Y) = 1 - 0{,}04 = 0{,}96;
+\]</span> <span class="math display">\[
+\E(XY) = -(1 \cdot 0{,}2 + 2 \cdot 0{,}1 + 3 \cdot 0{,}1) + (1 \cdot 0{,}1 + 2 \cdot 0{,}1 + 3 \cdot 0{,}4)
+= -0{,}7 + 1{,}5 = 0{,}8,
+\]</span> <span class="math display">\[
+\Cov(X, Y) = \E(XY) - \E(X)\E(Y) = 0{,}8 - 0{,}44 = 0{,}36,\qquad
+\rho(X, Y) = \frac{0{,}36}{\sqrt{0{,}76 \cdot 0{,}96}} \approx 0{,}421.
+\]</span> Контроль: <span class="math inline">\(|\rho| \leqslant 1\)</span>.</p>
+<p>г) Столбец <span class="math inline">\(X = 3\)</span>, делённый на <span class="math inline">\(\Prob(X = 3) = 0{,}5\)</span>: <span class="math inline">\(\Prob(Y = -1 \mid X = 3) = 0{,}2\)</span>, <span class="math inline">\(\Prob(Y = 1 \mid X = 3) = 0{,}8\)</span>; <span class="math display">\[
+\E(Y \mid X = 3) = -0{,}2 + 0{,}8 = 0{,}6.
+\]</span> Это больше, чем <span class="math inline">\(\E(Y) = 0{,}2\)</span>: при больших <span class="math inline">\(X\)</span> величина <span class="math inline">\(Y\)</span> в среднем больше, что согласуется с <span class="math inline">\(\rho &gt; 0\)</span>.</p>
+<p>д) <span class="math display">\[
+\Var(X - 2Y) = \Var(X) + 4\Var(Y) - 2 \cdot 2\,\Cov(X, Y) = 0{,}76 + 3{,}84 - 1{,}44 = 3{,}16.
+\]</span></p>
+<p><strong>Ответ:</strong> а) см. таблицы; б) зависимы; в) <span class="math inline">\(\E(X) = 2{,}2\)</span>, <span class="math inline">\(\E(Y) = 0{,}2\)</span>, <span class="math inline">\(\Var(X) = 0{,}76\)</span>, <span class="math inline">\(\Var(Y) = 0{,}96\)</span>, <span class="math inline">\(\Cov = 0{,}36\)</span>, <span class="math inline">\(\rho \approx 0{,}421\)</span>; г) <span class="math inline">\(0{,}2;\ 0{,}8\)</span>, <span class="math inline">\(\E(Y \mid X = 3) = 0{,}6\)</span>; д) <span class="math inline">\(3{,}16\)</span>.</p>
+<p>Проверка: точные дроби; <span class="math inline">\(\Var(X - 2Y)\)</span> ещё и прямым перебором значений <span class="math inline">\(X - 2Y\)</span>.</p>
+<div id="mock-t5-check" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>xs, ys <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>], [<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>]</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>P <span class="op">=</span> [[Fr(<span class="dv">2</span>, <span class="dv">10</span>), Fr(<span class="dv">1</span>, <span class="dv">10</span>), Fr(<span class="dv">1</span>, <span class="dv">10</span>)], [Fr(<span class="dv">1</span>, <span class="dv">10</span>), Fr(<span class="dv">1</span>, <span class="dv">10</span>), Fr(<span class="dv">4</span>, <span class="dv">10</span>)]]</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>px <span class="op">=</span> [P[<span class="dv">0</span>][i] <span class="op">+</span> P[<span class="dv">1</span>][i] <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">3</span>)]</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>py <span class="op">=</span> [<span class="bu">sum</span>(row) <span class="cf">for</span> row <span class="kw">in</span> P]</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>ex, vx <span class="op">=</span> moments(xs, px)</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>ey, vy <span class="op">=</span> moments(ys, py)</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>cov <span class="op">=</span> <span class="bu">sum</span>(xs[i] <span class="op">*</span> ys[j] <span class="op">*</span> P[j][i] <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">3</span>) <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">2</span>)) <span class="op">-</span> ex <span class="op">*</span> ey</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"E X ="</span>, ex, <span class="st">" Var X ="</span>, vx, <span class="st">" E Y ="</span>, ey, <span class="st">" Var Y ="</span>, vy)</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Cov ="</span>, cov, <span class="ss">f" rho = </span><span class="sc">{</span><span class="bu">float</span>(cov) <span class="op">/</span> sqrt(vx <span class="op">*</span> vy)<span class="sc">:.4f}</span><span class="ss">"</span>)</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Y | X = 3:"</span>, [<span class="bu">str</span>(P[j][<span class="dv">2</span>] <span class="op">/</span> px[<span class="dv">2</span>]) <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">2</span>)])</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>vals <span class="op">=</span> [xs[i] <span class="op">-</span> <span class="dv">2</span> <span class="op">*</span> ys[j] <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">3</span>) <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">2</span>)]</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>pr <span class="op">=</span> [P[j][i] <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">3</span>) <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">2</span>)]</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Var(X - 2Y): по формуле"</span>, vx <span class="op">+</span> <span class="dv">4</span> <span class="op">*</span> vy <span class="op">-</span> <span class="dv">4</span> <span class="op">*</span> cov, <span class="st">"  перебором"</span>, moments(vals, pr)[<span class="dv">1</span>])</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>E X = 11/5  Var X = 19/25  E Y = 1/5  Var Y = 24/25
+Cov = 9/25  rho = 0.4215
+Y | X = 3: ['1/5', '4/5']
+Var(X - 2Y): по формуле 79/25   перебором 79/25</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning callout-titled" title="Типичная ошибка">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Предупреждение</span>Типичная ошибка
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>В пункте д) написать <span class="math inline">\(\Var(-2Y) = -2\Var(Y)\)</span> или забыть слагаемое с ковариацией. Множитель выходит из дисперсии в квадрате, а для зависимых величин <span class="math inline">\(\Var(aX + bY) = a^2\Var(X) + b^2\Var(Y) + 2ab\Cov(X, Y)\)</span>.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="sec-mock-phi" class="level2" data-number="7.4">
+<h2 data-number="7.4" class="anchored" data-anchor-id="sec-mock-phi"><span class="header-section-number">7.4</span> Таблица функции <span class="math inline">\(\Phi\)</span></h2>
+<p>Значения <span class="math inline">\(\Phi(x) = \Prob(Z \leqslant x)\)</span>, <span class="math inline">\(Z \sim N(0, 1)\)</span>. Строка даёт целую часть и десятые доли <span class="math inline">\(x\)</span>, столбец даёт сотые: <span class="math inline">\(\Phi(1{,}96)\)</span> стоит на пересечении строки <span class="math inline">\(1{,}9\)</span> и столбца <span class="math inline">\(6\)</span> и равна <span class="math inline">\(0{,}9750\)</span>. Для отрицательных аргументов <span class="math inline">\(\Phi(-x) = 1 - \Phi(x)\)</span>; при <span class="math inline">\(x &gt; 3{,}09\)</span> можно считать <span class="math inline">\(\Phi(x) \approx 1\)</span>.</p>
+<div class="cell" data-execution_count="7">
+<div id="tbl-mock-phi" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="7">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-mock-phi-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Таблица&nbsp;7.1: Функция распределения стандартного нормального закона
+</figcaption>
+<div aria-describedby="tbl-mock-phi-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output cell-output-display cell-output-markdown" data-execution_count="7">
+<table class="cell caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 8%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 9%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><span class="math inline">\(x\)</span></th>
+<th style="text-align: left;">0</th>
+<th style="text-align: left;">1</th>
+<th style="text-align: left;">2</th>
+<th style="text-align: left;">3</th>
+<th style="text-align: left;">4</th>
+<th style="text-align: left;">5</th>
+<th style="text-align: left;">6</th>
+<th style="text-align: left;">7</th>
+<th style="text-align: left;">8</th>
+<th style="text-align: left;">9</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">0,0</td>
+<td style="text-align: left;">0,5000</td>
+<td style="text-align: left;">0,5040</td>
+<td style="text-align: left;">0,5080</td>
+<td style="text-align: left;">0,5120</td>
+<td style="text-align: left;">0,5160</td>
+<td style="text-align: left;">0,5199</td>
+<td style="text-align: left;">0,5239</td>
+<td style="text-align: left;">0,5279</td>
+<td style="text-align: left;">0,5319</td>
+<td style="text-align: left;">0,5359</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">0,1</td>
+<td style="text-align: left;">0,5398</td>
+<td style="text-align: left;">0,5438</td>
+<td style="text-align: left;">0,5478</td>
+<td style="text-align: left;">0,5517</td>
+<td style="text-align: left;">0,5557</td>
+<td style="text-align: left;">0,5596</td>
+<td style="text-align: left;">0,5636</td>
+<td style="text-align: left;">0,5675</td>
+<td style="text-align: left;">0,5714</td>
+<td style="text-align: left;">0,5753</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">0,2</td>
+<td style="text-align: left;">0,5793</td>
+<td style="text-align: left;">0,5832</td>
+<td style="text-align: left;">0,5871</td>
+<td style="text-align: left;">0,5910</td>
+<td style="text-align: left;">0,5948</td>
+<td style="text-align: left;">0,5987</td>
+<td style="text-align: left;">0,6026</td>
+<td style="text-align: left;">0,6064</td>
+<td style="text-align: left;">0,6103</td>
+<td style="text-align: left;">0,6141</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">0,3</td>
+<td style="text-align: left;">0,6179</td>
+<td style="text-align: left;">0,6217</td>
+<td style="text-align: left;">0,6255</td>
+<td style="text-align: left;">0,6293</td>
+<td style="text-align: left;">0,6331</td>
+<td style="text-align: left;">0,6368</td>
+<td style="text-align: left;">0,6406</td>
+<td style="text-align: left;">0,6443</td>
+<td style="text-align: left;">0,6480</td>
+<td style="text-align: left;">0,6517</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">0,4</td>
+<td style="text-align: left;">0,6554</td>
+<td style="text-align: left;">0,6591</td>
+<td style="text-align: left;">0,6628</td>
+<td style="text-align: left;">0,6664</td>
+<td style="text-align: left;">0,6700</td>
+<td style="text-align: left;">0,6736</td>
+<td style="text-align: left;">0,6772</td>
+<td style="text-align: left;">0,6808</td>
+<td style="text-align: left;">0,6844</td>
+<td style="text-align: left;">0,6879</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">0,5</td>
+<td style="text-align: left;">0,6915</td>
+<td style="text-align: left;">0,6950</td>
+<td style="text-align: left;">0,6985</td>
+<td style="text-align: left;">0,7019</td>
+<td style="text-align: left;">0,7054</td>
+<td style="text-align: left;">0,7088</td>
+<td style="text-align: left;">0,7123</td>
+<td style="text-align: left;">0,7157</td>
+<td style="text-align: left;">0,7190</td>
+<td style="text-align: left;">0,7224</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">0,6</td>
+<td style="text-align: left;">0,7257</td>
+<td style="text-align: left;">0,7291</td>
+<td style="text-align: left;">0,7324</td>
+<td style="text-align: left;">0,7357</td>
+<td style="text-align: left;">0,7389</td>
+<td style="text-align: left;">0,7422</td>
+<td style="text-align: left;">0,7454</td>
+<td style="text-align: left;">0,7486</td>
+<td style="text-align: left;">0,7517</td>
+<td style="text-align: left;">0,7549</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">0,7</td>
+<td style="text-align: left;">0,7580</td>
+<td style="text-align: left;">0,7611</td>
+<td style="text-align: left;">0,7642</td>
+<td style="text-align: left;">0,7673</td>
+<td style="text-align: left;">0,7704</td>
+<td style="text-align: left;">0,7734</td>
+<td style="text-align: left;">0,7764</td>
+<td style="text-align: left;">0,7794</td>
+<td style="text-align: left;">0,7823</td>
+<td style="text-align: left;">0,7852</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">0,8</td>
+<td style="text-align: left;">0,7881</td>
+<td style="text-align: left;">0,7910</td>
+<td style="text-align: left;">0,7939</td>
+<td style="text-align: left;">0,7967</td>
+<td style="text-align: left;">0,7995</td>
+<td style="text-align: left;">0,8023</td>
+<td style="text-align: left;">0,8051</td>
+<td style="text-align: left;">0,8078</td>
+<td style="text-align: left;">0,8106</td>
+<td style="text-align: left;">0,8133</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">0,9</td>
+<td style="text-align: left;">0,8159</td>
+<td style="text-align: left;">0,8186</td>
+<td style="text-align: left;">0,8212</td>
+<td style="text-align: left;">0,8238</td>
+<td style="text-align: left;">0,8264</td>
+<td style="text-align: left;">0,8289</td>
+<td style="text-align: left;">0,8315</td>
+<td style="text-align: left;">0,8340</td>
+<td style="text-align: left;">0,8365</td>
+<td style="text-align: left;">0,8389</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">1,0</td>
+<td style="text-align: left;">0,8413</td>
+<td style="text-align: left;">0,8438</td>
+<td style="text-align: left;">0,8461</td>
+<td style="text-align: left;">0,8485</td>
+<td style="text-align: left;">0,8508</td>
+<td style="text-align: left;">0,8531</td>
+<td style="text-align: left;">0,8554</td>
+<td style="text-align: left;">0,8577</td>
+<td style="text-align: left;">0,8599</td>
+<td style="text-align: left;">0,8621</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1,1</td>
+<td style="text-align: left;">0,8643</td>
+<td style="text-align: left;">0,8665</td>
+<td style="text-align: left;">0,8686</td>
+<td style="text-align: left;">0,8708</td>
+<td style="text-align: left;">0,8729</td>
+<td style="text-align: left;">0,8749</td>
+<td style="text-align: left;">0,8770</td>
+<td style="text-align: left;">0,8790</td>
+<td style="text-align: left;">0,8810</td>
+<td style="text-align: left;">0,8830</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">1,2</td>
+<td style="text-align: left;">0,8849</td>
+<td style="text-align: left;">0,8869</td>
+<td style="text-align: left;">0,8888</td>
+<td style="text-align: left;">0,8907</td>
+<td style="text-align: left;">0,8925</td>
+<td style="text-align: left;">0,8944</td>
+<td style="text-align: left;">0,8962</td>
+<td style="text-align: left;">0,8980</td>
+<td style="text-align: left;">0,8997</td>
+<td style="text-align: left;">0,9015</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1,3</td>
+<td style="text-align: left;">0,9032</td>
+<td style="text-align: left;">0,9049</td>
+<td style="text-align: left;">0,9066</td>
+<td style="text-align: left;">0,9082</td>
+<td style="text-align: left;">0,9099</td>
+<td style="text-align: left;">0,9115</td>
+<td style="text-align: left;">0,9131</td>
+<td style="text-align: left;">0,9147</td>
+<td style="text-align: left;">0,9162</td>
+<td style="text-align: left;">0,9177</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">1,4</td>
+<td style="text-align: left;">0,9192</td>
+<td style="text-align: left;">0,9207</td>
+<td style="text-align: left;">0,9222</td>
+<td style="text-align: left;">0,9236</td>
+<td style="text-align: left;">0,9251</td>
+<td style="text-align: left;">0,9265</td>
+<td style="text-align: left;">0,9279</td>
+<td style="text-align: left;">0,9292</td>
+<td style="text-align: left;">0,9306</td>
+<td style="text-align: left;">0,9319</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1,5</td>
+<td style="text-align: left;">0,9332</td>
+<td style="text-align: left;">0,9345</td>
+<td style="text-align: left;">0,9357</td>
+<td style="text-align: left;">0,9370</td>
+<td style="text-align: left;">0,9382</td>
+<td style="text-align: left;">0,9394</td>
+<td style="text-align: left;">0,9406</td>
+<td style="text-align: left;">0,9418</td>
+<td style="text-align: left;">0,9429</td>
+<td style="text-align: left;">0,9441</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">1,6</td>
+<td style="text-align: left;">0,9452</td>
+<td style="text-align: left;">0,9463</td>
+<td style="text-align: left;">0,9474</td>
+<td style="text-align: left;">0,9484</td>
+<td style="text-align: left;">0,9495</td>
+<td style="text-align: left;">0,9505</td>
+<td style="text-align: left;">0,9515</td>
+<td style="text-align: left;">0,9525</td>
+<td style="text-align: left;">0,9535</td>
+<td style="text-align: left;">0,9545</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1,7</td>
+<td style="text-align: left;">0,9554</td>
+<td style="text-align: left;">0,9564</td>
+<td style="text-align: left;">0,9573</td>
+<td style="text-align: left;">0,9582</td>
+<td style="text-align: left;">0,9591</td>
+<td style="text-align: left;">0,9599</td>
+<td style="text-align: left;">0,9608</td>
+<td style="text-align: left;">0,9616</td>
+<td style="text-align: left;">0,9625</td>
+<td style="text-align: left;">0,9633</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">1,8</td>
+<td style="text-align: left;">0,9641</td>
+<td style="text-align: left;">0,9649</td>
+<td style="text-align: left;">0,9656</td>
+<td style="text-align: left;">0,9664</td>
+<td style="text-align: left;">0,9671</td>
+<td style="text-align: left;">0,9678</td>
+<td style="text-align: left;">0,9686</td>
+<td style="text-align: left;">0,9693</td>
+<td style="text-align: left;">0,9699</td>
+<td style="text-align: left;">0,9706</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1,9</td>
+<td style="text-align: left;">0,9713</td>
+<td style="text-align: left;">0,9719</td>
+<td style="text-align: left;">0,9726</td>
+<td style="text-align: left;">0,9732</td>
+<td style="text-align: left;">0,9738</td>
+<td style="text-align: left;">0,9744</td>
+<td style="text-align: left;">0,9750</td>
+<td style="text-align: left;">0,9756</td>
+<td style="text-align: left;">0,9761</td>
+<td style="text-align: left;">0,9767</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2,0</td>
+<td style="text-align: left;">0,9772</td>
+<td style="text-align: left;">0,9778</td>
+<td style="text-align: left;">0,9783</td>
+<td style="text-align: left;">0,9788</td>
+<td style="text-align: left;">0,9793</td>
+<td style="text-align: left;">0,9798</td>
+<td style="text-align: left;">0,9803</td>
+<td style="text-align: left;">0,9808</td>
+<td style="text-align: left;">0,9812</td>
+<td style="text-align: left;">0,9817</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2,1</td>
+<td style="text-align: left;">0,9821</td>
+<td style="text-align: left;">0,9826</td>
+<td style="text-align: left;">0,9830</td>
+<td style="text-align: left;">0,9834</td>
+<td style="text-align: left;">0,9838</td>
+<td style="text-align: left;">0,9842</td>
+<td style="text-align: left;">0,9846</td>
+<td style="text-align: left;">0,9850</td>
+<td style="text-align: left;">0,9854</td>
+<td style="text-align: left;">0,9857</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2,2</td>
+<td style="text-align: left;">0,9861</td>
+<td style="text-align: left;">0,9864</td>
+<td style="text-align: left;">0,9868</td>
+<td style="text-align: left;">0,9871</td>
+<td style="text-align: left;">0,9875</td>
+<td style="text-align: left;">0,9878</td>
+<td style="text-align: left;">0,9881</td>
+<td style="text-align: left;">0,9884</td>
+<td style="text-align: left;">0,9887</td>
+<td style="text-align: left;">0,9890</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2,3</td>
+<td style="text-align: left;">0,9893</td>
+<td style="text-align: left;">0,9896</td>
+<td style="text-align: left;">0,9898</td>
+<td style="text-align: left;">0,9901</td>
+<td style="text-align: left;">0,9904</td>
+<td style="text-align: left;">0,9906</td>
+<td style="text-align: left;">0,9909</td>
+<td style="text-align: left;">0,9911</td>
+<td style="text-align: left;">0,9913</td>
+<td style="text-align: left;">0,9916</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2,4</td>
+<td style="text-align: left;">0,9918</td>
+<td style="text-align: left;">0,9920</td>
+<td style="text-align: left;">0,9922</td>
+<td style="text-align: left;">0,9925</td>
+<td style="text-align: left;">0,9927</td>
+<td style="text-align: left;">0,9929</td>
+<td style="text-align: left;">0,9931</td>
+<td style="text-align: left;">0,9932</td>
+<td style="text-align: left;">0,9934</td>
+<td style="text-align: left;">0,9936</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2,5</td>
+<td style="text-align: left;">0,9938</td>
+<td style="text-align: left;">0,9940</td>
+<td style="text-align: left;">0,9941</td>
+<td style="text-align: left;">0,9943</td>
+<td style="text-align: left;">0,9945</td>
+<td style="text-align: left;">0,9946</td>
+<td style="text-align: left;">0,9948</td>
+<td style="text-align: left;">0,9949</td>
+<td style="text-align: left;">0,9951</td>
+<td style="text-align: left;">0,9952</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2,6</td>
+<td style="text-align: left;">0,9953</td>
+<td style="text-align: left;">0,9955</td>
+<td style="text-align: left;">0,9956</td>
+<td style="text-align: left;">0,9957</td>
+<td style="text-align: left;">0,9959</td>
+<td style="text-align: left;">0,9960</td>
+<td style="text-align: left;">0,9961</td>
+<td style="text-align: left;">0,9962</td>
+<td style="text-align: left;">0,9963</td>
+<td style="text-align: left;">0,9964</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2,7</td>
+<td style="text-align: left;">0,9965</td>
+<td style="text-align: left;">0,9966</td>
+<td style="text-align: left;">0,9967</td>
+<td style="text-align: left;">0,9968</td>
+<td style="text-align: left;">0,9969</td>
+<td style="text-align: left;">0,9970</td>
+<td style="text-align: left;">0,9971</td>
+<td style="text-align: left;">0,9972</td>
+<td style="text-align: left;">0,9973</td>
+<td style="text-align: left;">0,9974</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2,8</td>
+<td style="text-align: left;">0,9974</td>
+<td style="text-align: left;">0,9975</td>
+<td style="text-align: left;">0,9976</td>
+<td style="text-align: left;">0,9977</td>
+<td style="text-align: left;">0,9977</td>
+<td style="text-align: left;">0,9978</td>
+<td style="text-align: left;">0,9979</td>
+<td style="text-align: left;">0,9979</td>
+<td style="text-align: left;">0,9980</td>
+<td style="text-align: left;">0,9981</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2,9</td>
+<td style="text-align: left;">0,9981</td>
+<td style="text-align: left;">0,9982</td>
+<td style="text-align: left;">0,9982</td>
+<td style="text-align: left;">0,9983</td>
+<td style="text-align: left;">0,9984</td>
+<td style="text-align: left;">0,9984</td>
+<td style="text-align: left;">0,9985</td>
+<td style="text-align: left;">0,9985</td>
+<td style="text-align: left;">0,9986</td>
+<td style="text-align: left;">0,9986</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">3,0</td>
+<td style="text-align: left;">0,9987</td>
+<td style="text-align: left;">0,9987</td>
+<td style="text-align: left;">0,9987</td>
+<td style="text-align: left;">0,9988</td>
+<td style="text-align: left;">0,9988</td>
+<td style="text-align: left;">0,9989</td>
+<td style="text-align: left;">0,9989</td>
+<td style="text-align: left;">0,9989</td>
+<td style="text-align: left;">0,9990</td>
+<td style="text-align: left;">0,9990</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Скопировано");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Скопировано");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/alexshem\.github\.io\/stats-2026\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../seminars/07-normal-plane-functions/seminar-07.html" class="pagination-link" aria-label="Семинар 7. Нормальный закон на плоскости. Функции случайных величин">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Семинар 7. Нормальный закон на плоскости. Функции случайных величин</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/AlexShem/stats-2026/issues/new" class="toc-action"><i class="bi bi-github"></i>Сообщить о проблеме</a></li></ul></div></div></div></footer></body></html>

@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://alexshem.github.io/stats-2026/index.html</loc>
-    <lastmod>2026-10-26T12:11:10.942Z</lastmod>
+    <lastmod>2026-11-02T10:51:06.990Z</lastmod>
   </url>
   <url>
     <loc>https://alexshem.github.io/stats-2026/seminars/01-addition-multiplication/seminar-01.html</loc>
@@ -22,10 +22,14 @@
   </url>
   <url>
     <loc>https://alexshem.github.io/stats-2026/seminars/05-two-random-variables/seminar-05.html</loc>
-    <lastmod>2026-10-26T11:47:50.758Z</lastmod>
+    <lastmod>2026-11-01T11:55:06.015Z</lastmod>
   </url>
   <url>
     <loc>https://alexshem.github.io/stats-2026/seminars/07-normal-plane-functions/seminar-07.html</loc>
-    <lastmod>2026-10-26T11:45:35.349Z</lastmod>
+    <lastmod>2026-11-01T11:55:06.016Z</lastmod>
+  </url>
+  <url>
+    <loc>https://alexshem.github.io/stats-2026/exams/mock-midterm.html</loc>
+    <lastmod>2026-11-02T10:51:06.990Z</lastmod>
   </url>
 </urlset>
