@@ -17,12 +17,14 @@ code are Russian, matching the surrounding style.
 
 Schedule: Tuesdays, 2026-09-08 through 2026-12-22, 16 planned slots. The
 series started a week after the calendar start of the semester, so seminar 3
-falls on 2026-09-22. Seminar 6 moved to Fri 2026-10-09, and the 2026-10-20 slot
-moved to Fri 2026-11-06. The probability midterm is held on Tue 2026-11-03.
-A midterm is a class but not a seminar: no seminar chapter, no seminar number
-(`MIDTERMS`). So there are 16 classes (`CLASS_DATES`) and 15 seminars
-(`SEMINAR_DATES`), numbered in date order: seminar 7 is 2026-10-27, seminar 8
-is Fri 2026-11-06, seminar 9 is 2026-11-10. The practice midterm («пробная
+falls on 2026-09-22. Seminar 6 moved to Fri 2026-10-09. The 2026-10-20 slot was
+moved to Fri 2026-11-06, did not take place there, and is postponed with no date
+yet (`POSTPONED`; it will be a statistics seminar). The probability midterm is
+held on Tue 2026-11-03. A midterm is a class but not a seminar: no seminar
+chapter, no seminar number (`MIDTERMS`). So there are 15 dated classes
+(`CLASS_DATES`) and 14 dated seminars (`SEMINAR_DATES`), numbered in date
+order: seminar 7 is 2026-10-27, seminar 8 is 2026-11-10. When the make-up date
+is known it goes into `RESCHEDULED`, and seminars after it shift by one. The practice midterm («пробная
 контрольная») is a book chapter in `exams/`; the real variants and their key
 live only in the gitignored `midterm/` (the repo is public). The dates are generated, not hand-maintained: see
 `src/mephi_stats/schedule.py`; the chapters' own `date:` fields must agree
