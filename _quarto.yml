@@ -5,6 +5,7 @@ project:
     - index.qmd
     - "seminars/**/*.qmd"
     - "exams/*.qmd"
+    - "appendices/*.qmd"
 
 # Книга для студентов (HTML): теория, задачи, решения и примеры на Python.
 # Профиль `handout` (см. _quarto-handout.yml) даёт PDF-раздатку с одними
@@ -29,6 +30,8 @@ book:
     - seminars/07-normal-plane-functions/seminar-07.qmd
     - seminars/08-lln-clt-sample/seminar-08.qmd
     - exams/mock-midterm.qmd
+  appendices:
+    - appendices/how-to-lie.qmd
 
 lang: ru
 date-format: "D MMMM YYYY"

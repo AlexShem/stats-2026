@@ -8,8 +8,12 @@ import pytest
 import yaml
 
 ROOT = Path(__file__).resolve().parent.parent
-# Главы семинаров и пробная контрольная (exams/): правила для них одни.
-CHAPTERS = sorted(ROOT.glob("seminars/*/seminar-*.qmd")) + sorted(ROOT.glob("exams/*.qmd"))
+# Главы семинаров, пробная контрольная (exams/) и приложения: правила для них одни.
+CHAPTERS = (
+    sorted(ROOT.glob("seminars/*/seminar-*.qmd"))
+    + sorted(ROOT.glob("exams/*.qmd"))
+    + sorted(ROOT.glob("appendices/*.qmd"))
+)
 
 CELL = re.compile(r"^```\{python\}\n(.*?)^```", re.DOTALL | re.MULTILINE)
 # import, from … import, def и lambda-выражение (но не слово lambda в строке или в LaTeX)
@@ -49,6 +53,6 @@ def test_labels_unique_across_book():
 
 def test_every_chapter_listed_in_book():
     config = yaml.safe_load((ROOT / "_quarto.yml").read_text(encoding="utf-8"))
-    listed = set(config["book"]["chapters"])
+    listed = set(config["book"]["chapters"]) | set(config["book"].get("appendices", []))
     missing = [str(p.relative_to(ROOT)) for p in CHAPTERS if str(p.relative_to(ROOT)) not in listed]
     assert not missing
