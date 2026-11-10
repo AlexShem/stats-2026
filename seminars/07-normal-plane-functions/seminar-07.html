@@ -72,7 +72,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../exams/mock-midterm.html" rel="next">
+<link href="../../seminars/08-lln-clt-sample/seminar-08.html" rel="next">
 <link href="../../seminars/05-two-random-variables/seminar-05.html" rel="prev">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -238,10 +238,33 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../exams/mock-midterm.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Пробная контрольная работа по теории вероятностей</span></span></a>
+  <a href="../../seminars/08-lln-clt-sample/seminar-08.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Семинар 8. Закон больших чисел и ЦПТ. Выборка и её описание</span></span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../exams/mock-midterm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Пробная контрольная работа по теории вероятностей</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Приложения</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Переключить раздел">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../appendices/how-to-lie.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Как лгать при помощи статистики</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
     </ul>
     </div>
 </nav>
@@ -803,7 +826,7 @@ f(x, y) = \frac{1}{2\pi\sigma^2}\,e^{-(x^2 + y^2)/(2\sigma^2)}.
 \]</span></p>
 <p><strong>б)</strong> <span class="math inline">\(a = 2\sigma\)</span>: <span class="math inline">\(\Prob = 1 - e^{-2} \approx 0{,}865\)</span>. Для одной координаты <span class="math inline">\(\Prob(|X| &lt; 2\sigma) = 2\Phi(2) - 1 \approx 0{,}954\)</span>. На плоскости вероятность меньше: чтобы попасть в круг, малыми должны быть <strong>оба</strong> отклонения сразу.</p>
 <p><strong>в)</strong> <span class="math inline">\(1 - e^{-a^2/(2\sigma^2)} = 1/2\)</span>, откуда <span class="math inline">\(a = \sigma\sqrt{2\ln 2} \approx 1{,}177\sigma \approx 5{,}89\)</span> см. Этот радиус называют <strong>срединным отклонением</strong> (круговым вероятным отклонением): половина пуль ложится внутри него.</p>
-<p><strong>Замечание.</strong> В пункте а) по сути найдена функция распределения расстояния <span class="math inline">\(R = \sqrt{X^2 + Y^2}\)</span>: <span class="math inline">\(F_R(a) = 1 - e^{-a^2/(2\sigma^2)}\)</span> при <span class="math inline">\(a &gt; 0\)</span> (закон Рэлея). Это первый пример закона функции двух случайных величин; систематически такие задачи решаются на семинаре 8.</p>
+<p><strong>Замечание.</strong> В пункте а) по сути найдена функция распределения расстояния <span class="math inline">\(R = \sqrt{X^2 + Y^2}\)</span>: <span class="math inline">\(F_R(a) = 1 - e^{-a^2/(2\sigma^2)}\)</span> при <span class="math inline">\(a &gt; 0\)</span> (закон Рэлея). Это первый пример закона функции двух случайных величин.</p>
 <p>Проверка: формула и симуляция.</p>
 <div id="s07-t4-check" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>sx4, sy4 <span class="op">=</span> sample_normal2(<span class="dv">1_000_000</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">0</span>)</span>
@@ -1292,7 +1315,7 @@ sigma = 1.0:  E Y точно 1.6487, симуляция 1.6525, 2-й поряд�
 <li><span class="math inline">\(\E\dfrac{1}{1 + X} = \dfrac{1 - e^{-\lambda}}{\lambda}\)</span>; при <span class="math inline">\(\lambda = 2\)</span> это <span class="math inline">\(0{,}432\)</span> против <span class="math inline">\(1/3\)</span>.</li>
 <li><span class="math inline">\(V = \pi D^3/6\)</span>: <span class="math inline">\(\E V \approx 523{,}6\)</span> см³, <span class="math inline">\(\sigma(V) \approx \tfrac{\pi D^2}{2}\,\sigma(D) \approx 7{,}85\)</span> см³; относительная погрешность <span class="math inline">\(1{,}5\,\%\)</span>, втрое больше <span class="math inline">\(0{,}5\,\%\)</span> диаметра. Поправка второго порядка к среднему <span class="math inline">\(\tfrac12\cdot\pi\cdot10\cdot0{,}0025 \approx 0{,}04\)</span> см³ ничтожна.</li>
 <li><span class="math inline">\(\E R = \sigma\sqrt{\pi/2} \approx 1{,}253\sigma \approx 6{,}27\)</span> см.</li>
-<li><span class="math inline">\(\E Y = \int_0^1(-\ln x)\,dx = 1\)</span>, <span class="math inline">\(\E Y^2 = \int_0^1 \ln^2 x\,dx = 2\)</span>, <span class="math inline">\(\Var Y = 1\)</span>. На семинаре 8 выяснится, что <span class="math inline">\(Y\)</span> показательна с <span class="math inline">\(\lambda = 1\)</span>.</li>
+<li><span class="math inline">\(\E Y = \int_0^1(-\ln x)\,dx = 1\)</span>, <span class="math inline">\(\E Y^2 = \int_0^1 \ln^2 x\,dx = 2\)</span>, <span class="math inline">\(\Var Y = 1\)</span>. Это не случайно: <span class="math inline">\(\Prob(Y &gt; t) = \Prob(X &lt; e^{-t}) = e^{-t}\)</span> при <span class="math inline">\(t &gt; 0\)</span>, то есть <span class="math inline">\(Y\)</span> показательна с <span class="math inline">\(\lambda = 1\)</span>.</li>
 </ol>
 </div>
 </div>
@@ -1709,8 +1732,8 @@ sigma = 1.0:  E Y точно 1.6487, симуляция 1.6525, 2-й поряд�
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../exams/mock-midterm.html" class="pagination-link" aria-label="Пробная контрольная работа по теории вероятностей">
-        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Пробная контрольная работа по теории вероятностей</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../seminars/08-lln-clt-sample/seminar-08.html" class="pagination-link" aria-label="Семинар 8. Закон больших чисел и ЦПТ. Выборка и её описание">
+        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Семинар 8. Закон больших чисел и ЦПТ. Выборка и её описание</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

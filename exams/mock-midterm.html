@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>7&nbsp; Пробная контрольная работа по теории вероятностей – Теория вероятностей и математическая статистика</title>
+<title>8&nbsp; Пробная контрольная работа по теории вероятностей – Теория вероятностей и математическая статистика</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -71,7 +71,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../seminars/07-normal-plane-functions/seminar-07.html" rel="prev">
+<link href="../appendices/how-to-lie.html" rel="next">
+<link href="../seminars/08-lln-clt-sample/seminar-08.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -164,7 +165,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Переключить боковую панель навигации" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../exams/mock-midterm.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Пробная контрольная работа по теории вероятностей</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../exams/mock-midterm.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Пробная контрольная работа по теории вероятностей</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Переключить боковую панель навигации" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Поиск" onclick="window.quartoOpenSearch();">
@@ -236,10 +237,33 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../exams/mock-midterm.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Пробная контрольная работа по теории вероятностей</span></span></a>
+  <a href="../seminars/08-lln-clt-sample/seminar-08.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Семинар 8. Закон больших чисел и ЦПТ. Выборка и её описание</span></span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exams/mock-midterm.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Пробная контрольная работа по теории вероятностей</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Приложения</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Переключить раздел">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../appendices/how-to-lie.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Как лгать при помощи статистики</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
     </ul>
     </div>
 </nav>
@@ -250,17 +274,17 @@ window.Quarto = {
     <h2 id="toc-title">Содержание</h2>
    
   <ul>
-  <li><a href="#sec-mock-code" id="toc-sec-mock-code" class="nav-link active" data-scroll-target="#sec-mock-code"><span class="header-section-number">7.1</span> Код для этой главы</a></li>
-  <li><a href="#как-устроена-контрольная" id="toc-как-устроена-контрольная" class="nav-link" data-scroll-target="#как-устроена-контрольная"><span class="header-section-number">7.2</span> Как устроена контрольная</a></li>
-  <li><a href="#задачи" id="toc-задачи" class="nav-link" data-scroll-target="#задачи"><span class="header-section-number">7.3</span> Задачи</a>
+  <li><a href="#sec-mock-code" id="toc-sec-mock-code" class="nav-link active" data-scroll-target="#sec-mock-code"><span class="header-section-number">8.1</span> Код для этой главы</a></li>
+  <li><a href="#как-устроена-контрольная" id="toc-как-устроена-контрольная" class="nav-link" data-scroll-target="#как-устроена-контрольная"><span class="header-section-number">8.2</span> Как устроена контрольная</a></li>
+  <li><a href="#задачи" id="toc-задачи" class="nav-link" data-scroll-target="#задачи"><span class="header-section-number">8.3</span> Задачи</a>
   <ul class="collapse">
-  <li><a href="#sec-mock-t1" id="toc-sec-mock-t1" class="nav-link" data-scroll-target="#sec-mock-t1"><span class="header-section-number">7.3.1</span> Задача 1</a></li>
-  <li><a href="#sec-mock-t2" id="toc-sec-mock-t2" class="nav-link" data-scroll-target="#sec-mock-t2"><span class="header-section-number">7.3.2</span> Задача 2</a></li>
-  <li><a href="#sec-mock-t3" id="toc-sec-mock-t3" class="nav-link" data-scroll-target="#sec-mock-t3"><span class="header-section-number">7.3.3</span> Задача 3</a></li>
-  <li><a href="#sec-mock-t4" id="toc-sec-mock-t4" class="nav-link" data-scroll-target="#sec-mock-t4"><span class="header-section-number">7.3.4</span> Задача 4 (Гмурман, гл. 6 § 5, № 333, дополнена)</a></li>
-  <li><a href="#sec-mock-t5" id="toc-sec-mock-t5" class="nav-link" data-scroll-target="#sec-mock-t5"><span class="header-section-number">7.3.5</span> Задача 5</a></li>
+  <li><a href="#sec-mock-t1" id="toc-sec-mock-t1" class="nav-link" data-scroll-target="#sec-mock-t1"><span class="header-section-number">8.3.1</span> Задача 1</a></li>
+  <li><a href="#sec-mock-t2" id="toc-sec-mock-t2" class="nav-link" data-scroll-target="#sec-mock-t2"><span class="header-section-number">8.3.2</span> Задача 2</a></li>
+  <li><a href="#sec-mock-t3" id="toc-sec-mock-t3" class="nav-link" data-scroll-target="#sec-mock-t3"><span class="header-section-number">8.3.3</span> Задача 3</a></li>
+  <li><a href="#sec-mock-t4" id="toc-sec-mock-t4" class="nav-link" data-scroll-target="#sec-mock-t4"><span class="header-section-number">8.3.4</span> Задача 4 (Гмурман, гл. 6 § 5, № 333, дополнена)</a></li>
+  <li><a href="#sec-mock-t5" id="toc-sec-mock-t5" class="nav-link" data-scroll-target="#sec-mock-t5"><span class="header-section-number">8.3.5</span> Задача 5</a></li>
   </ul></li>
-  <li><a href="#sec-mock-phi" id="toc-sec-mock-phi" class="nav-link" data-scroll-target="#sec-mock-phi"><span class="header-section-number">7.4</span> Таблица функции <span class="math inline">\(\Phi\)</span></a></li>
+  <li><a href="#sec-mock-phi" id="toc-sec-mock-phi" class="nav-link" data-scroll-target="#sec-mock-phi"><span class="header-section-number">8.4</span> Таблица функции <span class="math inline">\(\Phi\)</span></a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/AlexShem/stats-2026/issues/new" class="toc-action"><i class="bi bi-github"></i>Сообщить о проблеме</a></li></ul></div></nav>
     </div>
@@ -269,7 +293,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Пробная контрольная работа по теории вероятностей</span></h1>
+<h1 class="title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Пробная контрольная работа по теории вероятностей</span></h1>
 <p class="subtitle lead">Теория вероятностей и математическая статистика · НИЯУ МИФИ</p>
 </div>
 
@@ -294,8 +318,8 @@ window.Quarto = {
 
 
 <p><a href="../handouts/exams/mock-midterm.pdf">Скачать PDF пробного варианта</a></p>
-<section id="sec-mock-code" class="level2" data-number="7.1">
-<h2 data-number="7.1" class="anchored" data-anchor-id="sec-mock-code"><span class="header-section-number">7.1</span> Код для этой главы</h2>
+<section id="sec-mock-code" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="sec-mock-code"><span class="header-section-number">8.1</span> Код для этой главы</h2>
 <p>Все импорты и функции, которые используются в проверках, собраны в одной ячейке. Выполните её первой. Остальные ячейки опираются на неё.</p>
 <div id="mock-setup" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -365,8 +389,8 @@ window.Quarto = {
 <span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>name<span class="sc">:&gt;16}</span><span class="ss">:  </span><span class="sc">{</span>labels[<span class="dv">0</span>]<span class="sc">}</span><span class="ss"> </span><span class="sc">{</span>a<span class="sc">:9.4f}</span><span class="ss">   </span><span class="sc">{</span>labels[<span class="dv">1</span>]<span class="sc">}</span><span class="ss"> </span><span class="sc">{</span>b<span class="sc">:9.4f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
-<section id="как-устроена-контрольная" class="level2" data-number="7.2">
-<h2 data-number="7.2" class="anchored" data-anchor-id="как-устроена-контрольная"><span class="header-section-number">7.2</span> Как устроена контрольная</h2>
+<section id="как-устроена-контрольная" class="level2" data-number="8.2">
+<h2 data-number="8.2" class="anchored" data-anchor-id="как-устроена-контрольная"><span class="header-section-number">8.2</span> Как устроена контрольная</h2>
 <p>Контрольная работа по теории вероятностей проходит <strong>во вторник 3 ноября</strong> и длится <strong>80 минут</strong>. Этот пробный вариант устроен так же, как настоящий: те же темы, тот же объём, сопоставимая трудность. Решите его за 80 минут, не подглядывая в решения, и только потом сверьтесь.</p>
 <ul>
 <li><p><strong>Темы:</strong> семинары 1–7. Пять задач, по одной на каждую линию:</p>
@@ -444,10 +468,10 @@ window.Quarto = {
 </div>
 </div>
 </section>
-<section id="задачи" class="level2" data-number="7.3">
-<h2 data-number="7.3" class="anchored" data-anchor-id="задачи"><span class="header-section-number">7.3</span> Задачи</h2>
-<section id="sec-mock-t1" class="level3" data-number="7.3.1">
-<h3 data-number="7.3.1" class="anchored" data-anchor-id="sec-mock-t1"><span class="header-section-number">7.3.1</span> Задача 1</h3>
+<section id="задачи" class="level2" data-number="8.3">
+<h2 data-number="8.3" class="anchored" data-anchor-id="задачи"><span class="header-section-number">8.3</span> Задачи</h2>
+<section id="sec-mock-t1" class="level3" data-number="8.3.1">
+<h3 data-number="8.3.1" class="anchored" data-anchor-id="sec-mock-t1"><span class="header-section-number">8.3.1</span> Задача 1</h3>
 <p>Устройство содержит три одинаковых элемента, которые работают независимо друг от друга. Время безотказной работы каждого элемента (в часах) распределено по показательному закону с параметром <span class="math inline">\(\lambda = 0{,}1\)</span>. Найти вероятность того, что</p>
 <p>а) отдельный элемент проработает без отказа 5 ч <em>(0,5 балла)</em>;</p>
 <p>б) за 5 ч безотказно проработают ровно два элемента из трёх <em>(1 балл)</em>;</p>
@@ -513,8 +537,8 @@ p = e^{-0{,}1 \cdot 5} = e^{-0{,}5} \approx 0{,}6065.
 </div>
 </div>
 </section>
-<section id="sec-mock-t2" class="level3" data-number="7.3.2">
-<h3 data-number="7.3.2" class="anchored" data-anchor-id="sec-mock-t2"><span class="header-section-number">7.3.2</span> Задача 2</h3>
+<section id="sec-mock-t2" class="level3" data-number="8.3.2">
+<h3 data-number="8.3.2" class="anchored" data-anchor-id="sec-mock-t2"><span class="header-section-number">8.3.2</span> Задача 2</h3>
 <p>У стрелка 3 патрона. Он стреляет по мишени до первого попадания или пока не кончатся патроны. Вероятность попадания при каждом выстреле равна <span class="math inline">\(0{,}6\)</span>, выстрелы независимы. Случайная величина <span class="math inline">\(X\)</span> есть число израсходованных патронов.</p>
 <p>а) Построить ряд распределения <span class="math inline">\(X\)</span> <em>(1,5 балла)</em>.</p>
 <p>б) Найти <span class="math inline">\(\E(X)\)</span> и <span class="math inline">\(\Var(X)\)</span> <em>(1 балл)</em>.</p>
@@ -605,8 +629,8 @@ F(x) = \begin{cases}
 </div>
 </div>
 </section>
-<section id="sec-mock-t3" class="level3" data-number="7.3.3">
-<h3 data-number="7.3.3" class="anchored" data-anchor-id="sec-mock-t3"><span class="header-section-number">7.3.3</span> Задача 3</h3>
+<section id="sec-mock-t3" class="level3" data-number="8.3.3">
+<h3 data-number="8.3.3" class="anchored" data-anchor-id="sec-mock-t3"><span class="header-section-number">8.3.3</span> Задача 3</h3>
 <p>Плотность распределения случайной величины <span class="math inline">\(X\)</span> равна <span class="math inline">\(f(x) = C(1 + x)\)</span> в интервале <span class="math inline">\((0, 2)\)</span> и <span class="math inline">\(f(x) = 0\)</span> вне его.</p>
 <p>а) Найти постоянную <span class="math inline">\(C\)</span> <em>(0,5 балла)</em>.</p>
 <p>б) Найти функцию распределения <span class="math inline">\(F(x) = \Prob(X \leqslant x)\)</span> <em>(1 балл)</em>.</p>
@@ -664,8 +688,8 @@ E = 7/6   Var = 11/36
 </div>
 </div>
 </section>
-<section id="sec-mock-t4" class="level3" data-number="7.3.4">
-<h3 data-number="7.3.4" class="anchored" data-anchor-id="sec-mock-t4"><span class="header-section-number">7.3.4</span> Задача 4 (Гмурман, гл. 6 § 5, № 333, дополнена)</h3>
+<section id="sec-mock-t4" class="level3" data-number="8.3.4">
+<h3 data-number="8.3.4" class="anchored" data-anchor-id="sec-mock-t4"><span class="header-section-number">8.3.4</span> Задача 4 (Гмурман, гл. 6 § 5, № 333, дополнена)</h3>
 <p>Случайная ошибка измерения <span class="math inline">\(X\)</span> распределена нормально, <span class="math inline">\(X \sim N(0, 20^2)\)</span> (в миллиметрах). Измерения независимы.</p>
 <p>а) Найти вероятность того, что ошибка одного измерения не превзойдёт по абсолютной величине 4 мм <em>(1,5 балла)</em>.</p>
 <p>б) Найти вероятность того, что из трёх независимых измерений ошибка хотя бы одного не превзойдёт по абсолютной величине 4 мм <em>(1 балл)</em>.</p>
@@ -719,8 +743,8 @@ q = \Prob(|X| \leqslant 4) = 2\Phi\Big(\frac{4}{20}\Big) - 1 = 2\Phi(0{,}2) - 1
 </div>
 </div>
 </section>
-<section id="sec-mock-t5" class="level3" data-number="7.3.5">
-<h3 data-number="7.3.5" class="anchored" data-anchor-id="sec-mock-t5"><span class="header-section-number">7.3.5</span> Задача 5</h3>
+<section id="sec-mock-t5" class="level3" data-number="8.3.5">
+<h3 data-number="8.3.5" class="anchored" data-anchor-id="sec-mock-t5"><span class="header-section-number">8.3.5</span> Задача 5</h3>
 <p>Совместный закон распределения дискретных величин <span class="math inline">\(X\)</span> и <span class="math inline">\(Y\)</span> задан таблицей:</p>
 <table class="caption-top table">
 <thead>
@@ -859,14 +883,14 @@ Var(X - 2Y): по формуле 79/25   перебором 79/25</code></pre>
 </div>
 </section>
 </section>
-<section id="sec-mock-phi" class="level2" data-number="7.4">
-<h2 data-number="7.4" class="anchored" data-anchor-id="sec-mock-phi"><span class="header-section-number">7.4</span> Таблица функции <span class="math inline">\(\Phi\)</span></h2>
+<section id="sec-mock-phi" class="level2" data-number="8.4">
+<h2 data-number="8.4" class="anchored" data-anchor-id="sec-mock-phi"><span class="header-section-number">8.4</span> Таблица функции <span class="math inline">\(\Phi\)</span></h2>
 <p>Значения <span class="math inline">\(\Phi(x) = \Prob(Z \leqslant x)\)</span>, <span class="math inline">\(Z \sim N(0, 1)\)</span>. Строка даёт целую часть и десятые доли <span class="math inline">\(x\)</span>, столбец даёт сотые: <span class="math inline">\(\Phi(1{,}96)\)</span> стоит на пересечении строки <span class="math inline">\(1{,}9\)</span> и столбца <span class="math inline">\(6\)</span> и равна <span class="math inline">\(0{,}9750\)</span>. Для отрицательных аргументов <span class="math inline">\(\Phi(-x) = 1 - \Phi(x)\)</span>; при <span class="math inline">\(x &gt; 3{,}09\)</span> можно считать <span class="math inline">\(\Phi(x) \approx 1\)</span>.</p>
 <div class="cell" data-execution_count="7">
 <div id="tbl-mock-phi" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="7">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-mock-phi-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Таблица&nbsp;7.1: Функция распределения стандартного нормального закона
+Таблица&nbsp;8.1: Функция распределения стандартного нормального закона
 </figcaption>
 <div aria-describedby="tbl-mock-phi-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output cell-output-display cell-output-markdown" data-execution_count="7">
@@ -1717,11 +1741,14 @@ Var(X - 2Y): по формуле 79/25   перебором 79/25</code></pre>
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../seminars/07-normal-plane-functions/seminar-07.html" class="pagination-link" aria-label="Семинар 7. Нормальный закон на плоскости. Функции случайных величин">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Семинар 7. Нормальный закон на плоскости. Функции случайных величин</span></span>
+      <a href="../seminars/08-lln-clt-sample/seminar-08.html" class="pagination-link" aria-label="Семинар 8. Закон больших чисел и ЦПТ. Выборка и её описание">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Семинар 8. Закон больших чисел и ЦПТ. Выборка и её описание</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="../appendices/how-to-lie.html" class="pagination-link" aria-label="Как лгать при помощи статистики">
+        <span class="nav-page-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Как лгать при помощи статистики</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->

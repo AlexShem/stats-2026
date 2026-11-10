@@ -1,0 +1,1565 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru" xml:lang="ru"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="А. Шемендюк">
+
+<title>7&nbsp; Семинар 8. Закон больших чисел и ЦПТ. Выборка и её описание – Теория вероятностей и математическая статистика</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../exams/mock-midterm.html" rel="next">
+<link href="../../seminars/07-normal-plane-functions/seminar-07.html" rel="prev">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-1aa567b42d78015c3b7cfc07166ec9b5.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Поиск не дал результатов",
+    "search-matching-documents-text": "Результаты поиска",
+    "search-copy-link-title": "Скопировать ссылку",
+    "search-hide-matches-text": "Скрыть дополнительные результаты",
+    "search-more-match-text": "дополнительный результат в этом документе",
+    "search-more-matches-text": "дополнительных результата(-ов) в этом документе",
+    "search-clear-button-title": "Очистить",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Отменить",
+    "search-submit-button-title": "Найти",
+    "search-label": "Поиск"
+  }
+}</script>
+<script>
+window.MathJax = {
+  tex: {
+    macros: {
+      E: "\\mathrm{E}",
+      Var: "\\mathrm{Var}",
+      Prob: "\\mathbb{P}",
+      Cov: "\\mathrm{cov}",
+      indep: "\\perp\\!\\!\\!\\perp"
+    }
+  }
+};
+</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Переключить боковую панель навигации" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../seminars/08-lln-clt-sample/seminar-08.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Семинар 8. Закон больших чисел и ЦПТ. Выборка и её описание</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Переключить боковую панель навигации" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Поиск" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../../">Теория вероятностей и математическая статистика</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/AlexShem/stats-2026/" title="Исходный код" class="quarto-navigation-tool px-1" aria-label="Исходный код"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Поиск"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">О книге</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../seminars/01-addition-multiplication/seminar-01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Семинар 1. Теоремы сложения и умножения вероятностей</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../seminars/02-discrete-random-variables/seminar-02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Семинар 2. Дискретные случайные величины: биномиальный закон и закон Пуассона</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../seminars/03-continuous-random-variables/seminar-03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Семинар 3. Непрерывные случайные величины</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../seminars/04-exponential-distribution/seminar-04.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Семинар 4. Показательное распределение</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../seminars/05-two-random-variables/seminar-05.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Семинар 5. Системы двух случайных величин</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../seminars/07-normal-plane-functions/seminar-07.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Семинар 7. Нормальный закон на плоскости. Функции случайных величин</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../seminars/08-lln-clt-sample/seminar-08.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Семинар 8. Закон больших чисел и ЦПТ. Выборка и её описание</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../exams/mock-midterm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Пробная контрольная работа по теории вероятностей</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Приложения</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Переключить раздел">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../appendices/how-to-lie.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Как лгать при помощи статистики</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Содержание</h2>
+   
+  <ul>
+  <li><a href="#sec-s08-code" id="toc-sec-s08-code" class="nav-link active" data-scroll-target="#sec-s08-code"><span class="header-section-number">7.1</span> Код для этой главы</a></li>
+  <li><a href="#краткая-сводка" id="toc-краткая-сводка" class="nav-link" data-scroll-target="#краткая-сводка"><span class="header-section-number">7.2</span> Краткая сводка</a>
+  <ul class="collapse">
+  <li><a href="#от-вероятности-к-статистике" id="toc-от-вероятности-к-статистике" class="nav-link" data-scroll-target="#от-вероятности-к-статистике"><span class="header-section-number">7.2.1</span> От вероятности к статистике</a></li>
+  <li><a href="#выборка-и-её-распределение" id="toc-выборка-и-её-распределение" class="nav-link" data-scroll-target="#выборка-и-её-распределение"><span class="header-section-number">7.2.2</span> Выборка и её распределение</a></li>
+  <li><a href="#числовые-характеристики-выборки" id="toc-числовые-характеристики-выборки" class="nav-link" data-scroll-target="#числовые-характеристики-выборки"><span class="header-section-number">7.2.3</span> Числовые характеристики выборки</a></li>
+  </ul></li>
+  <li><a href="#блок-a.-закон-больших-чисел-и-цпт" id="toc-блок-a.-закон-больших-чисел-и-цпт" class="nav-link" data-scroll-target="#блок-a.-закон-больших-чисел-и-цпт"><span class="header-section-number">7.3</span> Блок A. Закон больших чисел и ЦПТ</a>
+  <ul class="collapse">
+  <li><a href="#sec-s08-t1" id="toc-sec-s08-t1" class="nav-link" data-scroll-target="#sec-s08-t1"><span class="header-section-number">7.3.1</span> Задача 1</a></li>
+  </ul></li>
+  <li><a href="#блок-b.-выборка-и-её-распределение" id="toc-блок-b.-выборка-и-её-распределение" class="nav-link" data-scroll-target="#блок-b.-выборка-и-её-распределение"><span class="header-section-number">7.4</span> Блок B. Выборка и её распределение</a>
+  <ul class="collapse">
+  <li><a href="#sec-s08-t2" id="toc-sec-s08-t2" class="nav-link" data-scroll-target="#sec-s08-t2"><span class="header-section-number">7.4.1</span> Задача 2</a></li>
+  <li><a href="#sec-s08-t3" id="toc-sec-s08-t3" class="nav-link" data-scroll-target="#sec-s08-t3"><span class="header-section-number">7.4.2</span> Задача 3</a></li>
+  </ul></li>
+  <li><a href="#блок-c.-числовые-характеристики-выборки" id="toc-блок-c.-числовые-характеристики-выборки" class="nav-link" data-scroll-target="#блок-c.-числовые-характеристики-выборки"><span class="header-section-number">7.5</span> Блок C. Числовые характеристики выборки</a>
+  <ul class="collapse">
+  <li><a href="#sec-s08-t4" id="toc-sec-s08-t4" class="nav-link" data-scroll-target="#sec-s08-t4"><span class="header-section-number">7.5.1</span> Задача 4</a></li>
+  <li><a href="#sec-s08-t5" id="toc-sec-s08-t5" class="nav-link" data-scroll-target="#sec-s08-t5"><span class="header-section-number">7.5.2</span> Задача 5</a></li>
+  <li><a href="#sec-s08-t6" id="toc-sec-s08-t6" class="nav-link" data-scroll-target="#sec-s08-t6"><span class="header-section-number">7.5.3</span> Задача 6</a></li>
+  </ul></li>
+  <li><a href="#задачи-для-самостоятельной-работы" id="toc-задачи-для-самостоятельной-работы" class="nav-link" data-scroll-target="#задачи-для-самостоятельной-работы"><span class="header-section-number">7.6</span> Задачи для самостоятельной работы</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/AlexShem/stats-2026/issues/new" class="toc-action"><i class="bi bi-github"></i>Сообщить о проблеме</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Семинар 8. Закон больших чисел и ЦПТ. Выборка и её описание</span></h1>
+<p class="subtitle lead">Теория вероятностей и математическая статистика · НИЯУ МИФИ</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Автор</div>
+    <div class="quarto-title-meta-contents">
+             <p>А. Шемендюк </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Дата публикации</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">10 ноября 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p><a href="../../handouts/seminars/08-lln-clt-sample/seminar-08.pdf">Скачать PDF-раздатку этого семинара</a></p>
+<section id="sec-s08-code" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="sec-s08-code"><span class="header-section-number">7.1</span> Код для этой главы</h2>
+<p>Все импорты и функции, которые используются в примерах главы, собраны в одной ячейке. Выполните её первой: остальные ячейки опираются на неё.</p>
+<div id="s08-setup" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> math <span class="im">import</span> ceil, erf, sqrt</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Оформление графиков: шрифт с кириллицей и палитра, различимая при печати</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>PALETTE <span class="op">=</span> [<span class="st">"#0b5394"</span>, <span class="st">"#b45309"</span>, <span class="st">"#2e7d32"</span>, <span class="st">"#7b1fa2"</span>, <span class="st">"#c62828"</span>, <span class="st">"#00838f"</span>]</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>plt.rcParams.update({</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"font.family"</span>: <span class="st">"sans-serif"</span>,</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"font.sans-serif"</span>: [<span class="st">"DejaVu Sans"</span>, <span class="st">"Liberation Sans"</span>, <span class="st">"Noto Sans"</span>, <span class="st">"sans-serif"</span>],</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"axes.unicode_minus"</span>: <span class="va">False</span>,</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"axes.prop_cycle"</span>: plt.cycler(color<span class="op">=</span>PALETTE),</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"axes.spines.top"</span>: <span class="va">False</span>,</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"axes.spines.right"</span>: <span class="va">False</span>,</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">"axes.grid"</span>: <span class="va">True</span>,</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">"grid.alpha"</span>: <span class="fl">0.3</span>,</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    <span class="st">"figure.dpi"</span>: <span class="dv">110</span>,</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    <span class="st">"figure.constrained_layout.use"</span>: <span class="va">True</span>,</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Генератор случайных чисел с фиксированным зерном: результаты воспроизводимы</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>rng <span class="op">=</span> np.random.default_rng(<span class="dv">2026</span>)</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> norm_cdf(t):</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Функция распределения стандартного нормального закона, Phi(t) = P(Z &lt;= t)."""</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="fl">0.5</span> <span class="op">*</span> (<span class="dv">1</span> <span class="op">+</span> erf(t <span class="op">/</span> sqrt(<span class="dv">2</span>)))</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> norm_pdf(t, mu<span class="op">=</span><span class="fl">0.0</span>, sigma<span class="op">=</span><span class="fl">1.0</span>):</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Плотность нормального закона N(mu, sigma^2); t может быть массивом."""</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.exp(<span class="op">-</span>((t <span class="op">-</span> mu) <span class="op">**</span> <span class="dv">2</span>) <span class="op">/</span> (<span class="dv">2</span> <span class="op">*</span> sigma<span class="op">**</span><span class="dv">2</span>)) <span class="op">/</span> (sigma <span class="op">*</span> np.sqrt(<span class="dv">2</span> <span class="op">*</span> np.pi))</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> freq_table(sample):</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Статистический ряд: варианты x_i, частоты n_i и относительные частоты w_i."""</span></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>    values, counts <span class="op">=</span> np.unique(np.asarray(sample), return_counts<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> values, counts, counts <span class="op">/</span> counts.<span class="bu">sum</span>()</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> ecdf(sample, x):</span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Эмпирическая функция распределения: доля элементов выборки, не больших x."""</span></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>    sample <span class="op">=</span> np.asarray(sample)</span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.mean(sample <span class="op">&lt;=</span> x)</span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> grouped_stats(mids, counts):</span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Среднее, дисперсия с делителем n и s^2 с делителем n - 1 по сгруппированным данным.</span></span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a><span class="co">    mids: середины интервалов, counts: частоты интервалов.</span></span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>    mids, counts <span class="op">=</span> np.asarray(mids, dtype<span class="op">=</span><span class="bu">float</span>), np.asarray(counts)</span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>    n <span class="op">=</span> counts.<span class="bu">sum</span>()</span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>    mean <span class="op">=</span> (mids <span class="op">*</span> counts).<span class="bu">sum</span>() <span class="op">/</span> n</span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>    var <span class="op">=</span> ((mids <span class="op">-</span> mean) <span class="op">**</span> <span class="dv">2</span> <span class="op">*</span> counts).<span class="bu">sum</span>() <span class="op">/</span> n</span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> mean, var, var <span class="op">*</span> n <span class="op">/</span> (n <span class="op">-</span> <span class="dv">1</span>)</span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> compare(name, a, b, labels<span class="op">=</span>(<span class="st">"формула"</span>, <span class="st">"расчёт"</span>)):</span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Печатает два значения одной величины рядом, с подписями labels."""</span></span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>name<span class="sc">:&gt;16}</span><span class="ss">:  </span><span class="sc">{</span>labels[<span class="dv">0</span>]<span class="sc">}</span><span class="ss"> </span><span class="sc">{</span>a<span class="sc">:10.4f}</span><span class="ss">   </span><span class="sc">{</span>labels[<span class="dv">1</span>]<span class="sc">}</span><span class="ss"> </span><span class="sc">{</span>b<span class="sc">:10.4f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="краткая-сводка" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="краткая-сводка"><span class="header-section-number">7.2</span> Краткая сводка</h2>
+<p>Теория вероятностей позади: по известному закону мы считали вероятности и средние. Статистика решает обратную задачу: закон неизвестен, есть только наблюдения, и по ним надо судить о законе. Мостом служат две предельные теоремы. Здесь они только формулируются; работать с ними будем на следующих семинарах.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Уведомление
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Обозначения.</strong> В главе используются стандартные обозначения. В задачнике Гмурмана то же самое записано иначе:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Здесь</th>
+<th style="text-align: left;">Гмурман</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(\bar x\)</span>, выборочное среднее</td>
+<td style="text-align: left;"><span class="math inline">\(\bar x_в\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(\hat\sigma^2 = \frac1n\sum (x_i - \bar x)^2\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(D_в\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(s^2 = \frac{1}{n-1}\sum (x_i - \bar x)^2\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(s^2\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(\hat F_n(x)\)</span>, эмпирическая функция распределения</td>
+<td style="text-align: left;"><span class="math inline">\(F^*(x)\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(w_i = n_i / n\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(W_i\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(\E X\)</span>, <span class="math inline">\(\Var X\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(M(X)\)</span>, <span class="math inline">\(D(X)\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(\Phi(t) = \Prob(Z \leqslant t)\)</span>, <span class="math inline">\(Z \sim N(0, 1)\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\Phi(t) - 0{,}5\)</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<section id="от-вероятности-к-статистике" class="level3" data-number="7.2.1">
+<h3 data-number="7.2.1" class="anchored" data-anchor-id="от-вероятности-к-статистике"><span class="header-section-number">7.2.1</span> От вероятности к статистике</h3>
+<p>Пусть <span class="math inline">\(X_1, \dots, X_n\)</span> независимы и одинаково распределены: <span class="math display">\[
+X_1, \dots, X_n \sim F, \qquad X_i \indep X_j \ (i \ne j),
+\]</span> где <span class="math inline">\(F\)</span> есть <strong>какая угодно</strong> функция распределения (дискретная, непрерывная, несимметричная). Раз закон у всех <span class="math inline">\(X_i\)</span> один и тот же, у них одни и те же среднее и дисперсия: <span class="math display">\[
+\E X_i = \mu, \qquad \Var X_i = \sigma^2 \qquad \text{для всех } i = 1, \dots, n
+\]</span> (предполагаем, что они существуют и <span class="math inline">\(0 &lt; \sigma^2 &lt; \infty\)</span>). Обозначим <span class="math inline">\(S_n = X_1 + \dots + X_n\)</span> и <span class="math inline">\(\bar X_n = S_n / n\)</span>. По свойствам среднего и дисперсии (для дисперсии нужна независимость) <span class="math display">\[
+\E S_n = n\mu, \quad \Var S_n = n\sigma^2, \qquad
+\E \bar X_n = \mu, \quad \Var \bar X_n = \frac{\sigma^2}{n}.
+\]</span></p>
+<ul>
+<li><p><strong>Неравенство Чебышева.</strong> Для любой величины <span class="math inline">\(X\)</span> с конечной дисперсией и любого <span class="math inline">\(\varepsilon &gt; 0\)</span> <span class="math display">\[
+\Prob(|X - \E X| \geqslant \varepsilon) \leqslant \frac{\Var X}{\varepsilon^2}.
+\]</span></p></li>
+<li><p><strong>Закон больших чисел.</strong> Применяя неравенство к <span class="math inline">\(\bar X_n\)</span>: <span class="math inline">\(\Prob(|\bar X_n - \mu| \geqslant \varepsilon) \leqslant \dfrac{\sigma^2}{n\varepsilon^2} \to 0\)</span>. Среднее многих наблюдений приближается к <span class="math inline">\(\mu\)</span>. Частный случай (теорема Бернулли): относительная частота события в <span class="math inline">\(n\)</span> испытаниях приближается к его вероятности <span class="math inline">\(p\)</span>.</p></li>
+<li><p><strong>Центральная предельная теорема.</strong> Стандартизуем сумму: вычтем её среднее и разделим на стандартное отклонение. Тогда при любом <span class="math inline">\(F\)</span> с конечной дисперсией для каждого <span class="math inline">\(t\)</span> <span class="math display">\[
+\Prob\Big(\frac{S_n - n\mu}{\sigma\sqrt n} \leqslant t\Big)
+= \Prob\Big(\frac{\bar X_n - \mu}{\sigma / \sqrt n} \leqslant t\Big)
+\xrightarrow[n \to \infty]{} \Phi(t).
+\]</span> От закона <span class="math inline">\(F\)</span> в ответе остались только два числа, <span class="math inline">\(\mu\)</span> и <span class="math inline">\(\sigma\)</span>: форма <span class="math inline">\(F\)</span> при больших <span class="math inline">\(n\)</span> забывается. На практике теорему применяют в виде приближения <span class="math display">\[
+S_n \approx N(n\mu,\ n\sigma^2), \qquad
+\bar X_n \approx N\Big(\mu,\ \frac{\sigma^2}{n}\Big).
+\]</span></p>
+<p><strong>Пример.</strong> Бросают 100 игральных костей, <span class="math inline">\(X_i\)</span> есть очко на <span class="math inline">\(i\)</span>-й. Закон <span class="math inline">\(X_i\)</span> равномерный на <span class="math inline">\(\{1, \dots, 6\}\)</span>, совсем не нормальный, но <span class="math inline">\(\mu = 3{,}5\)</span>, <span class="math inline">\(\sigma^2 = \frac{91}{6} - 3{,}5^2 = \frac{35}{12}\)</span> одни и те же у всех костей. Для суммы очков <span class="math inline">\(\E S_{100} = 350\)</span>, <span class="math inline">\(\Var S_{100} = \frac{3500}{12} \approx 291{,}7\)</span>, <span class="math inline">\(\sigma(S_{100}) \approx 17{,}08\)</span>, и по ЦПТ <span class="math display">\[
+\Prob(330 \leqslant S_{100} \leqslant 370) \approx
+\Phi\Big(\frac{20}{17{,}08}\Big) - \Phi\Big(-\frac{20}{17{,}08}\Big)
+= 2\Phi(1{,}17) - 1 \approx 0{,}758.
+\]</span> Точное значение 0,770; разница в основном из-за того, что сумма целочисленна (если взять границы <span class="math inline">\(329{,}5\)</span> и <span class="math inline">\(370{,}5\)</span>, получится 0,770).</p>
+<p>Частный случай: <span class="math inline">\(X_i\)</span> принимает значения 1 и 0 с вероятностями <span class="math inline">\(p\)</span> и <span class="math inline">\(q = 1 - p\)</span> (успех в <span class="math inline">\(i\)</span>-м испытании Бернулли). Тогда <span class="math inline">\(\mu = p\)</span>, <span class="math inline">\(\sigma^2 = pq\)</span>, <span class="math inline">\(S_n = k\)</span> есть число успехов, и ЦПТ превращается в интегральную теорему Муавра–Лапласа: <span class="math inline">\(\Prob(a \leqslant k \leqslant b) \approx
+\Phi\big(\frac{b - np}{\sqrt{npq}}\big) - \Phi\big(\frac{a - np}{\sqrt{npq}}\big)\)</span>.</p></li>
+</ul>
+<p>Что из этого берёт статистика:</p>
+<ul>
+<li>выборочное среднее <span class="math inline">\(\bar x\)</span> годится как приближение для <span class="math inline">\(\mu\)</span> (закон больших чисел);</li>
+<li>его ошибка имеет порядок <span class="math inline">\(\sigma/\sqrt n\)</span> и приближённо нормальна (ЦПТ): чтобы уменьшить ошибку вдвое, наблюдений нужно вчетверо больше;</li>
+<li>по той же причине эмпирическая функция распределения <span class="math inline">\(\hat F_n(x)\)</span> при больших <span class="math inline">\(n\)</span> близка к истинной <span class="math inline">\(F(x)\)</span> (теорема Гливенко).</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled" title="Прочитайте за вечер: «Как лгать при помощи статистики»">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Уведомление</span>Прочитайте за вечер: «Как лгать при помощи статистики»
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>С этого семинара начинается статистика, а с ней и умение не верить цифрам на слово. Классическая книжка Даррелла Хаффа (1954, есть русский перевод) показывает, как честными цифрами вводят в заблуждение: выборка не из той совокупности, «среднее» вместо медианы, группа из 12 человек, обрезанная ось графика, корреляция вместо причины. Формул там нет, а каждый приём ловится тем, что мы прошли в этом семестре.</p>
+<p>Краткий пересказ с примерами на Python в <a href="../../appendices/how-to-lie.html">приложении к книге</a>.</p>
+</div>
+</div>
+<p>Проверка примера с костями: точный закон суммы 100 костей (свёртка 100 одинаковых равномерных рядов) против приближения ЦПТ.</p>
+<div id="s08-dice-check" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>die <span class="op">=</span> np.ones(<span class="dv">6</span>) <span class="op">/</span> <span class="dv">6</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>law <span class="op">=</span> np.array([<span class="fl">1.0</span>])</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">100</span>):</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    law <span class="op">=</span> np.convolve(law, die)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>sums <span class="op">=</span> np.arange(<span class="dv">100</span>, <span class="dv">601</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>exact <span class="op">=</span> law[(sums <span class="op">&gt;=</span> <span class="dv">330</span>) <span class="op">&amp;</span> (sums <span class="op">&lt;=</span> <span class="dv">370</span>)].<span class="bu">sum</span>()</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>sd <span class="op">=</span> sqrt(<span class="dv">100</span> <span class="op">*</span> <span class="dv">35</span> <span class="op">/</span> <span class="dv">12</span>)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>compare(<span class="st">"P(330&lt;=S&lt;=370)"</span>, <span class="dv">2</span> <span class="op">*</span> norm_cdf(<span class="dv">20</span> <span class="op">/</span> sd) <span class="op">-</span> <span class="dv">1</span>, exact, (<span class="st">"ЦПТ"</span>, <span class="st">"точно"</span>))</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>compare(<span class="st">"с поправкой 0,5"</span>, <span class="dv">2</span> <span class="op">*</span> norm_cdf(<span class="fl">20.5</span> <span class="op">/</span> sd) <span class="op">-</span> <span class="dv">1</span>, exact, (<span class="st">"ЦПТ"</span>, <span class="st">"точно"</span>))</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  P(330&lt;=S&lt;=370):  ЦПТ     0.7584   точно     0.7697
+ с поправкой 0,5:  ЦПТ     0.7700   точно     0.7697</code></pre>
+</div>
+</div>
+<div id="cell-fig-s08-clt" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">3</span>, figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="fl">3.2</span>))</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> ax, n_obs <span class="kw">in</span> <span class="bu">zip</span>(axes, [<span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">30</span>]):</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    means <span class="op">=</span> rng.exponential(<span class="fl">1.0</span>, size<span class="op">=</span>(<span class="dv">20_000</span>, n_obs)).mean(axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    ax.hist(means, bins<span class="op">=</span><span class="dv">60</span>, <span class="bu">range</span><span class="op">=</span>(<span class="dv">0</span>, <span class="dv">3</span>), density<span class="op">=</span><span class="va">True</span>, color<span class="op">=</span>PALETTE[<span class="dv">0</span>], alpha<span class="op">=</span><span class="fl">0.6</span>)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    grid <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">3</span>, <span class="dv">300</span>)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    ax.plot(grid, norm_pdf(grid, <span class="fl">1.0</span>, <span class="fl">1.0</span> <span class="op">/</span> sqrt(n_obs)), color<span class="op">=</span>PALETTE[<span class="dv">1</span>], lw<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    ax.set_title(<span class="ss">f"n = </span><span class="sc">{</span>n_obs<span class="sc">}</span><span class="ss">"</span>, fontsize<span class="op">=</span><span class="dv">10</span>)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    ax.set_xlabel(<span class="st">"$</span><span class="ch">\\</span><span class="st">bar x$"</span>)</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].set_ylabel(<span class="st">"плотность"</span>)</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div id="fig-s08-clt" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-s08-clt-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="seminar-08_files/figure-html/fig-s08-clt-output-1.png" width="1112" height="364" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-s08-clt-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;7.1: ЦПТ в действии. Наблюдения показательны с <span class="math inline">\(\lambda = 1\)</span> (<span class="math inline">\(\mu = \sigma = 1\)</span>), закон сильно несимметричен. Гистограммы 20 000 средних по <span class="math inline">\(n\)</span> наблюдений и плотность <span class="math inline">\(N(1, 1/n)\)</span>. Уже при <span class="math inline">\(n = 30\)</span> закон среднего почти нормален и сжат вокруг <span class="math inline">\(\mu = 1\)</span> в <span class="math inline">\(\sqrt{30} \approx 5{,}5\)</span> раза.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="выборка-и-её-распределение" class="level3" data-number="7.2.2">
+<h3 data-number="7.2.2" class="anchored" data-anchor-id="выборка-и-её-распределение"><span class="header-section-number">7.2.2</span> Выборка и её распределение</h3>
+<p><strong>Генеральная совокупность</strong> есть случайная величина <span class="math inline">\(X\)</span> с неизвестным законом. <strong>Выборка</strong> объёма <span class="math inline">\(n\)</span>: значения <span class="math inline">\(x_1, \dots, x_n\)</span>, полученные в <span class="math inline">\(n\)</span> независимых наблюдениях <span class="math inline">\(X\)</span>.</p>
+<ul>
+<li><strong>Вариационный ряд:</strong> выборка, упорядоченная по возрастанию, <span class="math inline">\(x_{(1)} \leqslant \dots \leqslant x_{(n)}\)</span>.</li>
+<li><strong>Статистический ряд:</strong> различные значения (варианты) <span class="math inline">\(x_i\)</span>, их частоты <span class="math inline">\(n_i\)</span> (<span class="math inline">\(\sum n_i = n\)</span>) и относительные частоты <span class="math inline">\(w_i = n_i/n\)</span> (<span class="math inline">\(\sum w_i = 1\)</span>). Это выборочный аналог ряда распределения.</li>
+<li><strong>Эмпирическая функция распределения:</strong> <span class="math display">\[
+\hat F_n(x) = \frac{\text{число } x_i \leqslant x}{n}.
+\]</span> Ступенчатая, от 0 до 1, в каждой варианте <span class="math inline">\(x_i\)</span> прыгает на <span class="math inline">\(w_i\)</span>. Выборочный аналог <span class="math inline">\(F(x)\)</span>.</li>
+<li><strong>Полигон частот:</strong> ломаная через точки <span class="math inline">\((x_i, w_i)\)</span>. Для дискретных данных.</li>
+<li><strong>Группировка и гистограмма.</strong> Непрерывные данные разбивают на интервалы длины <span class="math inline">\(h\)</span>, <span class="math inline">\(n_i\)</span> есть число наблюдений в <span class="math inline">\(i\)</span>-м интервале. Над интервалом строят прямоугольник высотой <span class="math inline">\(\dfrac{w_i}{h} = \dfrac{n_i}{nh}\)</span>. Площадь всей гистограммы равна 1, гистограмма есть выборочный аналог плотности <span class="math inline">\(f(x)\)</span>.</li>
+</ul>
+</section>
+<section id="числовые-характеристики-выборки" class="level3" data-number="7.2.3">
+<h3 data-number="7.2.3" class="anchored" data-anchor-id="числовые-характеристики-выборки"><span class="header-section-number">7.2.3</span> Числовые характеристики выборки</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Выборочная</th>
+<th style="text-align: left;">Формула</th>
+<th style="text-align: left;">Аналог</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">среднее</td>
+<td style="text-align: left;"><span class="math inline">\(\bar x = \frac1n\sum x_i = \sum x_i w_i\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\E X\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">дисперсия</td>
+<td style="text-align: left;"><span class="math inline">\(\hat\sigma^2 = \frac1n\sum (x_i - \bar x)^2 = \overline{x^2} - \bar x^2\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\Var X\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">исправленная дисперсия</td>
+<td style="text-align: left;"><span class="math inline">\(s^2 = \frac{n}{n - 1}\,\hat\sigma^2\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(\Var X\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">медиана</td>
+<td style="text-align: left;">средний элемент вариационного ряда (при чётном <span class="math inline">\(n\)</span> полусумма двух средних)</td>
+<td style="text-align: left;">медиана <span class="math inline">\(X\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">мода</td>
+<td style="text-align: left;">варианта с наибольшей частотой</td>
+<td style="text-align: left;">мода <span class="math inline">\(X\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">размах</td>
+<td style="text-align: left;"><span class="math inline">\(x_{(n)} - x_{(1)}\)</span></td>
+<td style="text-align: left;"></td>
+</tr>
+</tbody>
+</table>
+<p>Для сгруппированных данных <span class="math inline">\(x_i\)</span> в формулах заменяют серединами интервалов. Почему у <span class="math inline">\(s^2\)</span> делитель <span class="math inline">\(n - 1\)</span> и какая из двух дисперсий «правильная», разберём на следующем семинаре.</p>
+<p><strong>Линейная замена.</strong> Если <span class="math inline">\(y_i = a + b x_i\)</span>, то <span class="math inline">\(\bar y = a + b\bar x\)</span>, <span class="math inline">\(\hat\sigma^2_y = b^2\hat\sigma^2_x\)</span> (то же для <span class="math inline">\(s^2\)</span>). Удобно для расчётов вручную: середины интервалов заменяют на <span class="math inline">\(u_i = (x_i - C)/h\)</span>, где <span class="math inline">\(C\)</span> есть середина в центре таблицы, а <span class="math inline">\(h\)</span> есть шаг. Тогда <span class="math inline">\(u_i\)</span> будут целыми числами <span class="math inline">\(\dots, -1, 0, 1, \dots\)</span>, и <span class="math inline">\(\bar x = C + h\bar u\)</span>, <span class="math inline">\(\hat\sigma^2_x = h^2\hat\sigma^2_u\)</span>.</p>
+</section>
+</section>
+<section id="блок-a.-закон-больших-чисел-и-цпт" class="level2" data-number="7.3">
+<h2 data-number="7.3" class="anchored" data-anchor-id="блок-a.-закон-больших-чисел-и-цпт"><span class="header-section-number">7.3</span> Блок A. Закон больших чисел и ЦПТ</h2>
+<section id="sec-s08-t1" class="level3" data-number="7.3.1">
+<h3 data-number="7.3.1" class="anchored" data-anchor-id="sec-s08-t1"><span class="header-section-number">7.3.1</span> Задача 1</h3>
+<p>Прибор измеряет величину <span class="math inline">\(\mu\)</span> со случайной ошибкой: среднее ошибки 0, стандартное отклонение <span class="math inline">\(\sigma = 0{,}2\)</span>. Результатом считают среднее <span class="math inline">\(\bar X\)</span> из <span class="math inline">\(n\)</span> независимых измерений. Сколько нужно измерений, чтобы <span class="math inline">\(|\bar X - \mu| &lt; 0{,}05\)</span> с вероятностью не меньше 0,95?</p>
+<p>а) Ответить с помощью ЦПТ. б) Ответить с помощью неравенства Чебышева (оно не требует знать закон ошибки). Сравнить.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Решение">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Совет</span>Решение
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><span class="math inline">\(\E\bar X = \mu\)</span>, <span class="math inline">\(\sigma(\bar X) = \sigma/\sqrt n = 0{,}2/\sqrt n\)</span>.</p>
+<p><strong>а) ЦПТ.</strong> <span class="math inline">\(\bar X \approx N(\mu, \sigma^2/n)\)</span>, поэтому <span class="math display">\[
+\Prob(|\bar X - \mu| &lt; 0{,}05) \approx 2\Phi\Big(\frac{0{,}05\sqrt n}{0{,}2}\Big) - 1 \geqslant 0{,}95
+\iff \Phi\Big(\frac{\sqrt n}{4}\Big) \geqslant 0{,}975
+\iff \frac{\sqrt n}{4} \geqslant 1{,}96.
+\]</span> Отсюда <span class="math inline">\(n \geqslant (4 \cdot 1{,}96)^2 = 61{,}47\)</span>, то есть <span class="math inline">\(n = 62\)</span>.</p>
+<p><strong>б) Чебышев.</strong> <span class="math inline">\(\Prob(|\bar X - \mu| \geqslant 0{,}05) \leqslant
+\dfrac{0{,}04}{n \cdot 0{,}0025} = \dfrac{16}{n} \leqslant 0{,}05\)</span>, откуда <span class="math inline">\(n \geqslant 320\)</span>.</p>
+<p><strong>Сравнение.</strong> Неравенство Чебышева гарантирует результат при любом законе ошибки, поэтому оно осторожно и требует впятеро больше измерений. ЦПТ даёт приближённый, но гораздо более точный ответ: на практике берут его.</p>
+<p>Проверка: ошибки берём равномерными (не нормальными) с <span class="math inline">\(\sigma = 0{,}2\)</span>, то есть на <span class="math inline">\((-0{,}2\sqrt3;\ 0{,}2\sqrt3)\)</span>; при <span class="math inline">\(n = 62\)</span> доля серий с <span class="math inline">\(|\bar X - \mu| &lt; 0{,}05\)</span> должна быть около 0,95.</p>
+<div id="s08-t1-check" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>sigma, eps <span class="op">=</span> <span class="fl">0.2</span>, <span class="fl">0.05</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>n_clt <span class="op">=</span> ceil((<span class="fl">1.96</span> <span class="op">*</span> sigma <span class="op">/</span> eps) <span class="op">**</span> <span class="dv">2</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>n_cheb <span class="op">=</span> ceil(sigma<span class="op">**</span><span class="dv">2</span> <span class="op">/</span> (eps<span class="op">**</span><span class="dv">2</span> <span class="op">*</span> <span class="fl">0.05</span>))</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"ЦПТ: n = </span><span class="sc">{</span>n_clt<span class="sc">}</span><span class="ss">,  Чебышев: n = </span><span class="sc">{</span>n_cheb<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>half <span class="op">=</span> sigma <span class="op">*</span> sqrt(<span class="dv">3</span>)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>errors <span class="op">=</span> rng.uniform(<span class="op">-</span>half, half, size<span class="op">=</span>(<span class="dv">100_000</span>, n_clt))</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>hit <span class="op">=</span> np.mean(np.<span class="bu">abs</span>(errors.mean(axis<span class="op">=</span><span class="dv">1</span>)) <span class="op">&lt;</span> eps)</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>compare(<span class="st">"P(|ошибка|&lt;0,05)"</span>, <span class="dv">2</span> <span class="op">*</span> norm_cdf(eps <span class="op">*</span> sqrt(n_clt) <span class="op">/</span> sigma) <span class="op">-</span> <span class="dv">1</span>, hit, (<span class="st">"ЦПТ"</span>, <span class="st">"симуляция"</span>))</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>ЦПТ: n = 62,  Чебышев: n = 320
+P(|ошибка|&lt;0,05):  ЦПТ     0.9510   симуляция     0.9510</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning callout-titled" title="Типичная ошибка">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Предупреждение</span>Типичная ошибка
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Подставлять в ЦПТ <span class="math inline">\(\sigma\)</span> вместо <span class="math inline">\(\sigma/\sqrt n\)</span>: тогда <span class="math inline">\(n\)</span> из ответа пропадает, и кажется, что повторные измерения не помогают.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="блок-b.-выборка-и-её-распределение" class="level2" data-number="7.4">
+<h2 data-number="7.4" class="anchored" data-anchor-id="блок-b.-выборка-и-её-распределение"><span class="header-section-number">7.4</span> Блок B. Выборка и её распределение</h2>
+<section id="sec-s08-t2" class="level3" data-number="7.4.1">
+<h3 data-number="7.4.1" class="anchored" data-anchor-id="sec-s08-t2"><span class="header-section-number">7.4.1</span> Задача 2</h3>
+<p>Проверено 20 партий изделий; число бракованных изделий в партиях:</p>
+<p><span class="math display">\[
+2,\ 1,\ 0,\ 3,\ 1,\ 1,\ 2,\ 4,\ 0,\ 1,\ 2,\ 3,\ 1,\ 0,\ 2,\ 1,\ 3,\ 0,\ 1,\ 2.
+\]</span></p>
+<p>а) Записать вариационный ряд и статистический ряд (частоты и относительные частоты). б) Найти эмпирическую функцию распределения <span class="math inline">\(\hat F_{20}(x)\)</span> и построить её график. в) Построить полигон относительных частот. г) По <span class="math inline">\(\hat F_{20}\)</span> найти долю партий, в которых бракованных изделий не больше двух, и долю, в которых их больше одного.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Решение">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Совет</span>Решение
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>а)</strong> Вариационный ряд: <span class="math inline">\(0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 3, 3, 3, 4\)</span>.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;"><span class="math inline">\(x_i\)</span></th>
+<th style="text-align: left;">0</th>
+<th style="text-align: left;">1</th>
+<th style="text-align: left;">2</th>
+<th style="text-align: left;">3</th>
+<th style="text-align: left;">4</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(n_i\)</span></td>
+<td style="text-align: left;">4</td>
+<td style="text-align: left;">7</td>
+<td style="text-align: left;">5</td>
+<td style="text-align: left;">3</td>
+<td style="text-align: left;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(w_i\)</span></td>
+<td style="text-align: left;">0,20</td>
+<td style="text-align: left;">0,35</td>
+<td style="text-align: left;">0,25</td>
+<td style="text-align: left;">0,15</td>
+<td style="text-align: left;">0,05</td>
+</tr>
+</tbody>
+</table>
+<p>Контроль: <span class="math inline">\(\sum n_i = 20\)</span>, <span class="math inline">\(\sum w_i = 1\)</span>.</p>
+<p><strong>б)</strong> Накапливаем относительные частоты: <span class="math display">\[
+\hat F_{20}(x) =
+\begin{cases}
+0, &amp; x &lt; 0,\\
+0{,}20, &amp; 0 \leqslant x &lt; 1,\\
+0{,}55, &amp; 1 \leqslant x &lt; 2,\\
+0{,}80, &amp; 2 \leqslant x &lt; 3,\\
+0{,}95, &amp; 3 \leqslant x &lt; 4,\\
+1, &amp; x \geqslant 4.
+\end{cases}
+\]</span></p>
+<p><strong>в)</strong> Полигон: ломаная через точки <span class="math inline">\((0;\ 0{,}20)\)</span>, <span class="math inline">\((1;\ 0{,}35)\)</span>, <span class="math inline">\((2;\ 0{,}25)\)</span>, <span class="math inline">\((3;\ 0{,}15)\)</span>, <span class="math inline">\((4;\ 0{,}05)\)</span>. Оба графика ниже.</p>
+<p><strong>г)</strong> Не больше двух: <span class="math inline">\(\hat F_{20}(2) = 0{,}80\)</span>. Больше одного: <span class="math inline">\(1 - \hat F_{20}(1) = 1 - 0{,}55 = 0{,}45\)</span>.</p>
+<p>Проверка: ряд и значения <span class="math inline">\(\hat F_{20}\)</span> по самой выборке.</p>
+<div id="s08-t2-check" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>defects <span class="op">=</span> [<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>]</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>values, counts, freqs <span class="op">=</span> freq_table(defects)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"x_i:"</span>, values, <span class="st">" n_i:"</span>, counts, <span class="st">" w_i:"</span>, freqs)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"F(x) в вариантах:"</span>, [ecdf(defects, v) <span class="cf">for</span> v <span class="kw">in</span> values])</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>compare(<span class="st">"доля &lt;= 2"</span>, <span class="fl">0.80</span>, ecdf(defects, <span class="dv">2</span>))</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>compare(<span class="st">"доля &gt; 1"</span>, <span class="fl">0.45</span>, <span class="dv">1</span> <span class="op">-</span> ecdf(defects, <span class="dv">1</span>))</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>x_i: [0 1 2 3 4]  n_i: [4 7 5 3 1]  w_i: [0.2  0.35 0.25 0.15 0.05]
+F(x) в вариантах: [np.float64(0.2), np.float64(0.55), np.float64(0.8), np.float64(0.95), np.float64(1.0)]
+       доля &lt;= 2:  формула     0.8000   расчёт     0.8000
+        доля &gt; 1:  формула     0.4500   расчёт     0.4500</code></pre>
+</div>
+</div>
+<div id="cell-fig-s08-t2" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>fig, (ax1, ax2) <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">9</span>, <span class="fl">3.4</span>))</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>levels <span class="op">=</span> np.cumsum(freqs)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>edges <span class="op">=</span> np.concatenate([[<span class="op">-</span><span class="dv">1</span>], values, [<span class="dv">5</span>]])</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>heights <span class="op">=</span> np.concatenate([[<span class="dv">0</span>], levels])</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> left, right, h <span class="kw">in</span> <span class="bu">zip</span>(edges[:<span class="op">-</span><span class="dv">1</span>], edges[<span class="dv">1</span>:], heights):</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    ax1.hlines(h, left, right, color<span class="op">=</span>PALETTE[<span class="dv">0</span>], lw<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>ax1.plot(values, levels, <span class="st">"o"</span>, color<span class="op">=</span>PALETTE[<span class="dv">0</span>])</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>ax1.plot(values, heights[:<span class="op">-</span><span class="dv">1</span>], <span class="st">"o"</span>, mfc<span class="op">=</span><span class="st">"white"</span>, color<span class="op">=</span>PALETTE[<span class="dv">0</span>])</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>ax1.set_xlabel(<span class="st">"$x$"</span>)</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>ax1.set_ylabel(<span class="st">"$</span><span class="ch">\\</span><span class="st">hat F_</span><span class="sc">{20}</span><span class="st">(x)$"</span>)</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>ax2.plot(values, freqs, <span class="st">"o-"</span>, color<span class="op">=</span>PALETTE[<span class="dv">1</span>])</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>ax2.set_xlabel(<span class="st">"число бракованных $x_i$"</span>)</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>ax2.set_ylabel(<span class="st">"$w_i$"</span>)</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>ax2.set_xticks(values)</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div id="fig-s08-t2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-s08-t2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="seminar-08_files/figure-html/fig-s08-t2-output-1.png" width="1002" height="386" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-s08-t2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;7.2: Задача 2. Слева: эмпирическая функция распределения, справа: полигон относительных частот. Закрашенная точка на ступеньке показывает, что значение в точке скачка берётся сверху: <span class="math inline">\(\hat F_{20}(x)\)</span> считает элементы, не большие <span class="math inline">\(x\)</span>.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning callout-titled" title="Типичная ошибка">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Предупреждение</span>Типичная ошибка
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Путать значение в точке скачка: <span class="math inline">\(\hat F_{20}(1) = 0{,}55\)</span>, а не <span class="math inline">\(0{,}20\)</span>, потому что партии ровно с одним браком тоже считаются. Для доли «больше одного» вычитают <span class="math inline">\(\hat F_{20}(1)\)</span>, а не <span class="math inline">\(\hat F_{20}(2)\)</span>.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="sec-s08-t3" class="level3" data-number="7.4.2">
+<h3 data-number="7.4.2" class="anchored" data-anchor-id="sec-s08-t3"><span class="header-section-number">7.4.2</span> Задача 3</h3>
+<p>Измерено время ответа сервера (мс) на 50 запросов. Результаты сгруппированы:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Время, мс</th>
+<th style="text-align: left;"><span class="math inline">\([10, 12)\)</span></th>
+<th style="text-align: left;"><span class="math inline">\([12, 14)\)</span></th>
+<th style="text-align: left;"><span class="math inline">\([14, 16)\)</span></th>
+<th style="text-align: left;"><span class="math inline">\([16, 18)\)</span></th>
+<th style="text-align: left;"><span class="math inline">\([18, 20)\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Число запросов <span class="math inline">\(n_i\)</span></td>
+<td style="text-align: left;">4</td>
+<td style="text-align: left;">11</td>
+<td style="text-align: left;">17</td>
+<td style="text-align: left;">12</td>
+<td style="text-align: left;">6</td>
+</tr>
+</tbody>
+</table>
+<p>а) Построить гистограмму относительных частот и проверить, что её площадь равна 1. б) Найти долю запросов со временем от 14 до 18 мс. в) Оценить по гистограмме долю запросов со временем от 13 до 17 мс. г) Найти значения <span class="math inline">\(\hat F_{50}\)</span> на границах интервалов.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Решение">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Совет</span>Решение
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>а)</strong> <span class="math inline">\(n = 50\)</span>, <span class="math inline">\(h = 2\)</span>. Высоты <span class="math inline">\(w_i / h\)</span>:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Интервал</th>
+<th style="text-align: left;"><span class="math inline">\([10, 12)\)</span></th>
+<th style="text-align: left;"><span class="math inline">\([12, 14)\)</span></th>
+<th style="text-align: left;"><span class="math inline">\([14, 16)\)</span></th>
+<th style="text-align: left;"><span class="math inline">\([16, 18)\)</span></th>
+<th style="text-align: left;"><span class="math inline">\([18, 20)\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(w_i\)</span></td>
+<td style="text-align: left;">0,08</td>
+<td style="text-align: left;">0,22</td>
+<td style="text-align: left;">0,34</td>
+<td style="text-align: left;">0,24</td>
+<td style="text-align: left;">0,12</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(w_i / h\)</span></td>
+<td style="text-align: left;">0,04</td>
+<td style="text-align: left;">0,11</td>
+<td style="text-align: left;">0,17</td>
+<td style="text-align: left;">0,12</td>
+<td style="text-align: left;">0,06</td>
+</tr>
+</tbody>
+</table>
+<p>Площадь: <span class="math inline">\(2\cdot(0{,}04 + 0{,}11 + 0{,}17 + 0{,}12 + 0{,}06) = 2\cdot 0{,}5 = 1\)</span>.</p>
+<p><strong>б)</strong> Интервалы <span class="math inline">\([14, 16)\)</span> и <span class="math inline">\([16, 18)\)</span> целиком: <span class="math inline">\(0{,}34 + 0{,}24 = 0{,}58\)</span>. Это точный ответ по выборке.</p>
+<p><strong>в)</strong> Отрезок <span class="math inline">\([13, 17)\)</span> захватывает половину интервала <span class="math inline">\([12, 14)\)</span>, весь <span class="math inline">\([14, 16)\)</span> и половину <span class="math inline">\([16, 18)\)</span>. Площадь гистограммы над ним: <span class="math inline">\(1\cdot 0{,}11 + 2\cdot 0{,}17 + 1\cdot 0{,}12 = 0{,}57\)</span>. Это оценка: внутри интервала мы не знаем, где лежат наблюдения, и считаем их распределёнными равномерно.</p>
+<p><strong>г)</strong> Накопленные частоты: <span class="math inline">\(\hat F_{50}(12) = 0{,}08\)</span>, <span class="math inline">\(\hat F_{50}(14) = 0{,}30\)</span>, <span class="math inline">\(\hat F_{50}(16) = 0{,}64\)</span>, <span class="math inline">\(\hat F_{50}(18) = 0{,}88\)</span>, <span class="math inline">\(\hat F_{50}(20) = 1\)</span> (левее 10 значение 0). Ответ б) через них: <span class="math inline">\(\hat F_{50}(18) - \hat F_{50}(14) = 0{,}58\)</span>.</p>
+<p>Проверка: высоты, площадь и обе доли.</p>
+<div id="s08-t3-check" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>edges3 <span class="op">=</span> np.array([<span class="dv">10</span>, <span class="dv">12</span>, <span class="dv">14</span>, <span class="dv">16</span>, <span class="dv">18</span>, <span class="dv">20</span>])</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>counts3 <span class="op">=</span> np.array([<span class="dv">4</span>, <span class="dv">11</span>, <span class="dv">17</span>, <span class="dv">12</span>, <span class="dv">6</span>])</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>h <span class="op">=</span> <span class="dv">2</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>dens <span class="op">=</span> counts3 <span class="op">/</span> counts3.<span class="bu">sum</span>() <span class="op">/</span> h</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"высоты w_i/h:"</span>, dens, <span class="st">" площадь:"</span>, (dens <span class="op">*</span> h).<span class="bu">sum</span>())</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"F на правых границах:"</span>, np.cumsum(counts3) <span class="op">/</span> counts3.<span class="bu">sum</span>())</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>compare(<span class="st">"доля [14, 18)"</span>, <span class="fl">0.58</span>, (counts3[<span class="dv">2</span>] <span class="op">+</span> counts3[<span class="dv">3</span>]) <span class="op">/</span> <span class="dv">50</span>)</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>compare(<span class="st">"доля [13, 17)"</span>, <span class="fl">0.57</span>, <span class="dv">1</span> <span class="op">*</span> dens[<span class="dv">1</span>] <span class="op">+</span> <span class="dv">2</span> <span class="op">*</span> dens[<span class="dv">2</span>] <span class="op">+</span> <span class="dv">1</span> <span class="op">*</span> dens[<span class="dv">3</span>])</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>высоты w_i/h: [0.04 0.11 0.17 0.12 0.06]  площадь: 1.0
+F на правых границах: [0.08 0.3  0.64 0.88 1.  ]
+   доля [14, 18):  формула     0.5800   расчёт     0.5800
+   доля [13, 17):  формула     0.5700   расчёт     0.5700</code></pre>
+</div>
+</div>
+<div id="cell-fig-s08-t3" class="cell" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="fl">6.5</span>, <span class="fl">3.6</span>))</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>ax.bar(edges3[:<span class="op">-</span><span class="dv">1</span>], dens, width<span class="op">=</span>h, align<span class="op">=</span><span class="st">"edge"</span>, color<span class="op">=</span>PALETTE[<span class="dv">0</span>], alpha<span class="op">=</span><span class="fl">0.35</span>, edgecolor<span class="op">=</span>PALETTE[<span class="dv">0</span>])</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>ax.fill_between([<span class="dv">13</span>, <span class="dv">14</span>], <span class="dv">0</span>, dens[<span class="dv">1</span>], color<span class="op">=</span>PALETTE[<span class="dv">1</span>], alpha<span class="op">=</span><span class="fl">0.6</span>)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>ax.fill_between([<span class="dv">14</span>, <span class="dv">16</span>], <span class="dv">0</span>, dens[<span class="dv">2</span>], color<span class="op">=</span>PALETTE[<span class="dv">1</span>], alpha<span class="op">=</span><span class="fl">0.6</span>)</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>ax.fill_between([<span class="dv">16</span>, <span class="dv">17</span>], <span class="dv">0</span>, dens[<span class="dv">3</span>], color<span class="op">=</span>PALETTE[<span class="dv">1</span>], alpha<span class="op">=</span><span class="fl">0.6</span>)</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">"время ответа, мс"</span>)</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"$w_i / h$"</span>)</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>ax.set_xticks(edges3)</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div id="fig-s08-t3" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-s08-t3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="seminar-08_files/figure-html/fig-s08-t3-output-1.png" width="727" height="408" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-s08-t3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;7.3: Задача 3. Гистограмма относительных частот времени ответа. Закрашена площадь над <span class="math inline">\([13, 17)\)</span>: оценка доли запросов в этом диапазоне, 0,57.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning callout-titled" title="Типичная ошибка">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Предупреждение</span>Типичная ошибка
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Откладывать по вертикали <span class="math inline">\(n_i\)</span> или <span class="math inline">\(w_i\)</span> вместо <span class="math inline">\(w_i/h\)</span>. При равных интервалах форма не меняется, но площадь уже не равна 1, и долю нельзя считать как площадь. При неравных интервалах неверной становится и форма.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="блок-c.-числовые-характеристики-выборки" class="level2" data-number="7.5">
+<h2 data-number="7.5" class="anchored" data-anchor-id="блок-c.-числовые-характеристики-выборки"><span class="header-section-number">7.5</span> Блок C. Числовые характеристики выборки</h2>
+<section id="sec-s08-t4" class="level3" data-number="7.5.1">
+<h3 data-number="7.5.1" class="anchored" data-anchor-id="sec-s08-t4"><span class="header-section-number">7.5.1</span> Задача 4</h3>
+<p>Для выборки из задачи 2 найти выборочное среднее <span class="math inline">\(\bar x\)</span>, дисперсии <span class="math inline">\(\hat\sigma^2\)</span> и <span class="math inline">\(s^2\)</span>, медиану, моду и размах.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Решение">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Совет</span>Решение
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>По статистическому ряду: <span class="math display">\[
+\bar x = \frac{0\cdot4 + 1\cdot7 + 2\cdot5 + 3\cdot3 + 4\cdot1}{20} = \frac{30}{20} = 1{,}5,
+\qquad
+\overline{x^2} = \frac{0 + 7 + 20 + 27 + 16}{20} = \frac{70}{20} = 3{,}5.
+\]</span> <span class="math inline">\(\hat\sigma^2 = 3{,}5 - 1{,}5^2 = 1{,}25\)</span>, <span class="math inline">\(s^2 = \frac{20}{19}\cdot 1{,}25 = \frac{25}{19} \approx 1{,}316\)</span>.</p>
+<p>Медиана: <span class="math inline">\(n = 20\)</span> чётно, средние элементы вариационного ряда <span class="math inline">\(x_{(10)} = x_{(11)} = 1\)</span> (единицы занимают места 5–11), медиана 1. Мода 1 (частота 7). Размах <span class="math inline">\(4 - 0 = 4\)</span>.</p>
+<p>Медиана меньше среднего: у распределения длинный правый хвост (редкие партии с 3–4 бракованными изделиями тянут среднее вправо).</p>
+<p>Проверка: numpy по исходной выборке.</p>
+<div id="s08-t4-check" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>d <span class="op">=</span> np.array(defects)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>compare(<span class="st">"среднее"</span>, <span class="fl">1.5</span>, d.mean())</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>compare(<span class="st">"sigma^2 (1/n)"</span>, <span class="fl">1.25</span>, d.var())</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>compare(<span class="st">"s^2 (1/(n-1))"</span>, <span class="dv">25</span> <span class="op">/</span> <span class="dv">19</span>, d.var(ddof<span class="op">=</span><span class="dv">1</span>))</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>compare(<span class="st">"медиана"</span>, <span class="fl">1.0</span>, np.median(d))</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         среднее:  формула     1.5000   расчёт     1.5000
+   sigma^2 (1/n):  формула     1.2500   расчёт     1.2500
+   s^2 (1/(n-1)):  формула     1.3158   расчёт     1.3158
+         медиана:  формула     1.0000   расчёт     1.0000</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="sec-s08-t5" class="level3" data-number="7.5.2">
+<h3 data-number="7.5.2" class="anchored" data-anchor-id="sec-s08-t5"><span class="header-section-number">7.5.2</span> Задача 5</h3>
+<p>Для сгруппированных данных задачи 3 найти <span class="math inline">\(\bar x\)</span>, <span class="math inline">\(\hat\sigma^2\)</span> и <span class="math inline">\(s^2\)</span>, перейдя к условным вариантам <span class="math inline">\(u = (x - 15)/2\)</span>, где <span class="math inline">\(x\)</span> есть середина интервала.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Решение">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Совет</span>Решение
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;"><span class="math inline">\(x_i\)</span> (середина)</th>
+<th style="text-align: left;">11</th>
+<th style="text-align: left;">13</th>
+<th style="text-align: left;">15</th>
+<th style="text-align: left;">17</th>
+<th style="text-align: left;">19</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(u_i\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(-2\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(-1\)</span></td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">2</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(n_i\)</span></td>
+<td style="text-align: left;">4</td>
+<td style="text-align: left;">11</td>
+<td style="text-align: left;">17</td>
+<td style="text-align: left;">12</td>
+<td style="text-align: left;">6</td>
+</tr>
+</tbody>
+</table>
+<p><span class="math display">\[
+\bar u = \frac{-8 - 11 + 0 + 12 + 12}{50} = \frac{5}{50} = 0{,}1,
+\qquad
+\overline{u^2} = \frac{16 + 11 + 0 + 12 + 24}{50} = \frac{63}{50} = 1{,}26,
+\]</span> <span class="math inline">\(\hat\sigma^2_u = 1{,}26 - 0{,}01 = 1{,}25\)</span>.</p>
+<p>Обратно: <span class="math inline">\(\bar x = 15 + 2\cdot 0{,}1 = 15{,}2\)</span> мс, <span class="math inline">\(\hat\sigma^2_x = 2^2\cdot 1{,}25 = 5\)</span> мс², <span class="math inline">\(s^2 = \frac{50}{49}\cdot 5 \approx 5{,}10\)</span> мс², <span class="math inline">\(s \approx 2{,}26\)</span> мс.</p>
+<p>Проверка: те же числа по серединам напрямую.</p>
+<div id="s08-t5-check" class="cell" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>mids3 <span class="op">=</span> (edges3[:<span class="op">-</span><span class="dv">1</span>] <span class="op">+</span> edges3[<span class="dv">1</span>:]) <span class="op">/</span> <span class="dv">2</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>mean3, var3, s2_3 <span class="op">=</span> grouped_stats(mids3, counts3)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>compare(<span class="st">"среднее"</span>, <span class="fl">15.2</span>, mean3)</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>compare(<span class="st">"sigma^2 (1/n)"</span>, <span class="fl">5.0</span>, var3)</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>compare(<span class="st">"s^2 (1/(n-1))"</span>, <span class="dv">5</span> <span class="op">*</span> <span class="dv">50</span> <span class="op">/</span> <span class="dv">49</span>, s2_3)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         среднее:  формула    15.2000   расчёт    15.2000
+   sigma^2 (1/n):  формула     5.0000   расчёт     5.0000
+   s^2 (1/(n-1)):  формула     5.1020   расчёт     5.1020</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning callout-titled" title="Типичная ошибка">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Предупреждение</span>Типичная ошибка
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Переносить на дисперсию сдвиг: <span class="math inline">\(\hat\sigma^2_x = C + h^2\hat\sigma^2_u\)</span> или <span class="math inline">\(h\,\hat\sigma^2_u\)</span>. Сдвиг дисперсию не меняет, а масштаб входит в квадрате.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="sec-s08-t6" class="level3" data-number="7.5.3">
+<h3 data-number="7.5.3" class="anchored" data-anchor-id="sec-s08-t6"><span class="header-section-number">7.5.3</span> Задача 6</h3>
+<p>По данным задачи 3 (используя результат задачи 5) оценить, насколько выборочное среднее <span class="math inline">\(\bar x\)</span> может отличаться от истинного среднего времени ответа <span class="math inline">\(\mu\)</span>. Указать диапазон, в котором <span class="math inline">\(\mu\)</span> лежит «почти наверняка», если считать, что <span class="math inline">\(\sigma \approx s\)</span> и ЦПТ применима.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Решение">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Совет</span>Решение
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>По ЦПТ <span class="math inline">\(\bar X \approx N(\mu, \sigma^2/n)\)</span>, стандартное отклонение среднего <span class="math inline">\(\sigma/\sqrt n \approx s/\sqrt{50} = 2{,}26/7{,}07 \approx 0{,}32\)</span> мс. С вероятностью около 0,95 среднее отклоняется от <span class="math inline">\(\mu\)</span> меньше чем на <span class="math inline">\(2\sigma/\sqrt n \approx 0{,}64\)</span> мс (<span class="math inline">\(2\Phi(2) - 1 \approx 0{,}954\)</span>). Значит, <span class="math display">\[
+\mu \in (15{,}2 - 0{,}64;\ 15{,}2 + 0{,}64) = (14{,}56;\ 15{,}84)\ \text{мс}.
+\]</span></p>
+<p>Отдельное время ответа разбросано на <span class="math inline">\(\pm 4{,}5\)</span> мс вокруг среднего, а среднее по 50 запросам известно с точностью около <span class="math inline">\(\pm 0{,}6\)</span> мс: в <span class="math inline">\(\sqrt{50}\)</span> раз точнее. Строго такие диапазоны (доверительные интервалы) построим позже; там же выясним, что делать, когда <span class="math inline">\(\sigma\)</span> неизвестна и <span class="math inline">\(n\)</span> мало.</p>
+<p>Проверка: та же арифметика.</p>
+<div id="s08-t6-check" class="cell" data-execution_count="11">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>se <span class="op">=</span> sqrt(s2_3 <span class="op">/</span> <span class="dv">50</span>)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"s/sqrt(n) = </span><span class="sc">{</span>se<span class="sc">:.4f}</span><span class="ss">"</span>)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"диапазон: (</span><span class="sc">{</span>mean3 <span class="op">-</span> <span class="dv">2</span> <span class="op">*</span> se<span class="sc">:.2f}</span><span class="ss">; </span><span class="sc">{</span>mean3 <span class="op">+</span> <span class="dv">2</span> <span class="op">*</span> se<span class="sc">:.2f}</span><span class="ss">),  P(|Z| &lt; 2) = </span><span class="sc">{</span><span class="dv">2</span> <span class="op">*</span> norm_cdf(<span class="dv">2</span>) <span class="op">-</span> <span class="dv">1</span><span class="sc">:.4f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Скопировать текст" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>s/sqrt(n) = 0.3194
+диапазон: (14.56; 15.84),  P(|Z| &lt; 2) = 0.9545</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="задачи-для-самостоятельной-работы" class="level2" data-number="7.6">
+<h2 data-number="7.6" class="anchored" data-anchor-id="задачи-для-самостоятельной-работы"><span class="header-section-number">7.6</span> Задачи для самостоятельной работы</h2>
+<ol type="1">
+<li>Каждое из 100 чисел округляют до целого; ошибки округления независимы и равномерны на <span class="math inline">\((-0{,}5;\ 0{,}5)\)</span>. Оценить вероятность того, что суммарная ошибка по модулю меньше 5: а) по ЦПТ; б) по неравенству Чебышева.</li>
+<li>В опросе участвуют 400 человек. Доля сторонников некоторого решения в генеральной совокупности равна <span class="math inline">\(p = 0{,}5\)</span>. Найти вероятность того, что доля сторонников в выборке отличается от <span class="math inline">\(p\)</span> меньше чем на 0,05.</li>
+<li>Оценки 10 студентов: <span class="math inline">\(3, 4, 5, 4, 3, 5, 4, 2, 4, 5\)</span>. Составить статистический ряд, найти <span class="math inline">\(\hat F_{10}(x)\)</span>, <span class="math inline">\(\bar x\)</span>, <span class="math inline">\(\hat\sigma^2\)</span>, <span class="math inline">\(s^2\)</span>, медиану и моду.</li>
+<li>Эмпирическая функция распределения выборки объёма 20 равна 0 при <span class="math inline">\(x &lt; 1\)</span>, 0,15 при <span class="math inline">\(1 \leqslant x &lt; 2\)</span>, 0,40 при <span class="math inline">\(2 \leqslant x &lt; 3\)</span>, 0,80 при <span class="math inline">\(3 \leqslant x &lt; 5\)</span> и 1 при <span class="math inline">\(x \geqslant 5\)</span>. Восстановить статистический ряд (частоты <span class="math inline">\(n_i\)</span>) и найти <span class="math inline">\(\bar x\)</span>.</li>
+<li>Средняя температура по выборке равна <span class="math inline">\(-2{,}5\)</span> °C, <span class="math inline">\(s = 4\)</span> °C. Найти среднее и <span class="math inline">\(s\)</span> в градусах Фаренгейта (<span class="math inline">\(t_F = 32 + 1{,}8\,t_C\)</span>).</li>
+</ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Ответы">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Совет</span>Ответы
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-13" class="callout-13-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>Сумма <span class="math inline">\(S\)</span> имеет <span class="math inline">\(\E S = 0\)</span>, <span class="math inline">\(\Var S = 100/12\)</span>, <span class="math inline">\(\sigma(S) \approx 2{,}89\)</span>. а) <span class="math inline">\(2\Phi(5/2{,}89) - 1 = 2\Phi(1{,}73) - 1 \approx 0{,}917\)</span>; б) <span class="math inline">\(\Prob(|S| &lt; 5) \geqslant 1 - \frac{100/12}{25} = \frac23 \approx 0{,}667\)</span>.</li>
+<li><span class="math inline">\(\sigma(w) = \sqrt{0{,}25/400} = 0{,}025\)</span>; <span class="math inline">\(2\Phi(0{,}05/0{,}025) - 1 = 2\Phi(2) - 1 \approx 0{,}954\)</span>.</li>
+<li>Варианты 2, 3, 4, 5 с частотами 1, 2, 4, 3; <span class="math inline">\(\hat F_{10}\)</span>: 0 при <span class="math inline">\(x &lt; 2\)</span>; 0,1 на <span class="math inline">\([2, 3)\)</span>; 0,3 на <span class="math inline">\([3, 4)\)</span>; 0,7 на <span class="math inline">\([4, 5)\)</span>; 1 при <span class="math inline">\(x \geqslant 5\)</span>. <span class="math inline">\(\bar x = 3{,}9\)</span>, <span class="math inline">\(\hat\sigma^2 = 0{,}89\)</span>, <span class="math inline">\(s^2 \approx 0{,}989\)</span>, медиана 4, мода 4.</li>
+<li>Скачки <span class="math inline">\(\hat F_{20}\)</span> дают <span class="math inline">\(w_i\)</span>: 0,15; 0,25; 0,40; 0,20 в точках 1, 2, 3, 5; частоты 3, 5, 8, 4. <span class="math inline">\(\bar x = 2{,}85\)</span>.</li>
+<li><span class="math inline">\(\bar t_F = 32 + 1{,}8\cdot(-2{,}5) = 27{,}5\)</span> °F, <span class="math inline">\(s_F = 1{,}8\cdot 4 = 7{,}2\)</span> °F (сдвиг на 32 разброс не меняет).</li>
+</ol>
+</div>
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Скопировано");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Скопировано");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/alexshem\.github\.io\/stats-2026\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../../seminars/07-normal-plane-functions/seminar-07.html" class="pagination-link" aria-label="Семинар 7. Нормальный закон на плоскости. Функции случайных величин">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Семинар 7. Нормальный закон на плоскости. Функции случайных величин</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../../exams/mock-midterm.html" class="pagination-link" aria-label="Пробная контрольная работа по теории вероятностей">
+        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Пробная контрольная работа по теории вероятностей</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/AlexShem/stats-2026/issues/new" class="toc-action"><i class="bi bi-github"></i>Сообщить о проблеме</a></li></ul></div></div></div></footer></body></html>
