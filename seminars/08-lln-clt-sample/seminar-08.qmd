@@ -91,8 +91,8 @@ def compare(name, a, b, labels=("формула", "расчёт")):
 
 | Здесь | Гмурман |
 |:--|:--|
-| $\bar x$, выборочное среднее | $\bar x_в$ |
-| $\hat\sigma^2 = \frac1n\sum (x_i - \bar x)^2$ | $D_в$ |
+| $\bar x$, выборочное среднее | $\bar x_{\text{в}}$ |
+| $\hat\sigma^2 = \frac1n\sum (x_i - \bar x)^2$ | $D_{\text{в}}$ |
 | $s^2 = \frac{1}{n-1}\sum (x_i - \bar x)^2$ | $s^2$ |
 | $\hat F_n(x)$, эмпирическая функция распределения | $F^*(x)$ |
 | $w_i = n_i / n$ | $W_i$ |

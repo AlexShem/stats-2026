@@ -29,6 +29,7 @@ book:
     - seminars/05-two-random-variables/seminar-05.qmd
     - seminars/07-normal-plane-functions/seminar-07.qmd
     - seminars/08-lln-clt-sample/seminar-08.qmd
+    - seminars/09-point-estimates/seminar-09.qmd
     - exams/mock-midterm.qmd
   appendices:
     - appendices/how-to-lie.qmd
