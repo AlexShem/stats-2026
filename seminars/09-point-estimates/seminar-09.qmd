@@ -504,6 +504,24 @@ grid = np.linspace(0.01, 0.2, 19_001)
 compare("lambda", 1 / mean5, grid[np.argmax(exp_loglik(grid, x5, n5))], ("1/x̄", "максимум"))
 ```
 
+```{python}
+#| label: fig-s09-t5
+#| fig-cap: "Задача 5. Слева: гистограмма времени работы 1000 элементов (интервалы по 10 ч с серединами $x_i$) и найденная плотность $0{,}05\\,e^{-0{,}05x}$. Справа: логарифм функции правдоподобия, максимум при $\\hat\\lambda = 1/\\bar x = 0{,}05$ ч$^{-1}$."
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(9, 3.4))
+ax1.bar(x5, n5 / (n5.sum() * 10), width=10, color=PALETTE[0], alpha=0.35, edgecolor=PALETTE[0], label="данные")
+x_plot = np.linspace(0, 70, 300)
+ax1.plot(x_plot, np.exp(-x_plot / mean5) / mean5, color=PALETTE[1], lw=2, label="$\\hat\\lambda e^{-\\hat\\lambda x}$")
+ax1.set_xlabel("время безотказной работы $x$, ч")
+ax1.set_ylabel("плотность")
+ax1.legend()
+lam_plot = np.linspace(0.025, 0.1, 300)
+ax2.plot(lam_plot, exp_loglik(lam_plot, x5, n5), color=PALETTE[0], lw=2)
+ax2.axvline(1 / mean5, color=PALETTE[1], ls="--", lw=1.5)
+ax2.set_xlabel("$\\lambda$, ч$^{-1}$")
+ax2.set_ylabel("$\\ell(\\lambda)$")
+plt.show()
+```
+
 ::: {.callout-warning title="Типичная ошибка"}
 Ответ $\hat\lambda = \bar x = 20$. Выборочное среднее оценивает
 $\E X = 1/\lambda$, а не $\lambda$. Проверка размерностью: $\lambda$
@@ -559,6 +577,35 @@ best = np.unravel_index(np.argmax(surface), surface.shape)
 compare("mu", rod.mean(), mu_grid[best], ("формула", "максимум"))
 compare("sigma", sqrt(rod.var()), sigma_grid[best], ("формула", "максимум"))
 compare("дисперсия", rod.var(), rod.var(ddof=1), ("1/n", "1/(n-1)"))
+```
+
+```{python}
+#| label: fig-s09-t6
+#| fig-cap: "Задача 6. Слева: линии уровня $\\ell(\\mu, \\sigma)$ для пяти измерений стержня; число на линии показывает, на сколько $\\ell$ там ниже максимума. Вершина «холма» (звёздочка) в точке $\\hat\\mu = 100$, $\\hat\\sigma \\approx 5{,}83$; кружок отмечает $\\sigma = s \\approx 6{,}52$: это не максимум правдоподобия. Справа: измерения и две нормальные плотности со средним 100, по $\\hat\\sigma$ и по $s$."
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(9, 3.6))
+mu_plot, sigma_plot = np.meshgrid(np.linspace(90, 110, 301), np.linspace(2.5, 14, 301))
+surface_plot = normal_loglik(mu_plot, sigma_plot, rod)
+# Линии уровня на 0,5; 1; 2; 4; 8 ниже максимума ℓ
+drops = np.array([8, 4, 2, 1, 0.5])
+top = surface_plot.max()
+cs = ax1.contour(mu_plot, sigma_plot, surface_plot, levels=top - drops, colors=PALETTE[0],
+                 linewidths=1, linestyles="solid")
+ax1.clabel(cs, fmt={top - d: f"−{d:g}".replace(".", ",") for d in drops}, fontsize=7)
+ax1.plot(rod.mean(), sqrt(rod.var()), "*", ms=14, color=PALETTE[1], label="ОМП $(\\hat\\mu, \\hat\\sigma)$")
+ax1.plot(rod.mean(), sqrt(rod.var(ddof=1)), "o", ms=7, mfc="none", mew=1.5, color=PALETTE[2], label="$(\\bar x, s)$")
+ax1.set_xlabel("$\\mu$, мм")
+ax1.set_ylabel("$\\sigma$, мм")
+ax1.legend(loc="upper right")
+x_plot = np.linspace(80, 120, 400)
+for sd, color, name in [(sqrt(rod.var()), PALETTE[1], "$\\hat\\sigma \\approx 5{,}83$"),
+                        (sqrt(rod.var(ddof=1)), PALETTE[2], "$s \\approx 6{,}52$")]:
+    ax2.plot(x_plot, np.exp(-(x_plot - rod.mean()) ** 2 / (2 * sd**2)) / (sd * sqrt(2 * np.pi)),
+             color=color, lw=2, label=name)
+ax2.plot(rod, np.zeros_like(rod), "|", ms=18, mew=2, color="black", label="измерения")
+ax2.set_xlabel("длина стержня, мм")
+ax2.set_ylabel("плотность")
+ax2.legend(loc="upper right", fontsize=8)
+plt.show()
 ```
 :::
 :::
