@@ -174,26 +174,210 @@ $$ {#eq-s10-z}
 $n \geqslant z^2\sigma^2/\delta^2$ (округляют вверх). Точность растёт как
 $\sqrt n$: чтобы уменьшить $\delta$ вдвое, выборку увеличивают вчетверо.
 
+**Откуда $z$.** Под плотностью $N(0, 1)$ между $-z$ и $z$ должна лежать
+площадь $\gamma$; оставшиеся $1 - \gamma$ делятся поровну между хвостами,
+по $\frac{1 - \gamma}{2}$ в каждом. Слева от $z$ поэтому лежит
+$\gamma + \frac{1 - \gamma}{2} = \frac{1 + \gamma}{2}$, это и есть $\Phi(z)$.
+Чем больше $\gamma$, тем дальше $z$ и тем шире интервал.
+
+```{python}
+#| label: fig-s10-normal
+#| fig-cap: "Плотность $N(0, 1)$. Синяя площадь между $-z$ и $z$ равна $\\gamma$, красные хвосты по $\\frac{1-\\gamma}{2}$. Слева $\\gamma = 0{,}95$, $z = 1{,}960$; справа $\\gamma = 0{,}99$, $z = 2{,}576$."
+fig, axes = plt.subplots(1, 2, figsize=(7.5, 2.9), sharey=True)
+grid = np.linspace(-4, 4, 800)
+pdf = stats.norm.pdf(grid)
+for ax, g in zip(axes, (0.95, 0.99)):
+    zg = z_quantile(g)
+    ax.plot(grid, pdf, color=PALETTE[0], lw=2)
+    ax.fill_between(grid, pdf, where=np.abs(grid) <= zg, color=PALETTE[0], alpha=0.25)
+    ax.fill_between(grid, pdf, where=np.abs(grid) >= zg, color=PALETTE[4], alpha=0.6)
+    ax.text(0, 0.13, f"$\\gamma = {g}$".replace(".", "{,}"), ha="center", fontsize=11)
+    tail = f"{(1 - g) / 2:.3f}".replace(".", ",")
+    for side in (-1, 1):
+        ax.annotate(tail, xy=(side * (zg + 0.25), 0.008), xytext=(side * 3.1, 0.12),
+                    ha="center", fontsize=9, arrowprops={"arrowstyle": "->", "color": "0.4"})
+    zlabel = f"{zg:.3f}".replace(".", ",")
+    ax.set_xticks([-zg, 0, zg], [f"$-${zlabel}", "0", zlabel])
+    ax.set_xlabel("$x$")
+axes[0].set_ylabel("плотность")
+plt.show()
+```
+
+### Закон $\chi^2$
+
+Пусть $Z_1, \dots, Z_k$ независимы и $Z_i \sim N(0, 1)$. Закон суммы
+квадратов
+$$
+\chi^2 = Z_1^2 + Z_2^2 + \dots + Z_k^2
+$$
+называют **законом $\chi^2$ с $k$ степенями свободы**, $\chi^2(k)$.
+Число степеней свободы есть число независимых квадратов в сумме.
+
+- Величина неотрицательна. $\E Z_i^2 = \Var Z_i = 1$, поэтому
+  $\E\chi^2 = k$; $\Var Z_i^2 = \E Z_i^4 - 1 = 3 - 1 = 2$, поэтому
+  $\Var\chi^2 = 2k$.
+- При $k = 1$ и $k = 2$ плотность убывает от нуля; при $k \geqslant 3$
+  у неё горб около $k - 2$ и длинный правый хвост. С ростом $k$ закон
+  по ЦПТ приближается к нормальному $N(k, 2k)$, но при малых $k$ заметно
+  несимметричен.
+- Квантили $\chi^2_{\alpha/2}(k)$ и $\chi^2_{1-\alpha/2}(k)$ поэтому
+  расположены несимметрично относительно среднего $k$; их берут
+  из таблицы или из `scipy` по отдельности.
+
+```{python}
+#| label: fig-s10-chi2-sum
+#| fig-cap: "Закон $\\chi^2$ как сумма квадратов. Гистограммы: 100 000 значений $Z_1^2 + \\dots + Z_k^2$ для независимых $Z_i \\sim N(0, 1)$; линии: плотность $\\chi^2(k)$. Среднее равно $k$ (пунктир); с ростом $k$ закон сдвигается вправо, расплывается и становится симметричнее."
+chi2_k = (1, 2, 5, 10)
+chi2_sums = {k: (rng.standard_normal((100_000, k)) ** 2).sum(axis=1) for k in chi2_k}
+fig, axes = plt.subplots(1, 4, figsize=(8, 2.7))
+for ax, k in zip(axes, chi2_k):
+    right = k + 5 * sqrt(2 * k)
+    grid = np.linspace(0.01, right, 400)
+    ax.hist(chi2_sums[k], bins=60, range=(0, right), density=True, color=PALETTE[0], alpha=0.35)
+    ax.plot(grid, stats.chi2.pdf(grid, k), color=PALETTE[1], lw=2)
+    ax.axvline(k, color="0.3", ls="--", lw=1)
+    ax.set_title(f"$k = {k}$")
+    ax.set_ylim(0, 0.5 if k > 1 else 1.2)
+    ax.set_xlabel("$x$")
+axes[0].set_ylabel("плотность")
+plt.show()
+```
+
+::: {.content-hidden when-profile="handout"}
+Проверка: среднее и дисперсия смоделированных сумм против $k$ и $2k$.
+
+```{python}
+#| label: s10-chi2-check
+for k in chi2_k:
+    compare(f"k = {k}, среднее", k, chi2_sums[k].mean(), labels=("k", "модель"))
+    compare(f"k = {k}, дисперсия", 2 * k, chi2_sums[k].var(), labels=("2k", "модель"))
+```
+:::
+
+### Закон Стьюдента
+
+Пусть $Z \sim N(0, 1)$ и $V \sim \chi^2(k)$ независимы. Закон отношения
+$$
+T = \frac{Z}{\sqrt{V/k}}
+$$
+называют **законом Стьюдента с $k$ степенями свободы**, $t(k)$.
+
+- Плотность симметрична относительно нуля, $\E T = 0$ при $k > 1$,
+  $\Var T = \frac{k}{k - 2}$ при $k > 2$: больше единицы.
+- Знаменатель $\sqrt{V/k}$ сам случаен. Когда он случайно мал, $T$
+  получается большим, поэтому хвосты тяжелее, чем у $N(0, 1)$,
+  и квантили больше: $t_{0{,}975}(4) = 2{,}776$ против $z = 1{,}960$.
+- $V/k \to 1$ при $k \to \infty$ (закон больших чисел), и $t(k) \to N(0, 1)$.
+  При $k = 30$ квантиль $t_{0{,}975}$ равен 2,042, уже близко к 1,960.
+
+```{python}
+#| label: fig-s10-student
+#| fig-cap: "Слева: плотности Стьюдента с 1, 3 и 10 степенями свободы и плотность $N(0, 1)$ (пунктир). Чем меньше степеней свободы, тем ниже горб и тяжелее хвосты. Справа: квантиль $t_{0{,}975}(k)$ убывает к $z = 1{,}96$ с ростом $k$ (при $k = 1$ он равен 12,71 и на график не попал)."
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(8, 3), gridspec_kw={"width_ratios": [1.3, 1]})
+grid = np.linspace(-5, 5, 600)
+ax1.plot(grid, stats.norm.pdf(grid), color="0.2", ls="--", lw=1.6, label="$N(0, 1)$")
+for k, c in zip((1, 3, 10), PALETTE):
+    ax1.plot(grid, stats.t.pdf(grid, k), color=c, lw=1.8, label=f"$t({k})$")
+ax1.set_xlabel("$x$")
+ax1.set_ylabel("плотность")
+ax1.legend(fontsize=8)
+dfs = np.arange(2, 41)
+ax2.plot(dfs, stats.t.ppf(0.975, dfs), "o-", ms=3, color=PALETTE[0], label="$t_{0{,}975}(k)$")
+ax2.axhline(z_quantile(0.95), color=PALETTE[1], ls="--", lw=1.5, label="$z = 1{,}96$")
+ax2.set_ylim(1.8, 4.5)
+ax2.set_xlabel("число степеней свободы $k$")
+ax2.legend(fontsize=8)
+plt.show()
+```
+
+### Выборка из нормального закона: теорема Фишера
+
+Связь этих законов с выборкой даёт **теорема Фишера**. Если
+$X_1, \dots, X_n$ независимы и $X_i \sim N(\mu, \sigma^2)$, то
+
+1. $\bar X \sim N\!\left(\mu, \frac{\sigma^2}{n}\right)$;
+2. $\frac{(n - 1)s^2}{\sigma^2} = \sum_{i=1}^{n}\left(\frac{X_i - \bar X}{\sigma}\right)^2 \sim \chi^2(n - 1)$;
+3. $\bar X$ и $s^2$ независимы.
+
+Почему $n - 1$, а не $n$: если подставить $\mu$ вместо $\bar X$, сумма
+состояла бы из $n$ независимых квадратов $N(0, 1)$ и имела бы закон
+$\chi^2(n)$. Отклонения $X_i - \bar X$ связаны условием
+$\sum (X_i - \bar X) = 0$: зная $n - 1$ из них, последнее находим сами.
+Одна степень свободы уходит на оценку $\mu$ (та же причина, что и делитель
+$n - 1$ в $s^2$ на семинаре 9).
+
+Из пунктов 1–3 и определения закона Стьюдента:
+$$
+T = \frac{\bar X - \mu}{s/\sqrt n} =
+\frac{\dfrac{\bar X - \mu}{\sigma/\sqrt n}}{\sqrt{\dfrac{(n - 1)s^2}{\sigma^2}\Big/(n - 1)}}
+\sim t(n - 1) .
+$$
+В числителе $N(0, 1)$, под корнем $\chi^2(n - 1)$, делённое на число
+степеней свободы, и они независимы. $\sigma$ сократилась, поэтому $T$
+можно считать по данным. На этом построены интервалы
+(@eq-s10-t) и (@eq-s10-chi2).
+
+::: {.content-hidden when-profile="handout"}
+Проверка теоремы Фишера моделированием: 100 000 выборок объёма $n = 5$
+из $N(10, 2^2)$.
+
+```{python}
+#| label: s10-fisher-check
+n_f, mu_f, sigma_f = 5, 10.0, 2.0
+x_f = rng.normal(mu_f, sigma_f, size=(100_000, n_f))
+xbar_f, s_f = x_f.mean(axis=1), x_f.std(axis=1, ddof=1)
+v_f = (n_f - 1) * s_f**2 / sigma_f**2
+t_f = (xbar_f - mu_f) / (s_f / sqrt(n_f))
+compare("E (n-1)s^2/sigma^2", n_f - 1, v_f.mean(), labels=("n - 1", "модель"))
+compare("corr(xbar, s^2)", 0.0, np.corrcoef(xbar_f, s_f**2)[0, 1], labels=("теория", "модель"))
+compare("P(|T| > 1,96)", 0.05, (np.abs(t_f) > z_quantile(0.95)).mean(), labels=("если N(0,1)", "модель"))
+compare("P(|T| > t_0,975(4))", 0.05, (np.abs(t_f) > t_quantile(0.95, n_f)).mean(), labels=("t(4)", "модель"))
+```
+
+Если бы $T$ был нормальным, за $\pm 1{,}96$ выходили бы 5 % значений;
+на деле выходят около 12 %. Интервал с $z$ вместо $t$ при $n = 5$
+накрывал бы $\mu$ лишь примерно в 88 % случаев вместо 95 %.
+
+```{python}
+#| label: fig-s10-fisher
+#| fig-cap: "Теорема Фишера на 100 000 выборках объёма 5 из $N(10, 4)$. Слева: гистограмма $(n-1)s^2/\\sigma^2$ совпадает с плотностью $\\chi^2(4)$, а не $\\chi^2(5)$: одна степень свободы ушла на $\\bar x$. Справа: гистограмма $T = (\\bar x - \\mu)/(s/\\sqrt 5)$ совпадает с плотностью $t(4)$; у $N(0, 1)$ хвосты заметно легче."
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(8, 3))
+grid = np.linspace(0.01, 20, 400)
+ax1.hist(v_f, bins=80, range=(0, 20), density=True, color=PALETTE[0], alpha=0.35, label="модель")
+ax1.plot(grid, stats.chi2.pdf(grid, n_f - 1), color=PALETTE[1], lw=2, label="$\\chi^2(4)$")
+ax1.plot(grid, stats.chi2.pdf(grid, n_f), color=PALETTE[2], lw=1.6, ls="--", label="$\\chi^2(5)$")
+ax1.set_xlabel("$(n-1)s^2/\\sigma^2$")
+ax1.set_ylabel("плотность")
+ax1.legend(fontsize=8)
+grid = np.linspace(-6, 6, 600)
+ax2.hist(t_f, bins=120, range=(-6, 6), density=True, color=PALETTE[0], alpha=0.35, label="модель")
+ax2.plot(grid, stats.t.pdf(grid, n_f - 1), color=PALETTE[1], lw=2, label="$t(4)$")
+ax2.plot(grid, stats.norm.pdf(grid), color=PALETTE[2], lw=1.6, ls="--", label="$N(0, 1)$")
+ax2.set_xlabel("$T$")
+ax2.legend(fontsize=8)
+plt.show()
+```
+:::
+
 ### Среднее $\mu$ при неизвестном $\sigma$
 
-$\sigma$ заменяют на $s$. Величина
-$T = \frac{\bar X - \mu}{s/\sqrt n}$ имеет **закон Стьюдента** с $n - 1$
-степенями свободы (для нормальной выборки), и
+$\sigma$ заменяют на $s$. По теореме Фишера
+$T = \frac{\bar X - \mu}{s/\sqrt n} \sim t(n - 1)$, и с $t$, при котором
+$\Prob(|T| < t) = \gamma$,
 $$
 \bar x - t\frac{s}{\sqrt n} < \mu < \bar x + t\frac{s}{\sqrt n},
 \qquad t = t_{(1+\gamma)/2}(n - 1) .
 $$ {#eq-s10-t}
-Плотность Стьюдента симметрична, похожа на нормальную, но с более
-тяжёлыми хвостами: $t > z$, и интервал шире. Это плата за то, что $\sigma$
-тоже оценена. При $n \to \infty$ закон Стьюдента стремится к $N(0, 1)$;
-при $n \geqslant 30$ разница уже мала.
+Так как $t > z$, интервал шире, чем при известном $\sigma$: это плата
+за то, что $\sigma$ тоже оценена. При малых $n$ разница большая, при
+$n \geqslant 30$ уже мала.
 
 ### Стандартное отклонение $\sigma$
 
-Для нормальной выборки $\frac{(n - 1)s^2}{\sigma^2}$ имеет **закон
-$\chi^2$** с $n - 1$ степенями свободы. Он несимметричен и сосредоточен
-на $(0, \infty)$. Отрезаем по $\alpha/2 = \frac{1 - \gamma}{2}$ с каждой
-стороны:
+По теореме Фишера $\frac{(n - 1)s^2}{\sigma^2} \sim \chi^2(n - 1)$.
+Отрезаем от этого закона по $\alpha/2 = \frac{1 - \gamma}{2}$ с каждой
+стороны: $\chi^2_{\alpha/2} < \frac{(n - 1)s^2}{\sigma^2} < \chi^2_{1-\alpha/2}$
+с вероятностью $\gamma$. Разрешаем относительно $\sigma$:
 $$
 \sqrt{\frac{(n - 1)s^2}{\chi^2_{1-\alpha/2}(n - 1)}} < \sigma <
 \sqrt{\frac{(n - 1)s^2}{\chi^2_{\alpha/2}(n - 1)}} .
