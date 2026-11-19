@@ -333,7 +333,8 @@ $\bar x = 14$, $n = 25$. Ответ: $12{,}04 < \mu < 15{,}96$.
 
 ::: {.content-hidden when-profile="handout"}
 ::: {.callout-tip collapse="true" title="Решение"}
-**а)** $z = 1{,}96$,
+**а)** $\gamma = 0{,}95$, а $z$ находим из $\Phi(z) = \frac{1 + 0{,}95}{2} = 0{,}975$:
+$z = 1{,}96$. Тогда
 $\delta = z\frac{\sigma}{\sqrt n} = 1{,}96\cdot\frac{2}{10} = 0{,}392$ мм.
 
 **б)** Из $\delta = z\sigma/\sqrt n$ получаем $n = z^2\sigma^2/\delta^2$.
@@ -373,7 +374,7 @@ $\gamma = 0{,}95$ измерить не 25, а 100 деталей?
 
 ::: {.content-hidden when-profile="handout"}
 ::: {.callout-tip collapse="true" title="Решение"}
-**а)** $\delta = 1{,}96\cdot\frac{0{,}5}{5} = 0{,}196$ мм,
+**а)** $\Phi(z) = 0{,}975$, $z = 1{,}96$; $\delta = 1{,}96\cdot\frac{0{,}5}{5} = 0{,}196$ мм,
 $20{,}104 < \mu < 20{,}496$.
 
 **б)** Нет. $\mu$ есть число, а не случайная величина; найденный интервал
