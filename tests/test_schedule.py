@@ -16,12 +16,13 @@ from mephi_stats.schedule import (
 TUESDAY = 1
 
 
-def test_sixteen_planned_classes_one_midterm_one_postponed():
+def test_sixteen_classes_one_midterm_none_postponed():
     assert len(TUESDAYS) == 16
-    assert len(CLASS_DATES) == 16 - len(POSTPONED) == 15
+    assert POSTPONED == []
+    assert len(CLASS_DATES) == 16
     assert all(d.weekday() == TUESDAY for d in TUESDAYS)
     assert set(MIDTERMS) <= set(CLASS_DATES)
-    assert len(SEMINAR_DATES) == len(CLASS_DATES) - len(MIDTERMS) == 14
+    assert len(SEMINAR_DATES) == len(CLASS_DATES) - len(MIDTERMS) == 15
 
 
 def test_only_rescheduled_dates_leave_tuesday():
@@ -34,16 +35,20 @@ def test_seminar_06_moved_to_friday_9_october():
     assert seminar_date(6) == dt.date(2026, 10, 9)
 
 
-def test_midterm_3_november_and_20_october_postponed():
+def test_midterm_3_november_and_20_october_made_up_20_november():
     # Контрольная 3 ноября номера семинара не берёт. Занятие 20 октября
-    # (переносили на 6 ноября, не состоялось) отложено без даты, поэтому
-    # семинар 8 приходится на 10 ноября.
-    assert POSTPONED == [dt.date(2026, 10, 20)]
+    # (переносили на 6 ноября, не состоялось) отработано в пятницу 20 ноября:
+    # это семинар 10, вторники после него сдвинулись на единицу.
+    assert RESCHEDULED[dt.date(2026, 10, 20)] == dt.date(2026, 11, 20)
     assert dt.date(2026, 10, 20) not in CLASS_DATES
     assert dt.date(2026, 11, 6) not in CLASS_DATES
     assert dt.date(2026, 11, 3) in MIDTERMS
     assert seminar_date(7) == dt.date(2026, 10, 27)
     assert seminar_date(8) == dt.date(2026, 11, 10)
+    assert seminar_date(9) == dt.date(2026, 11, 17)
+    assert seminar_date(10) == dt.date(2026, 11, 20)
+    assert seminar_date(11) == dt.date(2026, 11, 24)
+    assert seminar_date(15) == dt.date(2026, 12, 22)
 
 
 def test_semester_boundaries():
