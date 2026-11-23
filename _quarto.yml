@@ -31,6 +31,7 @@ book:
     - seminars/08-lln-clt-sample/seminar-08.qmd
     - seminars/09-point-estimates/seminar-09.qmd
     - seminars/10-interval-estimates/seminar-10.qmd
+    - seminars/11-hypothesis-testing/seminar-11.qmd
     - exams/mock-midterm.qmd
   appendices:
     - appendices/how-to-lie.qmd
